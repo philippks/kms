@@ -1,0 +1,12 @@
+<h1><%= t '.title', date: l(@mail.sent_at) %></h1>
+
+<%= simple_form_for @mail, url: root_path do |f| %>
+  <%= f.input :employee, readonly: true, as: :hidden %>
+  <%= f.input :from, readonly: true %>
+  <%= f.input :to, readonly: true %>
+  <%= f.input :body, readonly: true, as: :text, input_html: { rows: 14 } %>
+<% end %>
+
+<div class="actions">
+  <%= link_to t('shared.back'), invoice_path(@invoice), class: 'btn btn-default' %>
+</div>

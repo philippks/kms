@@ -1,0 +1,15 @@
+<h1><%= t '.title' %></h1>
+
+<%= simple_form_for @invoice, url: invoice_delivery_path(@invoice), as: :delivery do |f| %>
+  <%= f.simple_fields_for :customer do |customer_form| %>
+    <%= customer_form.input :invoice_delivery, include_blank: false %>
+
+    <div class="toggle">
+      <%= customer_form.input :confidential_title, include_blank: false %>
+      <%= customer_form.input :email_address %>
+    </div>
+  <% end %>
+
+  <%= link_to t('shared.cancel'), invoice_path(@invoice), class: 'btn btn-default' %>
+  <%= f.button :submit, class: 'btn-primary', value: t('shared.next') %>
+<% end %>

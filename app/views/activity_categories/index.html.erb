@@ -1,0 +1,37 @@
+<%= page_title_for resource: ActivityCategory, action: :index %>
+
+<div class="table-row">
+  <% if @activity_categories.any? %>
+    <table class="management">
+      <thead>
+        <th class="name"><%= ActivityCategory.human_attribute_name(:name) %></th>
+        <th class="actions"></th>
+        <th class="actions"></th>
+      </thead>
+
+      <tbody>
+        <% @activity_categories.each do |category| %>
+          <tr>
+            <td><%= category.name %></td>
+            <td>
+              <%= link_to "#{category.text_templates.count}
+                           #{TextTemplate.model_name.human(count: category.text_templates)}",
+                          activity_category_text_templates_path(category) %>
+            </td>
+            <td>
+              <%= link_to_edit category %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p><%= t('shared.no_records', model: ActivityCategory.model_name.human(count: 2)) %></p>
+  <% end %>
+</div>
+
+<div class="actions">
+  <% if can? :create, ActivityCategory %>
+    <%= button_to_new ActivityCategory %>
+  <% end %>
+</div>

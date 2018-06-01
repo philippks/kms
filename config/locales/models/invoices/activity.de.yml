@@ -1,0 +1,10 @@
+---
+de:
+  activerecord:
+    attributes:
+      invoices/activity:
+        activities: Leistungen
+    models:
+      invoices/activity:
+        one: Rechnungsleistung
+        other: Rechnungsleistungen

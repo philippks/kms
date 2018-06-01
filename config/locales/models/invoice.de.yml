@@ -1,0 +1,46 @@
+---
+de:
+  activerecord:
+    attributes:
+      invoice:
+        address: Rechnungsadresse
+        state/open: Offen
+        state/sent: Verschickt
+        state/charged: Bezahlt
+        confidential: Vertraulich
+        activities_amount_manually: Total Leistungen
+        expenses_amount: Total Nebenkosten
+        vat_rate: Mehrwertsteuer
+        vat_amount: Mehrwertsteuer
+        total_amount: Total
+        open_amount: Offener Betrag
+        payed_amount: Einbezahlter Betrag
+        possible_wir_amount: WIR Zahlung möglich
+        display_swift: SWIFT einblenden
+        title: Rechnungstitel
+        format: Rechnungsformat
+        date: Rechnungsdatum
+        created_by_initials: Mitarbeiter-Initialen
+        sent_at: Verschickt am
+    models:
+      invoice:
+        one: Rechnung
+        other: Rechnungen
+    errors:
+      models:
+        invoice:
+          attributes:
+            confidential:
+              confidential_title_necessary: "Bei vertraulichen Rechnungen darf die vertrauliche Anrede nicht leer sein"
+            format:
+              activities_amount_set_manually: "Dieses Format steht nicht zur Verfügung wenn 'Total Leistungen' manuell gesetzt wurde"
+              expenses_amount_set_manually: "Dieses Format steht nicht zur Verfügung wenn 'Total Nebenkosten' manuell gesetzt wurde"
+              hidden_activities: "Dieses Format steht nicht zur Verfügung wenn Leistungen als versteckt markiert wurden"
+              conflicting_activities: "Dieses Format steht nicht zur Verfügung wenn Leistungen mit einem Konflikt vorhanden sind"
+  enumerize:
+    invoice:
+      format:
+        compact: Kompakt
+        detailed: Detailliert
+  invoice:
+    default_expense_text: Schreibarbeiten, Vervielfältigungen, Telefonate, etc.

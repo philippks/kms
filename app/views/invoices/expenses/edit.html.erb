@@ -1,0 +1,45 @@
+<%= page_title_for resource: Invoices::Expense, action: :edit %>
+
+<%= simple_form_for @expense, url: invoice_expense_path(@invoice, @expense), as: :expense do |f| %>
+  <fieldset>
+    <%= f.input :invoice_id, as: :hidden %>
+    <%= hidden_field_tag 'expense[effort_ids][]', nil %>
+
+    <div class="table-row">
+      <table class="management">
+        <thead>
+          <th class="checkbox_column">
+            <%= check_box_tag 'checkAll' %>
+          </th>
+          <th class="employee"><%= Expense.human_attribute_name(:employee) %></th>
+          <th class="customer"><%= Expense.human_attribute_name(:customer) %></th>
+          <th class="date"><%= Expense.human_attribute_name(:date) %></th>
+          <th class="amount"><%= Expense.human_attribute_name(:amount) %></th>
+          <th class="text"><%= Expense.human_attribute_name(:text) %></th>
+        </thead>
+
+        <tbody>
+          <% @expense.assignable_efforts.each do |expense| %>
+            <tr>
+              <td>
+                <%= check_box_tag 'expense[effort_ids][]',
+                                  expense.id,
+                                  @expense.efforts.include?(expense) %>
+              </td>
+              <td><%= expense.employee.name %></td>
+              <td><%= expense.customer.name %></td>
+              <td><%= l expense.date %></td>
+              <td class="amount"><%= humanized_money expense.amount %></td>
+              <td class="text"><%= expense.text %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </fieldset>
+
+  <div class="actions">
+    <%= f.button :submit, class: 'btn-primary' %>
+    <%= button_to_back invoice_wizard_expenses_path(@invoice) %>
+  </div>
+<% end %>

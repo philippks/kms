@@ -1,0 +1,19 @@
+<div class="filter">
+  <%= simple_form_for @filter, url: activities_path, method: :get, as: :filter do |form| %>
+    <%= render 'filters/default_row', form: form %>
+
+    <div class="filter-row">
+      <%= render 'filters/state_column', form: form, collection: Activity.state.options %>
+
+      <%= render 'filters/customer_group_column', form: form %>
+
+      <div class="col-md-4">
+        <%= form.input :activity_category, as: :select2,
+          collection: ActivityCategory.all,
+          label: false,
+          input_html: { class: 'filter_select' },
+          placeholder: t('shared.filter_for', model: Activity.human_attribute_name(:activity_category)) %>
+      </div>
+    </div>
+  <% end %>
+</div>

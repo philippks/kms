@@ -1,0 +1,39 @@
+<%= page_title_for resource: Employee, action: :index %>
+
+<div class="table-row">
+  <table class="management">
+    <thead>
+      <th class="name"><%= Employee.human_attribute_name :name %></th>
+      <th class="initials"><%= Employee.human_attribute_name :initials %></th>
+      <% if params[:deactivated] %>
+        <th class="deactivated"><%= Employee.human_attribute_name :deactivated %></th>
+      <% end %>
+      <th class="actions"></th>
+    </thead>
+
+    <tbody>
+      <% @employees.each do |employee| %>
+        <tr>
+          <td><%= employee.name %></td>
+          <td><%= employee.initials %></td>
+          <% if params[:deactivated] %>
+            <td class="deactivated"><%= fa_icon :times if employee.deactivated? %></td>
+          <% end %>
+          <td><%= link_to_edit employee %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="actions">
+  <% if can? :create, Employee %>
+    <%= button_to_new Employee %>
+  <% end %>
+
+  <% if params[:deactivated] %>
+    <%= link_to t('.exclude_deactivated'), employees_path %>
+  <% else %>
+    <%= link_to t('.include_deactivated'), employees_path(deactivated: true) %>
+  <% end %>
+</div>

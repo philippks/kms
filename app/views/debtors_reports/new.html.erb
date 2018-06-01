@@ -1,0 +1,18 @@
+<%= define_page_title t('.title', until: l(@until_date)) %>
+
+<div class="table-row">
+  <%= simple_form_for :debtors_report, url: debtors_reports_path do |f| %>
+    <fieldset>
+      <%= f.input :until_date, label: t('.until_date'),
+                               as: :filter_date_picker,
+                               input_html: { value: l(@until_date),
+                                             'data-clearbtn' => false } %>
+    </fieldset>
+  <% end %>
+
+  <%= link_to t('shared.download'), new_debtors_report_path(format: :pdf, debtors_report: { until_date: @until_date }),
+                                    class: 'btn btn-default' %>
+
+</div>
+
+<%= render 'table' %>

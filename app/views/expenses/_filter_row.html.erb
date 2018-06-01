@@ -1,0 +1,11 @@
+<div class="filter">
+  <%= simple_form_for @filter, url: expenses_path, method: :get, as: :filter do |form| %>
+    <%= render 'filters/default_row', form: form %>
+
+    <div class="filter-row">
+      <%= render 'filters/state_column', form: form, collection: Expense.state.options %>
+
+      <%= render 'filters/customer_group_column', form: form %>
+    </div>
+  <% end %>
+</div>

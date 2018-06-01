@@ -1,0 +1,8 @@
+<div class="filter">
+  <%= simple_form_for @filter, url: customers_path, method: :get, as: :filter do |form| %>
+    <div class="filter-row">
+      <%= render 'filters/customer_column', form: form %>
+      <%= render 'filters/customer_group_column', form: form %>
+    </div>
+  <% end %>
+</div>

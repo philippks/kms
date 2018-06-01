@@ -1,0 +1,14 @@
+<%= simple_form_for @employee do |f| %>
+  <fieldset>
+    <%= f.input :name %>
+    <%= f.input :email %>
+    <%= f.input :initials %>
+    <%= f.input :hourly_rate %>
+    <%= f.input :worktime_model, include_blank: false %>
+    <%= f.input :password, type: :password %>
+    <%= f.input :password_confirmation, type: :password %>
+    <%= f.input :deactivated %>
+  </fieldset>
+
+  <%= render 'shared/default_form_actions', f: f, entity: @employee %>
+<% end %>

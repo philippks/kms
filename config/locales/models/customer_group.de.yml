@@ -1,0 +1,7 @@
+---
+de:
+  activerecord:
+    models:
+      customer_group:
+        one: Kundengruppe
+        other: Kundengruppen

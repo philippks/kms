@@ -1,0 +1,7 @@
+<%= simple_form_for @activity_category do |f| %>
+  <fieldset>
+    <%= f.input :name %>
+  </fieldset>
+
+  <%= render 'shared/default_form_actions', f: f, entity: @activity_category %>
+<% end %>

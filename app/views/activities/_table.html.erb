@@ -1,0 +1,60 @@
+<table class="management">
+  <thead>
+    <th class="employee"><%= Activity.human_attribute_name(:employee) %></th>
+    <th class="customer"><%= Activity.human_attribute_name(:customer) %></th>
+    <th class="date"><%= Activity.human_attribute_name(:date) %></th>
+    <th class="hours"><%= t('shared.hours_short') %></th>
+    <th class="hourly_rate"><%= t('shared.hourly_rate_short') %></th>
+    <th class="amount"><%= Activity.human_attribute_name(:amount) %></th>
+    <th class="text"><%= Activity.human_attribute_name(:text) %></th>
+
+    <% if request.format.html? %>
+      <th class="note"></th>
+      <th class="actions"></th>
+    <% end %>
+  </thead>
+
+  <tbody>
+    <% @activities.each do |activity| %>
+      <tr>
+        <td><%= activity.employee.name %></td>
+        <td><%= present(activity.customer) { |customer| customer.display_name } %></td>
+        <td><%= l activity.date %></td>
+        <td class="hours"><%= activity.hours %></td>
+        <td class="hourly_rate"><%= humanized_money activity.hourly_rate %></td>
+        <td class="amount"><%= humanized_money activity.amount %></td>
+        <td class="text"><%= activity.text %></td>
+
+        <% if request.format.html? %>
+          <td class="note">
+            <%= tooltip_icon_for(activity.note, title: Activity.human_attribute_name(:note)) if activity.note.present? %>
+          </td>
+
+          <td>
+            <% if activity.invoice_id.present? %>
+              <%= link_to Invoice.model_name.human, invoice_path(activity.invoice_id) %>
+            <% else %>
+              <%= link_to_edit activity %>
+            <% end %>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+
+  <tfoot>
+    <th><%= Activity.human_attribute_name(:total) %></th>
+    <th></th>
+    <th></th>
+    <th class="hours"><%= number_with_precision @total_hours %></th>
+    <th></th>
+    <th class="amount"><%= humanized_money @total_amount %></th>
+    <th></th>
+
+    <% if request.format.html? %>
+      <th></th>
+      <th></th>
+    <% end %>
+  </tfoot>
+
+</table>

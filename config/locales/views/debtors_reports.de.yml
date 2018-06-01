@@ -1,0 +1,15 @@
+de:
+  debtors_reports:
+    new:
+      title: Debitorenliste per %{until}
+      until_date: Bis Datum
+      filename: Debitorenliste_per_%{until}
+    table:
+      amount: Betrag
+      overdue: Verfall
+      range_1: 0-30 Tage
+      range_2: 31-60 Tage
+      range_3: 61-90 Tage
+      range_4: 91-120 Tage
+      range_5: länger
+      show_invoice: Zur Rechnung

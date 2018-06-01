@@ -1,0 +1,21 @@
+<%= link_to root_path, class: 'navbar-brand' do %>
+  <%= image_tag 'logo.png', alt: t('application.brand') %>
+<% end %>
+
+<%= link_to destroy_employee_session_path, method: :delete, class: 'logout' do %>
+  <%= fa_icon 'sign-out' %>
+  <%= t('shared.logout', employee: current_employee.name) %>
+<% end %>
+
+<%= link_to hours_path do %>
+  <div class="activities_progress">
+    <span class="label"><%= t('.activities_today') %></span>
+
+    <div class="progress">
+      <div class="progress-bar progress-bar-success"
+           style="width: <%= current_employee.target_hours_reached_in_percent %>%">
+        <%= t('.activity_hours_today', hours: current_employee.activity_hours_today) %>
+      </div>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,16 @@
+<%= simple_form_for [@invoice, @payment] do |f| %>
+  <fieldset>
+    <%= f.input :date, as: :date_picker %>
+    <%= f.input :amount %>
+
+    <% unless @payment.persisted? %>
+      <%= f.input :mark_invoice_charged_anyway, as: :boolean %>
+    <% end %>
+
+    <span class="open_amount">
+      <%= t('.open_amount', amount: humanized_money_with_symbol(@invoice.open_amount(ignore: @payment))) %>
+    </span>
+  </fieldset>
+
+  <%= render 'shared/default_form_actions', f: f, entity: @payment, parent: @invoice %>
+<% end %>

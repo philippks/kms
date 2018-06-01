@@ -1,0 +1,26 @@
+---
+de:
+  activerecord:
+    attributes:
+      absence:
+        reason: Abwesenheitsgrund
+    models:
+      absence:
+        one: Abwesenheit
+        other: Abwesenheiten
+    errors:
+      models:
+        absence:
+          attributes:
+            to_date:
+              to_not_after_from: Bis- muss nach Von-Datum sein
+  enumerize:
+    absence:
+      reason:
+        doctor: Arzt
+        holidays: Ferien
+        funeral: Beerdigung
+        disease: Krankheit
+        military: Militär
+        personal: Privat
+        death_family: Todesfall Familie

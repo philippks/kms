@@ -1,0 +1,14 @@
+<%= simple_form_for @customer do |f| %>
+  <fieldset>
+    <%= f.input :name %>
+    <%= f.input :address, input_html: { rows: 5 } %>
+    <%= f.input :confidential_title %>
+    <%= f.input :email_address %>
+    <%= f.association :customer_group %>
+    <%= f.input :invoice_delivery, include_blank: false %>
+    <%= f.input :invoice_hint, as: :text %>
+    <%= f.input :deactivated %>
+  </fieldset>
+
+  <%= render 'shared/default_form_actions', f: f, entity: @customer %>
+<% end %>

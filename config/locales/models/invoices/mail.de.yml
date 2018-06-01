@@ -1,0 +1,10 @@
+---
+de:
+  activerecord:
+    attributes:
+      invoices/mail:
+        from: Absenderadresse
+        to: Empfängeradresse
+        body: Text der E-Mail
+        subject: "Rechnung vom %{date}"
+        attachment_filename: "Rechnung"

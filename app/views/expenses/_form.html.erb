@@ -1,0 +1,12 @@
+<%= simple_form_for @expense do |f| %>
+  <fieldset>
+    <%= f.association :employee, as: :hidden %>
+    <%= f.association :customer, input_html: { class: 'customer_select' } %>
+    <%= f.input :date, as: :date_picker %>
+    <%= f.input :amount %>
+    <%= f.input :text %>
+    <%= f.input :note %>
+  </fieldset>
+
+  <%= render 'shared/default_form_actions', f: f, entity: @expense %>
+<% end %>

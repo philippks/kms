@@ -1,0 +1,14 @@
+de:
+  op_lists:
+    new:
+      title: Offene Posten per %{date}
+      filename: "Offene Posten %{date}"
+      no_ops: Keine Offenen Posten vorhanden.
+    table:
+      title: Offene Posten %{date}
+      between: "%{from} bis %{to}"
+      amount: Offener Betrag
+      period: Periode
+      actions: Aktionen
+      create_invoice: Rechnung erstellen
+      employees: Mitarbeiter

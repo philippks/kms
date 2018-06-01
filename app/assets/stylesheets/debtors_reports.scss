@@ -1,0 +1,40 @@
+.debtors_reports {
+  .pdf_viewer{
+    width: 800px;
+  }
+
+  form {
+    max-width: 300px;
+  }
+
+  .range {
+    width: 8em;
+    text-align: right;
+  }
+
+  .amount {
+    text-align: right;
+  }
+
+  .overdue {
+    width: 4em;
+  }
+
+  .customer {
+    width: 20em;
+  }
+
+  .table-row {
+    vertical-align: bottom;
+
+    form, {
+      float: left;
+    }
+
+    .btn {
+      float: left;
+      margin-top: 1.68em;
+      margin-left: 1em;
+    }
+  }
+}

@@ -1,0 +1,27 @@
+<tbody>
+  <tr class="title">
+    <td colspan="100%"><%= t('.title') %></td>
+  </tr>
+
+  <% report.absence_reasons.each do |absence_reason| %>
+    <tr>
+      <td class="customer"><%= absence_reason.text %></td>
+
+      <% @report.employees.each do |employee| %>
+        <td class="hours"><%= report.absence_value_for(employee, absence_reason, :hours).round(1) %></td>
+      <% end %>
+
+      <td colspan="100%"></td>
+    </tr>
+  <% end %>
+
+  <tr class="total">
+    <td><%= t '.total' %></td>
+
+    <% report.employees.each do |employee| %>
+      <td class="hours"><%= report.absence_value_for(employee, :hours).round(1) %></td>
+    <% end %>
+
+    <td colspan="100%"></td>
+  </tr>
+</tbody>

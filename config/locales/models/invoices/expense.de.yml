@@ -1,0 +1,10 @@
+---
+de:
+  activerecord:
+    attributes:
+      invoices/expense:
+        expenses: Nebenkosten
+    models:
+      invoices/expense:
+        one: Rechnungs-Nebenkosten
+        other: Rechnungs-Nebenkosten

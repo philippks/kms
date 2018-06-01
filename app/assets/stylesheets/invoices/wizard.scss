@@ -1,0 +1,114 @@
+.invoices-wizard {
+  .manually_set {
+    color: red;
+  }
+
+  .wizard-navigation {
+    padding-bottom: 20px;
+
+    input {
+      @extend a !optional;
+    }
+  }
+}
+
+.invoices-wizard-activities, .invoices-wizard-expenses {
+  td {
+    vertical-align: middle;
+  }
+
+  th.visibility {
+    width: 2em;
+  }
+
+  th.confidential {
+    width: 5em;
+  }
+
+  td.visible, td.order, td.actions {
+    font-size: 1.5em;
+    text-align: center;
+  }
+
+  th.actions {
+    width: 6em;
+  }
+
+  a.pagebreak, a.sort {
+    padding-right: .3em;
+  }
+
+  a.pagebreak.inactive {
+    color: #D3D3D3;
+  }
+
+  td.hourly_rate, td.hours {
+    div.editable-input {
+      input {
+        max-width: 6em;
+      }
+    }
+  }
+
+  td.text {
+    form.editableform {
+      .editable-input {
+        min-width: 35em;
+      }
+
+      div, textarea {
+        min-width: 32em;
+      }
+
+      textarea {
+        height: 5em;
+      }
+    }
+
+    .text {
+      float: left;
+    }
+
+    .templates {
+      padding-left: 5px;
+      display: inline-block;
+    }
+  }
+
+  td.confidential_activities_title {
+    font-weight: bold;
+  }
+
+  .activities_amounts, .expenses_amounts {
+    tr > td:first-child {
+      font-weight: bold;
+      width: 16em;
+      text-align: right;
+      padding-right: 1em;
+    }
+
+    tr {
+      height: 2em;
+    }
+  }
+}
+
+.invoices-wizard-complete {
+  .total_amount {
+    .form-group {
+      float: left;
+    }
+
+    a.tooltip_icon {
+      float: left;
+      margin-top: 2.4em;
+      margin-left: 1em;
+    }
+  }
+}
+
+.invoices-wizard-summary {
+  .pdf_viewer {
+    max-width: 800px;
+  }
+}

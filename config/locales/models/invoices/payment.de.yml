@@ -1,0 +1,16 @@
+---
+de:
+  activerecord:
+    attributes:
+      invoices/payment:
+        mark_invoice_charged_anyway: Rechnung in jedem Fall als bezahlt markieren
+    models:
+      invoices/payment:
+        one: Zahlung
+        other: Zahlungen
+    errors:
+      models:
+        invoices/payment:
+          attributes:
+            amount:
+              greater_than_open_invoice_amount: Der Betrag kann nicht grösser als der offene Rechnungsbetrag sein

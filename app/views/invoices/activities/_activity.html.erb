@@ -1,0 +1,8 @@
+<div class="row">
+  <div class="col-md-4"><%= activity.text %></div>
+  <div class="col-md-2"><%= activity.humanized_amount %></div>
+  <div class="col-md-4">
+    <%= link_to t('resources.edit', resource: Activity.model_name.human),
+      edit_invoice_activity_path(activity), class: 'btn btn-default' %>
+  </div>
+</div>

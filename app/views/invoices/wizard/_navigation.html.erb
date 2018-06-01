@@ -1,0 +1,23 @@
+<div class="wizard-navigation">
+  <ul class="nav nav-tabs">
+    <li class="<%= 'active' if current_page? action: :customer %>">
+      <%= submit_tag t('invoices.wizard.navigation.customer'), name: 'customer' %>
+    </li>
+
+    <li class="<%= 'active' if current_page? action: :activities %>">
+      <%= submit_tag t('invoices.wizard.navigation.activities'), name: 'activities' %>
+    </li>
+
+    <li class="<%= 'active' if current_page? action: :expenses %>">
+      <%= submit_tag t('invoices.wizard.navigation.expenses'), name: 'expenses' %>
+    </li>
+
+    <li class="<%= 'active' if current_page? action: :complete %>">
+      <%= submit_tag t('invoices.wizard.navigation.complete'), name: 'complete' %>
+    </li>
+
+    <li class="<%= 'active' if current_page? action: :summary %>">
+      <%= submit_tag t('invoices.wizard.navigation.summary'), name: 'summary' %>
+    </li>
+  </ul>
+</div>

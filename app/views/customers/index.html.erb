@@ -1,0 +1,42 @@
+<%= page_title_for resource: Customer, action: :index %>
+
+<%= render 'filter_row' %>
+
+<div class="table-row">
+  <% if @customers.any? %>
+    <table class="management">
+      <thead>
+        <th class="name"><%= Customer.human_attribute_name(:name) %></th>
+        <th class="address"><%= Customer.human_attribute_name(:address) %></th>
+        <th class="email_address"><%= Customer.human_attribute_name(:email_address) %></th>
+        <th class="customer_group"><%= Customer.human_attribute_name(:customer_group) %></th>
+        <th class="invoice_hint"><%= Customer.human_attribute_name(:invoice_hint) %></th>
+        <th class="deactivated"><%= Customer.human_attribute_name :deactivated %></th>
+        <th class="actions"></th>
+      </thead>
+
+      <tbody>
+        <% @customers.each do |customer| %>
+          <tr>
+            <td><%= customer.name %></td>
+            <td><%= simple_format customer.address %></td>
+            <td><%= customer.email_address %></td>
+            <td><%= customer.customer_group_name %></td>
+            <td><%= customer.invoice_hint %></td>
+            <td class="deactivated"><%= fa_icon :times if customer.deactivated? %></td>
+            <td><%= link_to_edit customer %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= will_paginate @customers, renderer: BootstrapPagination::Rails %>
+  <% else %>
+    <p><%= t('shared.no_entities_found', model: Customer.model_name.human(count: 2)) %></p>
+  <% end %>
+</div>
+
+<div class="actions">
+  <% if can? :create, Customer %>
+    <%= button_to_new Customer %>
+  <% end %>
+</div>

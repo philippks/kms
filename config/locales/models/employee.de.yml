@@ -1,0 +1,27 @@
+---
+de:
+  activerecord:
+    attributes:
+      employee:
+        initials: Initialen
+        worktime_model: Arbeitszeitmodel
+        remember_me: Angemeldet bleiben
+        password: Passwort
+        password_confirmation: Passwort bestätigen
+        email: E-Mail-Adresse
+    models:
+      employee:
+        one: Mitarbeiter
+        other: Mitarbeiter
+    errors:
+      models:
+        employee:
+          attributes:
+            deactivated:
+              open_efforts_error: Mitarbeiter kann nicht deaktiviert werden, da noch offenen Leistungen oder Nebenkosten vorhanden sind.
+              open_invoices_error: Mitarbeiter kann nicht deaktiviert werden, da noch offenen Rechnungen vorhanden sind.
+  enumerize:
+    employee:
+      worktime_model:
+        debit_is_actual: Soll = Ist
+        target_hours: Sollstunden

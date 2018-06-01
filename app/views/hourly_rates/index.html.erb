@@ -1,0 +1,31 @@
+<%= page_title_for resource: HourlyRate, action: :index %>
+
+<div class="table-row">
+  <% if @hourly_rates.any? %>
+    <table class="management">
+      <thead>
+        <th class="name"><%= HourlyRate.human_attribute_name :customer %></th>
+        <th class="initials"><%= HourlyRate.human_attribute_name :hourly_rate %></th>
+        <th class="actions"></th>
+      </thead>
+
+      <tbody>
+        <% @hourly_rates.each do |hourly_rate| %>
+          <tr>
+            <td><%= hourly_rate.customer.name %></td>
+            <td><%= hourly_rate.hourly_rate %></td>
+            <td><%= link_to_edit [@employee, hourly_rate] %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p><%= t 'shared.no_records', model: HourlyRate.model_name.human(count: 2) %></p>
+  <% end %>
+</div>
+
+<div class="actions">
+  <% if can? :create, HourlyRate %>
+    <%= button_to_new [@employee, HourlyRate] %>
+  <% end %>
+</div>

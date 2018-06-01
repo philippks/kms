@@ -1,0 +1,8 @@
+<%= simple_form_for [@employee, @hourly_rate] do |f| %>
+  <fieldset>
+    <%= f.association :customer, input_html: { class: 'customer_select' } %>
+    <%= f.input :hourly_rate %>
+  </fieldset>
+
+  <%= render 'shared/default_form_actions', f: f, entity: @hourly_rate, parent: @employee %>
+<% end %>

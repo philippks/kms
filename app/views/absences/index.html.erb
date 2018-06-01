@@ -1,0 +1,40 @@
+<%= page_title_for resource: Absence, action: :index %>
+
+<%= render 'filter_row' %>
+
+<div class="table-row">
+  <% if @absences.any? %>
+    <table class="management">
+      <thead>
+        <th class="employee"><%= Absence.human_attribute_name(:employee) %></th>
+        <th class="from"><%= Absence.human_attribute_name(:date) %></th>
+        <th class="hours"><%= t('shared.hours_short') %></th>
+        <th class="reason"><%= Absence.human_attribute_name(:reason) %></th>
+        <th class="text"><%= Absence.human_attribute_name(:text) %></th>
+        <th class="actions"></th>
+      </thead>
+
+      <tbody>
+        <% @absences.each do |absence| %>
+          <tr>
+            <td><%= absence.employee.name %></td>
+            <td><%= present(absence) { |a| a.date } %></td>
+            <td><%= absence.absent_target_hours %></td>
+            <td><%= absence.reason.text %></td>
+            <td><%= absence.text %></td>
+            <td><%= link_to_edit absence %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= will_paginate @absences, renderer: BootstrapPagination::Rails %>
+  <% else %>
+    <p><%= t('shared.no_entities_found', model: Absence.model_name.human(count: 2)) %></p>
+  <% end %>
+</div>
+
+<div class="actions">
+  <% if can? :create, Absence %>
+    <%= button_to_new Absence %>
+  <% end %>
+</div>

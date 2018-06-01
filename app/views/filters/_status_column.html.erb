@@ -1,0 +1,10 @@
+<div class="col-md-4"/>
+  <%= form.input :status, as: :select2,
+                          collection: [[t('shared.open'), 0],
+                                       [t('shared.charged'), 1]],
+                          label: false,
+                          include_blank: true,
+                          input_html: { class: 'filter_select' },
+                          placeholder: t('shared.filter_for',
+                                      model: t('shared.state')) %>
+</div>

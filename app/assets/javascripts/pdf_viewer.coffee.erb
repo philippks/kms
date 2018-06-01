@@ -1,0 +1,60 @@
+class @PdfViewer
+  pdf = null
+  current_page = 1
+
+  constructor: (container, @options = { scale: 1 }) ->
+    @container = container
+    @initializeNavigation()
+    @loadPdf(container.data('url'))
+
+  loadPdf: (url) ->
+    pdfjsLib.GlobalWorkerOptions.workerSrc = "<%= javascript_url 'pdfjs-dist/build/pdf.worker.js' %>"
+    pdfjsLib.getDocument(url).then((pdf) =>
+      @pdf = pdf
+      @changePage(1)
+    )
+
+  renderPage: (pageNum) ->
+    @pdf.getPage(pageNum).then((page) =>
+      $('#page_count_label').text("Seite #{page.pageNumber} von #{@pdf.numPages}")
+      $('.pdf_viewer .navigation').removeClass('hidden') if @pdf.numPages > 1
+
+      @current_page = page.pageNumber
+      viewport = page.getViewport(@options['scale'])
+
+      canvas = @container.find('#pdf-canvas')[0]
+      context = canvas.getContext('2d')
+      canvas.height = viewport.height
+      canvas.width = viewport.width
+
+      renderContext = {
+          canvasContext: context,
+          viewport: viewport
+      }
+      page.render(renderContext)
+    )
+
+  changePage: (page) ->
+    @nextPageButton.removeClass('disabled')
+    @nextPageButton.addClass('disabled') if page == @pdf.numPages
+
+    @previousPageButton.removeClass('disabled')
+    @previousPageButton.addClass('disabled') if page == 1
+
+    @renderPage(page)
+
+  initializeNavigation: ->
+    @nextPageButton = $('#next_page_button')
+    @previousPageButton = $('#previous_page_button')
+
+    @previousPageButton.addClass('disabled')
+
+    @nextPageButton.click( =>
+      if @current_page < @pdf.numPages
+        @changePage(@current_page + 1)
+    )
+
+    @previousPageButton.click( =>
+      if @current_page > 1
+        @changePage(@current_page - 1)
+    )

@@ -1,0 +1,18 @@
+---
+de:
+  application:
+    brand: KMS
+    access_denied: Der Zugriff auf die Resource ist nicht erlaubt.
+    header:
+      activities_today: "Leistungen heute:"
+      activity_hours_today: "%{hours} Stunden"
+    navigation:
+      hours_placeholder: Stunden erfassen...
+      new_activity: Leistung erfassen
+      manage: Administration
+      activities_report: Auswertung
+      preferences: Einstellungen
+      op_list: OP-Liste
+      customer_report: Kunde
+      customers_report: Kunden
+

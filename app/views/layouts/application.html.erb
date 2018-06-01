@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= page_title app_name: 'KMS' %></title>
+    <%= stylesheet_link_tag "application" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+    <%= render 'application/piwik' %>
+
+    <link rel="shortcut icon" type="image/x-icon" href="<%= image_url('favicon.ico') %>">
+  </head>
+
+  <body class="<%= body_class %>">
+    <div class="header">
+      <%= render 'application/header' %>
+    </div>
+
+    <div class="sidebar-navigation">
+      <%= render 'application/navigation' %>
+    </div>
+
+    <div class='page-wrapper'>
+      <%= render 'flashes' %>
+      <div id='content'><%= yield %></div>
+    </div>
+  </body>
+</html>

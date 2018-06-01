@@ -1,0 +1,7 @@
+<%= simple_form_for [@activity_category, @text_template] do |f| %>
+  <fieldset>
+    <%= f.input :text %>
+  </fieldset>
+
+  <%= render 'shared/default_form_actions', f: f, entity: @text_template, parent: @activity_category %>
+<% end %>

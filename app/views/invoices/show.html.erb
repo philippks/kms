@@ -1,0 +1,141 @@
+<%= page_title_for resource: Invoice, action: :edit %>
+
+<div class="main">
+  <%= render 'notices' %>
+
+  <%= render 'pdf_viewer/pdf_viewer', url: new_invoice_pdf_path(@invoice, format: :pdf, templated: true) %>
+</div>
+
+<div class="aside">
+  <div class="back">
+    <%= link_to t('shared.back'), invoices_path, class: 'btn btn-default full-width' %>
+  </div>
+
+  <div class="panel panel-default details">
+    <div class="panel-heading">
+      <%= t 'shared.details' %>
+    </div>
+
+    <div class="panel-body">
+      <dl>
+        <dt><%= Invoice.human_attribute_name(:state) %></dt>
+        <dd><%= @invoice.aasm.human_state %></dd>
+
+        <dt><%= Invoice.human_attribute_name(:customer) %></dt>
+        <dd><%= @invoice.customer.name %></dd>
+
+        <dt><%= Invoice.human_attribute_name(:amount) %></dt>
+        <dd><%= humanized_money @invoice.total_amount %></dd>
+
+        <% if @invoice.sent? %>
+          <dt><%= Invoice.human_attribute_name(:open_amount) %></dt>
+          <dd><%= humanized_money @invoice.open_amount %></dd>
+
+          <dt><%= Invoice.human_attribute_name(:sent_at) %></dt>
+          <dd><%= @invoice.sent_at ? l(@invoice.sent_at) : '-' %>
+          <% if @invoice.delivery_method&.post? %>
+            (<%= t 'enumerize.customer.invoice_delivery.post' %>)
+          <% elsif @invoice.delivery_method&.email? %>
+            (<%= link_to t('enumerize.customer.invoice_delivery.email'), invoice_mail_path(@invoice) %>)
+          <% end %>
+        <% end %>
+
+        <% if @invoice.charged? %>
+          <dt><%= Invoice.human_attribute_name(:payed_amount) %></dt>
+          <dd><%= humanized_money @invoice.payed_amount %></dd>
+        <% end %>
+      </dl>
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <%= t('shared.actions') %>
+    </div>
+    <div class="panel-body">
+      <% if can? :edit, @invoice %>
+        <%= link_to t('shared.edit'), invoice_wizard_customer_path(@invoice), class: 'btn btn-default full-width' %>
+      <% end %>
+
+      <% if Global.invoices.company_template_path.blank? %>
+        <%= link_to t('.download'), new_invoice_pdf_path(@invoice, format: :pdf), class: 'btn btn-default full-width' %>
+      <% else %>
+        <div class="btn-group dropdown full-width">
+          <%= link_to t('.download'), new_invoice_pdf_path(@invoice, format: :pdf), class: 'btn btn-default grouped-download' %>
+
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <li> <%= link_to t('.download_templated'), new_invoice_pdf_path(@invoice, format: :pdf, templated: true) %> </li>
+          </ul>
+        </div>
+      <% end %>
+
+      <% if can? :read, @invoice.payments.build %>
+        <%= link_to t('.payments'),
+          invoice_payments_path(@invoice),
+          class: 'btn btn-default full-width' %>
+      <% end %>
+
+      <% if can? :deliver, @invoice %>
+        <%= link_to t('.deliver'),
+          new_invoice_delivery_path(@invoice),
+          class: 'btn btn-primary full-width' %>
+      <% end %>
+
+      <% if can? :charge, @invoice %>
+        <%= link_to t('.new_payment'),
+          new_invoice_payment_path(@invoice, id: @invoice.to_param, referrer: invoice_path(@invoice)),
+          class: 'btn btn-primary full-width' %>
+      <% end %>
+    </div>
+  </div>
+
+  <% if (can?(:destroy, @invoice) || can?(:reopen, @invoice)) %>
+    <div class="panel panel-default dangerzone">
+      <div class="panel-heading">
+        <%= t('.danger') %>
+      </div>
+      <div class="panel-body">
+        <% if can? :deliver, @invoice %>
+          <div class="link">
+            <%= link_to t('.force_deliver'),
+                        deliver_invoice_path(@invoice, id: @invoice.to_param),
+                        method: :patch,
+                        'data-confirm' => t('shared.are_you_sure') %>
+          </div>
+        <% end %>
+
+        <% if can? :charge, @invoice %>
+          <div class="link">
+            <%= link_to t('.charge'),
+                        charge_invoice_path(@invoice, id: @invoice.to_param),
+                        method: :patch,
+                        'data-confirm' => t('shared.are_you_sure') %>
+          </div>
+        <% end %>
+
+        <% if can? :reopen, @invoice %>
+          <div class="link">
+            <%= link_to t('.reopen'),
+                        reopen_invoice_path(@invoice, id: @invoice.to_param),
+                        method: :patch,
+                        'data-confirm' => t('shared.are_you_sure') %>
+          </div>
+        <% end %>
+
+        <% if can? :destroy, @invoice %>
+          <div class="link">
+            <%= link_to t('.destroy'),
+                        @invoice,
+                        method: :delete,
+                        'data-confirm' => t('shared.are_you_sure'),
+                        class: 'destroy_link' %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
+

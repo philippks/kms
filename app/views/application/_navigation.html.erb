@@ -1,0 +1,16 @@
+<nav class="navbar navbar-default">
+  <ul>
+    <li class="sidebar-input">
+      <div class="form-group select2">
+        <select id="hours_subject_select" class="hours_subject_select form-control" placeholder="<%= t('.hours_placeholder') %>">
+        </select>
+      </div>
+    </li>
+  </ul>
+
+  <%= render_navigation %>
+
+  <div class="bottom">
+    <%= render_navigation context: :bottom %>
+  </div>
+</nav>

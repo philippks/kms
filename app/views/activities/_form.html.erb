@@ -1,0 +1,14 @@
+<%= simple_form_for @activity do |f| %>
+  <fieldset>
+    <%= f.association :employee, as: :hidden %>
+    <%= f.association :customer, input_html: { class: 'customer_select' } %>
+    <%= f.input :date, as: :date_picker %>
+    <%= f.input :hourly_rate %>
+    <%= f.input :hours, as: :string, input_html: { autofocus: true, autocomplete: :off } %>
+    <%= f.association :activity_category, collection: ActivityCategory.order(:name), as: :select2 %>
+    <%= f.input :text, as: :text, input_html: { id: 'activity_text_input', rows: 3 } %>
+    <%= f.input :note, as: :text %>
+  </fieldset>
+
+  <%= render 'shared/default_form_actions', f: f, entity: @activity %>
+<% end %>

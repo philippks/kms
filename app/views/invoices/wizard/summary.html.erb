@@ -1,0 +1,11 @@
+<%= page_title_for resource: Invoice, action: :edit %>
+
+<%= render 'invoices/wizard/navigation_form' %>
+
+<%= render 'pdf_viewer/pdf_viewer', url: new_invoice_pdf_path(@invoice, format: :pdf, templated: true) %>
+
+<%= simple_form_for @invoice, url: invoice_wizard_path(@invoice, current_wizard_action: :summary) do |form| %>
+  <div class="actions">
+    <%= form.button :submit, t('shared.save_and_close'), class: 'btn-primary submit-button' %>
+  </div>
+<% end %>

@@ -1,0 +1,12 @@
+default:
+  from: <%= ENV.fetch('MAILER_FROM') { '' } %>
+  smtp_settings:
+    address: <%= ENV.fetch('SMTP_ADDRESS') { '' } %>
+    port: <%= ENV.fetch('SMTP_PORT') { 587 } %>
+    user_name: <%= ENV.fetch('SMTP_USER_NAME') { '' } %>
+    password: <%= ENV.fetch('SMTP_PASSWORD') { '' } %>
+    ssl: true
+development:
+  from: 'invoices@kms.ch'
+test:
+  from: 'invoices@kms.ch'

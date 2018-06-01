@@ -1,0 +1,11 @@
+de:
+  hours:
+    index:
+      title: Monatliche Übersicht
+      total_activities: "Total Leistungen:"
+      total_absences: "Total Abwesenheiten:"
+      total_hours: "Gesamttotal:"
+      target_hours: "Total Sollstunden:"
+    subjects:
+      index:
+        last_customers: "Letzte Kunden"

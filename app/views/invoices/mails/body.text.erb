@@ -1,0 +1,7 @@
+Guten Tag <%= @invoice.customer.confidential_title.presence || @invoice.customer.name %>
+
+In der Beilage erhalten Sie unsere Rechnung vom <%= I18n.l(@invoice.date, format: :long) %> mit der Bitte um fristgerechte Begleichung.
+
+Wir bedanken uns für das entgegengebrachte Vertrauen.
+
+<%= Global.invoices.mail_footer %>

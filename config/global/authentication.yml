@@ -1,0 +1,4 @@
+default:
+  encrypted_master_password: <%= ENV["ENCRYPTED_MASTER_PASSWORD"] %>
+test:
+  encrypted_master_password:

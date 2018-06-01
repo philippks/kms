@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>KMS - Login</title>
+  <%= stylesheet_link_tag 'application' %>
+</head>
+<body>
+  <div class='login-form'>
+    <%= image_tag 'logo-blue.png', class: 'logo', alt: t('application.brand') %>
+
+    <%= yield %>
+  </div>
+
+  <%= javascript_include_tag "application" %>
+</body>
+</html>

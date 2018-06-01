@@ -1,0 +1,6 @@
+---
+de:
+  resources:
+    edit: "%{resource} bearbeiten"
+    index: "%{resource} verwalten"
+    new: "%{resource} erfassen"

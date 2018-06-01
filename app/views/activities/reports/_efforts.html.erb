@@ -1,0 +1,63 @@
+<% report.customers_by_customer_group.each do |customer_group, customers| %>
+  <tbody>
+    <% if customer_group.present? %>
+      <tr>
+        <td colspan="100%" class="customer_group_title">
+          <%= t('.customer_group_title', customer_group: customer_group.name) %>
+        </td>
+      </tr>
+    <% end %>
+
+    <% customers.each do |customer| %>
+      <tr>
+        <td class="customer"><%= customer.name %></td>
+
+        <% report.employees.each do |employee| %>
+          <td class="hours"><%= report.effort_value_for(customer_group, customer, employee, :hours).round(1) %></td>
+        <% end %>
+
+        <% report.employees.each do |employee| %>
+          <td class="amount">
+            <%= humanized_money report.effort_value_for(customer_group, customer, employee, :activities), no_cents: true %>
+          </td>
+        <% end %>
+
+        <% [:activities, :expenses, :turnover].each do |amount_key| %>
+          <td class="amount">
+            <%= humanized_money report.effort_value_for(customer_group, customer, amount_key), no_cents: true %>
+          </td>
+        <% end %>
+
+        <td class="amount">
+          <%= humanized_money report.invoice_value_for(customer_group, customer, :charged), no_cents: true %>
+        </td>
+      </tr>
+    <% end %>
+
+    <tr class="total">
+      <td><%= t '.customer_group_total', customer_group: customer_group&.name %></td>
+
+      <% report.employees.each do |employee| %>
+        <td class="hours"><%= report.effort_value_for(customer_group, employee, :hours).round(1) %></td>
+      <% end %>
+
+      <% report.employees.each do |employee| %>
+        <td class="amount">
+          <%= humanized_money report.effort_value_for(customer_group, employee, :activities), no_cents: true %>
+        </td>
+      <% end %>
+
+      <% [:activities, :expenses, :turnover].each do |amount_key| %>
+        <td class="amount"><%= humanized_money report.effort_value_for(customer_group, amount_key), no_cents: true %></td>
+      <% end %>
+
+      <td class="amount">
+        <%= humanized_money report.invoice_value_for(customer_group, :charged), no_cents: true %>
+      </td>
+    </tr>
+  </tbody>
+
+  <tfoot>
+    <tr colspan="100%"></tr>
+  </tfoot>
+<% end %>

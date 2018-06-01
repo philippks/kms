@@ -1,0 +1,10 @@
+---
+de:
+  activerecord:
+    attributes:
+      text_template:
+        activity_category: Aktivitätskategorie
+    models:
+      text_template:
+        one: Vorlage
+        other: Vorlagen

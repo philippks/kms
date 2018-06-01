@@ -1,0 +1,70 @@
+<%= page_title_for resource: Invoice, action: :edit %>
+
+<%= render 'navigation_form' %>
+
+<%= simple_form_for :invoice_expenses, url: group_invoice_expenses_path(@invoice),
+                                       method: :patch do |f| %>
+  <% if @expenses.any? %>
+    <div class="table-row">
+      <table class="management">
+        <thead>
+          <th class="checkbox_column">
+            <%= check_box_tag 'checkAll' %> </th>
+          <th class="visibility"></th>
+          <th class="assigned_efforts"><%= Invoices::Activity.human_attribute_name(:expenses) %></th>
+          <th class="text"><%= Invoices::Activity.human_attribute_name(:text) %></th>
+          <th class="amount"><%= Invoices::Activity.human_attribute_name(:amount) %></th>
+          <th class="actions"></th>
+        </thead>
+        <tbody class="sortable">
+          <%= render partial: 'expense', collection: @expenses %>
+        </tbody>
+
+        <tfoot>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th class="amount"><%= humanized_money @invoice.expenses.sum(&:amount) %></th>
+          <th></th>
+        </tfoot>
+      </table>
+    </div>
+  <% end %>
+
+  <div class="table-row">
+    <table class="expenses_amounts">
+      <tr>
+        <td><%= t '.actual_expenses_amount' %></td>
+        <td><%= humanized_money @expenses.to_a.sum(&:actual_amount) %></td>
+      </tr>
+      <tr>
+        <td><%= t '.remaining_open_amount' %></td>
+        <td>
+          <%= humanized_money @open_amount %>
+
+          <% if @open_amount > 0 %>
+            (<%= link_to t('.generate_expenses'), generate_invoice_expenses_path(@invoice), method: :post %>)
+          <% end %>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="actions">
+    <% if can? :create, Invoices::Expense %>
+      <%= link_to t('.new_invoice_expense'),
+                  invoice_expenses_path(@invoice, expense: { invoice_id: @invoice.id }),
+                  method: :post,
+                  class: 'btn btn-default' %>
+
+      <%= f.button :submit, t('.group') %>
+    <% end %>
+  </div>
+<% end %>
+
+<%= simple_form_for @invoice, url: invoice_wizard_path(@invoice, current_wizard_action: :expenses) do |form| %>
+  <div class="actions">
+    <%= form.button :submit, t('shared.save_and_close'), class: 'btn-primary submit-button' %>
+  </div>
+<% end %>

@@ -1,0 +1,11 @@
+<%= page_title_for resource: Invoice, action: :new %>
+
+<%= simple_form_for @invoice do |f| %>
+  <%= f.hidden_field :employee_id %>
+  <%= f.hidden_field :created_by_initials %>
+  <%= f.hidden_field :date %>
+  <%= f.hidden_field :vat_rate %>
+  <%= f.association :customer, input_html: { class: 'customer_select' } %>
+
+  <%= render 'shared/default_form_actions', f: f, entity: @invoice %>
+<% end %>

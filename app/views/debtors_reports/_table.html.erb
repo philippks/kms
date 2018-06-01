@@ -1,0 +1,68 @@
+<div class="table-row">
+  <table class="management <%= 'plain' if request.format.pdf? %>">
+    <thead>
+      <th class="customer"><%= Invoice.human_attribute_name(:customer) %></th>
+      <th class="date"><%= t 'shared.date' %></th>
+      <th class="amount"><%= t '.amount' %></th>
+      <th class="overdue"><%= t '.overdue' %></th>
+      <th class="range"><%= t '.range_2' %></th>
+      <th class="range"><%= t '.range_3' %></th>
+      <th class="range"><%= t '.range_4' %></th>
+      <th class="range"><%= t '.range_5' %></th>
+      <% if request.format.html? %>
+        <th class="range"></th>
+      <% end %>
+    </thead>
+
+    <tbody>
+      <% @debtors.each do |debtor| %>
+        <tr>
+          <td class="customer"><%= debtor.customer.name %></td>
+          <td class="date"><%= l debtor.date %></td>
+          <td class="range">
+            <%= humanized_money debtor.open_amount %>
+          </td>
+          <td class="overdue"><%= @overdues[debtor] %></td>
+          <td class="range">
+            <%= humanized_money debtor.open_amount if @overdues[debtor].between? 31, 60 %>
+          </td>
+          <td class="range">
+            <%= humanized_money debtor.open_amount if @overdues[debtor].between? 61, 90 %>
+          </td>
+          <td class="range">
+            <%= humanized_money debtor.open_amount if @overdues[debtor].between? 91, 120 %>
+          </td>
+          <td class="range">
+            <%= humanized_money debtor.open_amount if @overdues[debtor] > 120 %>
+          </td>
+
+          <% if request.format.html? %>
+            <td class="link"><%= link_to t('.show_invoice'), debtor %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+
+    <tfoot>
+      <th><%= t Invoice.human_attribute_name :total %></th>
+      <th></th>
+      <th class="amount"><%= humanized_money @debtors.sum(&:open_amount) %></th>
+      <th></th>
+      <th class="amount">
+        <%= humanized_money @debtors.sum { |debtor| @overdues[debtor].between?(31, 60) ? debtor.open_amount : 0 }  %>
+      </th>
+      <th class="amount">
+        <%= humanized_money @debtors.sum { |debtor| @overdues[debtor].between?(61, 90) ? debtor.open_amount : 0 }  %>
+      </th>
+      <th class="amount">
+        <%= humanized_money @debtors.sum { |debtor| @overdues[debtor].between?(91, 120) ? debtor.open_amount : 0 }  %>
+      </th>
+      <th class="amount">
+        <%= humanized_money @debtors.sum { |debtor| @overdues[debtor] > 120 ? debtor.open_amount : 0 }  %>
+      </th>
+      <% if request.format.html? %>
+        <th></th>
+      <% end %>
+    </tfoot>
+  </table>
+</div>

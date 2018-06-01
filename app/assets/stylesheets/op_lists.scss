@@ -1,0 +1,34 @@
+.op_lists-new {
+  .filter-row{
+    .col-md-4 {
+      width: 300px;
+    }
+  }
+  .management {
+    width: 100%;
+
+    .customer {
+      width: 16em;
+    }
+
+    .amount {
+      width: 10em;
+
+      text-align: right;
+    }
+
+    .period {
+      width: 18em;
+    }
+
+    .employees {
+      .highlighted_employee {
+        font-weight: bold;
+      }
+    }
+
+    .actions {
+      width: 12em;
+    }
+  }
+}

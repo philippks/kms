@@ -1,0 +1,6 @@
+---
+de:
+  devise:
+    sessions:
+      new:
+        login_as: Anmelden als

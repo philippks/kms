@@ -1,0 +1,17 @@
+.pdf_viewer {
+  .navigation {
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+  }
+
+  #page_count_label {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  #pdf-canvas {
+    border: solid black 1px;
+  }
+}
