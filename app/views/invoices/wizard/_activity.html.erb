@@ -1,0 +1,85 @@
+<tr class="invoice-activity-<%= activity.id %>" data-reorder_path='<%= invoice_activity_reorder_path(@invoice, activity) %>'>
+  <td>
+    <%= check_box_tag 'effort_ids[]', activity.id %>
+  </td>
+  <td class="visible">
+    <% if @invoice.confidential? %>
+      <%= link_to fa_icon(activity.confidential? ? 'lock' : 'unlock'),
+                  invoice_activity_path(@invoice, activity, activity: { confidential: !activity.confidential }),
+                  method: :patch %>
+    <% end %>
+
+    <% if @invoice.format == :compact %>
+      <%= link_to fa_icon(activity.visible? ? 'eye' : 'eye-slash', title: t('.change_visibility')),
+        invoice_activity_path(@invoice, activity, activity: { visible: !activity.visible }),
+        method: :patch %>
+    <% else %>
+      <%= fa_icon('eye', title: t('.visibility_change_not_possible')) %>
+    <% end %>
+  </td>
+  <td>
+    <%= link_to t('invoices.wizard.activities.assigned', count: activity.efforts.size),
+                edit_invoice_activity_path(@invoice, activity), class: 'assigned_efforts' %>
+
+    <% if activity.efforts.size >= 2 %>
+      <%= link_to fa_icon('unlink'),
+                  invoice_activity_ungroup_path(@invoice, activity, id: activity),
+                  title: t('.ungroup'),
+                  method: :patch %>
+    <% end %>
+  </td>
+  <td class="text">
+    <div class="text">
+      <%= editable activity, :text, type: :textarea,
+                                    onblur: 'submit',
+                                    url: invoice_activity_path(@invoice, activity),
+                                    data: { invoice_activity_id: activity.id } %>
+    </div>
+
+    <div class="templates activity_text_suggestions_<%= activity.id %> hidden">
+      <%= link_to t('.templates'), invoice_activity_templates_path(@invoice, activity) %>
+    </div>
+  </td>
+
+  <td class="note">
+    <% if activity.efforts.pluck(:note).compact.any? %>
+      <%= tooltip_icon_for(activity.effort_notes, title: Invoices::Activity.human_attribute_name(:notes)) %>
+    <% end %>
+  </td>
+
+  <td class="hours">
+    <%= editable activity, :hours_manually,
+                           title: Invoices::Activity.human_attribute_name(:hours),
+                           url: invoice_activity_path(@invoice, activity),
+                           placeholder: '',
+                           class: ('manually_set' if activity.hours_manually.present?),
+                           value: activity.hours %>
+  </td>
+  <td class="hourly_rate">
+    <%= editable activity, :hourly_rate_manually,
+                           title: Invoices::Activity.human_attribute_name(:hourly_rate),
+                           url: invoice_activity_path(@invoice, activity),
+                           placeholder: '',
+                           class: ('manually_set' if activity.hourly_rate_manually.present?),
+                           value: activity.hourly_rate %>
+  </td>
+  <td class="amount"><%= humanized_money(activity.amount || 0) %></td>
+  <td class="actions">
+    <%= link_to fa_icon('sort'), '#', class: 'sort' %>
+
+    <%= link_to fa_icon('cut'),
+                invoice_activity_toggle_pagebreak_path(@invoice, activity, id: activity),
+                method: :patch,
+                title: activity.pagebreak? ? t('.remove_pagebreak') : t('.add_pagebreak'),
+                class: "pagebreak #{'inactive' unless activity.pagebreak?}" %>
+
+    <% if can? :destroy, Invoices::Activity %>
+      <%= link_to fa_icon('trash'),
+                  invoice_activity_path(@invoice, activity),
+                  method: :delete,
+                  data: { confirm: t('.confirm_remove') },
+                  title: t('.destroy'),
+                  id: "delete-invoice-activity-#{activity.id}-link" %>
+    <% end %>
+  </td>
+</tr>

@@ -1,0 +1,12 @@
+---
+de:
+  activerecord:
+    attributes:
+      activity:
+        activity_category: Leistungskategorie
+        text_suggestions: Textvorschläge
+        text: Rechnungstext
+    models:
+      activity:
+        one: Leistung
+        other: Leistungen

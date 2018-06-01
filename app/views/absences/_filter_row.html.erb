@@ -1,0 +1,18 @@
+<div class="filter">
+  <%= simple_form_for @filter, url: absences_path, method: :get, as: :filter do |form| %>
+    <div class="filter-row">
+      <%= render 'filters/employee_column', form: form %>
+
+      <%= render 'filters/date_column', form: form %>
+
+      <div class="col-md-4"/>
+        <%= form.input :reason, as: :select2,
+                                collection: Absence.reason.options,
+                                label: false,
+                                input_html: { class: 'filter_select' },
+                                placeholder: t('shared.filter_for',
+                                               model: Absence.human_attribute_name(:reason)) %>
+      </div>
+    </div>
+  <% end %>
+</div>

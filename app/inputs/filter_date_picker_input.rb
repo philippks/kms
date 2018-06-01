@@ -1,0 +1,2 @@
+class FilterDatePickerInput < DatePickerInput
+end

@@ -1,0 +1,34 @@
+.report {
+  thead {
+    th {
+      text-align: right;
+    }
+
+    .customer {
+      text-align: left;
+    }
+
+    .initials-hours {
+      width: 3em;
+    }
+
+    .initials-saldo {
+      width: 3em;
+    }
+
+    .hours, .amounts, .totals, .charged {
+      text-align: center;
+    }
+  }
+
+  tr.total, tr.title, td.customer_group_title {
+    background-color: #b7b7b7 !important;
+    font-weight: bold;
+  }
+
+  table tfoot{
+    display:block;
+    margin-bottom:10px;
+    border-radius: 5px;
+  }
+}

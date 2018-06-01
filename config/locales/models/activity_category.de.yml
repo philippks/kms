@@ -1,0 +1,8 @@
+---
+de:
+  activerecord:
+    models:
+      activity_category:
+        one: Leistungskategorie
+        other: Leistungskategorien
+

@@ -1,0 +1,49 @@
+de:
+  invoices:
+    wizard:
+      destroy_invoice: Rechnung löschen
+      navigation:
+        customer: Kunde
+        activities: Leistungen gruppieren
+        expenses: Nebenkosten gruppieren
+        complete: Rechnung vervollständigen
+        summary: Zusammenfassung
+      activities:
+        assigned:
+          one: "%{count} Leistung zugewiesen"
+          other: "%{count} Leistungen zugewiesen"
+        destruction_warning: Achtung, damit werden die bestehenden Rechnungsleistungen gelöscht.
+        group: Leistungen zusammenführen
+        generate_activities: Leistungen generieren
+        confidential_activities: Vertrauliche Leistungen
+        actual_activities_amount: "Betrag gem. Leistungen:"
+        remaining_open_amount: "Offener Betrag:"
+        new_invoice_activity: Leistung erfassen
+      activity:
+        confirm_remove: Die Rechnungsleistung von der Rechnung entfernen?
+        ungroup: Gruppierung aufheben
+        add_pagebreak: Zeilenumbreich ein
+        remove_pagebreak: Zeilenumbreich aus
+        destroy: Leistung entfernen
+        change_visibility: Leistung verstecken / anzeigen
+        visibility_change_not_possible: "Sichtbarkeit kann bei Rechnungen mit dem Format 'Detailliert' nicht geändert werden."
+        templates: Vorlagen aus Leistungskategorien
+      expenses:
+        assigned:
+          one: "%{count} Nebenkosten zugewiesen"
+          other: "%{count} Nebenkosten zugewiesen"
+        new_invoice_expense: Nebenkosten erfassen
+        group: Nebenkosten zusammenführen
+        default_expenses_amount: "zzgl. Standard Nebenkosten:"
+        actual_expenses_amount: "Betrag gem. Nebenkosten:"
+        remaining_open_amount: "Offener Betrag:"
+        generate_expenses: Nebenkosten generieren
+      expense:
+        confirm_remove: Die Nebenkosten wirklich von der Rechnung entfernen?
+        ungroup: Gruppierung aufheben
+        destroy: Nebenkosten entfernen
+        change_visibility: Nebenkosten verstecken / anzeigen
+        visibility_change_not_possible: "Sichtbarkeit kann bei Rechnungen mit dem Format 'Detailliert' nicht geändert werden."
+      complete:
+        recent_total_amounts: "Beträge in der Vergangenheit:"
+        vat_rate: Mehrwertsteuersatz

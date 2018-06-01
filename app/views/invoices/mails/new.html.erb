@@ -1,0 +1,13 @@
+<h1><%= t '.title' %></h1>
+
+<%= simple_form_for [@invoice, @mail], url: invoice_mail_path(@invoice) do |f| %>
+  <%= f.association :employee, readonly: true, as: :hidden %>
+  <%= f.input :from, readonly: true %>
+  <%= f.input :to, readonly: true %>
+  <%= f.input :body, as: :text, input_html: { rows: 16 } %>
+
+  <%= link_to t('shared.back'), new_invoice_delivery_path(@invoice), class: 'btn btn-default' %>
+  <%= f.button :submit, class: 'btn-primary',
+                        value: t('.send'),
+                        data: { disable_with: t('.sending') } %>
+<% end %>

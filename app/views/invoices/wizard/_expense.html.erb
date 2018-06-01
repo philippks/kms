@@ -1,0 +1,51 @@
+<tr data-invoice-id=<%= expense.invoice_id %> data-invoice-effort-id=<%= expense.id %> data-path='expenses'>
+  <td>
+    <%= check_box_tag 'effort_ids[]', expense.id %>
+  </td>
+  <td class="visible">
+    <% if @invoice.format == :compact %>
+      <%= link_to fa_icon(expense.visible? ? 'eye' : 'eye-slash', title: t('.change_visibility')),
+        invoice_expense_path(@invoice, expense, expense: { visible: !expense.visible }),
+        method: :patch %>
+    <% else %>
+      <%= fa_icon('eye', title: t('.visibility_change_not_possible')) %>
+    <% end %>
+  </td>
+  <td>
+    <%= link_to t('invoices.wizard.expenses.assigned', count: expense.efforts.size),
+                edit_invoice_expense_path(@invoice, expense), class: 'assigned_efforts' %>
+
+    <% if expense.efforts.size >= 2 %>
+      <%= link_to fa_icon('unlink'),
+                  invoice_expense_ungroup_path(@invoice, expense, id: expense),
+                  title: t('.ungroup'),
+                  method: :patch %>
+    <% end %>
+  </td>
+  <td class="text">
+    <%= editable expense, :text, type: :textarea,
+                                 onblur: 'submit',
+                                 url: invoice_expense_path(@invoice, expense) %>
+  </td>
+
+  <td class="amount">
+    <%= editable expense, :amount_manually,
+                          title: Invoices::Expense.human_attribute_name(:amount),
+                          url: invoice_expense_path(@invoice, expense),
+                          placeholder: '',
+                          class: ('manually_set' if expense.amount_manually.present?),
+                          value: expense.amount %>
+  </td>
+  <td class="actions">
+    <%= link_to fa_icon('sort'), '#', class: 'sort' %>
+
+    <% if can? :destroy, Invoices::Expense %>
+      <%= link_to fa_icon('trash'),
+                  invoice_expense_path(@invoice, expense),
+                  method: :delete,
+                  data: { confirm: t('.confirm_remove') },
+                  title: t('.destroy'),
+                  id: "delete-invoice-expense-#{expense.id}-link" %>
+    <% end %>
+  </td>
+</tr>

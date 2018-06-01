@@ -1,0 +1,40 @@
+.header {
+  top: 0px;
+  height: 4em;
+  width: 100%;
+  background: #3993ba;
+  font-color: white;
+  position: fixed;
+  z-index: 100;
+
+  .navbar-brand {
+    img {
+      margin-top: -0.7em;
+      height: 2.5em;
+    }
+  }
+
+  .activities_progress {
+    float: right;
+    width: 50%;
+    margin-top: 1.2em;
+    margin-right: 1em;
+
+    .label {
+      font-size: 1em;
+      float: left;
+    }
+
+    .progress {
+      width: 70%;
+      float: left;
+    }
+  }
+
+  a.logout, a.logout:hover {
+    color: white;
+    background: #3993ba;
+    float: right;
+    padding: 1.2em;
+  }
+}

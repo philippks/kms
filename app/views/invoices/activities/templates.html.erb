@@ -1,0 +1,49 @@
+<%= define_page_title t('.title') %>
+
+<div>
+  <ul class="nav nav-tabs" role="tablist">
+    <% @activity_categories.each do |activity_category| %>
+      <li role="presentation" class="<%= 'active' if activity_category == @activity_categories.first %>">
+        <a href="#<%= activity_category.id %>" aria-controls="<%= activity_category.id %>" role="tab" data-toggle="tab">
+          <%= activity_category.name %>
+        </a>
+      </li>
+    <% end %>
+  </ul>
+
+  <div class="tab-content">
+    <% @activity_categories.each do |activity_category| %>
+      <div role="tabpanel" class="tab-pane <%= 'active' if activity_category == @activity_categories.first %>"
+                           id="<%= activity_category.id %>">
+
+        <div class="table-row">
+          <table class="management">
+            <thead>
+              <th class="text"><%= ActivityCategory.human_attribute_name(:text) %></th>
+              <th class="actions"></th>
+            </thead>
+
+            <tbody>
+              <% activity_category.text_templates.each do |text_template| %>
+                <tr>
+                  <td><%= text_template.text %></td>
+                  <td>
+                    <%= link_to t('.choose'),
+                                invoice_activity_path(@invoice,
+                                                      id: params[:activity_id],
+                                                      activity: { text: text_template.text }),
+                                                      method: :put %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="actions">
+  <%= button_to_back invoice_wizard_activities_path(@invoice) %>
+</div>

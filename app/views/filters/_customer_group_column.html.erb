@@ -1,0 +1,8 @@
+<div class="col-md-4">
+  <%= form.input :customer_group, as: :select2,
+    collection: CustomerGroup.all,
+    label: false,
+    input_html: { class: 'filter_select' },
+    placeholder: t('shared.filter_for',
+                   model: CustomerGroup.model_name.human) %>
+</div>

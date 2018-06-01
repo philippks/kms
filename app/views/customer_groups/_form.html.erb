@@ -1,0 +1,8 @@
+<%= simple_form_for @customer_group do |f| %>
+  <fieldset>
+    <%= f.input :name %>
+    <%= f.input :not_chargeable %>
+  </fieldset>
+
+  <%= render 'shared/default_form_actions', f: f, entity: @customer_group %>
+<% end %>

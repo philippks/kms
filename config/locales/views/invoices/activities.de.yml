@@ -1,0 +1,10 @@
+de:
+  invoices:
+    activities:
+      templates:
+        choose: Auswählen
+        title: Vorlagen aus Leistungskategorien wählen
+      generates:
+        new:
+          title: Rechnungsleistungen generieren
+          warning: Achtung, damit werden alle bestehenden Rechnungsleistungen überschrieben.

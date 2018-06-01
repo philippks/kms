@@ -1,0 +1,60 @@
+.invoices {
+  .management {
+    th.customer {
+      width: 300px;
+    }
+  }
+
+  &.invoices-show {
+    .pdf_viewer {
+      #pdf-canvas {
+        height: 842px;
+        width: 595px;
+      }
+
+      width: 600px;
+    }
+
+    .back {
+      margin-bottom: 20px;
+    }
+
+    .main {
+      float: left;
+    }
+
+    .aside {
+      float: left;
+      width: 290px;
+      padding-left: 50px;
+    }
+  }
+
+  .aside {
+    .btn:not(:first-child):not(.dropdown-toggle), .link:not(:first-child), dt:not(:first-child), .btn-group {
+      margin-top: 1em;
+    }
+
+    dl {
+      margin-bottom: 0em;
+    }
+
+    .full-width {
+      width: 100%;
+    }
+
+    .grouped-download {
+      width: 182px;
+
+      .caret {
+        width: 20px;
+      }
+    }
+
+    .dangerzone {
+      .link {
+        width: 100%;
+      }
+    }
+  }
+}

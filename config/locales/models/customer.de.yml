@@ -1,0 +1,17 @@
+---
+de:
+  activerecord:
+    models:
+      customer:
+        one: Kunde
+        other: Kunden
+    attributes:
+      customer:
+        email_address: E-Mail Adresse
+        invoice_delivery: Rechnungsversand
+        invoice_hint: Rechnungshinweis
+  enumerize:
+    customer:
+      invoice_delivery:
+        post: Post
+        email: E-Mail

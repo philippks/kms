@@ -1,0 +1,14 @@
+<%= simple_form_for @absence do |f| %>
+  <fieldset>
+    <%= f.association :employee, as: :hidden %>
+    <%= f.input :reason,
+                include_blank: true,
+                selected: @absence.reason %>
+    <%= f.input :from_date, as: :date_picker %>
+    <%= f.input :to_date, as: :date_picker %>
+    <%= f.input :hours %>
+    <%= f.input :text %>
+  </fieldset>
+
+  <%= render 'shared/default_form_actions', f: f, entity: @absence %>
+<% end %>

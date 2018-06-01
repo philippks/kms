@@ -1,0 +1,33 @@
+<%= page_title_for resource: TextTemplate, action: :index %>
+
+<div class="table-row">
+  <% if @text_templates.any? %>
+    <table class="management">
+      <thead>
+        <th class="text"><%= ActivityCategory.human_attribute_name(:text) %></th>
+        <th class="actions"></th>
+      </thead>
+
+      <tbody>
+        <% @text_templates.each do |text_template| %>
+          <tr>
+            <td><%= text_template.text %></td>
+            <td>
+              <%= link_to_edit [@activity_category, text_template] %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p><%= t('.no_text_templates') %></p>
+  <% end %>
+</div>
+
+<div class="actions">
+  <% if can? :create, TextTemplate %>
+    <%= button_to_new [@activity_category, TextTemplate] %>
+  <% end %>
+
+  <%= button_to_back activity_categories_path %>
+</div>

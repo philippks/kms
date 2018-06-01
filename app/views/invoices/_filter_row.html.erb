@@ -1,0 +1,9 @@
+<div class="filter">
+  <%= simple_form_for @filter, url: invoices_path, method: :get, as: :filter do |form| %>
+    <%= render 'filters/default_row', form: form %>
+
+    <div class="filter-row">
+      <%= render 'filters/state_column', form: form, collection: Invoice.aasm.states_for_select %>
+    </div>
+  <% end %>
+</div>

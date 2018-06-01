@@ -1,0 +1,22 @@
+---
+de:
+  attributes:
+    address: Adresse
+    customer: Kunde
+    customer_group: Kundengruppe
+    customer_id: Kunde
+    date: Datum
+    employee: Mitarbeiter
+    from_date: Von
+    hourly_rate: Stundensatz
+    hours: Anzahl Stunden
+    name: Name
+    not_chargeable: Nicht verrechenbar
+    to_date: Bis
+    amount: Betrag
+    confidential_title: Vertrauliche Anrede
+    state: Status
+    total: Total
+    note: Notiz
+    notes: Notizen
+    deactivated: Deaktiviert

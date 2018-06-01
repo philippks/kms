@@ -1,0 +1,7 @@
+de:
+  invoices:
+    payments:
+      form:
+        open_amount: "Offener Betrag: %{amount}"
+      create:
+        charged: Die Rechnung wurde als bezahlt markiert.

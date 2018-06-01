@@ -1,0 +1,24 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  timeout: 5000
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: <%= ENV.fetch("POSTGRES_HOST") { 'localhost' } %>
+  username: <%= ENV.fetch('POSTGRES_USER') { 'postgres' } %>
+  password: <%= ENV['POSTGRES_PASSWORD'] %>
+  database: <%= ENV['POSTGRES_DATABASE'] %>
+
+development:
+  <<: *default
+  database: kms_development
+
+test:
+  <<: *default
+  database: kms_test
+
+staging:
+  <<: *default
+  database: kms_staging
+
+production:
+  <<: *default

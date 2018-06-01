@@ -1,0 +1,60 @@
+<tbody>
+  <tr>
+    <td class="customer"><%= t('.total') %></td>
+
+    <% report.employees.each do |employee| %>
+      <td class="hours"><%= report.total_hours_for(employee).round(1) %></td>
+    <% end %>
+
+    <% report.employees.each do |employee| %>
+      <td class="hours"><%= humanized_money report.effort_value_for(employee, :activities), no_cents: true %></td>
+    <% end %>
+
+    <% [:activities, :expenses, :turnover].each do |amount_key| %>
+      <td class="amount"><%= humanized_money report.effort_value_for(:total, amount_key), no_cents: true %></td>
+    <% end %>
+
+    <td class="amount"><%= humanized_money report.invoice_value_for(:total, :charged), no_cents: true %></td>
+  </tr>
+  <tr>
+    <td class="customer"><%= t('.target_hours') %></td>
+
+    <% report.employees.each do |employee| %>
+      <td class="hours">
+        <% if employee.worktime_model.target_hours? %>
+          <%= report.target_hours %>
+        <% else %>
+          -
+        <% end %>
+      </td>
+    <% end %>
+  </tr>
+
+  <tr>
+    <td class="customer"><%= t('.saldo') %></td>
+
+    <% report.employees.each do |employee| %>
+      <td class="hours">
+        <% if employee.worktime_model.target_hours? %>
+          <%= report.saldo_for(employee).round(1) %>
+        <% else %>
+          -
+        <% end %>
+      </td>
+    <% end %>
+  </tr>
+
+  <tr>
+    <td class="customer"><%= t('.saldo_in_days') %></td>
+
+    <% report.employees.each do |employee| %>
+      <td class="hours">
+        <% if employee.worktime_model.target_hours? %>
+          <%= (report.saldo_for(employee) / TargetHours::DEFAULT_TARGET_HOURS).round(1).to_s %>
+        <% else %>
+          -
+        <% end %>
+      </td>
+    <% end %>
+  </tr>
+</tbody>

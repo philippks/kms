@@ -1,0 +1,30 @@
+<%= page_title_for resource: CustomerGroup, action: :index %>
+
+<div class="table-row">
+  <% if @customer_groups.any? %>
+    <table class="management">
+      <thead>
+        <th class="name"><%= ActivityCategory.human_attribute_name(:name) %></th>
+        <th class="actions"></th>
+      </thead>
+
+      <tbody>
+        <% @customer_groups.each do |customer_group| %>
+          <tr>
+            <td><%= customer_group.name %></td>
+            <td><%= link_to_edit customer_group %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= will_paginate @customer_groups, renderer: BootstrapPagination::Rails %>
+  <% else %>
+    <p><%= t('shared.no_records', model: CustomerGroup.model_name.human(count: 2)) %></p>
+  <% end %>
+</div>
+
+<div class="actions">
+  <% if can? :create, CustomerGroup %>
+    <%= button_to_new CustomerGroup %>
+  <% end %>
+</div>

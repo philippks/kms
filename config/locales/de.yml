@@ -1,0 +1,37 @@
+---
+de:
+  date:
+    formats:
+      default: "%d.%m.%Y"
+      long: "%-d. %B %Y"
+      short: "%-d. %b"
+      vague: "%B %Y"
+  time:
+    formats:
+      default: "%d.%m.%Y %H:%M"
+  number:
+    precision:
+      format:
+        precision: 2
+        separator: "."
+        strip_insignificant_zeros: true
+    currency:
+      format:
+        delimiter: "'"
+        format: "%u %n"
+        precision: 2
+        separator: "."
+        significant: false
+        strip_insignificant_zeros: false
+        unit: CHF
+  datepicker:
+    dformat: "%d.%m.%Y"
+    pformat: DD.MM.YYYY
+  dayViewHeaderFormat: Dayviewheaderformat
+  helpers:
+    submit:
+      create: "%{model} erfassen"
+      update: "%{model} aktualisieren"
+  timepicker:
+    dformat: Dformat
+    pformat: Pformat

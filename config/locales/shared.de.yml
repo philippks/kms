@@ -1,0 +1,40 @@
+---
+de:
+  shared:
+    amount: Betrag
+    are_you_sure: Bist du sicher?
+    back: Zurück
+    next: Weiter
+    finish: Abschliessen
+    cancel: Abbrechen
+    save_and_next: Speichern und Weiter
+    charged: Bezahlt
+    date: Datum
+    destroy: Löschen
+    edit: Bearbeiten
+    filter: Filter
+    filter_for: Nach %{model} filtern...
+    no_entities_found: Es wurden keine %{model} mit diesen Filtern gefunden.
+    from: Von
+    hourly_rate_short: Fr./h
+    hours_short: Std.
+    login: Anmelden
+    logout: "%{employee} abmelden"
+    open: Offen
+    state: Status
+    to: Bis
+    to_before_from: Muss nach oder gleich Von-Datum sein
+    created_by: Erstellt von
+    conflict: Konflikt
+    details: Details
+    actions: Aktionen
+    save_and_close: Speichern und Schliessen
+    no_records: Keine %{model} erfasst.
+    download: Herunterladen
+    today: Heute
+  enumerize:
+    defaults:
+      state:
+        open: Offen
+        charged: Bezahlt
+        not_chargeable: Nicht bezahlt

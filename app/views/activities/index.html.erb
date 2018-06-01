@@ -1,0 +1,34 @@
+<%= page_title_for resource: Activity, action: :index %>
+
+<%= render 'filter_row' %>
+
+<div class="table-row">
+  <% if @activities.any? %>
+    <%= render 'table' %>
+
+    <%= will_paginate @activities, renderer: BootstrapPagination::Rails %>
+  <% else %>
+    <p><%= t('shared.no_entities_found', model: Activity.model_name.human(count: 2)) %></p>
+  <% end %>
+</div>
+
+<div class="actions">
+  <% if can? :create, Activity %>
+    <%= link_to(t('resources.new', resource: Activity.model_name.human),
+                '#',
+                class: 'btn btn-primary focus_hours_subject') %>
+  <% end %>
+
+  <% if @activities.any? %>
+    <div class="btn-group dropdown">
+      <%= link_to t('.export'), activities_path(format: :pdf, params: request.query_parameters), class: 'btn btn-default' %>
+      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <li> <%= link_to t('.export_as_pdf'), activities_path(format: :pdf, params: request.query_parameters) %> </li>
+        <li> <%= link_to t('.export_as_xls'), activities_path(format: :xls, params: request.query_parameters) %> </li>
+      </ul>
+    </div>
+  <% end %>
+</div>

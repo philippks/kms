@@ -1,0 +1,38 @@
+.hours {
+  .fc-event-container {
+    text-align: center;
+
+    .fc-event {
+      background-position: 10px center;
+      background-repeat: no-repeat;
+    }
+
+    .fc-event.activity {
+      background-image: image-url('lightning.png');
+    }
+
+    .fc-event.absence {
+      background-image: image-url('hourglass.png');
+    }
+  }
+
+  .calendar_navigation {
+    margin-bottom: -2.75em;
+  }
+}
+
+.total_hours {
+  padding-top: 15px;
+  padding-bottom: 10px;
+
+  .total_label {
+    float: left;
+    font-weight: bold;
+    margin-right: 1em;
+  }
+
+  .total_value {
+    float: left;
+    margin-right: 5em;
+  }
+}

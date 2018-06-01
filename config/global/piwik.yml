@@ -1,0 +1,4 @@
+default:
+  enabled: <%= ENV['PIWIK_URL'].present? %>
+  url: <%= ENV['PIWIK_URL'] %>
+  site_id: <%= ENV['PIWIK_SITE_ID'] %>

@@ -1,0 +1,39 @@
+<%= page_title_for resource: Invoices::Payment, action: :index %>
+
+<div class="table-row">
+  <% if @payments.any? %>
+    <table class="management">
+      <thead>
+        <th class="date"><%= Invoices::Payment.human_attribute_name(:date) %></th>
+        <th class="amount"><%= Invoices::Payment.human_attribute_name(:amount) %></th>
+        <th class="actions"></th>
+      </thead>
+
+      <tbody>
+        <% @payments.each do |payment| %>
+          <tr>
+            <td><%= l payment.date %></td>
+            <td><%= humanized_money payment.amount %></td>
+            <td><%= link_to_edit [@invoice, payment] if can? :edit, payment %></td>
+          </tr>
+        <% end %>
+      </tbody>
+      <tfoot>
+        <th><%= Invoices::Payment.human_attribute_name(:total) %></th>
+        <th><%= humanized_money @payments.sum(&:amount) %></th>
+        <th></th>
+      </tfoot>
+    </table>
+    <%= will_paginate @payments, renderer: BootstrapPagination::Rails %>
+  <% else %>
+    <p><%= t('shared.no_records', model: Invoices::Payment.model_name.human(count: 2)) %></p>
+  <% end %>
+</div>
+
+<div class="actions">
+  <% if can? :create, @invoice.payments.build %>
+    <%= button_to_new [@invoice, @invoice.payments.build] %>
+  <% end %>
+
+  <%= button_to_back invoice_path(@invoice) %>
+</div>

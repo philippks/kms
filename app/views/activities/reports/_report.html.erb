@@ -1,0 +1,44 @@
+<h1>
+  <%= t('.title', from: l(@report.from_date, format: :long),
+                  to: l(@report.to_date, format: :long)) %>
+</h1>
+
+<div class="table-row report">
+  <table class="management plain">
+    <thead>
+      <tr>
+        <th class="customer"><%= Activity.human_attribute_name(:customer) %></th>
+        <th class="hours" colspan=<%= @report.employees.count %>><%= t '.hours' %></th>
+        <th class="amounts" colspan=<%= @report.employees.count %>><%= t '.amounts' %></th>
+        <th class="totals" colspan=3><%= t '.totals' %></th>
+        <th class="charged"><%= t '.charged' %></th>
+      </tr>
+      <tr>
+        <th class="customer"></th>
+
+        <% @report.employees.each do |employee| %>
+          <th class="initials-saldo"><%= employee.initials %></th>
+        <% end %>
+
+        <% @report.employees.each do |employee| %>
+          <th class="initials-activities"><%= employee.initials %></th>
+        <% end %>
+
+        <th><%= t('.amount') %></th>
+        <th><%= t('.expenses') %></th>
+        <th><%= t('.turnover') %></th>
+        <th><%= t('.charged_in_past') %></th>
+      </tr>
+    </thead>
+
+    <%= render 'efforts', report: @report %>
+
+    <%= render 'absences', report: @report %>
+
+    <tfoot>
+      <tr colspan="100%"></tr>
+    </tfoot>
+
+    <%= render 'summary', report: @report %>
+  </table>
+</div>

@@ -1,0 +1,28 @@
+de:
+  activities:
+    reports:
+      new:
+        title: Auswertung erstellen
+        create: Auswertung erstellen
+      report:
+        title: Arbeitszeitstatistik vom %{from} bis %{to}
+        hours: Arbeitszeitstatistik
+        amounts: Honorarauswertung
+        totals: Summation
+        charged: bezahlt
+        amount: Honorar
+        expenses: Nebenk.
+        turnover: Umsatz
+        charged_in_past: Rg bisher
+        filename: "Auswertung_%{from}_bis_%{to}"
+      efforts:
+        customer_group_title: "Kundengruppe %{customer_group}"
+        customer_group_total: "Total %{customer_group}"
+      absences:
+        title: Abwesenheiten
+        total: Total Abwesenheiten
+      summary:
+        total: Periodentotal
+        target_hours: Sollstunden
+        saldo: Arbeitszeitsaldo
+        saldo_in_days: Saldo in Tagen

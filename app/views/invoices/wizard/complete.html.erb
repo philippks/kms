@@ -1,0 +1,56 @@
+<%= page_title_for resource: Invoice, action: :edit %>
+
+<%= simple_form_for @invoice, url: invoice_wizard_path(current_wizard_action: :complete) do |form| %>
+  <%= render 'invoices/wizard/navigation' %>
+
+  <fieldset>
+    <%= form.input :activities_amount_manually, as: :editable_currency,
+      input_html: { value: @invoice.activities_amount_manually || @invoice.activities_amount,
+                    class: (@invoice.activities_amount_manually.present? ?  'manually_set' : ''),
+                    data: { model: :invoice, name: :activities_amount_manually, url: invoice_path(@invoice)  } } %>
+    <%= form.input :expenses_amount, as: :currency, readonly: true, disabled: true %>
+
+    <!-- remove vat_rate switch as soon as all invoices of 2017 are written -->
+    <!-- <%= form.input :vat_rate, as: :percent, readonly: true, disabled: true %> -->
+
+    <div class="form-group optional">
+      <label class="control-label currency optional disabled" for="invoice_expenses_amount"><%= t '.vat_rate' %> </label>
+
+      <div class="input-group">
+        <div class="btn-group" role="group">
+          <%= link_to '8.0 %',
+            invoice_wizard_path(@invoice, invoice: { vat_rate: 0.08 }, referrer: invoice_wizard_complete_path),
+            method: :patch,
+            class: "btn btn-default #{'btn-primary disabled' if @invoice.vat_rate == 0.08}"
+          %>
+
+          <%= link_to '7.7 %',
+            invoice_wizard_path(@invoice, invoice: { vat_rate: 0.077 }, referrer: invoice_wizard_complete_path),
+            method: :patch,
+            class: "btn btn-default #{'btn-primary disabled' if @invoice.vat_rate == 0.077}"
+          %>
+        </div>
+      </div>
+    </div>
+
+    <%= form.input :vat_amount, as: :currency, readonly: true, disabled: true %>
+    <div class="total_amount">
+      <%= form.input :total_amount, as: :currency, readonly: true, disabled: true %>
+      <% if recent_invoices.any? %>
+        <%= tooltip_icon_for(recent_invoices.map do |invoice|
+              "#{l(invoice.date)}: #{humanized_money invoice.total_amount}"
+            end, title: t('.recent_total_amounts'), fa_icon: 'history', position: 'right') %>
+      <% end %>
+    </div>
+    <%= form.input :possible_wir_amount, as: :currency %>
+    <%= form.input :date, as: :date_picker %>
+    <%= form.input :created_by_initials %>
+    <%= form.input :display_swift %>
+    <%= form.input :title, placeholder: default_invoice_title %>
+    <%= form.input :format, include_blank: false %>
+  </fieldset>
+
+  <div class="actions">
+    <%= form.button :submit, t('shared.save_and_close'), class: 'btn-primary submit-button' %>
+  </div>
+<% end %>

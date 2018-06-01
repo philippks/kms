@@ -1,0 +1,5 @@
+de:
+  employees:
+    index:
+      include_deactivated: Deaktivierte einblenden
+      exclude_deactivated: Deaktivierte ausblenden

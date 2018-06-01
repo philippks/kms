@@ -1,0 +1,60 @@
+<%= page_title_for resource: Expense, action: :index %>
+
+<%= render 'filter_row' %>
+
+<div class="table-row">
+  <% if @expenses.any? %>
+    <table class="management">
+      <thead>
+        <th class="employee"><%= Expense.human_attribute_name(:employee) %></th>
+        <th class="customer"><%= Expense.human_attribute_name(:customer) %></th>
+        <th class="date"><%= Expense.human_attribute_name(:date) %></th>
+        <th class="amount"><%= Expense.human_attribute_name(:amount) %></th>
+        <th class="text"><%= Expense.human_attribute_name(:text) %></th>
+        <th class="note"></th>
+        <th class="actions"></th>
+      </thead>
+
+      <tbody>
+        <% @expenses.each do |expense| %>
+          <tr>
+            <td><%= expense.employee.name %></td>
+            <td><%= present(expense.customer) { |customer| customer.display_name } %></td>
+            <td><%= l expense.date %></td>
+            <td class="amount"><%= humanized_money expense.amount %></td>
+            <td class="text"><%= expense.text %></td>
+            <td class="note">
+              <%= tooltip_icon_for(expense.note, title: Expense.human_attribute_name(:note)) if expense.note.present? %>
+            </td>
+            <td>
+              <% if expense.invoice.present? %>
+                <%= link_to Invoice.model_name.human, invoice_path(expense.invoice) %>
+              <% else %>
+                <%= link_to_edit expense %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+
+      <tfoot>
+        <th><%= Expense.human_attribute_name(:total) %></th>
+        <th></th>
+        <th></th>
+        <th><%= humanized_money @total_amount %></th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tfoot>
+    </table>
+    <%= will_paginate @expenses, renderer: BootstrapPagination::Rails %>
+  <% else %>
+    <p><%= t('shared.no_entities_found', model: Expense.model_name.human(count: 2)) %></p>
+  <% end %>
+</div>
+
+<div class="actions">
+  <% if can? :create, Expense %>
+    <%= button_to_new Expense %>
+  <% end %>
+</div>

@@ -1,0 +1,7 @@
+de:
+  invoices:
+    expenses:
+      generates:
+        new:
+          title: Rechnungsnebenkosten generieren
+          warning: Achtung, damit werden alle bestehenden Rechnungsnebenkosten überschrieben.

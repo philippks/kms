@@ -1,0 +1,58 @@
+table.management {
+  @extend .table;
+  @extend .table-bordered;
+
+  margin-bottom: 10px;
+
+  thead {
+    thead.tr{
+      @extend .row
+    }
+
+    th.checkbox_column { width: 20px; }
+    th.employee { width: 140px; }
+    th.customer { width: 140px; }
+    th.date { width: 4em; }
+    th.hours { width: 50px; }
+    th.hourly_rate { width: 50px; }
+    th.amount { width: 60px; }
+    th.actions { width: 105px; }
+    th.assigned_efforts {
+      width: 8.5em;
+
+      a { float: left; }
+    }
+    th.state { width: 140px; }
+    th.note { width: 2.5em; }
+    th.deactivated { width: 2.5em; }
+  }
+
+  tbody{
+    td.hours, td.hourly_rate, td.amount {
+      text-align: right;
+    }
+
+    td.deactivated {
+      text-align: center;
+    }
+  }
+
+  tfoot{
+    th.hours, th.hourly_rate, th.amount {
+      text-align: right;
+    }
+  }
+}
+
+.table-row{
+  padding-bottom: 5px;
+}
+
+table.management:not(.plain) {
+  @extend .table-striped;
+}
+
+// https://github.com/wkhtmltopdf/wkhtmltopdf/issues/2367#issuecomment-110751637
+thead { display: table-header-group }
+tfoot { display: table-row-group }
+tr { page-break-inside: avoid }

@@ -1,0 +1,62 @@
+.datepicker {
+  padding: 4px;
+  border-radius: 4px;
+  direction: ltr;
+}
+
+.select2-container {
+  width: 100%;
+}
+
+span.editable:hover {
+  cursor: pointer;
+}
+
+form {
+  .form-group {
+    max-width: 30em;
+  }
+
+  .form-group.date_picker {
+    max-width: 15em;
+
+    .input-group-addon {
+      cursor: pointer;
+    }
+  }
+
+  .form-group.currency, .form-group.editable_currency {
+    max-width: 15em;
+
+    input, div {
+      text-align: right;
+    }
+  }
+
+  .input-group.percent {
+    max-width: 10em;
+
+    input {
+      text-align: right;
+    }
+  }
+
+  .easy-autocomplete {
+    .eac-category {
+      text-decoration: underline;
+      font-weight: bold !important;
+      font-style: normal !important;
+      padding-top: 1.2em;
+    }
+
+    .easy-autocomplete-container {
+      width: 1000px;
+    }
+  }
+}
+
+.datepicker-days {
+  .prev, .next, .datepicker-switch {
+    cursor: pointer;
+  }
+}

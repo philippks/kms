@@ -1,0 +1,8 @@
+---
+de:
+  activerecord:
+    models:
+      target_hours:
+        one: Sollstunden
+        other: Sollstunden
+

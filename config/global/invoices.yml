@@ -1,0 +1,14 @@
+default:
+  iban: "<%= ENV.fetch('INVOICE_IBAN') { 'CH11 1111 2222 3333 4444' } %>"
+  vat_number: "<%= ENV.fetch('INVOICE_VAT_NUMBER') { 'CHE-111.999.333' } %>"
+  swift: "<%= ENV.fetch('INVOICE_SWIFT') { 'ZZZZZZZZZZZZZZ' } %>"
+  default_vat_rate: 0.077
+  persisted_pdfs_directory: "<%= Rails.root %>/storage/invoices/"
+  company_template_path: <%= ENV['INVOICE_COMPANY_TEMPLATE_PATH'] %>
+  mail_footer: "<%= ENV.fetch('INVOICE_MAIL_FOOTER') { 'Freundliche Grüsse' } %>"
+test:
+  iban: CH90 1337 1337 1337 1337 8
+  vat_number: CHE-013.131.123
+  swift: 134134 1234134 123134
+  persisted_pdfs_directory: "<%= Rails.root %>/tmp/"
+  company_template_path: "<%= Rails.root %>/spec/fixtures/files/invoice_template.pdf"

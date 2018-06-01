@@ -1,0 +1,19 @@
+<%= define_page_title t('.title') %>
+
+<div class="table-row">
+  <%= simple_form_for @report, url: new_activities_report_path(format: :pdf),
+                               method: :get do |form| %>
+    <fieldset>
+      <%= form.input :from_date, as: :date_picker,
+                                 input_html: { 'data-clearbtn' => false } %>
+
+      <%= form.input :to_date, as: :date_picker,
+                               input_html: { 'data-clearbtn' => false } %>
+
+    </fieldset>
+
+    <div class="actions">
+      <input type="submit" name="commit" value="<%= t('.create') %>" class="btn btn-primary">
+    </div>
+  <% end %>
+</div>

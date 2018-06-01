@@ -1,0 +1,5 @@
+de:
+  invoices:
+    activities:
+      index:
+        assigned: "%{count} Zugewiesen"

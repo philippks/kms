@@ -1,0 +1,33 @@
+<%= define_page_title(t('.title')) %>
+
+<div class="calendar_navigation">
+  <%= link_to fa_icon('arrow-left'),
+              hours_path(month: @current_month - 1.month),
+              class: 'btn btn-default' %>
+
+  <%= link_to fa_icon('arrow-right'),
+              hours_path(month: @current_month + 1.month),
+              class: 'btn btn-default' %>
+
+  <%= link_to t('shared.today'),
+              hours_path(month: Date.current.beginning_of_month),
+              class: 'btn btn-default' %>
+</div>
+
+<div id='hours_calendar' data-month="<%= @current_month.iso8601 %>"></div>
+
+<div class="total_hours">
+  <span class="total_label"><%= t '.total_activities' %></span>
+  <span class="total_value"><%= number_with_precision @total_activities %></span>
+
+  <span class="total_label"><%= t '.total_absences' %></span>
+  <span class="total_value"><%= number_with_precision @total_absences %></span>
+
+  <span class="total_label"><%= t '.total_hours' %></span>
+  <span class="total_value">
+    <%= number_with_precision(@total_activities + @total_absences) %>
+  </span>
+
+  <span class="total_label"><%= t '.target_hours' %></span>
+  <span class="total_value"><%= number_with_precision @target_hours %></span>
+</div>

@@ -1,0 +1,5 @@
+de:
+  invoices:
+    mails:
+      show:
+        title: "E-Mail vom %{date}"

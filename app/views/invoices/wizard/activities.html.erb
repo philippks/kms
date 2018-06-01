@@ -1,0 +1,93 @@
+<%= page_title_for resource: Invoice, action: :edit %>
+
+<%= render 'navigation_form' %>
+
+<%= simple_form_for :invoice_activities, url: group_invoice_activities_path(@invoice),
+  method: :patch do |f| %>
+  <% if @activities.any? %>
+    <div class="table-row">
+      <table class="management">
+        <thead>
+          <th class="checkbox_column">
+            <%= check_box_tag 'checkAll' %>
+          </th>
+          <th class="visibility <%= 'confidential' if @invoice.confidential? %>"></th>
+          <th class="assigned_efforts"><%= Invoices::Activity.human_attribute_name(:activities) %></th>
+          <th class="text"><%= Invoices::Activity.human_attribute_name(:text) %></th>
+          <th class="note"></th>
+          <th class="hours"><%= t 'shared.hours_short' %></th>
+          <th class="hourly_rate"><%= t 'shared.hourly_rate_short' %></th>
+          <th class="amount"><%= Invoices::Activity.human_attribute_name(:amount) %></th>
+          <th class="actions"></th>
+        </thead>
+        <tbody class="sortable">
+          <%= render partial: 'activity', collection: @activities.confidentials(false) %>
+        </tbody>
+
+        <% if @activities.confidentials(true).any? %>
+          <thead>
+            <tr>
+              <td class="confidential_activities_title" colspan=10>
+                <%= t '.confidential_activities' %>
+              </td>
+            </tr>
+          </thead>
+
+          <tbody class="sortable">
+            <%= render partial: 'activity', collection: @activities.confidentials(true) %>
+          </tbody>
+        <% end %>
+
+        <tfoot>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th class="hours"><%= number_with_precision @activities.to_a.sum(&:hours) %></th>
+          <th></th>
+          <th class="amount"><%= humanized_money @activities.to_a.sum(&:amount) %></th>
+          <th></th>
+        </tfoot>
+      </table>
+    </div>
+  <% else %>
+    <p><%= t 'shared.no_records', model: Invoices::Activity.model_name.human %></p>
+  <% end %>
+
+  <div class="table-row">
+    <table class="activities_amounts">
+      <tr>
+        <td><%= t '.actual_activities_amount' %></td>
+        <td><%= humanized_money @activities.to_a.sum(&:actual_amount) %></td>
+      </tr>
+      <tr>
+        <td><%= t '.remaining_open_amount' %></td>
+        <td>
+          <%= humanized_money @open_amount %>
+
+          <% if @open_amount > 0 %>
+            (<%= link_to t('.generate_activities'), generate_invoice_activities_path(@invoice), method: :post %>)
+          <% end %>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="actions">
+    <% if can? :create, Invoices::Activity %>
+      <%= link_to t('.new_invoice_activity'),
+        invoice_activities_path(@invoice, activity: { invoice_id: @invoice.id }),
+        method: :post,
+        class: 'btn btn-default' %>
+
+      <%= f.button :submit, t('.group') %>
+    <% end %>
+  </div>
+<% end %>
+
+<%= simple_form_for @invoice, url: invoice_wizard_path(@invoice, current_wizard_action: :activities) do |form| %>
+  <div class="actions">
+    <%= form.button :submit, t('shared.save_and_close'), class: 'btn-primary submit-button' %>
+  </div>
+<% end %>

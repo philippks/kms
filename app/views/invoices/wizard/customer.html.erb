@@ -1,0 +1,24 @@
+<%= page_title_for resource: Invoice, action: :edit %>
+
+<%= simple_form_for @invoice, url: invoice_wizard_path(@invoice, current_wizard_action: :customer) do |form| %>
+  <%= render 'invoices/wizard/navigation' %>
+
+  <fieldset>
+    <%= form.association :employee, as: :hidden %>
+    <%= form.input :customer_id, disabled: true,
+                                 collection: [@invoice.customer] %>
+
+    <% if @invoice.customer %>
+      <%= form.input :confidential %>
+      <%= form.simple_fields_for :customer do |customer_form| %>
+        <%= customer_form.input :confidential_title %>
+        <%= customer_form.input :address, as: :text, input_html: { rows: 4 } %>
+        <%= customer_form.input :invoice_hint, as: :text %>
+      <% end %>
+    <% end %>
+  </fieldset>
+
+  <div class="actions">
+    <%= form.button :submit, t('shared.save_and_close'), class: 'btn-primary submit-button' %>
+  </div>
+<% end %>

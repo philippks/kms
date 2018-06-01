@@ -1,0 +1,13 @@
+<% if @invoice.open? %>
+  <% if @invoice.customer.invoice_hint.present? %>
+    <div class="alert alert-warning">
+      <strong><%= Customer.human_attribute_name(:invoice_hint) %>:</strong> <%= @invoice.customer.invoice_hint %>
+    </div>
+  <% end %>
+
+  <% if @open_efforts_before_invoice_date_exists %>
+    <div class="alert alert-danger">
+      <%= t '.open_efforts_before_invoice_date_exists' %>
+    </div>
+  <% end %>
+<% end %>

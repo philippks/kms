@@ -1,0 +1,13 @@
+---
+de:
+  activerecord:
+    attributes:
+      expense:
+        amount: Betrag
+        customer_id: Kunde
+        date: Datum
+        employee: Mitarbeiter
+    models:
+      expense:
+        one: Nebenkosten
+        other: Nebenkosten

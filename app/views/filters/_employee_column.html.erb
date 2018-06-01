@@ -1,0 +1,7 @@
+<div class="col-md-4"/>
+  <%= form.input :employee, label: false,
+                            collection: Employee.where(id: @filter.employee),
+                            input_html: { class: 'filter_employee_select' },
+                            placeholder: t('shared.filter_for',
+                                           model: Employee.model_name.human(count: 2)) %>
+</div>

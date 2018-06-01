@@ -1,0 +1,27 @@
+<%= define_page_title t('.title', date: l(@filter.until_date)) %>
+
+
+<% if @op_list_items.any? %>
+  <div class="filter-row">
+    <%= simple_form_for @filter, url: new_op_list_path, method: :get, as: :filter do |f| %>
+      <div class="col-md-4"/>
+        <%= f.input :until_date, label: false,
+                                 as: :filter_date_picker,
+                                 input_html: { value: l(@filter.until_date),
+                                               'data-clearbtn' => false } %>
+      </div>
+
+      <%= render 'filters/employee_column', form: f %>
+    <% end %>
+
+    <%= link_to t('shared.download'), new_op_list_path(format: :pdf, filter: @filter.to_h),
+      class: 'btn btn-default' %>
+
+  </div>
+
+  <div class="table-row">
+    <%= render 'table' %>
+  </div>
+<% else %>
+  <p><%= t('.no_ops') %></p>
+<% end %>

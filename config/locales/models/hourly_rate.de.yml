@@ -1,0 +1,7 @@
+---
+de:
+  activerecord:
+    models:
+      hourly_rate:
+        one: Persönlicher Stundensatz
+        other: Persönliche Stundensätze

@@ -1,0 +1,29 @@
+<!--
+  renders if not persisted:
+    * a submit button for the form
+    * a cancel button to entities index (or referrer if defined)
+
+  renders if persisted:
+    * a submit button for the form
+    * a back button to entities index (or referrer if defined)
+    * a link to destroy the entitiy
+
+  example use:
+    render 'shared/default_form_actions', f: f, entity: @customer
+
+  to use with nested resources, the parent resource must be set:
+    render 'shared/default_form_actions', f: f, entity: @payment, parent: @invoice
+-->
+<div class="actions">
+  <% parent ||= nil %>
+
+  <%= f.button :submit, class: 'btn-primary' %>
+
+  <%= link_to t('shared.cancel'),
+              params[:referrer] || polymorphic_url([parent, entity.class]),
+              class: 'btn btn-default' %>
+
+  <% if entity.persisted? && can?(:destroy, entity) %>
+    <%= link_to_destroy [parent, entity] %>
+  <% end %>
+</div>
