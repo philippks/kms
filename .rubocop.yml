@@ -1,0 +1,27 @@
+require: rubocop-rspec
+
+AllCops:
+  Exclude:
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'bin/**/*'
+    - 'spec/factories/**/*'
+    - Gemfile.lock
+    - Guardfile
+    - 'app/inputs/*_input.rb'
+    - 'vendor/assets/bower_components/**/*'
+
+Style/Documentation:
+   Enabled: false
+
+Metrics/LineLength:
+   Max: 100
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: comma
+
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: comma
