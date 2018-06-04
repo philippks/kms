@@ -2,7 +2,7 @@
 
 
 ![GitHub release](https://img.shields.io/github/release/philippks/kms.svg) [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-[![Build Status](https://travis-ci.com/philippks/kms.svg?token=A6pZ6ecyzEpUNRjpj3Sq&branch=master)](https://travis-ci.com/philippks/kms)
+[![Build Status](https://travis-ci.org/philippks/kms.svg?branch=master)](https://travis-ci.org/philippks/kms)
 
 A web application for time tracking and invoicing.
 
