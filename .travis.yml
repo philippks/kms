@@ -1,0 +1,25 @@
+language: ruby
+sudo: required
+services:
+  - postgresql
+env:
+ global:
+   - PRONTO_PULL_REQUEST_ID=$TRAVIS_PULL_REQUEST
+cache:
+  bundler: true
+  directories:
+    - node_modules
+  yarn: true
+addons:
+  chrome: stable
+  apt:
+    packages:
+      - libreoffice
+before_script:
+  - npm install -g yarn
+  - yarn install
+  - bundle exec rake db:test:prepare
+after_script:
+  - if [ $PRONTO_PULL_REQUEST_ID != false ]; then bundle exec pronto run -f github_pr; fi
+before_install:
+  - gem install bundler
