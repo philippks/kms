@@ -370,7 +370,7 @@ GEM
     will_paginate (3.1.6)
     will_paginate-bootstrap (1.0.1)
       will_paginate (>= 3.0.3)
-    wkhtmltopdf-binary (0.12.3.1)
+    wkhtmltopdf-binary (0.12.4)
     x-editable-rails (1.5.5.1)
       railties
     xpath (3.1.0)
