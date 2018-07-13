@@ -7,7 +7,7 @@ class InvoicesController < ApplicationController
   respond_to :json, only: [:update]
 
   def index
-    @invoices = @invoices.order("(CASE state WHEN 'open' THEN 1 ELSE 2 END), date DESC, created_at DESC")
+    @invoices = @invoices.order(Arel.sql("(CASE state WHEN 'open' THEN 1 ELSE 2 END), date DESC, created_at DESC"))
     @invoices = @filter.filter @invoices
 
     @total_amount = Money.new(@invoices.sum(:persisted_total_amount_cents))
