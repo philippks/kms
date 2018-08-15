@@ -149,7 +149,7 @@ GEM
     gitlab (4.3.0)
       httparty
       terminal-table
-    global (1.0.0)
+    global (1.1.0)
       activesupport (>= 2.0)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
