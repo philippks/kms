@@ -7,7 +7,7 @@ class ActivitiesController < ApplicationController
   def index
     @activities = @activities.order(date: :desc, created_at: :desc)
     @activities = @filter.filter @activities
-    @activities = @activities.includes(:employee, :customer, :invoice_effort)
+    @activities = @activities.includes(:employee, :customer, :invoice_effort, :activity_category)
     @total_hours = @activities.sum(:hours)
     @total_amount = Money.new(@activities.sum(:amount_cents))
 
