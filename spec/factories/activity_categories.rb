@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :activity_category do
-    name 'Buchhaltung'
+    name { 'Buchhaltung' }
   end
 end
