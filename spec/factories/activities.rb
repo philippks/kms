@@ -1,13 +1,13 @@
 FactoryBot.define do
   factory :activity do
-    text 'Steuererklärung ausgefüllt'
-    note ''
-    employee nil
-    customer nil
+    text { 'Steuererklärung ausgefüllt' }
+    note { '' }
+    employee { nil }
+    customer { nil }
     activity_category
-    hours '2.5'
-    hourly_rate 150
-    date '2015-02-18'
+    hours { '2.5' }
+    hourly_rate { 150 }
+    date { '2015-02-18' }
 
     trait :with_associations do
       employee
