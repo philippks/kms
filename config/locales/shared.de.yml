@@ -36,5 +36,5 @@ de:
     defaults:
       state:
         open: Offen
-        charged: Bezahlt
-        not_chargeable: Nicht bezahlt
+        charged: Verrechnet
+        not_chargeable: Nicht verrechenbar
