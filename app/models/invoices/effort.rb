@@ -7,6 +7,7 @@ module Invoices
     belongs_to :invoice
     has_many :efforts, foreign_key: :invoice_effort_id,
                        dependent: :nullify,
+                       inverse_of: :invoice_effort,
                        class_name: '::Effort'
 
     before_destroy :nullify_efforts, prepend: true

@@ -1,10 +1,10 @@
 FactoryBot.define do
   factory :invoice, class: Invoice do
-    date '2015-03-22'
-    vat_rate 0.015
-    employee nil
-    customer nil
-    confidential false
+    date { '2015-03-22' }
+    vat_rate { 0.015 }
+    employee { nil }
+    customer { nil }
+    confidential { false }
 
     trait :with_associations do
       employee
