@@ -4,10 +4,12 @@ describe Invoices::Effort do
   it { is_expected.to validate_presence_of :invoice }
 
   describe '#amount' do
+    subject { invoice_activity.amount }
+
     let(:efforts) do
       [
         create(:activity, hours: 1, hourly_rate: 150),
-        create(:activity, hours: 1, hourly_rate: 150)
+        create(:activity, hours: 1, hourly_rate: 150),
       ]
     end
 
@@ -15,11 +17,9 @@ describe Invoices::Effort do
       create :invoice_activity, efforts: efforts
     end
 
-    subject { invoice_activity.amount }
-
     it { eq 300 }
 
-    context 'amount_manually is set' do
+    context 'when amount_is set manually' do
       let(:invoice_activity) do
         create :invoice_activity, efforts: efforts,
                                   amount_manually: 720
@@ -57,13 +57,13 @@ describe Invoices::Effort do
   end
 
   describe '#assignable_efforts' do
+    subject(:selection) { invoice_activity.assignable_efforts }
+
     let(:customer) { create :customer }
     let(:employee) { create :employee }
     let(:invoice) { create :invoice, customer: customer, employee: employee }
     let(:invoice_activity) { create :invoice_activity, invoice: invoice }
     let(:activity) { create(:activity, customer: customer, employee: employee) }
-
-    subject(:selection) { invoice_activity.assignable_efforts }
 
     it 'returns activities by customer' do
       other_customer = create :customer, name: 'Mr Wrong'
