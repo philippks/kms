@@ -32,6 +32,7 @@ de:
     no_records: Keine %{model} erfasst.
     download: Herunterladen
     today: Heute
+    export: Exportieren
   enumerize:
     defaults:
       state:
