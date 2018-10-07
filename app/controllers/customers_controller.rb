@@ -16,6 +16,13 @@ class CustomersController < ApplicationController
                                .order(:name)
                                .paginate(page: params[:page])
       end
+      format.csv do
+        @customers = @filter.filter @customers
+        @customers = @customers.includes(:customer_group)
+                               .order(:name)
+
+        send_data CustomersCsv.new(@customers).csv, filename: "#{I18n.t('customers.index.export_filename')}.csv"
+      end
     end
   end
 

@@ -13,6 +13,18 @@ feature 'Managing Customers' do
     expect(page).to have_text('Hans Meier')
   end
 
+  scenario 'Export Customers' do
+    visit customers_path
+
+    click_link 'Exportieren'
+
+    expected = <<~EXPECTED.chomp
+      "name","confidential_title","address","email_address","customer_group_name","invoice_hint" "Hans Meier","Hansi","Hansstrasse 10\\n4312 Meiershausen","hans@hausen.ch","",""
+    EXPECTED
+
+    expect(page.text).to eq expected
+  end
+
   scenario 'Create new Customer' do
     visit new_customer_path
 
