@@ -13,7 +13,8 @@ class CustomersCsv
   end
 
   def csv
-    CSV.generate(headers: true, force_quotes: true) do |csv|
+    # 'ISO-8859-1' encoding for excel...
+    CSV.generate(headers: true, force_quotes: true, encoding: 'ISO-8859-1') do |csv|
       csv << CSV_ATTRIBUTES
 
       @customers.each do |customer|
