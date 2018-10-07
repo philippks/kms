@@ -1,5 +1,5 @@
-require "selenium/webdriver"
-require "chromedriver-helper"
+require 'selenium/webdriver'
+require 'chromedriver-helper'
 
 Capybara.register_driver :chrome do |app|
   Capybara::Selenium::Driver.new(app, browser: :chrome)
@@ -12,8 +12,8 @@ Capybara.register_driver :headless_chrome do |app|
   )
 
   Capybara::Selenium::Driver.new app,
-    browser: :chrome,
-    desired_capabilities: capabilities
+                                 browser: :chrome,
+                                 desired_capabilities: capabilities
 end
 
 Capybara.javascript_driver = :headless_chrome

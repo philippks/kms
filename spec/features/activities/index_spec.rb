@@ -42,7 +42,7 @@ feature 'List Activities' do
   scenario 'Export PDF' do
     visit activities_path
 
-    click_link 'Leistungen exportieren'
+    click_link 'Exportieren'
 
     header = page.response_headers['Content-Disposition']
     expect(header).to eq 'attachment; filename="Leistungen_Export.pdf"'
