@@ -39,4 +39,6 @@
   <% if can? :create, Customer %>
     <%= button_to_new Customer %>
   <% end %>
+
+  <%= link_to t('shared.export'), customers_path(format: :csv, params: request.query_parameters), class: 'btn btn-default' %>
 </div>

@@ -20,7 +20,7 @@
   <% end %>
 
   <div class="btn-group dropup">
-    <%= link_to t('.export'), activities_path(format: :pdf, params: request.query_parameters), class: 'btn btn-default' %>
+    <%= link_to t('shared.export'), activities_path(format: :pdf, params: request.query_parameters), class: 'btn btn-default' %>
     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
       <span class="caret"></span>
     </button>
