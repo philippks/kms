@@ -7,7 +7,7 @@
     "bootstrap-sass": "^3.3.7",
     "easy-autocomplete": "https://github.com/philippks/EasyAutocomplete.git",
     "fullcalendar": "^3.9.0",
-    "html5sortable": "^0.9.7",
+    "html5sortable": "^0.9.8",
     "moment": "^2.22.1",
     "pdfjs-dist": "^2.0.489"
   }
