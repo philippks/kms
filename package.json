@@ -4,7 +4,7 @@
   "repository": "git@github.com:philippks/kms.git",
   "dependencies": {
     "bootstrap-datepicker": "^1.8.0",
-    "bootstrap-sass": "^3.3.7",
+    "bootstrap-sass": "^3.4.0",
     "easy-autocomplete": "https://github.com/philippks/EasyAutocomplete.git",
     "fullcalendar": "^3.9.0",
     "html5sortable": "^0.9.8",
