@@ -178,7 +178,7 @@ GEM
     jwt (2.1.0)
     launchy (2.4.3)
       addressable (~> 2.3)
-    letter_opener (1.6.0)
+    letter_opener (1.7.0)
       launchy (~> 2.2)
     libreconv (0.9.1)
       spoon
