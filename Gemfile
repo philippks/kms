@@ -3,7 +3,7 @@ ruby '2.6.1'
 
 gem 'rails', '~> 5.2'
 gem 'rails-i18n'
-gem 'sass-rails'
+gem 'sassc-rails'
 gem 'coffee-rails'
 gem 'jbuilder'
 gem 'pg'
