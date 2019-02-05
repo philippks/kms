@@ -1,5 +1,6 @@
 MoneyRails.configure do |config|
-  # To set the default currency
+  Money.locale_backend = :i18n
+
   config.default_currency = :chf
 
   config.include_validations = false
@@ -25,7 +26,6 @@ MoneyRails.configure do |config|
     default: 'CHF'
   }
 
-  # Register a custom currency
   config.register_currency = {
     priority: 1,
     iso_code: 'CHF',
