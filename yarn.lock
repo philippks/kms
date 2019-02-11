@@ -86,9 +86,9 @@ node-ensure@^0.0.0:
   version "0.0.0"
   resolved "https://registry.yarnpkg.com/node-ensure/-/node-ensure-0.0.0.tgz#ecae764150de99861ec5c810fd5d096b183932a7"
 
-pdfjs-dist@^2.0.943:
-  version "2.0.943"
-  resolved "https://registry.yarnpkg.com/pdfjs-dist/-/pdfjs-dist-2.0.943.tgz#32fb9a2d863df5a1d89521a0b3cd900c16e7edde"
+pdfjs-dist@^2.2.2:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/pdfjs-dist/-/pdfjs-dist-2.2.2.tgz#35b0246e036495e79bd7cddb7edb60217db484e0"
   dependencies:
     node-ensure "^0.0.0"
     worker-loader "^2.0.0"
