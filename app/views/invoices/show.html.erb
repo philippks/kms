@@ -14,6 +14,7 @@
   <div class="panel panel-default details">
     <div class="panel-heading">
       <%= t 'shared.details' %>
+      <%= link_to fa_icon(:history, title: t('versions.link')), versions_path(item_type: 'Invoice', item_id: @invoice.id)%>
     </div>
 
     <div class="panel-body">

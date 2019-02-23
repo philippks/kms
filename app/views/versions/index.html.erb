@@ -1,0 +1,28 @@
+<h1><%= t '.title', item_type: params[:item_type], item_id: params[:item_id] %></h1>
+
+<div class="table-row">
+  <% if @versions.any? %>
+    <table class="management">
+      <% @versions.each do |version| %>
+      <tbody>
+        <tr>
+          <td colspan=3><b><%= t('.change_title',
+                                 date: I18n.l(version.created_at),
+                                 employee: @employee_names[version.whodunnit]) %></b></td>
+        </tr>
+        <% version.changeset.except(:updated_at).each do |attribute, values| %>
+          <tr>
+            <td><%= attribute %></td>
+            <td><%= values[0] %></td>
+            <td><%= values[1] %></td>
+          </tr>
+        <% end %>
+      </tbody>
+      <% end %>
+    </table>
+  <% end %>
+</div>
+
+<div class="actions">
+  <%= link_to t('shared.back'), :back, class: 'btn btn-default' %>
+</div>

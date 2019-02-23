@@ -4,6 +4,8 @@ module Invoices
       'invoice_'
     end
 
+    has_paper_trail
+
     belongs_to :invoice
 
     validates :date, :amount, :invoice, presence: true

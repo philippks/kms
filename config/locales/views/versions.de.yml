@@ -1,0 +1,6 @@
+de:
+  versions:
+    link: Änderungsverlauf
+    index:
+      title: "Änderungen von item_type '%{item_type}' mit ID '%{item_id}'"
+      change_title: "Änderung vom %{date} von %{employee}"
