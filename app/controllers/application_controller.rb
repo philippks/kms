@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   respond_to :html
 
   before_action :authenticate_employee!
+  before_action :set_paper_trail_whodunnit
 
   alias current_user current_employee
 

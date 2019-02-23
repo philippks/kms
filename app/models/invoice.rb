@@ -3,6 +3,8 @@ class Invoice < ActiveRecord::Base
   include AASM
   include Invoices::Validations
 
+  has_paper_trail
+
   belongs_to :employee
   belongs_to :customer
 

@@ -1,6 +1,8 @@
 class Effort < ActiveRecord::Base
   extend Enumerize
 
+  has_paper_trail
+
   belongs_to :employee
   belongs_to :customer
   belongs_to :invoice_effort, class_name: '::Invoices::Effort'

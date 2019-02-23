@@ -90,4 +90,5 @@ Rails.application.routes.draw do
   end
 
   resources :debtors_reports, only: [:new, :create]
+  resources :versions, only: [:index]
 end
