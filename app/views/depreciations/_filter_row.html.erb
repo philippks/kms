@@ -1,0 +1,5 @@
+<div class="filter">
+  <%= simple_form_for @filter, url: invoices_path, method: :get, as: :filter do |form| %>
+    <%= render 'filters/default_row', form: form %>
+  <% end %>
+</div>

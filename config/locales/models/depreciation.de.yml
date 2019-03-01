@@ -1,0 +1,10 @@
+---
+de:
+  activerecord:
+    attributes:
+      employee:
+        initials: Initialen
+    models:
+      depreciation:
+        one: Abschreibung
+        other: Abschreibungen

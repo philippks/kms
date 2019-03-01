@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  get 'depreciations/index'
+  get 'depreciations/new'
+  get 'depreciation/index'
+  get 'depreciation/new'
+  get 'depreciation/index'
   root to: redirect('activities')
 
   devise_for :employees, controllers: {
@@ -91,4 +96,5 @@ Rails.application.routes.draw do
 
   resources :debtors_reports, only: [:new, :create]
   resources :versions, only: [:index]
+  resources :depreciations
 end

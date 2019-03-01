@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_23_152740) do
+ActiveRecord::Schema.define(version: 2019_03_01_140753) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,18 @@ ActiveRecord::Schema.define(version: 2019_02_23_152740) do
     t.index ["customer_group_id"], name: "index_customers_on_customer_group_id"
   end
 
+  create_table "depreciations", force: :cascade do |t|
+    t.string "note"
+    t.date "date"
+    t.integer "persisted_total_amount_cents"
+    t.bigint "customer_id"
+    t.bigint "employee_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_depreciations_on_customer_id"
+    t.index ["employee_id"], name: "index_depreciations_on_employee_id"
+  end
+
   create_table "efforts", id: :serial, force: :cascade do |t|
     t.string "type"
     t.integer "employee_id"
@@ -69,8 +81,10 @@ ActiveRecord::Schema.define(version: 2019_02_23_152740) do
     t.integer "invoice_effort_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.bigint "depreciation_id"
     t.index ["activity_category_id"], name: "index_efforts_on_activity_category_id"
     t.index ["customer_id"], name: "index_efforts_on_customer_id"
+    t.index ["depreciation_id"], name: "index_efforts_on_depreciation_id"
     t.index ["employee_id"], name: "index_efforts_on_employee_id"
     t.index ["invoice_effort_id"], name: "index_efforts_on_invoice_effort_id"
   end
@@ -184,8 +198,11 @@ ActiveRecord::Schema.define(version: 2019_02_23_152740) do
   end
 
   add_foreign_key "absences", "employees"
+  add_foreign_key "depreciations", "customers"
+  add_foreign_key "depreciations", "employees"
   add_foreign_key "efforts", "activity_categories"
   add_foreign_key "efforts", "customers"
+  add_foreign_key "efforts", "depreciations"
   add_foreign_key "efforts", "employees"
   add_foreign_key "invoice_efforts", "invoices"
   add_foreign_key "invoice_mails", "employees"

@@ -1,0 +1,36 @@
+<%= page_title_for resource: Depreciation, action: :index %>
+
+<%= render 'filter_row' %>
+
+<div class="table-row">
+  <% if @depreciations.any? %> <table class="management">
+      <thead>
+        <th class="customer"><%= Depreciation.human_attribute_name(:customer) %></th>
+        <th class="date"><%= Depreciation.human_attribute_name(:date) %></th>
+        <th class="amount"><%= Depreciation.human_attribute_name(:amount) %></th>
+        <th class="created_by"><%= t('shared.created_by') %></th>
+        <th class="actions"></th>
+      </thead>
+
+      <tbody>
+        <% @depreciations.each do |depreciation| %>
+          <td><%= present(depreciation.customer) { |customer| customer.display_name } %></td>
+          <td><%= l depreciation.date %></td>
+          <td><%= humanized_money depreciation.total_amount %></td>
+          <td><%= depreciation.employee.name %></td>
+          <td><%= link_to t('.show_depreciation'), depreciation %></td>
+        <% end %>
+      </tbody>
+
+      <tfoot>
+        <th><%= Depreciation.human_attribute_name(:total) %></th>
+        <th></th>
+        <th class="amount"><%= money_without_cents @total_amount %></th>
+        <th></th>
+      </tfoot>
+    </table>
+    <%= will_paginate @depreciations, renderer: BootstrapPagination::Rails %>
+  <% else %>
+    <p><%= t('shared.no_entities_found', model: Depreciation.model_name.human(count: 2)) %></p>
+  <% end %>
+</div>

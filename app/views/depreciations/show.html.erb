@@ -1,0 +1,41 @@
+<%= page_title_for resource: Depreciation, action: :edit %>
+
+<fieldset>
+  <div class="table-row">
+    <table class="management">
+      <thead>
+        <th class="employee"><%= Activity.human_attribute_name(:employee) %></th>
+        <th class="customer"><%= Activity.human_attribute_name(:customer) %></th>
+        <th class="date"><%= Activity.human_attribute_name(:date) %></th>
+        <th class="hours"><%= t('shared.hours_short') %></th>
+        <th class="hourly_rate"><%= t('shared.hourly_rate_short') %></th>
+        <th class="amount"><%= Activity.human_attribute_name(:amount) %></th>
+        <th class="text"><%= Activity.human_attribute_name(:text) %></th>
+        <th class="note"></th>
+      </thead>
+
+      <tbody>
+        <% @activities.each do |activity| %>
+          <tr>
+            <td><%= activity.employee.name %></td>
+            <td><%= activity.customer.name %></td>
+            <td><%= l activity.date %></td>
+            <td class="hours"><%= activity.hours %></td>
+            <td class="hourly_rate"><%= humanized_money activity.hourly_rate %></td>
+            <td class="amount"><%= humanized_money activity.amount %></td>
+            <td class="text"><%= activity.text %></td>
+            <td class="note">
+              <%= tooltip_icon_for(activity.note, title: Activity.human_attribute_name(:note)) if activity.note.present? %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</fieldset>
+
+<div class="actions">
+  <%= button_to_back depreciations_path %>
+
+  <%= link_to_destroy @depreciation %>
+</div>
