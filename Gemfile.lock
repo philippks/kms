@@ -6,14 +6,6 @@ GIT
       capybara
       rspec
 
-GIT
-  remote: https://github.com/philippks/odf-report.git
-  revision: e8740badefdf91399322a7df7b06b51d94b6306f
-  specs:
-    odf-report (0.5.1)
-      nokogiri (>= 1.5.0)
-      rubyzip (~> 1.2.1)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -416,7 +408,6 @@ DEPENDENCIES
   letter_opener
   libreconv
   money-rails
-  odf-report!
   paper_trail
   pg
   pronto

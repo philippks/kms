@@ -190,20 +190,4 @@ describe Invoices::Activity do
       end
     end
   end
-
-  describe '#confidentials' do
-    let(:confidential_activity) do
-      create :invoice_activity, invoice: invoice, confidential: true
-    end
-
-    before do
-      create :invoice_activity, invoice: invoice, confidential: false
-    end
-
-    subject { described_class.confidentials }
-
-    it 'returns only confidential actvitites' do
-      expect(subject).to eq [confidential_activity]
-    end
-  end
 end

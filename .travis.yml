@@ -14,7 +14,8 @@ addons:
   chrome: stable
   apt:
     packages:
-      - libreoffice
+      - libqt5webkit5-dev
+      - qtdeclarative5-dev
 before_script:
   - npm install -g yarn
   - yarn install
@@ -23,3 +24,4 @@ after_script:
   - if [ $PRONTO_PULL_REQUEST_ID != false ]; then bundle exec pronto run -f github_pr; fi
 before_install:
   - gem install bundler
+  - export QMAKE=/usr/lib/x86_64-linux-gnu/qt5/bin/qmake

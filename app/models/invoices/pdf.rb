@@ -6,31 +6,26 @@ module Invoices
       @invoice = invoice
     end
 
-    def create_temporary
-      if @invoice.confidential?
-        main_pdf_generator.create
-        confidential_supplement_pdf.create
-
-        @pdf = combine_pdfs [main_pdf_generator.pdf_path, confidential_supplement_pdf.pdf_path]
+    def read
+      if persisted?
+        File.open(persisted_pdf_path).read
       else
-        main_pdf_generator.create
-
-        @pdf = File.new main_pdf_generator.pdf_path
+        render_pdf
       end
-
-      return @pdf.path
     end
 
-    def create_persisted
-      FileUtils.cp(create_temporary, persisted_pdf_path)
-    end
-
-    def persisted?
-      File.exists? persisted_pdf_path
+    def persist!
+      File.open(persisted_pdf_path, 'wb') do |file|
+        file << render_pdf
+      end
     end
 
     def persisted_pdf_path
       "#{Global.invoices.persisted_pdfs_directory}/#{@invoice.id}.pdf"
+    end
+
+    def persisted?
+      File.exists? persisted_pdf_path
     end
 
     def remove_persisted_pdf
@@ -39,24 +34,13 @@ module Invoices
 
     private
 
-    def main_pdf_generator
-      @main_pdf_generator ||= Invoices::PDFGenerators::Main.new @invoice
-    end
+    def render_pdf
+      @invoice = InvoicePresenter.new(@invoice)
 
-    def confidential_supplement_pdf
-      @confidential_supplement_pdf ||= Invoices::PDFGenerators::ConfidentialSupplement.new @invoice
-    end
-
-    def combine_pdfs(pdf_paths)
-      output = Tempfile.new("#{file_name}_pdf", tmp_dir)
-
-      combined_pdf = CombinePDF.new
-      pdf_paths.each do |pdf_path|
-        combined_pdf << CombinePDF.load(pdf_path)
-      end
-      combined_pdf.save output.path
-
-      output
+      WickedPdf.new.pdf_from_string(
+        PdfsController.render(:new, assigns: { invoice: @invoice}),
+        Global.invoices.wicked_pdf_options.hash
+      )
     end
 
     def file_name

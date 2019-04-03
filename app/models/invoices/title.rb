@@ -8,21 +8,21 @@ module Invoices
 
     def to_s
       if no_date?
-        I18n.t 'invoices.pdf.sub_title.no_date',
+        I18n.t 'invoices.pdfs.new.sub_title.no_date',
                date: I18n.l(invoice.date, format: '%B %Y')
       elsif one_date?
-        I18n.t 'invoices.pdf.sub_title.one_date',
+        I18n.t 'invoices.pdfs.new.sub_title.one_date',
                date: I18n.l(oldest_activity_date, format: :long)
       elsif multiple_years?
-        I18n.t 'invoices.pdf.sub_title.multiple_dates',
+        I18n.t 'invoices.pdfs.new.sub_title.multiple_dates',
                first_date: I18n.l(oldest_activity_date, format: :long),
                second_date: I18n.l(@invoice.date, format: :long)
       elsif multiple_months?
-        I18n.t 'invoices.pdf.sub_title.multiple_dates',
+        I18n.t 'invoices.pdfs.new.sub_title.multiple_dates',
                first_date: I18n.l(oldest_activity_date, format: '%e. %B'),
                second_date: I18n.l(@invoice.date, format: :long)
       else
-        I18n.t 'invoices.pdf.sub_title.multiple_dates',
+        I18n.t 'invoices.pdfs.new.sub_title.multiple_dates',
                first_date: I18n.l(oldest_activity_date, format: '%e.'),
                second_date: I18n.l(@invoice.date, format: :long)
       end
