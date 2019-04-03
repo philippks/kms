@@ -64,7 +64,7 @@ group :test do
   gem 'capybara'
   gem 'capybara-select2', git: 'https://github.com/philippks/capybara-select2.git'
   gem 'capybara-selenium'
-  gem 'chromedriver-helper'
+  gem 'webdrivers'
   gem 'database_cleaner'
   gem 'launchy', require: false
   gem 'rails-controller-testing'
