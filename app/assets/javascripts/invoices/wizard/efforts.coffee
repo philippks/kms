@@ -10,6 +10,7 @@ $ ->
 initSortables = () ->
   sortables = sortable('.sortable', {
     items: 'tr',
+    handle: '.sort',
     placeholder: '<tr><td colspan="10">&nbsp;</td></tr>',
     forcePlaceholderSize: true,
   })
