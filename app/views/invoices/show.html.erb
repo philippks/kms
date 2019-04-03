@@ -3,7 +3,7 @@
 <div class="main">
   <%= render 'notices' %>
 
-  <%= render 'pdf_viewer/pdf_viewer', url: new_invoice_pdf_path(@invoice, format: :pdf, templated: true) %>
+  <%= render 'pdf_viewer/pdf_viewer', url: invoice_pdf_path(@invoice, format: :pdf, templated: true) %>
 </div>
 
 <div class="aside">
@@ -58,11 +58,11 @@
         <%= link_to t('shared.edit'), invoice_wizard_customer_path(@invoice), class: 'btn btn-default full-width' %>
       <% end %>
 
-      <% if Global.invoices.company_template_path.blank? %>
-        <%= link_to t('.download'), new_invoice_pdf_path(@invoice, format: :pdf), class: 'btn btn-default full-width' %>
+      <% if Global.invoices.company_template_disabled? %>
+        <%= link_to t('.download'), invoice_pdf_path(@invoice, format: :pdf), class: 'btn btn-default full-width' %>
       <% else %>
         <div class="btn-group dropdown full-width">
-          <%= link_to t('.download'), new_invoice_pdf_path(@invoice, format: :pdf), class: 'btn btn-default grouped-download' %>
+          <%= link_to t('.download'), invoice_pdf_path(@invoice, format: :pdf), class: 'btn btn-default grouped-download' %>
 
           <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
             <span class="caret"></span>

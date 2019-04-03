@@ -68,10 +68,10 @@ Rails.application.routes.draw do
         post :generate, on: :collection
       end
 
-      resources :pdfs, only: [:new]
       resources :payments
       resource :delivery, only: [:new, :update]
       resource :mail, only: [:new, :create, :show]
+      resource :pdf, only: [:new, :show]
 
       controller '/invoices/wizard' do
         patch :wizard, action: :update

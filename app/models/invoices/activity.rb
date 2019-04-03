@@ -6,7 +6,9 @@ module Invoices
 
     monetize :hourly_rate_manually_cents, allow_nil: true
 
-    scope :confidentials, -> (confidential = true) { where(confidential: confidential) }
+    scope :visible, -> { where(visible: true) }
+    scope :confidentials, -> { where(confidential: true) }
+    scope :non_confidentials, -> { where(confidential: false) }
 
     def amount
       return amount_manually if amount_manually.present?

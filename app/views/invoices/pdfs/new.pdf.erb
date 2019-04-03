@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%= wicked_pdf_stylesheet_link_tag 'invoices/pdfs' %>
+  </head>
+
+  <div class="main">
+    <div class="row">
+      <div class="address">
+        <% if @invoice.confidential? %>
+          <span class="confidential_header"><%= t '.confidential_header' %></span><br/>
+          <span class="confidential_title"><%= @invoice.customer.confidential_title %></span><br/>
+        <% end %>
+        <%= simple_format @invoice.customer.address, {}, wrapper_tag: :span %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="infos">
+        <p><%= l @invoice.date, format: :long %> <%= @invoice.created_by_initials %></p>
+        <p><%= Global.invoices.vat_number %> MWST</p>
+        <p>IBAN <%= Global.invoices.iban %></p>
+
+        <% if @invoice.display_swift? %>
+          <p>SWIFT <%= Global.invoices.swift %></p>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="title">
+        <p>
+          <span class="invoice">Rechnung</span>
+          <span class="invoice_title">für Beratungstätigkeit <%= @invoice.title %></span>
+        </p>
+      </div>
+    </div>
+
+    <table class="efforts">
+      <%= render 'activities', activities: @invoice.activities.visible.non_confidentials %>
+
+      <table class="efforts-row">
+        <tr>
+          <td colspan=<%= @invoice.format.compact? ? 1 : 4 %>>
+            <li><%= t '.default_activity' %></li>
+          </td>
+
+          <td class="amount">
+            <%= currency_symbol %>
+            <%= humanized_money @invoice.activities_amount %>
+          </td>
+        </tr>
+      </table>
+    </table>
+
+    <table class="efforts-row">
+      <tr class="header_row">
+        <td colspan=2><%= t '.expenses' %></td>
+      </tr>
+
+      <% @invoice.expenses.visible.each do |expense| %>
+        <table class="efforts">
+          <tr>
+            <td>
+              <li><%= expense.text %></li>
+            </td>
+
+            <td class="amount underline">
+              <%= currency_symbol %>
+              <%= humanized_money expense.amount %>
+            </td>
+          </tr>
+        </table>
+      <% end %>
+    </table>
+
+    <table class="totals stay_together">
+      <tr>
+        <td><%= t '.subtotal' %></td>
+        <td class="amount">
+          <%= currency_symbol %>
+          <%= humanized_money @invoice.efforts_amount %>
+        </td>
+      </tr>
+
+      <tr>
+        <td><%= t '.vat_rate_included', vat_rate: @invoice.vat_rate * 100 %></td>
+        <td class="amount underline">
+          <%= currency_symbol %>
+          <%= humanized_money @invoice.vat_amount %>
+        </td>
+      </tr>
+
+      <tr class="total_amount">
+        <td>
+          <%= t '.total_amount' %>
+
+          <% if @invoice.possible_wir_amount > 0 %>
+            <span class="wir_amount"><%= @invoice.possible_wir_amount_text %></span>
+          <% end %>
+        </td>
+        <td class="amount underline">
+          <%= currency_symbol %>
+          <%= humanized_money @invoice.total_amount %>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan=2 class="netto"><%= t '.netto' %></td>
+      </tr>
+    </table>
+
+    <% if @invoice.confidential_supplement? %>
+      <div class="confidential_supplement">
+        <table class="efforts">
+          <tr><td class="title"><%= t '.confidential_supplement_title_1' %></td></tr>
+          <tr><td class="title border"><%= t '.confidential_supplement_title_2', title: @invoice.title %></td></tr>
+
+          <%= render 'activities', activities: @invoice.activities.visible.confidentials %>
+
+          <tr><%= t '.place', date: l(@invoice.date, format: :long) %></tr>
+        </table>
+      </div>
+    <% end %>
+  </div>
+</html>

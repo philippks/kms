@@ -21,10 +21,10 @@
           <th class="actions"></th>
         </thead>
         <tbody class="sortable">
-          <%= render partial: 'activity', collection: @activities.confidentials(false) %>
+          <%= render partial: 'activity', collection: @activities.non_confidentials %>
         </tbody>
 
-        <% if @activities.confidentials(true).any? %>
+        <% if @activities.confidentials.any? %>
           <thead>
             <tr>
               <td class="confidential_activities_title" colspan=10>
@@ -34,7 +34,7 @@
           </thead>
 
           <tbody class="sortable">
-            <%= render partial: 'activity', collection: @activities.confidentials(true) %>
+            <%= render partial: 'activity', collection: @activities.confidentials %>
           </tbody>
         <% end %>
 

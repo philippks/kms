@@ -2,7 +2,7 @@
 
 <%= render 'invoices/wizard/navigation_form' %>
 
-<%= render 'pdf_viewer/pdf_viewer', url: new_invoice_pdf_path(@invoice, format: :pdf, templated: true) %>
+<%= render 'pdf_viewer/pdf_viewer', url: invoice_pdf_path(@invoice, format: :pdf, templated: true) %>
 
 <%= simple_form_for @invoice, url: invoice_wizard_path(@invoice, current_wizard_action: :summary) do |form| %>
   <div class="actions">

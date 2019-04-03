@@ -1,0 +1,131 @@
+.main {
+  font-family: 'Helvetica';
+  font-size: .85em;
+  letter-spacing: .1em;
+  line-height: 1.7em;
+  overflow: visible !important;
+
+  height: 233.5mm; // A4 - margin
+  width: 164mm; // A4 - margin
+
+  .row {
+    float: left;
+    width: 100%;
+  }
+
+  .address {
+    float: right;
+    width: 20em;
+
+    .confidential_header {
+      font-weight: 900;
+    }
+  }
+
+  .infos {
+    width: 100%;
+    line-height: 1.1em;
+    height: 8em;
+  }
+
+  .title {
+    height: 24px;
+    width: 100%;
+    border-bottom: solid black 1px;
+    margin-bottom: 10px;
+
+    .invoice {
+      font-size: 1.4em;
+      font-weight: 900;
+      letter-spacing: 2px;
+    }
+
+    .invoice_title {
+      padding-left: 3px;
+    }
+  }
+
+  .efforts, .totals, .efforts-row {
+    width: 100%;
+
+    .header_row {
+      font-weight: 900;
+      font-size: 110%;
+    }
+
+    td {
+      vertical-align: top;
+      padding: 0;
+    }
+
+    td.amount {
+      width: 8.5em;
+      text-align: right;
+
+      .currency_symbol {
+        float: left;
+      }
+    }
+
+    td.hourly_rate, td.hours {
+      width: 2em;
+      padding-left: 2px;
+    }
+
+    td.equal_sign {
+      width: 1.3em;
+      text-align: center;
+    }
+
+    tr.total_amount {
+      font-weight: 900;
+
+      .wir_amount {
+        font-weight: normal;
+      }
+    }
+
+    td.underline {
+      border-bottom: solid black 1px;
+    }
+
+    td.netto {
+      text-align: right;
+      padding-top: 5px;
+    }
+  }
+
+  tr, .stay_together {
+    page-break-inside: avoid;
+  }
+
+  li {
+    list-style-type: disc;
+    list-style-position: inside;
+    text-indent: -1em;
+    padding-left: 1em;
+    padding-top: 3px;
+
+    line-height: 1.3em;
+    margin-bottom: 1px;
+  }
+}
+
+.confidential_supplement {
+  page-break-before: always;
+
+  .efforts {
+    width: 100%;
+
+    td.title {
+      font-size: 1.3em;
+      font-weight: 900;
+      letter-spacing: 2px;
+    }
+  }
+
+  .efforts-row {
+    padding-top: .3em;
+    padding-bottom: .3em;
+  }
+}

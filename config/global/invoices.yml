@@ -6,6 +6,17 @@ default:
   persisted_pdfs_directory: "<%= Rails.root %>/storage/invoices/"
   company_template_path: <%= ENV['INVOICE_COMPANY_TEMPLATE_PATH'] %>
   mail_footer: "<%= ENV.fetch('INVOICE_MAIL_FOOTER') { 'Freundliche Grüsse' } %>"
+  wicked_pdf_options:
+    page_size: 'A4'
+    margin:
+      top: 44.45
+      bottom: 20
+      left: 28
+      right: 18
+    dpi: 96
+    footer:
+      right:
+
 test:
   iban: CH90 1337 1337 1337 1337 8
   vat_number: CHE-013.131.123
