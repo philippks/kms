@@ -1,12 +1,11 @@
 .main {
   font-family: 'Helvetica';
-  font-size: .85em;
-  letter-spacing: .1em;
-  line-height: 1.7em;
+  font-size: 16px;
+  letter-spacing: 1px;
+  line-height: 27px;
   overflow: visible !important;
 
-  height: 233.5mm; // A4 - margin
-  width: 164mm; // A4 - margin
+  width: 205mm;
 
   .row {
     float: left;
@@ -15,7 +14,8 @@
 
   .address {
     float: right;
-    width: 20em;
+    width: 200px;
+    margin-right: 130px;
 
     .confidential_header {
       font-weight: 900;
@@ -32,12 +32,13 @@
     height: 24px;
     width: 100%;
     border-bottom: solid black 1px;
-    margin-bottom: 10px;
+    margin-bottom: 14px;
+    padding-bottom: 8px;
 
     .invoice {
       font-size: 1.4em;
       font-weight: 900;
-      letter-spacing: 2px;
+      letter-spacing: 3px;
     }
 
     .invoice_title {
@@ -45,16 +46,22 @@
     }
   }
 
-  .efforts, .totals, .efforts-row {
+  .efforts {
+    width: 100%;
+    margin-bottom: 8px;
+  }
+
+  .header-row {
+    font-weight: 900;
+    font-size: 110%;
+    height: 90%;
+    text-align: left;
+  }
+
+  .efforts-row, .totals {
     width: 100%;
 
-    .header_row {
-      font-weight: 900;
-      font-size: 110%;
-    }
-
     td {
-      vertical-align: top;
       padding: 0;
     }
 
@@ -67,8 +74,8 @@
       }
     }
 
-    td.hourly_rate, td.hours {
-      width: 2em;
+    .hourly_rate, .hours {
+      width: 50px;
       padding-left: 2px;
     }
 
@@ -77,16 +84,30 @@
       text-align: center;
     }
 
+    .last-expense {
+      border-bottom: solid black 1px;
+    }
+
+    .vat_amount {
+      .amount {
+        border-bottom: solid black 1px;
+      }
+    }
+
     tr.total_amount {
       font-weight: 900;
+
+      .label {
+        font-size: 110%;
+      }
 
       .wir_amount {
         font-weight: normal;
       }
-    }
 
-    td.underline {
-      border-bottom: solid black 1px;
+      .amount {
+        border-bottom: solid black 2px;
+      }
     }
 
     td.netto {
@@ -97,6 +118,7 @@
 
   tr, .stay_together {
     page-break-inside: avoid;
+    height: 2em;
   }
 
   li {
@@ -109,23 +131,27 @@
     line-height: 1.3em;
     margin-bottom: 1px;
   }
-}
 
-.confidential_supplement {
-  page-break-before: always;
+  .confidential_supplement {
+    page-break-before: always;
 
-  .efforts {
-    width: 100%;
-
-    td.title {
+    .title {
       font-size: 1.3em;
       font-weight: 900;
       letter-spacing: 2px;
+      border: 0;
     }
-  }
 
-  .efforts-row {
-    padding-top: .3em;
-    padding-bottom: .3em;
+    .subtitle {
+      font-size: 1.1em;
+      font-weight: 900;
+      letter-spacing: 2px;
+      border-bottom: solid black 1px;
+    }
+
+    .efforts-row {
+      padding-top: .3em;
+      padding-bottom: .3em;
+    }
   }
 }

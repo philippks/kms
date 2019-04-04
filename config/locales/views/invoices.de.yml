@@ -42,8 +42,6 @@ de:
         post_delivery_success: Die Rechnung wurde als versendet markiert.
     pdfs:
       new:
-        expenses: Nebenkosten
-        default_activity: Aktenstudium und Telefonate
         vat_rate_included: Zuzüglich %{vat_rate} % Mehrwertssteuer
         total_amount: Total Rechnungsbetrag
         netto: 20 Tage netto
@@ -62,3 +60,6 @@ de:
         activities: Honorar
         hourly_rate: Satz
         hours: Std.
+        default_activity: Aktenstudium und Telefonate
+      expenses:
+        expenses: Nebenkosten

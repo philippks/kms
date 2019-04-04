@@ -8,7 +8,7 @@ feature 'New Invoice PDF' do
       customer: customer,
       employee: employee,
       vat_rate: 0.08,
-      date: '2017-10-01'
+      date: '2017-10-01',
     }
   end
   let!(:invoice) { create :invoice, invoice_attributes }
@@ -20,7 +20,7 @@ feature 'New Invoice PDF' do
   it 'shows visible activity texts' do
     create :invoice_activity, invoice: invoice, text: 'Däumchen drehen'
 
-    visit new_invoice_pdf_path(invoice)
+    visit new_invoice_pdf_path(invoice, format: :pdf, html: true)
 
     expect(page).to have_text 'Däumchen drehen'
   end
@@ -28,13 +28,13 @@ feature 'New Invoice PDF' do
   it 'does not show hidden activity texts' do
     create :invoice_activity, invoice: invoice, visible: false, text: 'Däumchen drehen'
 
-    visit new_invoice_pdf_path(invoice)
+    visit new_invoice_pdf_path(invoice, format: :pdf, html: true)
 
     expect(page).not_to have_text 'Däumchen drehen'
   end
 
   it 'shows invoice title' do
-    visit new_invoice_pdf_path(invoice)
+    visit new_invoice_pdf_path(invoice, format: :pdf, html: true)
 
     expect(page).not_to have_text 'Weitere Leistungen vom 19. Januar'
   end
@@ -44,7 +44,7 @@ feature 'New Invoice PDF' do
     create :invoice_activity, invoice: invoice, amount_manually: 200
     create :invoice_expense, invoice: invoice, amount_manually: 100
 
-    visit new_invoice_pdf_path(invoice)
+    visit new_invoice_pdf_path(invoice, format: :pdf, html: true)
 
     expect(page).to have_text '700.00' # activities
     expect(page).to have_text '100.00' # expenses
@@ -59,7 +59,7 @@ feature 'New Invoice PDF' do
     end
 
     it 'shows possible wir amount on invoice' do
-      visit new_invoice_pdf_path(invoice)
+      visit new_invoice_pdf_path(invoice, format: :pdf, html: true)
 
       expect(page).to have_text "(CHF 2'000 WIR-Zahlung möglich)"
     end
@@ -71,7 +71,7 @@ feature 'New Invoice PDF' do
     end
 
     it 'shows confidential title of customer' do
-      visit new_invoice_pdf_path(invoice)
+      visit new_invoice_pdf_path(invoice, format: :pdf, html: true)
 
       expect(page).to have_text 'Persönlich / Vertraulich'
       expect(page).to have_text 'Lölimann'
@@ -90,7 +90,7 @@ feature 'New Invoice PDF' do
       end
 
       it 'shows confidential supplement' do
-        visit new_invoice_pdf_path(invoice)
+        visit new_invoice_pdf_path(invoice, format: :pdf, html: true)
 
         expect(page).to have_text 'Vertrauliches Beiblatt'
         expect(page).to have_text 'Weitere Leistungen vom 19. Januar bis 1. Oktober 2017'

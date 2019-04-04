@@ -1,29 +1,44 @@
-<tr class="header_row">
-  <td colspan=<%= @invoice.format.compact? ? 2 : 1 %>><%= t '.activities' %></td>
+<table class="efforts">
+  <tr class="header-row">
+    <td colspan=<%= @invoice.format.compact? ? 2 : 1 %>><%= t '.activities' %></td>
 
-  <% if @invoice.format.detailed? %>
-    <th class="hours"><%= t '.hours' %></td>
-    <th class="hourly_rate"><%= t '.hourly_rate' %></td>
-    <th class="equal_sign"></td>
+    <% if @invoice.format.detailed? %>
+      <th class="hours"><%= t '.hours' %></td>
+      <th class="hourly_rate"><%= t '.hourly_rate' %></td>
+      <th class="equal_sign"></td>
+    <% end %>
+  </tr>
+
+  <% activities.each do |activity| %>
+      <tr class="efforts-row">
+        <td colspan=<%= @invoice.format.compact? ? 2 : 1 %>>
+          <li><%= activity.text %></li>
+        </td>
+
+        <% if @invoice.format.detailed? %>
+          <td class="hours"><%= activity.hours %></td>
+          <td class="hourly_rate"><%= humanized_money activity.hourly_rate, no_cents_if_whole: true %></td>
+          <td class="equal_sign">=</td>
+          <td class="amount">
+            <%= currency_symbol %>
+            <%= humanized_money activity.amount %>
+          </td>
+        <% end %>
+      </tr>
   <% end %>
-</tr>
 
-<% activities.each do |activity| %>
-  <table class="efforts-row">
-    <tr>
-      <td colspan=<%= @invoice.format.compact? ? 2 : 1 %>>
-        <li><%= activity.text %></li>
+  <% if render_default_activity %>
+    <tr class="efforts-row">
+      <td colspan=<%= @invoice.format.compact? ? 1 : 4 %>>
+        <li><%= t '.default_activity' %></li>
       </td>
 
-      <% if @invoice.format.detailed? %>
-        <td class="hours"><%= activity.hours %></td>
-        <td class="hourly_rate"><%= humanized_money activity.hourly_rate, no_cents_if_whole: true %></td>
-        <td class="equal_sign">=</td>
+      <% if @invoice.format.compact? %>
         <td class="amount">
           <%= currency_symbol %>
-          <%= humanized_money activity.amount %>
+          <%= humanized_money @invoice.activities_amount %>
         </td>
       <% end %>
     </tr>
-  </table>
-<% end %>
+  <% end %>
+</table>

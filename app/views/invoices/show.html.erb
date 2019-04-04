@@ -58,7 +58,7 @@
         <%= link_to t('shared.edit'), invoice_wizard_customer_path(@invoice), class: 'btn btn-default full-width' %>
       <% end %>
 
-      <% if Global.invoices.company_template_disabled? %>
+      <% if Global.invoices.company_template_path.present? %>
         <%= link_to t('.download'), invoice_pdf_path(@invoice, format: :pdf), class: 'btn btn-default full-width' %>
       <% else %>
         <div class="btn-group dropdown full-width">

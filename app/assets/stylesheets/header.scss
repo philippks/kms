@@ -37,4 +37,17 @@
     float: right;
     padding: 1.2em;
   }
+
+  .environment-note {
+    float:left;
+    width: 250px;
+    height: 30px;
+    color: red;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-align: center;
+    background-color: yellow;
+    padding: 5px;
+    margin-top: 10px;
+  }
 }

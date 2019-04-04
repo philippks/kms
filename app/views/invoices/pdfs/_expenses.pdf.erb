@@ -1,0 +1,18 @@
+<table class="efforts">
+  <tr class="header-row">
+    <td colspan=2><%= t '.expenses' %></td>
+  </tr>
+
+  <% expenses.each do |expense| %>
+    <tr class="efforts-row">
+      <td>
+        <li><%= expense.text %></li>
+      </td>
+
+      <td class="amount <%= 'last-expense' if expense == expenses.last %>">
+        <%= currency_symbol %>
+        <%= humanized_money expense.amount %>
+      </td>
+    </tr>
+  <% end %>
+</table>
