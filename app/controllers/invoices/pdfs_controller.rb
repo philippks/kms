@@ -3,14 +3,11 @@ class Invoices::PdfsController < ApplicationController
 
   def new
     @invoice = InvoicePresenter.new(@invoice)
+    wicked_pdf_config = Global.invoices.wicked_pdf_options.hash.deep_symbolize_keys
 
     respond_to do |format|
-      format.html do
-        render :new, formats: [:pdf]
-      end
-
       format.pdf do
-        render pdf: filename, **Global.invoices.wicked_pdf_options.hash.deep_symbolize_keys
+        render pdf: filename, show_as_html: params[:html], **wicked_pdf_config
       end
     end
   end
@@ -30,7 +27,7 @@ class Invoices::PdfsController < ApplicationController
   end
 
   def template_pdf?
-    params[:templated] && !Global.invoices.company_template_disabled?
+    params[:templated] && Global.invoices.company_template_path.present?
   end
 
   def templated_pdf
