@@ -35,7 +35,7 @@ describe Invoices::PDF do
     it 'perists pdf' do
       expect do
         pdf.persist!
-      end.to change { File.exists?(persisted_pdf_path) }.from(false).to(true)
+      end.to change { File.exist?(persisted_pdf_path) }.from(false).to(true)
     end
   end
 
@@ -47,7 +47,7 @@ describe Invoices::PDF do
     it 'removes peristed pdf' do
       expect do
         pdf.remove_persisted_pdf
-      end.to change { File.exists?(persisted_pdf_path) }.from(true).to(false)
+      end.to change { File.exist?(persisted_pdf_path) }.from(true).to(false)
     end
   end
 end
