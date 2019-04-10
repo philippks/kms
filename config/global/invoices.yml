@@ -11,7 +11,7 @@ default:
     margin:
       top: 44.45
       bottom: 20
-      left: 28
+      left: 26
       right: 18
     dpi: 96
     footer:
