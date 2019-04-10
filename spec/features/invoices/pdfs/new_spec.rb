@@ -98,4 +98,14 @@ feature 'New Invoice PDF' do
       end
     end
   end
+
+  context 'when activities should break the page' do
+    it 'adds pagebreak class to table row' do
+      create :invoice_activity, invoice: invoice, pagebreak: true
+
+      visit new_invoice_pdf_path(invoice, format: :pdf, html: true)
+
+      expect(page).to have_css 'div.pagebreak'
+    end
+  end
 end
