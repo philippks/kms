@@ -25,7 +25,7 @@ module Invoices
     end
 
     def persisted?
-      File.exists? persisted_pdf_path
+      File.exist? persisted_pdf_path
     end
 
     def remove_persisted_pdf

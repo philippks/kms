@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Invoices::PdfsController do
+describe Invoices::PdfsController do
   let(:customer) { create :customer, name: 'Hans' }
   let(:employee) { create :employee }
   let!(:invoice) { create :invoice, customer: customer, employee: employee, date: '2017-09-04' }
