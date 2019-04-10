@@ -38,7 +38,7 @@ module Invoices
       @invoice = InvoicePresenter.new(@invoice)
 
       WickedPdf.new.pdf_from_string(
-        PdfsController.render(:new, assigns: { invoice: @invoice}),
+        PdfsController.render(:new, assigns: { invoice: @invoice }),
         Global.invoices.wicked_pdf_options.hash
       )
     end
