@@ -25,6 +25,12 @@
           </td>
         <% end %>
       </tr>
+
+      <% if activity.pagebreak? %>
+        </table>
+          <div class="pagebreak"/>
+        <table class="efforts">
+      <% end %>
   <% end %>
 
   <% if render_default_activity %>
