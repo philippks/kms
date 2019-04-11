@@ -1,24 +1,41 @@
 class Invoices::PdfsController < ApplicationController
   load_and_authorize_resource :invoice
 
-  def index
-  end
-
   def new
+    @invoice = InvoicePresenter.new(@invoice)
+    wicked_pdf_config = Global.invoices.wicked_pdf_options.hash.deep_symbolize_keys
+
     respond_to do |format|
       format.pdf do
-        send_file pdf_path(templated: params[:templated]), filename: filename
+        render pdf: filename, show_as_html: params[:html], **wicked_pdf_config
+      end
+    end
+  end
+
+  def show
+    respond_to do |format|
+      format.pdf do
+        send_data pdf, filename: filename
       end
     end
   end
 
   private
 
-  def pdf_path(templated: false)
-    pdf = Invoices::PDF.new(@invoice)
-    path = pdf.persisted? ? pdf.persisted_pdf_path : pdf.create_temporary
+  def pdf
+    template_pdf? ? templated_pdf : plain_pdf
+  end
 
-    templated ? Invoices::TemplatedPDF.new(path).path : path
+  def template_pdf?
+    params[:templated] && Global.invoices.company_template_path.present?
+  end
+
+  def templated_pdf
+    Invoices::TemplatedPDF.new(plain_pdf).read
+  end
+
+  def plain_pdf
+    Invoices::PDF.new(@invoice).read
   end
 
   def filename

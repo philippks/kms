@@ -28,6 +28,7 @@ feature 'Managing Activities' do
     page.execute_script("$('#activity_text_input').focus()")
 
     expect(page).to have_text('Gugus')
+    sleep(1) # 💩
   end
 
   scenario 'Update a Activity' do

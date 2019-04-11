@@ -35,3 +35,5 @@ de:
   timepicker:
     dformat: Dformat
     pformat: Pformat
+  environment-note-staging: Testumgebung
+  environment-note-development: Entwicklungsumgebung

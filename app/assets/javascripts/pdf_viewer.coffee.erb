@@ -9,7 +9,7 @@ class @PdfViewer
 
   loadPdf: (url) ->
     pdfjsLib.GlobalWorkerOptions.workerSrc = "<%= javascript_url 'pdfjs-dist/build/pdf.worker.js' %>"
-    pdfjsLib.getDocument(url).then((pdf) =>
+    pdfjsLib.getDocument(url).promise.then((pdf) =>
       @pdf = pdf
       @changePage(1)
     )
@@ -20,7 +20,7 @@ class @PdfViewer
       $('.pdf_viewer .navigation').removeClass('hidden') if @pdf.numPages > 1
 
       @current_page = page.pageNumber
-      viewport = page.getViewport(@options['scale'])
+      viewport = page.getViewport( { scale: @options['scale'] })
 
       canvas = @container.find('#pdf-canvas')[0]
       context = canvas.getContext('2d')
@@ -31,7 +31,7 @@ class @PdfViewer
           canvasContext: context,
           viewport: viewport
       }
-      page.render(renderContext)
+      page.render(renderContext).promise.then(-> {})
     )
 
   changePage: (page) ->

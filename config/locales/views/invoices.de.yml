@@ -40,3 +40,26 @@ de:
         title: Rechnungsversand
       update:
         post_delivery_success: Die Rechnung wurde als versendet markiert.
+    pdfs:
+      new:
+        vat_rate_included: Zuzüglich %{vat_rate} % Mehrwertssteuer
+        total_amount: Total Rechnungsbetrag
+        netto: 20 Tage netto
+        confidential_header: Persönlich / Vertraulich
+        confidential_supplement_title_1: Vertrauliches Beiblatt
+        confidential_supplement_title_2: Weitere Leistungen %{title}
+        place: Hombrechtikon, %{date}
+        subtotal: Subtotal
+        possible_wir_amount_text: '(CHF %{amount} WIR-Zahlung möglich)'
+        various_hourly_rates_shortcut: 'Div.'
+        sub_title:
+          no_date: 'im %{date}'
+          one_date: 'vom %{date}'
+          multiple_dates: 'vom %{first_date} bis %{second_date}'
+      activities:
+        activities: Honorar
+        hourly_rate: Satz
+        hours: Std.
+        default_activity: Aktenstudium und Telefonate
+      expenses:
+        expenses: Nebenkosten

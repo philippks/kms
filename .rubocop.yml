@@ -17,6 +17,12 @@ Style/Documentation:
 Metrics/LineLength:
    Max: 120
 
+Metrics/BlockLength:
+  Exclude:
+    - 'Rakefile'
+    - '**/*.rake'
+    - 'spec/**/*.rb'
+
 Style/FrozenStringLiteralComment:
   Enabled: false
 
@@ -25,3 +31,9 @@ Style/TrailingCommaInArrayLiteral:
 
 Style/TrailingCommaInHashLiteral:
   EnforcedStyleForMultiline: comma
+
+Capybara/FeatureMethods:
+  Enabled: false
+
+RSpec/MultipleExpectations:
+  Enabled: false

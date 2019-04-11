@@ -2,6 +2,13 @@
   <%= image_tag 'logo.png', alt: t('application.brand') %>
 <% end %>
 
+<% unless Rails.env.production? %>
+  <p class="environment-note">
+    <%= fa_icon 'info-circle' %>
+    <%= t "environment-note-#{Rails.env}" %>
+  </p>
+<% end %>
+
 <%= link_to destroy_employee_session_path, method: :delete, class: 'logout' do %>
   <%= fa_icon 'sign-out' %>
   <%= t('shared.logout', employee: current_employee.name) %>
