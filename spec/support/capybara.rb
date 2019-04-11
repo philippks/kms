@@ -38,13 +38,16 @@ end
 IGNORED_WARNINGS = [
   'Warning: Load test font never loaded.',
   'XMLHttpRequest.responseType "moz-chunked-arraybuffer" is not supported.',
-  "Consider using 'dppx' units instead of 'dpi', as in CSS 'dpi' means dots-per-CSS-inch, not dots-per-physical-inch, so does not correspond to the actual 'dpi' of a screen. In media query expression: only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 144dpi), only screen and (min-resolution: 1.5dppx)"
+  "Consider using 'dppx' units instead of 'dpi', as in CSS 'dpi' means dots-per-CSS-inch, not dots-per-physical-inch, so does not correspond to the actual 'dpi' of a screen. In media query expression: only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 144dpi), only screen and (min-resolution: 1.5dppx)",
+  "TypeError: fontRes.getRaw is not a function",
 ]
 
 RSpec.configure do |config|
   config.after(:each, js: true) do
     console_messages = page.driver.browser.manage.logs.get(:browser)
-    console_messages.delete_if { |message| IGNORED_WARNINGS.include? message.message }
+    console_messages.delete_if do |message|
+      IGNORED_WARNINGS.any? { |ignored_warning| message.message.include? ignored_warning }
+    end
     raise JavascriptConsoleError, console_messages if console_messages.any?
   end
 end

@@ -35,11 +35,11 @@ module Invoices
     private
 
     def render_pdf
-      @invoice = InvoicePresenter.new(@invoice)
+      invoice_presenter = InvoicePresenter.new(@invoice)
 
       WickedPdf.new.pdf_from_string(
-        PdfsController.render(:new, assigns: { invoice: @invoice }),
-        Global.invoices.wicked_pdf_options.hash
+        PdfsController.render(:new, assigns: { invoice: invoice_presenter }),
+        **Global.invoices.wicked_pdf_options.hash.deep_symbolize_keys
       )
     end
 
