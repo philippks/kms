@@ -1,9 +1,0 @@
-de:
-  invoices:
-    pdf:
-      possible_wir_amount_text: '(CHF %{amount} WIR-Zahlung möglich)'
-      various_hourly_rates_shortcut: 'Div.'
-      sub_title:
-        no_date: 'im %{date}'
-        one_date: 'vom %{date}'
-        multiple_dates: 'vom %{first_date} bis %{second_date}'

@@ -11,13 +11,13 @@ class InvoiceMailer < ApplicationMailer
   private
 
   def set_attachment
-    attachments[attachment_filename] = File.read(attachment_path)
+    attachments[attachment_filename] = invoice_pdf
   end
 
-  def attachment_path
+  def invoice_pdf
     Invoices::TemplatedPDF.new(
-      Invoices::PDF.new(@invoice).persisted_pdf_path
-    ).path
+      Invoices::PDF.new(@invoice).read
+    ).read
   end
 
   def attachment_filename

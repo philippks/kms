@@ -7,12 +7,12 @@ class InvoicePresenter < BasePresenter
     end
   end
 
-  def possible_wir_amount_text
-    I18n.t 'invoices.pdf.possible_wir_amount_text', amount: humanized_money(possible_wir_amount, no_cents_if_whole: true)
+  def title
+    super.presence || Invoices::Title.new(self)
   end
 
-  def date
-    I18n.l(super, format: :long)
+  def possible_wir_amount_text
+    I18n.t 'invoices.pdfs.new.possible_wir_amount_text', amount: humanized_money(possible_wir_amount, no_cents_if_whole: true)
   end
 
   def confidential_hours
@@ -21,7 +21,7 @@ class InvoicePresenter < BasePresenter
 
   def confidential_hourly_rate
     if activities.confidentials.map(&:hourly_rate).uniq.size > 1
-      I18n.t 'invoices.pdf.various_hourly_rates_shortcut'
+      I18n.t 'invoices.pdfs.new.various_hourly_rates_shortcut'
     else
       humanized_money(activities.confidentials.first.hourly_rate, no_cents_if_whole: true)
     end
@@ -29,5 +29,9 @@ class InvoicePresenter < BasePresenter
 
   def confidential_amount
     humanized_money(activities.confidentials.sum(&:amount))
+  end
+
+  def confidential_supplement?
+    confidential? && activities.visible.confidentials.any?
   end
 end

@@ -99,7 +99,7 @@ class Invoice < ActiveRecord::Base
   end
 
   def persist_pdf
-    Invoices::PDF.new(self).create_persisted
+    Invoices::PDF.new(self).persist!
   end
 
   def update_sent_at
