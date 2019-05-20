@@ -1,0 +1,3 @@
+default:
+  overdue_days: 40
+  overdue_min_amount: 1000
