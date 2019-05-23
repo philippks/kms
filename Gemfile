@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.6.1'
+ruby '2.5.5'
 
 gem 'aasm'
 gem 'acts_as_list'
