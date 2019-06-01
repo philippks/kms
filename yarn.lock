@@ -54,9 +54,9 @@ fullcalendar@^3.9.0:
     jquery "2 - 3"
     moment "^2.20.1"
 
-html5sortable@^0.9.8:
-  version "0.9.8"
-  resolved "https://registry.yarnpkg.com/html5sortable/-/html5sortable-0.9.8.tgz#5f1a9ebdb312cbba7e6a7c2a2d26d32fae21e6a1"
+html5sortable@^0.9.16:
+  version "0.9.16"
+  resolved "https://registry.yarnpkg.com/html5sortable/-/html5sortable-0.9.16.tgz#2ef9eef996d9e6ef67a89c56878aef083b72e56c"
 
 jquery@*, "jquery@2 - 3", "jquery@>=1.7.1 <4.0.0":
   version "3.4.0"
