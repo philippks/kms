@@ -8,14 +8,6 @@ feature 'Managing Invoices' do
     sign_in employee
   end
 
-  scenario 'List Invoices' do
-    create :invoice, employee: employee, customer: customer, date: Date.parse('2015-01-19')
-
-    visit invoices_path
-
-    expect(page).to have_text('19.01.2015')
-  end
-
   scenario 'Create Invoice', js: true do
     visit new_invoice_path
 

@@ -14,6 +14,21 @@ class InvoicesController < ApplicationController
 
     @invoices = @invoices.includes(:customer, :employee)
     @invoices = @invoices.paginate(page: params[:page])
+
+    respond_to do |format|
+      format.html do
+        @invoices = @invoices.paginate(page: params[:page])
+      end
+
+      format.pdf do
+        render pdf: export_file_name, orientation: :landscape, disposition: :attachment, zoom: 0.65
+      end
+
+      format.xls do
+        response.headers['Content-Disposition'] =
+          "attachment; filename=#{export_file_name}.xls"
+      end
+    end
   end
 
   def show
@@ -79,5 +94,9 @@ class InvoicesController < ApplicationController
                                     :vat_rate,
                                     :title,
                                     :activities_amount_manually
+  end
+
+  def export_file_name
+    I18n.t 'invoices.index.export_filename'
   end
 end
