@@ -25,8 +25,8 @@
       <span class="caret"></span>
     </button>
     <ul class="dropdown-menu">
-      <li> <%= link_to t('.export_as_pdf'), activities_path(format: :pdf, params: request.query_parameters) %> </li>
-      <li> <%= link_to t('.export_as_xls'), activities_path(format: :xls, params: request.query_parameters) %> </li>
+      <li> <%= link_to t('shared.as_pdf'), activities_path(format: :pdf, params: request.query_parameters) %> </li>
+      <li> <%= link_to t('shared.as_xls'), activities_path(format: :xls, params: request.query_parameters) %> </li>
     </ul>
   </div>
 </div>

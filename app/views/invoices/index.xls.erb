@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">ID</Data></Cell>
+        <Cell><Data ss:Type="String"><%= Invoice.human_attribute_name(:employee) %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= Invoice.human_attribute_name(:customer) %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= Invoice.human_attribute_name(:date) %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= Invoice.human_attribute_name(:amount) %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= Invoice.human_attribute_name(:state) %></Data></Cell>
+      </Row>
+    <% @invoices.each do |invoice| %>
+      <Row>
+        <Cell><Data ss:Type="Number"><%= invoice.id %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= invoice.employee.name %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= invoice.customer.name %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= I18n.l(invoice.date) %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= humanized_money(invoice.total_amount) %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= I18n.t("activerecord.attributes.invoice.state/#{invoice.state}") %></Data></Cell>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>
