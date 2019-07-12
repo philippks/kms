@@ -1,0 +1,46 @@
+<table class="management">
+  <thead>
+    <th class="customer"><%= Invoice.human_attribute_name(:customer) %></th>
+    <th class="date"><%= Invoice.human_attribute_name(:date) %></th>
+    <th class="amount"><%= Invoice.human_attribute_name(:amount) %></th>
+    <th class="state"><%= Invoice.human_attribute_name(:state) %></th>
+    <th class="created_by"><%= t('shared.created_by') %></th>
+
+    <% if request.format.html? %>
+      <th class="actions"></th>
+    <% end %>
+  </thead>
+
+  <tbody>
+    <% @invoices.each do |invoice| %>
+      <tr class='state-<%= invoice.state %>'>
+        <td><%= present(invoice.customer) { |customer| customer.display_name } %></td>
+        <td><%= l invoice.date %></td>
+        <td><%= humanized_money invoice.total_amount %></td>
+        <td>
+          <%= invoice.aasm.human_state %>
+
+          <% if invoice.sent? && invoice.delivery_method.email? %>
+            <%= fa_icon('envelope-o') %>
+          <% end %>
+        </td>
+        <td><%= invoice.employee.name %></td>
+
+        <% if request.format.html? %>
+          <td><%= link_to t('.show_invoice'), invoice %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+
+  <tfoot>
+    <th><%= Invoice.human_attribute_name(:total) %></th>
+    <th></th>
+    <th class="amount"><%= money_without_cents @total_amount %></th>
+    <th></th>
+    <th></th>
+    <% if request.format.html? %>
+      <th></th>
+    <% end %>
+  </tfoot>
+</table>

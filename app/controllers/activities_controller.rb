@@ -17,12 +17,12 @@ class ActivitiesController < ApplicationController
       end
 
       format.pdf do
-        render pdf: file_name, orientation: :landscape, disposition: :attachment, zoom: 0.65
+        render pdf: export_file_name, orientation: :landscape, disposition: :attachment, zoom: 0.65
       end
 
       format.xls do
         response.headers['Content-Disposition'] =
-          "attachment; filename=#{I18n.t('activities.index.export_filename')}.xls"
+          "attachment; filename=#{export_file_name}.xls"
       end
     end
   end
@@ -79,7 +79,7 @@ class ActivitiesController < ApplicationController
     return current_employee.hourly_rate
   end
 
-  def file_name
-    I18n.t 'activities.index.export_filename', date: I18n.l(Date.current)
+  def export_file_name
+    I18n.t 'activities.index.export_filename'
   end
 end

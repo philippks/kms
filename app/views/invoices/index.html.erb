@@ -4,43 +4,8 @@
 
 <div class="table-row">
   <% if @invoices.any? %> <table class="management">
-      <thead>
-        <th class="customer"><%= Invoice.human_attribute_name(:customer) %></th>
-        <th class="date"><%= Invoice.human_attribute_name(:date) %></th>
-        <th class="amount"><%= Invoice.human_attribute_name(:amount) %></th>
-        <th class="state"><%= Invoice.human_attribute_name(:state) %></th>
-        <th class="created_by"><%= t('shared.created_by') %></th>
-        <th class="actions"></th>
-      </thead>
+    <%= render 'table' %>
 
-      <tbody>
-        <% @invoices.each do |invoice| %>
-          <tr class='state-<%= invoice.state %>'>
-            <td><%= present(invoice.customer) { |customer| customer.display_name } %></td>
-            <td><%= l invoice.date %></td>
-            <td><%= humanized_money invoice.total_amount %></td>
-            <td>
-              <%= invoice.aasm.human_state %>
-
-              <% if invoice.sent? && invoice.delivery_method.email? %>
-                <%= fa_icon('envelope-o') %>
-              <% end %>
-            </td>
-            <td><%= invoice.employee.name %></td>
-            <td><%= link_to t('.show_invoice'), invoice %></td>
-          </tr>
-        <% end %>
-      </tbody>
-
-      <tfoot>
-        <th><%= Invoice.human_attribute_name(:total) %></th>
-        <th></th>
-        <th class="amount"><%= money_without_cents @total_amount %></th>
-        <th></th>
-        <th></th>
-        <th></th>
-      </tfoot>
-    </table>
     <%= will_paginate @invoices, renderer: BootstrapPagination::Rails %>
   <% else %>
     <p><%= t('shared.no_entities_found', model: Invoice.model_name.human(count: 2)) %></p>
@@ -55,4 +20,15 @@
   <%= link_to t('.debtors_report'),
               new_debtors_report_path,
               class: 'btn btn-default' %>
+
+  <div class="btn-group dropup">
+    <%= link_to t('shared.export'), invoices_path(format: :pdf, params: request.query_parameters), class: 'btn btn-default' %>
+    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+      <li> <%= link_to t('shared.as_pdf'), invoices_path(format: :pdf, params: request.query_parameters) %> </li>
+      <li> <%= link_to t('shared.as_xls'), invoices_path(format: :xls, params: request.query_parameters) %> </li>
+    </ul>
+  </div>
 </div>
