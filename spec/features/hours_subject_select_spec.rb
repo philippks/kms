@@ -9,7 +9,8 @@ feature 'Select Hours Subject' do
   end
 
   scenario 'Select Activity', js: true do
-    visit activities_path
+    # subject select is available on every view
+    visit absences_path
 
     xpath = '//*[@id="hours_subject_select"]//..//*[contains(@class, "select2-container")]'
     select2('Fritzli', xpath: xpath, search: true)
