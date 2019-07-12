@@ -19,7 +19,7 @@ feature 'Change Invoice Activity Confidentiality' do
 
     expect(page).to have_css '.fa-lock'
     expect(activity.reload.confidential?).to eq true
-    expect(page).to have_css(:td, text: 'Vertrauliche Leistungen')
+    expect(page).to have_css('td', text: 'Vertrauliche Leistungen')
   end
 
   scenario 'Change confidentiality to false' do
@@ -30,6 +30,6 @@ feature 'Change Invoice Activity Confidentiality' do
 
     expect(page).to have_css '.fa-unlock'
     expect(activity.reload.confidential?).to eq false
-    expect(page).not_to have_css(:td, text: 'Vertrauliche Leistungen')
+    expect(page).not_to have_css('td', text: 'Vertrauliche Leistungen')
   end
 end
