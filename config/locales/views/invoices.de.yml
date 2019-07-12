@@ -2,8 +2,10 @@ de:
   invoices:
     index:
       customer_not_set: Kunde nicht gesetzt
-      show_invoice: Zur Rechnung
       debtors_report: Debitorenliste
+      export_filename: Rechnungen_Export
+    table:
+      show_invoice: Zur Rechnung
     show:
       mail: Verschickt
       new_payment: Zahlung erfassen

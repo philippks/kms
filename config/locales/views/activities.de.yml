@@ -2,5 +2,3 @@ de:
   activities:
     index:
       export_filename: Leistungen_Export
-      export_as_pdf: Als PDF
-      export_as_xls: Als XLS
