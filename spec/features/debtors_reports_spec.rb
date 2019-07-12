@@ -25,13 +25,13 @@ feature 'Create a Debtors Report' do
   scenario 'Renders all infos' do
     visit new_debtors_report_path
 
-    expect(page).to have_css :td, text: debtor.customer.name
-    expect(page).to have_css :td, text: 100 # overdue
-    expect(page).to have_css :td, text: debtor.reload.open_amount
-    expect(page).to have_css :td, text: second_debtor.open_amount
-    expect(page).to have_css :td, text: second_debtor.open_amount
-    expect(page).to have_css :td, text: range_1_total_amount
-    expect(page).to have_css :td, text: range_4_total_amount
+    expect(page).to have_css 'td', text: debtor.customer.name
+    expect(page).to have_css 'td', text: 100 # overdue
+    expect(page).to have_css 'td', text: debtor.reload.open_amount
+    expect(page).to have_css 'td', text: second_debtor.open_amount
+    expect(page).to have_css 'td', text: second_debtor.open_amount
+    expect(page).to have_css 'td', text: range_1_total_amount
+    expect(page).to have_css 'td', text: range_4_total_amount
     expect(page).to have_link 'Zur Rechnung', href: invoice_path(debtor)
   end
 
@@ -45,7 +45,7 @@ feature 'Create a Debtors Report' do
     page.execute_script("$('#debtors_report_until_date').trigger('hide')")
 
     # expect to be redirected
-    expect(page).to have_css :td, text: '80'
+    expect(page).to have_css 'td', text: '80'
 
     expected_link = new_debtors_report_path(format: :pdf, debtors_report: { until_date: 20.days.ago.to_date.iso8601 })
     expect(page).to have_link 'Herunterladen', href: expected_link

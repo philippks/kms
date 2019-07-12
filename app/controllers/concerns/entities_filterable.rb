@@ -16,7 +16,15 @@ module EntitiesFilterable
 
   def filter_params
     return stored_filter || default_filter unless filter_provided?
-    params[:filter] ? params.require(:filter).permit(EntitiesFilter::FILTER_METHODS.keys).to_h : {}
+
+    params.require(:filter).permit(:customer_group,
+                                   :employee,
+                                   :state,
+                                   :activity_category,
+                                   :reason,
+                                   :from,
+                                   :to,
+                                   customer: []).to_h
   end
 
   private
