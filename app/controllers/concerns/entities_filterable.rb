@@ -16,6 +16,7 @@ module EntitiesFilterable
 
   def filter_params
     return stored_filter || default_filter unless filter_provided?
+    return {} unless params[:filter]
 
     params.require(:filter).permit(:customer_group,
                                    :employee,
