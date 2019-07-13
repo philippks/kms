@@ -41,6 +41,18 @@ describe EntitiesFilter do
         expect(filter.customer).to eq 'Fritzli'
       end
     end
+
+    context 'with arrays' do
+      let(:parameters) do
+        {
+          customer: %w[Fritzli Franz],
+        }
+      end
+
+      it 'works' do
+        expect(filter.customer).to eq %w[Fritzli Franz]
+      end
+    end
   end
 
   describe '#filter' do
@@ -76,13 +88,13 @@ describe EntitiesFilter do
     context 'with blank parametes' do
       let(:parameters) do
         {
-          customer: 'Fritzli',
+          customer: [''],
           employee: '',
         }
       end
 
-      it 'calls only filter methods if there is a value' do
-        expect(entities).to receive(:for_customer).with('Fritzli').and_return entities
+      it 'does not call filter methods' do
+        expect(entities).not_to receive(:for_customer)
         expect(entities).not_to receive(:for_employee)
 
         filter.filter(entities)

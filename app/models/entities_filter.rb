@@ -23,6 +23,8 @@ class EntitiesFilter
 
     parameters.each do |key, value|
       next if value.blank?
+      next if value.class == Array && (value - [nil, '']).empty?
+
       entities = entities.send(FILTER_METHODS[key.to_sym], value)
     end
     entities
