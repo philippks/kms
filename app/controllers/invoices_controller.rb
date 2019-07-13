@@ -9,11 +9,8 @@ class InvoicesController < ApplicationController
   def index
     @invoices = @invoices.order(Arel.sql("(CASE state WHEN 'open' THEN 1 ELSE 2 END), date DESC, created_at DESC"))
     @invoices = @filter.filter @invoices
-
-    @total_amount = Money.new(@invoices.sum(:persisted_total_amount_cents))
-
     @invoices = @invoices.includes(:customer, :employee)
-    @invoices = @invoices.paginate(page: params[:page])
+    @total_amount = Money.new(@invoices.sum(:persisted_total_amount_cents))
 
     respond_to do |format|
       format.html do
