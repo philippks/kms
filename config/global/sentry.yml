@@ -1,0 +1,2 @@
+default:
+  dsn: <%= ENV["SENTRY_DSN"] %>
