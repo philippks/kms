@@ -1,3 +1,0 @@
-default:
-  host: <%= ENV["ERRBIT_HOST"] %>
-  project_key: <%= ENV["ERRBIT_PROJECT_KEY"] %>
