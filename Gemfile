@@ -3,7 +3,7 @@ ruby '2.6.3'
 
 gem 'aasm'
 gem 'acts_as_list'
-gem 'airbrake'
+gem 'sentry-raven'
 gem 'cancancan'
 gem 'classy_cancan'
 gem 'coffee-rails'
