@@ -31,10 +31,9 @@ Only available in German for now:
 
 ### Prerequisites
 
-* ruby 2.5
+* ruby
 * bundler
 * yarn
-* Libreoffice (will be removed)
 * PostgreSQL
 
 ### Install Dependencies
