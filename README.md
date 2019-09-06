@@ -29,39 +29,47 @@ Only available in German for now:
 
 ## Getting Started
 
-### Prerequisites
-
-* ruby
-* bundler
-* yarn
-* PostgreSQL
-
-### Install Dependencies
-```bash
-bundle
-yarn install
-```
-
-### Configuration
-Basic configuration in `.env` file:
-```
-POSTGRES_HOST=localhost
-POSTGRES_USER=postgres
-POSTGRES_DATABASE="kms"
-POSTGRES_PASSWORD=password
-SECRET_KEY_BASE=xxx
-```
+Use docker for development, testing and production.
 
 ### Start Locally
-```bash
-bundle exec rails s
+Build containers:
 ```
+docker-compose build app
+```
+
+Copy and edit configuration file:
+```
+cp .env.example .env
+```
+
+Start app:
+```
+docker-compose up development
+```
+
+Access web application: http://localhost:3000
+
+### Run Production
+
+Change values in `.env` accordingly.
+
+Start server with:
+```
+docker-compose up app
+```
+
 Access web application: http://localhost:3000
 
 ### Run Tests
-```bash
-bundle exec rspec
+
+Run tests inside docker container with:
 ```
+docker-compose run --rm tests
+```
+
+### Configuration
+
+See `.env.example` for example configuration.
 
 ## Hints
 
