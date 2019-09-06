@@ -1,5 +1,4 @@
 FROM ruby:2.6.3 AS base
-
 RUN apt-get update \
     && apt-get install -y curl \
     && curl -sL https://deb.nodesource.com/setup_10.x | bash \
@@ -20,20 +19,26 @@ RUN bundle install --without test development
 ADD package*.json $APP_HOME/
 RUN npm install
 
-ADD . $APP_HOME
 
+FROM base AS kms
+ADD . $APP_HOME
 CMD ["bundle", "exec", "rails", "server"]
 
 
-FROM base AS test
+FROM base AS development
+RUN bundle install --with development
+ADD . $APP_HOME
+CMD ["bundle", "exec", "rails", "server"]
 
+
+FROM development AS test
 RUN apt-get update \
     && curl https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -o /chrome.deb \
     && dpkg -i /chrome.deb; apt-get -fy install \
-    && rm /chrome.deb
+    && rm /chrome.deb \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-WORKDIR $APP_HOME
 RUN bundle install --with test development
+ADD . $APP_HOME
 
 CMD ["bundle", "exec", "rspec"]
