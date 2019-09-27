@@ -15,4 +15,5 @@ blocks:
         - name: "Run Tests"
           commands:
             - cp .env.example .env
+            - docker-compose build tests
             - docker-compose run --rm tests
