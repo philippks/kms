@@ -19,7 +19,6 @@ RUN bundle install --without test development
 ADD package*.json $APP_HOME/
 RUN npm install
 
-
 FROM base AS kms
 ADD . $APP_HOME
 CMD ["bundle", "exec", "rails", "server"]
