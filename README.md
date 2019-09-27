@@ -34,7 +34,7 @@ Use docker for development, testing and production.
 ### Start Locally
 Build containers:
 ```
-docker-compose build app
+docker-compose build
 ```
 
 Copy and edit configuration file:
@@ -42,7 +42,7 @@ Copy and edit configuration file:
 cp .env.example .env
 ```
 
-Start app:
+Start app for development:
 ```
 docker-compose up development
 ```
@@ -55,7 +55,7 @@ Change values in `.env` accordingly.
 
 Start server with:
 ```
-docker-compose up app
+docker-compose up kms
 ```
 
 Access web application: http://localhost:3000
