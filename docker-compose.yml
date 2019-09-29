@@ -1,11 +1,24 @@
-version: '3.4'
+version: '3.7'
+
 services:
-  web:
+  kms:
     build:
       context: .
-      target: base
+      target: kms
+      cache_from:
+        - philippks/kms:latest
+    image: philippks/kms
     env_file: .env
-    command: bin/rails server --port 3000 --binding 0.0.0.0
+    ports:
+      - 3000:3000
+    depends_on:
+      - postgres
+
+  development:
+    build:
+      context: .
+      target: development
+    env_file: .env
     ports:
       - 3000:3000
     depends_on:
@@ -13,21 +26,27 @@ services:
     volumes:
       - .:/app
 
-  test:
+  tests:
     build:
       context: .
       target: test
-    env_file: .env
+      cache_from:
+        - philippks/kms:test-latest
+    image: philippks/kms:test-latest
+    env_file: .env.test
     depends_on:
-      - postgres
-    volumes:
-      - .:/app
+      - postgres-test
 
   postgres:
     image: postgres:11.5
     env_file: .env
     volumes:
-      - postgres-data:/var/lib/postgresql/data/
+      - postgres:/var/lib/postgresql/data/
+
+  postgres-test:
+    image: postgres:11.5
+    env_file: .env.test
 
 volumes:
-  postgres-data:
+  postgres:
+    name: kms-postgres

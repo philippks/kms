@@ -1,14 +1,11 @@
 FROM ruby:2.6.3 AS base
-
 RUN apt-get update \
     && apt-get install -y curl \
     && curl -sL https://deb.nodesource.com/setup_10.x | bash \
     && apt-get install -y \
     libpq-dev \
     cmake \
-    nodejs \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
-
+    nodejs
 
 ENV APP_HOME /app
 RUN mkdir $APP_HOME
@@ -20,20 +17,26 @@ RUN bundle install --without test development
 ADD package*.json $APP_HOME/
 RUN npm install
 
+FROM base AS kms
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 ADD . $APP_HOME
-
 CMD ["bundle", "exec", "rails", "server"]
 
 
-FROM base AS test
+FROM base AS development
+RUN bundle install --with development
+ADD . $APP_HOME
+CMD ["bundle", "exec", "rails", "server"]
 
-RUN apt-get update \
-    && curl https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -o /chrome.deb \
-    && dpkg -i /chrome.deb; apt-get -fy install \
-    && rm /chrome.deb
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-WORKDIR $APP_HOME
+FROM development AS test
+RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
+    && dpkg -i google-chrome-stable_current_amd64.deb; apt-get -fy install \
+    && rm google-chrome-stable_current_amd64.deb
+
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+
 RUN bundle install --with test development
+ADD . $APP_HOME
 
 CMD ["bundle", "exec", "rspec"]
