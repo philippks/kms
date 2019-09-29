@@ -30,10 +30,11 @@ CMD ["bundle", "exec", "rails", "server"]
 
 
 FROM development AS test
-RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -i /chrome.deb \
-    && dpkg -i /chrome.deb; apt-get -fy install \
-    && rm /chrome.deb \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
+    && dpkg -i google-chrome-stable_current_amd64.deb; apt-get -fy install \
+    && rm google-chrome-stable_current_amd64.deb
+
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN bundle install --with test development
 ADD . $APP_HOME
