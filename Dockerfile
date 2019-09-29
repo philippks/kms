@@ -30,7 +30,7 @@ CMD ["bundle", "exec", "rails", "server"]
 
 
 FROM development AS test
-RUN curl https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -o /chrome.deb \
+RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -i /chrome.deb \
     && dpkg -i /chrome.deb; apt-get -fy install \
     && rm /chrome.deb \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
