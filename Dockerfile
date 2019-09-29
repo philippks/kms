@@ -5,9 +5,7 @@ RUN apt-get update \
     && apt-get install -y \
     libpq-dev \
     cmake \
-    nodejs \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
-
+    nodejs
 
 ENV APP_HOME /app
 RUN mkdir $APP_HOME
@@ -20,6 +18,7 @@ ADD package*.json $APP_HOME/
 RUN npm install
 
 FROM base AS kms
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 ADD . $APP_HOME
 CMD ["bundle", "exec", "rails", "server"]
 
@@ -31,8 +30,7 @@ CMD ["bundle", "exec", "rails", "server"]
 
 
 FROM development AS test
-RUN apt-get update \
-    && curl https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -o /chrome.deb \
+RUN curl https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -o /chrome.deb \
     && dpkg -i /chrome.deb; apt-get -fy install \
     && rm /chrome.deb \
     && apt-get clean && rm -rf /var/lib/apt/lists/*

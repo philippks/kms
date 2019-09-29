@@ -11,9 +11,14 @@ blocks:
       prologue:
         commands:
           - checkout
+          - echo $DOCKER_PASSWORD | docker login --username "$DOCKER_USERNAME" --password-stdin
+          - cp .env.example .env
+          - docker-compose pull tests || true
       jobs:
         - name: "Run Tests"
           commands:
-            - cp .env.example .env
             - docker-compose build tests
+            - docker-compose push tests
             - docker-compose run --rm tests
+      secrets:
+        - name: docker
