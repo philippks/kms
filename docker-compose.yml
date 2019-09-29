@@ -5,6 +5,8 @@ services:
     build:
       context: .
       target: kms
+      cache_from:
+        - philippks/kms:latest
     image: philippks/kms
     env_file: .env
     ports:
