@@ -6,7 +6,7 @@ agent:
 execution_time_limit:
   minutes: 5
 blocks:
-  - name: "Run Tests"
+  - name: "Run Tests and Push Docker Image"
     task:
       prologue:
         commands:
@@ -15,10 +15,13 @@ blocks:
           - cp .env.example .env
           - docker-compose pull tests || true
       jobs:
-        - name: "Run Tests"
+        - name: "Run Tests and Push Docker Image"
           commands:
-            - docker-compose build tests
+            - docker-compose build kms tests
             - docker-compose push tests
             - docker-compose run --rm tests
+            - docker tag philippks/kms:latest philippks/kms:$SEMAPHORE_GIT_SHA
+            - docker push philippks/kms:$SEMAPHORE_GIT_SHA
+            - docker push philippks/kms:latest
       secrets:
         - name: docker

@@ -1,10 +1,11 @@
 version: '3.7'
+
 services:
   kms:
     build:
       context: .
       target: kms
-    image: philippks/kms:latest
+    image: philippks/kms
     env_file: .env
     ports:
       - 3000:3000
