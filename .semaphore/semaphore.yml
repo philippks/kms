@@ -17,10 +17,11 @@ blocks:
       jobs:
         - name: "Run Tests and Push Docker Image"
           commands:
-            - docker-compose build kms tests
+            - docker-compose build tests
             - docker-compose push tests
             - docker-compose run --rm tests
-            - docker tag philippks/kms:latest philippks/kms:$SEMAPHORE_GIT_SHA
+            - if [ $SEMAPHORE_GIT_BRANCH == "master" ]; docker-compose build kms; fi
+            - if [ $SEMAPHORE_GIT_BRANCH == "master" ]; docker tag philippks/kms:latest philippks/kms:$SEMAPHORE_GIT_SHA; fi
             - if [ $SEMAPHORE_GIT_BRANCH == "master" ]; docker push philippks/kms:$SEMAPHORE_GIT_SHA && docker push philippks/kms:latest; fi
       secrets:
         - name: docker
