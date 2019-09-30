@@ -6,6 +6,7 @@ services:
       context: .
       target: kms
       cache_from:
+        - philippks/kms:test-latest
         - philippks/kms:latest
     image: philippks/kms
     env_file: .env
