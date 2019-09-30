@@ -25,7 +25,9 @@ CMD ["bundle", "exec", "rails", "server"]
 
 FROM base AS development
 RUN bundle install --with development
-ADD . $APP_HOME
+
+# files are mounted in development
+# ADD . $APP_HOME
 CMD ["bundle", "exec", "rails", "server"]
 
 
