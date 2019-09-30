@@ -1,0 +1,27 @@
+version: v1.0
+name: KMS
+agent:
+  machine:
+    type: e1-standard-2
+execution_time_limit:
+  minutes: 10
+blocks:
+  - name: "Run Tests and Push Docker Image"
+    task:
+      prologue:
+        commands:
+          - checkout
+          - echo $DOCKER_PASSWORD | docker login --username "$DOCKER_USERNAME" --password-stdin
+          - cp .env.example .env
+          - docker-compose pull tests || true
+      jobs:
+        - name: "Run Tests and Push Docker Image"
+          commands:
+            - docker-compose build tests
+            - docker-compose push tests
+            - docker-compose run tests
+            - if [ $SEMAPHORE_GIT_BRANCH == "master" ]; then docker-compose build kms; fi
+            - if [ $SEMAPHORE_GIT_BRANCH == "master" ]; then philippks/kms:$SEMAPHORE_GIT_SHA; fi
+            - if [ $SEMAPHORE_GIT_BRANCH == "master" ]; then docker push philippks/kms:$SEMAPHORE_GIT_SHA && docker push philippks/kms:latest; fi
+      secrets:
+        - name: docker
