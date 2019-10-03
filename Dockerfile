@@ -17,15 +17,17 @@ RUN bundle install --without test development
 ADD package*.json $APP_HOME/
 RUN npm install
 
+
 FROM base AS kms
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+ENV RAILS_ENV production
 ADD . $APP_HOME
 CMD ["bundle", "exec", "rails", "server"]
 
 
 FROM base AS development
 RUN bundle install --with development
-
+ENV RAILS_ENV development
 # files are mounted in development
 # ADD . $APP_HOME
 CMD ["bundle", "exec", "rails", "server"]
@@ -40,5 +42,5 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN bundle install --with test development
 ADD . $APP_HOME
-
+ENV RAILS_ENV test
 CMD ["bundle", "exec", "rspec"]
