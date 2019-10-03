@@ -51,8 +51,6 @@ group :development, :test do
   gem 'byebug'
   gem 'factory_bot_rails'
   gem 'i18n-tasks'
-  gem 'pronto'
-  gem 'pronto-rubocop', require: false
   gem 'puma'
   gem 'rspec-rails'
   gem 'rubocop'
