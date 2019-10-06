@@ -34,7 +34,7 @@ ENV RAILS_ENV development
 RUN bundle install --with development
 # files are mounted in development
 # ADD . $APP_HOME
-CMD ["bundle", "exec", "rails", "server"]
+CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
 
 
 FROM development AS test
