@@ -22,6 +22,6 @@ blocks:
             - docker-compose run tests
             - if [ $SEMAPHORE_GIT_REF_TYPE == "branch" -a $SEMAPHORE_GIT_BRANCH == "master" ]; then TAG=$SEMAPHORE_GIT_SHA docker-compose build kms; fi
             - if [ $SEMAPHORE_GIT_REF_TYPE == "branch" -a $SEMAPHORE_GIT_BRANCH == "master" ]; then docker tag philippks/kms:$SEMAPHORE_GIT_SHA philippks/kms:latest; fi
-            - if [ $SEMAPHORE_GIT_REF_TYPE == "branch" -a $SEMAPHORE_GIT_BRANCH == "master" ]; then docker push; fi
+            - if [ $SEMAPHORE_GIT_REF_TYPE == "branch" -a $SEMAPHORE_GIT_BRANCH == "master" ]; then docker push philippks/kms:$SEMAPHORE_GIT_SHA; docker push philippks/kms:latest; fi
       secrets:
         - name: docker
