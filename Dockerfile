@@ -42,9 +42,8 @@ ENV RAILS_ENV test
 
 RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
     && dpkg -i google-chrome-stable_current_amd64.deb; apt-get -fy install \
-    && rm google-chrome-stable_current_amd64.deb
-
-RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+    && rm google-chrome-stable_current_amd64.deb \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN bundle install --with test development
 
