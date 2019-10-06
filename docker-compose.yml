@@ -8,7 +8,7 @@ services:
       cache_from:
         - philippks/kms:test-latest
         - philippks/kms:latest
-    image: philippks/kms:{TAG|latest}
+    image: "philippks/kms:${TAG}"
     env_file: .env
     ports:
       - 3000:3000
