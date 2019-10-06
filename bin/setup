@@ -1,10 +1,9 @@
 #!/usr/bin/env ruby
-require 'pathname'
 require 'fileutils'
 include FileUtils
 
 # path to your application root.
-APP_ROOT = Pathname.new File.expand_path('../../', __FILE__)
+APP_ROOT = File.expand_path('..', __dir__)
 
 def system!(*args)
   system(*args) || abort("\n== Command #{args} failed ==")
@@ -18,18 +17,11 @@ chdir APP_ROOT do
   system! 'gem install bundler --conservative'
   system('bundle check') || system!('bundle install')
 
-  puts "\n== Copying sample files =="
-  Dir['config/*.example', '.env.example'].each do |source|
-    destination = source.gsub('.example', '')
-    system "cp #{source} #{destination}" unless File.exist?(destination)
-  end
+  # Install JavaScript dependencies if using Yarn
+  system('bin/yarn')
 
   puts "\n== Preparing database =="
-  system 'RAILS_ENV=development bin/rake db:create db:schema:load'
-  system 'RAILS_ENV=test bin/rake db:create db:schema:load'
-
-  puts "\n== run yarn =="
-  system 'yarn install'
+  system! 'bin/rails db:setup'
 
   puts "\n== Removing old logs and tempfiles =="
   system! 'bin/rails log:clear tmp:clear'
