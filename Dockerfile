@@ -20,6 +20,7 @@ RUN npm install
 
 FROM base AS kms
 ENV RAILS_ENV production
+ENV RAILS_SERVE_STATIC_FILES true
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 ADD . $APP_HOME
