@@ -1,7 +1,7 @@
 class Customer < ActiveRecord::Base
   extend Enumerize
 
-  belongs_to :customer_group
+  belongs_to :customer_group, optional: true
   has_many :efforts
 
   scope :for_customer, -> (customer_id) { where(id: customer_id) }
