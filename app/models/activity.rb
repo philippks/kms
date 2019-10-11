@@ -1,5 +1,5 @@
 class Activity < Effort
-  belongs_to :activity_category
+  belongs_to :activity_category, optional: true
 
   validates :hours, :hourly_rate, presence: true
   validates :hours, numericality: { greater_than_or_equal: 0 }

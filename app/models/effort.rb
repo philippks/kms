@@ -5,7 +5,7 @@ class Effort < ActiveRecord::Base
 
   belongs_to :employee
   belongs_to :customer
-  belongs_to :invoice_effort, class_name: '::Invoices::Effort'
+  belongs_to :invoice_effort, class_name: '::Invoices::Effort', optional: true
 
   validates :employee, :customer_id, :text, :date, presence: true
 
