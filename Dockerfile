@@ -1,4 +1,4 @@
-FROM ruby:2.6.3 AS base
+FROM ruby:2.6.5 AS base
 RUN apt-get update \
     && apt-get install -y curl \
     && curl -sL https://deb.nodesource.com/setup_10.x | bash \
