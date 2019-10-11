@@ -13,14 +13,14 @@ class Effort < ActiveRecord::Base
 
   before_validation :set_state
 
-  scope :before, -> (date) { where('date <= ?', date.to_date) }
-  scope :after, -> (date) { where('date >= ?', date.to_date) }
-  scope :for_customer, -> (customer_id) { where(customer_id: customer_id) }
-  scope :for_employee, -> (employee_id) { where(employee_id: employee_id) }
-  scope :for_customer_group, -> (customer_group_id) do
+  scope :before, ->(date) { where('date <= ?', date.to_date) }
+  scope :after, ->(date) { where('date >= ?', date.to_date) }
+  scope :for_customer, ->(customer_id) { where(customer_id: customer_id) }
+  scope :for_employee, ->(employee_id) { where(employee_id: employee_id) }
+  scope :for_customer_group, lambda { |customer_group_id|
     includes(:customer).where(customers: { customer_group_id: customer_group_id })
-  end
-  scope :for_state, -> (state) { with_state(state) }
+  }
+  scope :for_state, ->(state) { with_state(state) }
   scope :without_invoice, -> { where(invoice_effort_id: nil) }
 
   delegate :invoice, :invoice_id, to: :invoice_effort, allow_nil: true
