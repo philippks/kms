@@ -1,16 +1,16 @@
 class Customer < ActiveRecord::Base
   extend Enumerize
 
-  belongs_to :customer_group
+  belongs_to :customer_group, optional: true
   has_many :efforts
 
-  scope :for_customer, -> (customer_id) { where(id: customer_id) }
-  scope :for_customer_group, -> (customer_group_id) do
+  scope :for_customer, ->(customer_id) { where(id: customer_id) }
+  scope :for_customer_group, lambda { |customer_group_id|
     where(customer_group_id: customer_group_id)
-  end
-  scope :for_query, -> (query) do
+  }
+  scope :for_query, lambda { |query|
     where('lower(name) LIKE lower(?)', "%#{query}%")
-  end
+  }
   scope :active, -> { where(deactivated: false) }
 
   validates :name, presence: true, uniqueness: true
