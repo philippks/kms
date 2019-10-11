@@ -38,6 +38,10 @@ gem 'wkhtmltopdf-binary'
 gem 'will_paginate-bootstrap'
 gem 'x-editable-rails'
 
+# Temporarily locking sprockets to v3.x
+# will be replaced with webpacker
+gem 'sprockets', '~> 3'
+
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
