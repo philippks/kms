@@ -5,6 +5,8 @@ MoneyRails.configure do |config|
 
   config.include_validations = false
 
+  config.rounding_mode = BigDecimal::ROUND_HALF_UP
+
   # Default ActiveRecord migration configuration values for columns:
   config.amount_column = {
     prefix: '',           # column name prefix
