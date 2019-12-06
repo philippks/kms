@@ -5,7 +5,8 @@ RUN apt-get update \
     && apt-get install -y \
     libpq-dev \
     cmake \
-    nodejs
+    nodejs \
+    wkhtmltopdf
 
 ENV APP_HOME /app
 RUN mkdir $APP_HOME
