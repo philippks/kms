@@ -1,7 +1,3 @@
-<%= wicked_pdf_stylesheet_link_tag 'application' %>
+<h1><%= t '.title', until: l(@until_date) %></h1>
 
-<body class="<%= body_class %>">
-  <h1><%= t '.title', until: l(@until_date) %></h1>
-
-  <%= render partial: 'table', formats: [:html] %>
-</body>
+<%= render partial: 'table', formats: [:html] %>
