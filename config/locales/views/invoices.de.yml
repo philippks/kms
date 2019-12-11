@@ -44,7 +44,7 @@ de:
         post_delivery_success: Die Rechnung wurde als versendet markiert.
     pdfs:
       new:
-        vat_rate_included: Zuzüglich %{vat_rate} % Mehrwertssteuer
+        vat_rate_included: Zuzüglich %{vat_rate} % Mehrwertsteuer
         total_amount: Total Rechnungsbetrag
         netto: 20 Tage netto
         confidential_header: Persönlich / Vertraulich
