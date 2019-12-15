@@ -6,7 +6,7 @@
   <% expenses.each do |expense| %>
     <tr class="efforts-row">
       <td>
-        <li><%= expense.text %></li>
+        <li><%= html_escape(expense.text).gsub(/(?:\n\r?|\r\n?)/, '<br>').html_safe %></li>
       </td>
 
       <td class="amount <%= 'last-expense' if expense == expenses.last %>">
