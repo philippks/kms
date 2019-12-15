@@ -1,0 +1,24 @@
+version: v1.0
+name: Push docker latest image
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+blocks:
+  - name: Push
+    task:
+      prologue:
+        commands:
+          - checkout
+          - echo $DOCKER_PASSWORD | docker login --username "$DOCKER_USERNAME" --password-stdin
+          - cp .env.example .env
+          - docker-compose pull tests || true
+      jobs:
+        - name: 'Build an push image to Docker Hub'
+          commands:
+            - TAG=$SEMAPHORE_GIT_SHA docker-compose build kms
+            - docker tag philippks/kms:$SEMAPHORE_GIT_SHA philippks/kms:latest
+            - docker push philippks/kms:$SEMAPHORE_GIT_SHA
+            - docker push philippks/kms:latest
+      secrets:
+        - name: docker
