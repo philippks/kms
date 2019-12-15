@@ -6,7 +6,7 @@
   <% expenses.each do |expense| %>
     <tr class="efforts-row">
       <td>
-        <li><%= expense.text %></li>
+        <li><%= simple_format expense.text, class: 'effort-text' %></li>
       </td>
 
       <td class="amount <%= 'last-expense' if expense == expenses.last %>">
