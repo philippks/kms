@@ -6,7 +6,7 @@ agent:
 execution_time_limit:
   minutes: 30
 blocks:
-  - name: "Run Tests and Push Docker Image"
+  - name: "Run Tests"
     task:
       prologue:
         commands:
@@ -15,13 +15,15 @@ blocks:
           - cp .env.example .env
           - docker-compose pull tests || true
       jobs:
-        - name: "Run Tests and Push Docker Image"
+        - name: "Run Tests"
           commands:
             - docker-compose build tests
             - docker-compose push tests
             - docker-compose run tests
-            - if [ $SEMAPHORE_GIT_REF_TYPE == "branch" -a $SEMAPHORE_GIT_BRANCH == "master" ]; then TAG=$SEMAPHORE_GIT_SHA docker-compose build kms; fi
-            - if [ $SEMAPHORE_GIT_REF_TYPE == "branch" -a $SEMAPHORE_GIT_BRANCH == "master" ]; then docker tag philippks/kms:$SEMAPHORE_GIT_SHA philippks/kms:latest; fi
-            - if [ $SEMAPHORE_GIT_REF_TYPE == "branch" -a $SEMAPHORE_GIT_BRANCH == "master" ]; then docker push philippks/kms:$SEMAPHORE_GIT_SHA; docker push philippks/kms:latest; fi
       secrets:
         - name: docker
+promotions:
+  - name: Build and push docker staging-latest image
+    pipeline_file: build-and-push-docker-staging-latest.yml
+  - name: Build and push docker latest image
+    pipeline_file: build-and-push-docker-latest.yml
