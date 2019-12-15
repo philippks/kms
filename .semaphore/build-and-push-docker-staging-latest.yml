@@ -1,0 +1,22 @@
+version: v1.0
+name: Push docker staging-latest image
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+blocks:
+  - name: Push
+    task:
+      prologue:
+        commands:
+          - checkout
+          - echo $DOCKER_PASSWORD | docker login --username "$DOCKER_USERNAME" --password-stdin
+          - cp .env.example .env
+          - docker-compose pull tests || true
+      jobs:
+        - name: 'Build an push staging image to Docker Hub'
+          commands:
+            - TAG=staging-latest docker-compose build kms
+            - docker push philippks/kms:staging-latest
+      secrets:
+        - name: docker
