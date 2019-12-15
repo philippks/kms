@@ -12,7 +12,7 @@
   <% activities.each do |activity| %>
       <tr class="efforts-row">
         <td colspan=<%= @invoice.format.compact? ? 2 : 1 %>>
-          <li><%= activity.text %></li>
+          <li><%= html_escape(activity.text).gsub(/(?:\n\r?|\r\n?)/, '<br>').html_safe %></li>
         </td>
 
         <% if @invoice.format.detailed? %>
