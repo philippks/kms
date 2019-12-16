@@ -6,7 +6,8 @@ RUN apt-get update \
     libpq-dev \
     cmake \
     nodejs \
-    wkhtmltopdf
+    wkhtmltopdf \
+    fonts-freefont-ttf
 
 ENV APP_HOME /app
 RUN mkdir $APP_HOME
@@ -19,6 +20,15 @@ ADD package*.json $APP_HOME/
 RUN npm install
 
 
+FROM base AS development
+ENV RAILS_ENV development
+
+RUN bundle install --with development
+# files are mounted in development
+# ADD . $APP_HOME
+CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
+
+
 FROM base AS kms
 ENV RAILS_ENV production
 ENV RAILS_SERVE_STATIC_FILES true
@@ -27,15 +37,6 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 ADD . $APP_HOME
 RUN SECRET_KEY_BASE=tmp rails assets:precompile
 CMD ["bundle", "exec", "rails", "server"]
-
-
-FROM base AS development
-ENV RAILS_ENV development
-
-RUN bundle install --with development
-# files are mounted in development
-# ADD . $APP_HOME
-CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
 
 
 FROM development AS test
