@@ -27,3 +27,5 @@ promotions:
     pipeline_file: build-and-push-docker-staging-latest.yml
   - name: Build and push docker latest image
     pipeline_file: build-and-push-docker-latest.yml
+    auto_promote:
+      when: "result = 'passed' and branch = 'master'"
