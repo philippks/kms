@@ -22,7 +22,7 @@ gem 'money-rails'
 gem 'paper_trail'
 gem 'pg'
 gem 'puma'
-gem 'rails', '~> 5.2'
+gem 'rails', '~> 6.0'
 gem 'rails-i18n'
 gem 'responders'
 gem 'sassc-rails'
@@ -56,7 +56,7 @@ group :development, :test do
   gem 'byebug'
   gem 'factory_bot_rails'
   gem 'i18n-tasks'
-  gem 'rspec-rails'
+  gem 'rspec-rails', '4.0.0.beta3' # use beta for rails 6 support
   gem 'rubocop'
   gem 'rubocop-rspec'
 end
