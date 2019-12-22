@@ -38,7 +38,8 @@ RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.d
 
 RUN bundle install --with test development
 
-ADD . $APP_HOME
+# files are mounted in tests
+# ADD . $APP_HOME
 CMD ["bundle", "exec", "rspec"]
 
 
