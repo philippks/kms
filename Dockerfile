@@ -49,4 +49,5 @@ ENV RAILS_SERVE_STATIC_FILES true
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 ADD . $APP_HOME
 RUN SECRET_KEY_BASE=tmp rails assets:precompile
+ENTRYPOINT ["/app/docker-entrypoint.sh"]
 CMD ["bundle", "exec", "rails", "server"]
