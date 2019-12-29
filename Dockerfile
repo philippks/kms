@@ -17,16 +17,7 @@ RUN bundle install --without test development
 
 ADD package*.json $APP_HOME/
 RUN npm install
-
-
-FROM base AS kms
-ENV RAILS_ENV production
-ENV RAILS_SERVE_STATIC_FILES true
-
-RUN apt-get clean && rm -rf /var/lib/apt/lists/*
-ADD . $APP_HOME
-RUN SECRET_KEY_BASE=tmp rails assets:precompile
-CMD ["bundle", "exec", "rails", "server"]
+ENTRYPOINT ["/app/docker-entrypoint.sh"]
 
 
 FROM base AS development
@@ -48,5 +39,16 @@ RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.d
 
 RUN bundle install --with test development
 
-ADD . $APP_HOME
+# files are mounted in tests
+# ADD . $APP_HOME
 CMD ["bundle", "exec", "rspec"]
+
+
+FROM base AS kms
+ENV RAILS_ENV production
+ENV RAILS_SERVE_STATIC_FILES true
+
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+ADD . $APP_HOME
+RUN SECRET_KEY_BASE=tmp rails assets:precompile
+CMD ["bundle", "exec", "rails", "server"]
