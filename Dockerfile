@@ -31,7 +31,7 @@ CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
 FROM development AS test
 ENV RAILS_ENV test
 
-RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
+RUN wget --no-verbose https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
     && dpkg -i google-chrome-stable_current_amd64.deb; apt-get -fy install \
     && rm google-chrome-stable_current_amd64.deb \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
