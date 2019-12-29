@@ -41,7 +41,7 @@ feature 'List Invoices' do
     click_link 'Als XLS'
 
     header = page.response_headers['Content-Disposition']
-    expect(header).to eq 'attachment; filename=Rechnungen_Export.xls'
+    expect(header).to include 'attachment; filename=Rechnungen_Export.xls'
     expect(page).to have_text('Kunde')
 
     expect(page).to have_text('100.00') # first amount
@@ -62,6 +62,6 @@ feature 'List Invoices' do
     click_link 'Exportieren'
 
     header = page.response_headers['Content-Disposition']
-    expect(header).to eq 'attachment; filename="Rechnungen_Export.pdf"'
+    expect(header).to include 'attachment; filename="Rechnungen_Export.pdf"'
   end
 end
