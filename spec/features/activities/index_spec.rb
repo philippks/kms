@@ -31,7 +31,7 @@ feature 'List Activities' do
     click_link 'Als XLS'
 
     header = page.response_headers['Content-Disposition']
-    expect(header).to eq 'attachment; filename=Leistungen_Export.xls'
+    expect(header).to include 'attachment; filename=Leistungen_Export.xls'
     expect(page).to have_text('Kunde')
     expect(page).to have_text('300.00', count: 2)
     expect(page).to have_text(text)
@@ -45,6 +45,6 @@ feature 'List Activities' do
     click_link 'Exportieren'
 
     header = page.response_headers['Content-Disposition']
-    expect(header).to eq 'attachment; filename="Leistungen_Export.pdf"'
+    expect(header).to include 'attachment; filename="Leistungen_Export.pdf"'
   end
 end
