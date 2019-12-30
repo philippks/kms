@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "repository": "git@github.com:philippks/kms.git",
   "dependencies": {
+    "@rails/webpacker": "4.2.2",
     "bootstrap-datepicker": "^1.8.0",
     "bootstrap-sass": "^3.4.1",
     "easy-autocomplete": "https://github.com/philippks/EasyAutocomplete.git",
@@ -10,5 +11,8 @@
     "html5sortable": "^0.9.8",
     "moment": "^2.24.0",
     "pdfjs-dist": "^2.0.943"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^3.10.1"
   }
 }

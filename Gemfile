@@ -31,6 +31,7 @@ gem 'sentry-raven'
 gem 'simple-navigation'
 gem 'simple_form'
 gem 'uglifier'
+gem 'webpacker'
 gem 'wicked_pdf'
 
 # to be removed
