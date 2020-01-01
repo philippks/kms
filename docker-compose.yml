@@ -1,10 +1,10 @@
-version: '3.7'
+version: "3.7"
 
 services:
-  kms:
+  production:
     build:
       context: .
-      target: kms
+      target: production
       cache_from:
         - philippks/kms:test-latest
         - philippks/kms:latest
@@ -26,8 +26,9 @@ services:
       - postgres
     volumes:
       - .:/app
+      - bundle:/bundle
 
-  tests:
+  test:
     build:
       context: .
       target: test
@@ -51,3 +52,5 @@ services:
 volumes:
   postgres:
     name: kms-postgres
+  bundle:
+    name: kms-bundle
