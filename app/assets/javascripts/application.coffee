@@ -1,5 +1,3 @@
-#= require jquery
-#= require jquery_ujs
 #= require html5sortable/dist/html5sortable.min
 
 #= require select2
