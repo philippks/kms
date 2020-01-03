@@ -13,13 +13,13 @@ blocks:
           - checkout
           - echo $DOCKER_PASSWORD | docker login --username "$DOCKER_USERNAME" --password-stdin
           - cp .env.example .env
-          - docker-compose pull tests || true
+          - docker-compose pull test || true
       jobs:
-        - name: "Run Tests"
+        - name: "Run tests"
           commands:
-            - docker-compose build tests
-            - docker-compose push tests
-            - docker-compose run tests
+            - docker-compose build test
+            - docker-compose push test
+            - docker-compose run test
       secrets:
         - name: docker
 promotions:

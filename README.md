@@ -55,7 +55,7 @@ Change values in `.env` accordingly.
 
 Start server with:
 ```
-docker-compose up kms
+docker-compose up production
 ```
 
 Access web application: http://localhost:3000
@@ -64,7 +64,7 @@ Access web application: http://localhost:3000
 
 Run tests inside docker container with:
 ```
-docker-compose run --rm tests
+docker-compose run --rm test
 ```
 
 ### Configuration

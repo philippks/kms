@@ -1,52 +1,62 @@
 FROM ruby:2.6.5 AS base
 RUN apt-get update \
-    && apt-get install -y curl \
     && curl -sL https://deb.nodesource.com/setup_10.x | bash \
-    && apt-get install -y \
+    && apt-get install --no-install-recommends -y \
     libpq-dev \
     cmake \
     nodejs \
-    wkhtmltopdf
+    wkhtmltopdf \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 ENV APP_HOME /app
 RUN mkdir $APP_HOME
 WORKDIR $APP_HOME
 
-ADD Gemfile* $APP_HOME/
-RUN bundle install --without test development
-
 ADD package*.json $APP_HOME/
 RUN npm install
 
 
+################################################################################################
+#### Development
+################################################################################################
 FROM base AS development
 ENV RAILS_ENV development
 
-RUN bundle install --with development
-# files are mounted in development
-# ADD . $APP_HOME
+ENV BUNDLE_PATH=/bundle
+# bundle install is called in entrypoint
+
+ENTRYPOINT ["/app/docker-entrypoint.sh"]
 CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
 
 
-FROM development AS test
+################################################################################################
+#### Test
+################################################################################################
+FROM base AS test
 ENV RAILS_ENV test
 
 RUN wget --no-verbose https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
-    && dpkg -i google-chrome-stable_current_amd64.deb; apt-get -fy install \
+    && dpkg -i google-chrome-stable_current_amd64.deb; apt-get update && apt-get -fy install \
     && rm google-chrome-stable_current_amd64.deb \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-RUN bundle install --with test development
+ADD Gemfile* $APP_HOME/
+RUN bundle install --jobs 3 --with test development
 
 ADD . $APP_HOME
 CMD ["bundle", "exec", "rspec"]
 
 
-FROM base AS kms
+################################################################################################
+#### Production
+################################################################################################
+FROM base AS production
 ENV RAILS_ENV production
 ENV RAILS_SERVE_STATIC_FILES true
 
-RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+ADD Gemfile* $APP_HOME/
+RUN bundle install --jobs 3 --without test development
+
 ADD . $APP_HOME
 RUN SECRET_KEY_BASE=tmp rails assets:precompile
 ENTRYPOINT ["/app/docker-entrypoint.sh"]
