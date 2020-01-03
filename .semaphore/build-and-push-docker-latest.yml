@@ -12,11 +12,11 @@ blocks:
           - checkout
           - echo $DOCKER_PASSWORD | docker login --username "$DOCKER_USERNAME" --password-stdin
           - cp .env.example .env
-          - docker-compose pull tests || true
+          - docker-compose pull test || true
       jobs:
-        - name: 'Build an push image to Docker Hub'
+        - name: "Build an push image to Docker Hub"
           commands:
-            - TAG=$SEMAPHORE_GIT_SHA docker-compose build kms
+            - TAG=$SEMAPHORE_GIT_SHA docker-compose build production
             - docker tag philippks/kms:$SEMAPHORE_GIT_SHA philippks/kms:latest
             - docker push philippks/kms:$SEMAPHORE_GIT_SHA
             - docker push philippks/kms:latest
