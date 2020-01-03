@@ -6,6 +6,8 @@
     "@rails/webpacker": "4.2.2",
     "bootstrap-datepicker": "^1.8.0",
     "bootstrap-sass": "^3.4.1",
+    "coffee-loader": "^0.9.0",
+    "coffeescript": "1.12.7",
     "easy-autocomplete": "https://github.com/philippks/EasyAutocomplete.git",
     "fullcalendar": "^3.9.0",
     "html5sortable": "^0.9.8",
