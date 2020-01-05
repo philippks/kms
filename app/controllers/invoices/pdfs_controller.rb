@@ -7,7 +7,7 @@ class Invoices::PdfsController < ApplicationController
 
     respond_to do |format|
       format.pdf do
-        render pdf: filename, show_as_html: params[:html], **wicked_pdf_config
+        render pdf: filename, layout: false, show_as_html: params[:html], **wicked_pdf_config
       end
     end
   end
