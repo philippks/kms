@@ -1,4 +1,4 @@
-class @CustomerSelect
+class CustomerSelect
   constructor: (selector, onChange) ->
     @onChangeCallback = onChange
     @initialize(selector)
@@ -36,3 +36,8 @@ class @CustomerSelect
 jQuery ->
   $('select.customer_select').each (index, select) ->
     new CustomerSelect(select)
+
+  $('select.filter_customer_select').each (index, select) ->
+    new CustomerSelect(select, (customer_id) =>
+      $(select).closest('form').submit()
+    )

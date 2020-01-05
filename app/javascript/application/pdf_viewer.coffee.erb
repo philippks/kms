@@ -1,4 +1,6 @@
-class @PdfViewer
+import pdfjsLib from 'pdfjs-dist/webpack'
+
+class PdfViewer
   pdf = null
   current_page = 1
 
@@ -8,7 +10,6 @@ class @PdfViewer
     @loadPdf(container.data('url'))
 
   loadPdf: (url) ->
-    pdfjsLib.GlobalWorkerOptions.workerSrc = "<%= javascript_url 'pdfjs-dist/build/pdf.worker.js' %>"
     pdfjsLib.getDocument(url).then((pdf) =>
       @pdf = pdf
       @changePage(1)

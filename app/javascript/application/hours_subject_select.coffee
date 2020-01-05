@@ -1,4 +1,4 @@
-class @HoursSubjectSelect
+class HoursSubjectSelect
   constructor: (selector, onChange) ->
     @initialize(selector)
 

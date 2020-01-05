@@ -1,4 +1,4 @@
-class @EmployeeSelect
+class EmployeeSelect
   constructor: (selector, onChange) ->
     @onChangeCallback = onChange
 
@@ -36,3 +36,8 @@ class @EmployeeSelect
 jQuery ->
   $('select.employee_select').each (index, select) ->
     new EmployeeSelect(select)
+
+  $('select.filter_employee_select').each (index, select) ->
+    new EmployeeSelect(select, (employee_id) =>
+      $(select).closest('form').submit()
+    )
