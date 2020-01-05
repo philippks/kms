@@ -1,4 +1,4 @@
-class @EmailAddressToggler
+class EmailAddressToggler
   constructor: ->
     @delivery_select = $('#delivery_customer_attributes_invoice_delivery')
     @toggle_elements = $('.toggle')

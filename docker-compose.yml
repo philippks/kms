@@ -24,9 +24,23 @@ services:
       - 3000:3000
     depends_on:
       - postgres
+      - webpacker
     volumes:
       - .:/app
       - bundle:/bundle
+
+  webpacker:
+    build:
+      context: .
+      target: development
+    volumes:
+      - .:/app
+      - bundle:/bundle
+    ports:
+      - 3035:3035
+    environment:
+      - WEBPACKER_DEV_SERVER_HOST=0.0.0.0
+    command: ./bin/webpack-dev-server
 
   test:
     build:

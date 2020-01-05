@@ -1,4 +1,4 @@
-class @ActivityTextInput
+class ActivityTextInput
   constructor: (selector, onChange) ->
     @onChangeCallback = onChange
     @initialize(selector)

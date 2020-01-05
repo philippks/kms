@@ -1,11 +1,14 @@
 FROM ruby:2.6.5 AS base
-RUN apt-get update \
-    && curl -sL https://deb.nodesource.com/setup_10.x | bash \
-    && apt-get install --no-install-recommends -y \
+
+RUN apt-get update && apt-get install --no-install-recommends -y \
     libpq-dev \
     cmake \
-    nodejs \
     wkhtmltopdf \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
+    && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
+    && apt-get update && apt-get install -y yarn \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 ENV APP_HOME /app
@@ -13,7 +16,7 @@ RUN mkdir $APP_HOME
 WORKDIR $APP_HOME
 
 ADD package*.json $APP_HOME/
-RUN npm install
+RUN yarn install
 
 
 ################################################################################################
