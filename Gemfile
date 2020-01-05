@@ -25,7 +25,6 @@ gem 'rails', '~> 6.0'
 gem 'rails-i18n'
 gem 'responders'
 gem 'sassc-rails'
-gem 'select2-rails'
 gem 'sentry-raven'
 gem 'simple-navigation'
 gem 'simple_form'
@@ -36,10 +35,6 @@ gem 'wicked_pdf'
 # to be removed
 gem 'will_paginate-bootstrap'
 gem 'x-editable-rails'
-
-# Temporarily locking sprockets to v3.x
-# will be replaced with webpacker
-gem 'sprockets', '~> 3'
 
 group :development do
   gem 'better_errors'
