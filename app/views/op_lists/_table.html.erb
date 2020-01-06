@@ -12,10 +12,15 @@
   <tbody>
     <% @op_list_items.each do |op_list_item| %>
       <tr>
-        <td>
-          <%= link_to present(op_list_item.customer) { |c| c.display_name },
-            activities_path(filter: { customer: [op_list_item.customer], state: Activity.state.find_value(:open)}) %>
-      </td>
+
+        <% if request.format.html? %>
+          <td>
+            <%= link_to present(op_list_item.customer) { |c| c.display_name },
+              activities_path(filter: { customer: [op_list_item.customer], state: Activity.state.find_value(:open)}) %>
+          </td>
+        <% else %>
+          <td><%= present(op_list_item.customer) { |c| c.display_name } %></td>
+        <% end %>
       <td class="amount"><%= humanized_money op_list_item.amount %></td>
       <td><%= op_list_item.range_string %></td>
       <td class="employees">
