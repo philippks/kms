@@ -1,20 +1,20 @@
-class @CustomerSelect
+class EmployeeSelect
   constructor: (selector, onChange) ->
     @onChangeCallback = onChange
+
     @initialize(selector)
 
   initialize: (selector) ->
     $(selector).select2(
       placeholder: $(selector).attr('placeholder') || '',
       ajax:
-        dataType: 'json'
-        url: '/customers.json',
-        cache: true,
+        url: '/employees.json',
+        dataType: 'json',
+        cache: true
         delay: 250,
-        data: (params) -> { query: params.term }
+        data: (params) -> { query: params.term, deactivated: true }
         processResults: @processResults
-      current: @currentSelection
-      minimumInputLength: 3
+      minimumInputLength: 3,
     ).on('change', @onChange)
 
   processResults: (data) ->
@@ -23,7 +23,7 @@ class @CustomerSelect
     $.each(data, (index, item) ->
       results.push({
         'id': item.id,
-        'text': item.display_name
+        'text': item.name
       })
     )
     return {
@@ -31,8 +31,13 @@ class @CustomerSelect
     }
 
   onChange: (element) =>
-    @onChangeCallback($(element.target).val()) if @onChangeCallback
+    @onChangeCallback(element.val) if @onChangeCallback
 
 jQuery ->
-  $('select.customer_select').each (index, select) ->
-    new CustomerSelect(select)
+  $('select.employee_select').each (index, select) ->
+    new EmployeeSelect(select)
+
+  $('select.filter_employee_select').each (index, select) ->
+    new EmployeeSelect(select, (employee_id) =>
+      $(select).closest('form').submit()
+    )
