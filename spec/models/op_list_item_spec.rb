@@ -6,12 +6,23 @@ describe OpListItem do
   let(:customer_1) { create :customer }
   let(:customer_2) { create :customer }
 
-  let!(:activity_1) { create :activity, customer: customer_1, employee: employee_1 }
-  let!(:activity_2) { create :activity, customer: customer_1, employee: employee_2, date: 2.weeks.ago}
-  let!(:activity_3) { create :activity, customer: customer_2, employee: employee_2 }
+  let!(:activity_1) do
+    create :activity, customer: customer_1, employee: employee_1
+  end
+  let!(:activity_2) do
+    create :activity,
+           customer: customer_1, employee: employee_2, date: 2.weeks.ago
+  end
+  let!(:activity_3) do
+    create :activity, customer: customer_2, employee: employee_2
+  end
 
   describe '.build_for' do
-    subject(:op_list_items) { described_class.build_for(employee_id: employee_id, until_date: until_date) }
+    subject(:op_list_items) do
+      described_class.build_for(
+        employee_id: employee_id, until_date: until_date
+      )
+    end
 
     let(:employee_id) { nil }
     let(:until_date) { Date.current }
@@ -50,16 +61,28 @@ describe OpListItem do
   describe '#range_string' do
     subject { described_class.build_for(employee_id: nil).first.range_string }
 
-    context 'if dates spans multiple months' do
-      let(:activity_1) { create :activity, customer: customer_1, employee: employee_1, date: '2017-01-01' }
-      let(:activity_2) { create :activity, customer: customer_1, employee: employee_2, date: '2016-01-01' }
+    context 'when dates spans multiple months' do
+      let(:activity_1) do
+        create :activity,
+               customer: customer_1, employee: employee_1, date: '2017-01-01'
+      end
+      let(:activity_2) do
+        create :activity,
+               customer: customer_1, employee: employee_2, date: '2016-01-01'
+      end
 
       it { is_expected.to eq 'Januar 2016 bis Januar 2017' }
     end
 
-    context 'if dates are in one month' do
-      let(:activity_1) { create :activity, customer: customer_1, employee: employee_1, date: '2017-01-01' }
-      let(:activity_2) { create :activity, customer: customer_1, employee: employee_2, date: '2017-01-03' }
+    context 'when dates are in one month' do
+      let(:activity_1) do
+        create :activity,
+               customer: customer_1, employee: employee_1, date: '2017-01-01'
+      end
+      let(:activity_2) do
+        create :activity,
+               customer: customer_1, employee: employee_2, date: '2017-01-03'
+      end
 
       it { is_expected.to eq 'Januar 2017' }
     end
@@ -69,5 +92,49 @@ describe OpListItem do
     subject { described_class.build_for(employee_id: nil).first.employees }
 
     it { is_expected.to eq [employee_1, employee_2] }
+  end
+
+  describe '#overdue?' do
+    subject do
+      described_class.build_for(employee_id: nil).first.overdue?
+    end
+
+    describe 'when amount of activities before given date >= given amount' do
+      let(:activity_1) do
+        create :activity,
+               customer: customer_1,
+               employee: employee_1,
+               date: 4.months.ago,
+               hours: 1,
+               hourly_rate: 500
+      end
+      let(:activity_2) do
+        create :activity,
+               customer: customer_1,
+               employee: employee_2,
+               date: 4.months.ago,
+               hours: 1,
+               hourly_rate: 700
+      end
+
+      it { is_expected.to be true }
+
+      describe 'when newer activity exists' do
+        let(:activity_3) do
+          create :activity,
+                 customer: customer_1,
+                 employee: employee_2,
+                 date: 1.months.ago,
+                 hours: 4,
+                 hourly_rate: 500
+        end
+
+        it { is_expected.to be false }
+      end
+    end
+
+    describe 'when amount of activities before given date < given amount' do
+      it { is_expected.to be false }
+    end
   end
 end
