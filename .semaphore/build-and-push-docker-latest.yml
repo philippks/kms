@@ -17,8 +17,7 @@ blocks:
         - name: "Build an push image to Docker Hub"
           commands:
             - TAG=$SEMAPHORE_GIT_SHA docker-compose build production
-            - docker tag philippks/kms:$SEMAPHORE_GIT_SHA philippks/kms:latest
-            - docker push philippks/kms:$SEMAPHORE_GIT_SHA
+            - docker tag philippks/kms:latest
             - docker push philippks/kms:latest
       secrets:
         - name: docker
