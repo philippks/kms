@@ -19,6 +19,7 @@ module Kms
 
     # configure global here, since it is used in {environmnet}.rb
     Global.configure do |config|
+      config.backend = :filesystem
       config.environment = Rails.env.to_s
       config.config_directory = Rails.root.join('config/global').to_s
     end
