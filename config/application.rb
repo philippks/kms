@@ -17,10 +17,9 @@ module Kms
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
 
-    # configure global here, since it is used in {environmnet}.rb
+    # configure global here, since it is used in {environment}.rb
     Global.configure do |config|
-      config.environment = Rails.env.to_s
-      config.config_directory = Rails.root.join('config/global').to_s
+      config.backend :filesystem
     end
 
     # Use the responders controller from the responders gem
