@@ -96,7 +96,9 @@ describe Employee do
 
       before do
         encrypted_master_password = Employee.new(password: password).encrypted_password
-        expect(Global.authentication).to receive(:encrypted_master_password).and_return encrypted_master_password
+        expect(Global).to receive(:authentication).and_return(
+          OpenStruct.new(encrypted_master_password: encrypted_master_password)
+        )
       end
 
       it { is_expected.to eq true }
