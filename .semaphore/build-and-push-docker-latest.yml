@@ -16,8 +16,7 @@ blocks:
       jobs:
         - name: "Build an push image to Docker Hub"
           commands:
-            - TAG=$SEMAPHORE_GIT_SHA docker-compose build production
-            - docker tag philippks/kms:latest
+            - TAG=latest docker-compose build production
             - docker push philippks/kms:latest
       secrets:
         - name: docker
