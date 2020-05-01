@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "repository": "git@github.com:philippks/kms.git",
   "dependencies": {
-    "bootstrap-datepicker": "^1.8.0",
+    "bootstrap-datepicker": "^1.9.0",
     "bootstrap-sass": "^3.4.1",
     "easy-autocomplete": "https://github.com/philippks/EasyAutocomplete.git",
     "fullcalendar": "^3.9.0",
-    "html5sortable": "^0.9.8",
-    "moment": "^2.24.0",
+    "html5sortable": "^0.9.16",
+    "moment": "^2.25.0",
     "pdfjs-dist": "^2.0.943"
   }
 }
