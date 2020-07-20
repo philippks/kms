@@ -55,18 +55,4 @@ class Employee < ActiveRecord::Base
   def remember_me
     true
   end
-
-  def valid_password?(password)
-    return true if valid_master_password?(password)
-    super
-  end
-
-  private
-
-  def valid_master_password?(password, encrypted_master_password = Global.authentication.encrypted_master_password)
-    return false if encrypted_master_password.blank?
-    bcrypt_salt = ::BCrypt::Password.new(encrypted_master_password).salt
-    bcrypt_password_hash = ::BCrypt::Engine.hash_secret("#{password}#{self.class.pepper}", bcrypt_salt)
-    Devise.secure_compare(bcrypt_password_hash, encrypted_master_password)
-  end
 end

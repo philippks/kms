@@ -87,17 +87,6 @@ To use a company template for the invoices, set the path to the corresponding PD
 INVOICE_COMPANY_TEMPLATE_PATH='/home/kms/invoice_template.pdf'
 ```
 
-### Master Password
-To set a master password which can login as each user, generate an encrypted password inside the rails console
-``` ruby
-Employee.new(password: 'mymasterpassword').encrypted_password
-```
-
-And save this value inside the `.env` file as `ENCRYPTED_MASTER_PASSWORD`, e.g.
-``` yml
-ENCRYPTED_MASTER_PASSWORD='$2a$11$pwpCKdGI0fu7I1ISy19Uz.UCiVgJ03c/XN2nIylI952Qdvmbh89cu'
-```
-
 ## Questions?
 
 For any questions drop me a mail: <kms-opensource@use.startmail.com>
