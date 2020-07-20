@@ -90,18 +90,5 @@ describe Employee do
 
       it { is_expected.to eq false }
     end
-
-    context 'with master password' do
-      let(:password) { 'master password' }
-
-      before do
-        encrypted_master_password = Employee.new(password: password).encrypted_password
-        expect(Global).to receive(:authentication).and_return(
-          OpenStruct.new(encrypted_master_password: encrypted_master_password)
-        )
-      end
-
-      it { is_expected.to eq true }
-    end
   end
 end
