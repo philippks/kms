@@ -4,6 +4,7 @@
     <th class="amount"><%= t '.amount' %></th>
     <th class="period"><%= t '.period' %></th>
     <th class="employees"><%= t '.employees' %></th>
+    <th class="overdue"></th>
     <% if request.format.html? %>
       <th class="actions"><%= t 'shared.actions' %></th>
     <% end %>
@@ -29,6 +30,12 @@
             content_tag(:span, employee.name, class: ('highlighted_employee' if employee.id == @highlighted_employee_id))
           end.join(', ').html_safe
         %>
+    </td>
+    <td class="overdue">
+      <% if op_list_item.overdue? %>
+      <%= tooltip_icon_for(t('.overdue', days: Global.op_list.overdue_days, amount: Global.op_list.overdue_min_amount),
+                           fa_icon: 'flag') %>
+      <% end %>
     </td>
     <% if request.format.html? %>
       <td>

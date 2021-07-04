@@ -27,6 +27,14 @@
       }
     }
 
+    .overdue {
+      width: 1em;
+
+      i {
+        color: red;
+      }
+    }
+
     .actions {
       width: 12em;
     }

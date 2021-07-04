@@ -44,6 +44,13 @@ class OpListItem
     Money.new @activities.sum(&:amount_cents)
   end
 
+  def overdue?
+    overdue_date = Date.current - Global.op_list.overdue_days.days
+    min_amount = Money.from_amount Global.op_list.overdue_min_amount
+    latest_date = activities.map(&:date).max
+    latest_date <= overdue_date && amount >= min_amount
+  end
+
   private
 
   def dates

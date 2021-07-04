@@ -12,3 +12,4 @@ de:
       actions: Aktionen
       create_invoice: Rechnung erstellen
       employees: Mitarbeiter
+      overdue: "Es sind offene Posten (>= CHF %{amount}) vorhanden, die älter als %{days} Tage sind."
