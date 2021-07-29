@@ -19,7 +19,7 @@ describe Invoices::Validations do
 
       it 'is invalid' do
         expect(subject).not_to be_valid
-        expect(subject.errors.first[0]).to eq :format
+        expect(subject.errors.first.attribute).to eq :format
       end
     end
 
@@ -30,7 +30,7 @@ describe Invoices::Validations do
 
       it 'is invalid' do
         expect(subject).not_to be_valid
-        expect(subject.errors.first[0]).to eq :format
+        expect(subject.errors.first.attribute).to eq :format
       end
     end
 
@@ -48,7 +48,7 @@ describe Invoices::Validations do
 
       it 'is invalid' do
         expect(subject).not_to be_valid
-        expect(subject.errors.first[0]).to eq :format
+        expect(subject.errors.first.attribute).to eq :format
       end
     end
   end
