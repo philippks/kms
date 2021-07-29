@@ -38,6 +38,8 @@ services:
     env_file: .env.test
     depends_on:
       - postgres-test
+    # volumes:
+    #   - .:/app
 
   postgres:
     image: postgres:12
