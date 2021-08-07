@@ -1,6 +1,6 @@
 FROM ruby:2.7.1 AS base
 RUN apt-get update \
-    && curl -sL https://deb.nodesource.com/setup_10.x | bash \
+    && curl -sL https://deb.nodesource.com/setup_14.x | bash \
     && apt-get install --no-install-recommends -y \
     libpq-dev \
     cmake \

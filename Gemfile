@@ -56,7 +56,7 @@ group :development, :test do
   gem 'byebug'
   gem 'factory_bot_rails'
   gem 'i18n-tasks'
-  gem 'rspec-rails', '4.0.0.beta3' # use beta for rails 6 support
+  gem 'rspec-rails'
   gem 'rubocop'
   gem 'rubocop-rspec'
 end
