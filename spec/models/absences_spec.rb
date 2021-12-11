@@ -62,6 +62,7 @@ describe Absence do
       end
     end
 
+
     describe 'limiting date range' do
       let(:range) { { from: Date.parse('2016-12-01'), to: Date.parse('2016-12-05') } }
 
@@ -85,37 +86,37 @@ describe Absence do
         end
       end
     end
+  end
 
-    describe 'between' do
-      subject { described_class.between(range) }
+  describe 'between' do
+    subject { described_class.between(range) }
 
-      let!(:absence) do
-        create :absence, hours: nil, from_date: '2016-11-30', to_date: '2016-12-06'
-      end
+    let!(:absence) do
+      create :absence, hours: nil, from_date: '2016-11-30', to_date: '2016-12-06'
+    end
 
-      context 'with not covering range' do
-        let(:range) { { from: Date.parse('2016-11-01'), to: Date.parse('2016-11-02') } }
+    context 'with not covering range' do
+      let(:range) { { from: Date.parse('2016-11-01'), to: Date.parse('2016-11-02') } }
 
-        it { is_expected.to eq [] }
-      end
+      it { is_expected.to eq [] }
+    end
 
-      context 'with covering range' do
-        let(:range) { { from: Date.parse('2016-11-01'), to: Date.parse('2016-12-31') } }
+    context 'with covering range' do
+      let(:range) { { from: Date.parse('2016-11-01'), to: Date.parse('2016-12-31') } }
 
-        it { is_expected.to eq [absence] }
-      end
+      it { is_expected.to eq [absence] }
+    end
 
-      context 'with overlapping to_date' do
-        let(:range) { { from: Date.parse('2016-12-05'), to: Date.parse('2016-12-31') } }
+    context 'with overlapping to_date' do
+      let(:range) { { from: Date.parse('2016-12-05'), to: Date.parse('2016-12-31') } }
 
-        it { is_expected.to eq [absence] }
-      end
+      it { is_expected.to eq [absence] }
+    end
 
-      context 'with overlapping from_date' do
-        let(:range) { { from: Date.parse('2016-11-01'), to: Date.parse('2016-12-01') } }
+    context 'with overlapping from_date' do
+      let(:range) { { from: Date.parse('2016-11-01'), to: Date.parse('2016-12-01') } }
 
-        it { is_expected.to eq [absence] }
-      end
+      it { is_expected.to eq [absence] }
     end
   end
 end
