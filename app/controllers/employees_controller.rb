@@ -31,6 +31,7 @@ class EmployeesController < ApplicationController
                                                       :initials,
                                                       :hourly_rate,
                                                       :worktime_model,
+                                                      :workload,
                                                       :password,
                                                       :password_confirmation,
                                                       :deactivated

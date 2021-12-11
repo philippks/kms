@@ -40,6 +40,18 @@ describe Absence do
       end
 
       it { is_expected.to eq 2 }
+
+      context 'for employee with reduced workload' do
+        let(:employee) do
+          build :employee, workload: 80
+        end
+
+        let(:absence) do
+          build :absence, hours: 8, employee: employee
+        end
+
+        it { is_expected.to eq 8 }
+      end
     end
 
     context 'absence spanning multiple days' do
@@ -59,6 +71,40 @@ describe Absence do
         it 'considers target_hours' do
           expect(subject).to eq 12
         end
+      end
+
+      context 'for employee with reduced workload' do
+        let(:employee) do
+          build :employee, workload: 80
+        end
+
+        let(:absence) do
+          build :absence, from_date: '2016-12-12', to_date: '2016-12-13', employee: employee
+        end
+
+        it { is_expected.to eq 16 }
+      end
+    end
+
+    context 'absence spanning a full week' do
+      let(:absence) do
+        build :absence, from_date: '2022-03-07', to_date: '2022-03-11'
+      end
+
+      it 'returns correct absent target hours' do
+        expect(subject).to eq 5 * 8
+      end
+
+      context 'for employee with reduced workload' do
+        let(:employee) do
+          build :employee, workload: 80
+        end
+
+        let(:absence) do
+          build :absence, from_date: '2016-12-12', to_date: '2016-12-13', employee: employee
+        end
+
+        it { is_expected.to eq 16 }
       end
     end
 
@@ -85,37 +131,37 @@ describe Absence do
         end
       end
     end
+  end
 
-    describe 'between' do
-      subject { described_class.between(range) }
+  describe 'between' do
+    subject { described_class.between(range) }
 
-      let!(:absence) do
-        create :absence, hours: nil, from_date: '2016-11-30', to_date: '2016-12-06'
-      end
+    let!(:absence) do
+      create :absence, hours: nil, from_date: '2016-11-30', to_date: '2016-12-06'
+    end
 
-      context 'with not covering range' do
-        let(:range) { { from: Date.parse('2016-11-01'), to: Date.parse('2016-11-02') } }
+    context 'with not covering range' do
+      let(:range) { { from: Date.parse('2016-11-01'), to: Date.parse('2016-11-02') } }
 
-        it { is_expected.to eq [] }
-      end
+      it { is_expected.to eq [] }
+    end
 
-      context 'with covering range' do
-        let(:range) { { from: Date.parse('2016-11-01'), to: Date.parse('2016-12-31') } }
+    context 'with covering range' do
+      let(:range) { { from: Date.parse('2016-11-01'), to: Date.parse('2016-12-31') } }
 
-        it { is_expected.to eq [absence] }
-      end
+      it { is_expected.to eq [absence] }
+    end
 
-      context 'with overlapping to_date' do
-        let(:range) { { from: Date.parse('2016-12-05'), to: Date.parse('2016-12-31') } }
+    context 'with overlapping to_date' do
+      let(:range) { { from: Date.parse('2016-12-05'), to: Date.parse('2016-12-31') } }
 
-        it { is_expected.to eq [absence] }
-      end
+      it { is_expected.to eq [absence] }
+    end
 
-      context 'with overlapping from_date' do
-        let(:range) { { from: Date.parse('2016-11-01'), to: Date.parse('2016-12-01') } }
+    context 'with overlapping from_date' do
+      let(:range) { { from: Date.parse('2016-11-01'), to: Date.parse('2016-12-01') } }
 
-        it { is_expected.to eq [absence] }
-      end
+      it { is_expected.to eq [absence] }
     end
   end
 end
