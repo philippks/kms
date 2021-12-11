@@ -47,10 +47,10 @@ module Activities
         {
           absence.employee => {
             absence.reason => {
-              hours: hours
+              hours: hours * (absence.employee.workload_in_percent)
             },
 
-            hours: hours
+            hours: hours * (absence.employee.workload_in_percent)
           }
         }
       end
