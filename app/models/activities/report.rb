@@ -31,12 +31,16 @@ module Activities
       effort_value_for(employee, :hours) + absence_value_for(employee, :hours)
     end
 
-    def target_hours
-      @target_hours ||= TargetHours.hours_between(from: @from_date, to: @to_date)
+    def total_target_hours
+      @total_target_hours ||= TargetHours.hours_between(from: @from_date, to: @to_date)
+    end
+
+    def target_hours_for(employee)
+      return total_target_hours * (employee.workload * 0.01)
     end
 
     def saldo_for(employee)
-      total_hours_for(employee) - target_hours
+      total_hours_for(employee) - target_hours_for(employee)
     end
 
     def persisted?

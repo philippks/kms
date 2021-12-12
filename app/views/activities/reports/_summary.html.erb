@@ -22,7 +22,7 @@
     <% report.employees.each do |employee| %>
       <td class="hours">
         <% if employee.worktime_model.target_hours? %>
-          <%= report.target_hours %>
+          <%= report.target_hours_for(employee) %>
         <% else %>
           -
         <% end %>

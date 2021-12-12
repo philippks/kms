@@ -20,6 +20,7 @@ class Employee < ActiveRecord::Base
   validates :password, length: { minimum: 8 }, unless: -> { persisted? && password.nil? }, confirmation: true
   validates :password_confirmation, presence: true, unless: -> { persisted? && password.nil? }
   validate :check_deactivate
+  validates :workload, presence: true, numericality: { greater_than: 0, less_than_or_equal_to: 100 }, unless: -> { worktime_model.debit_is_actual? }
 
   enumerize :worktime_model, in: { target_hours: 0, debit_is_actual: 1 }, default: :target_hours
 
