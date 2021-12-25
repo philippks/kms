@@ -52,6 +52,10 @@ class TargetHours < ActiveRecord::Base
     hours_per_date(from: from, to: to).values.sum
   end
 
+  def self.hours_between_for_employee(from:, to:, employee:)
+    hours_between(from: from, to: to) * (employee.workload_in_percent)
+  end
+
   private
 
   def self.default_target_hours_for(date)
