@@ -4,13 +4,14 @@ class HoursController < ApplicationController
   def index
     @current_month = params['month'] ? Date.parse(params['month']) : Date.current.beginning_of_month
 
-    @target_hours = TargetHours.hours_between range
+    @target_hours = TargetHours.hours_between_for_employee from: range[:from], to: range[:to], employee: current_employee
     @total_activities = Activity.for_employee(current_employee)
                                 .between(range)
                                 .sum(:hours)
-    @total_absences = Absence.for_employee(current_employee)
+    total_absences = Absence.for_employee(current_employee)
                              .between(range)
                              .sum { |absence| absence.absent_target_hours(range) }
+    @total_absences = total_absences * current_employee.workload_in_percent
   end
 
   private

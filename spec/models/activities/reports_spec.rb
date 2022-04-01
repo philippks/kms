@@ -6,7 +6,7 @@ describe Activities::Report do
   let(:to_date) { Date.parse '2015-02-28' }
 
   let(:employee) { create :employee }
-  let(:other_employee) { create :employee }
+  let(:other_employee) { create :employee, workload: 50 }
   let(:customer) { create :customer }
   let(:other_customer) { create :customer }
 
@@ -77,13 +77,14 @@ describe Activities::Report do
     end
   end
 
-  describe '#target_hours' do
+  describe '#target_hours_for' do
     before do
       create :target_hours, date: Date.parse('2015-02-03'), hours: 4
     end
 
     it 'returns correct amount of target hours' do
-      expect(report.target_hours).to eq 156
+      expect(report.target_hours_for(employee)).to eq 156
+      expect(report.target_hours_for(other_employee)).to eq 78
     end
   end
 end
