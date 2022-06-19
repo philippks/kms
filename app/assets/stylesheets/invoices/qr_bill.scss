@@ -1,0 +1,153 @@
+.main {
+  zoom: 1.33; // we need this because wkhtmltopdf output is too small..
+  width: 100%;
+  margin-top: 18cm;
+}
+
+.swiss-qr-bill {
+  box-sizing: border-box;
+  border-collapse: collapse;
+  color: #000;
+  width: 100%;
+}
+
+.swiss-qr-bill * {
+  font-family: Frutiger;
+}
+
+.swiss-qr-bill-separate-info {
+  text-align: center;
+  font-size: 8pt;
+  line-height: 9pt;
+  border-bottom: 0.75pt solid black;
+  height: 5mm;
+  vertical-align: middle;
+}
+
+/* h1 / h2 */
+.swiss-qr-bill h1 {
+  font-size: 11pt;
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+  height: 7mm;
+  border-bottom: none;
+}
+
+.swiss-qr-bill h2 {
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+}
+
+.swiss-qr-bill-payment-part h2 {
+  font-size: 8pt;
+  line-height: 11pt;
+  margin-top: 11pt;
+}
+
+.swiss-qr-bill-receipt h2 {
+  font-size: 6pt;
+  line-height: 8pt;
+  margin-top: 8pt;
+}
+
+.swiss-qr-bill-payment-part h2:first-child,
+.swiss-qr-bill-receipt h2:first-child {
+  margin-top: 0;
+}
+
+/* p */
+.swiss-qr-bill p {
+  font-weight: normal;
+  margin: 0;
+  padding: 0;
+}
+
+.swiss-qr-bill-receipt p {
+  font-size: 8pt;
+  line-height: 9pt;
+}
+
+.swiss-qr-bill-payment-part p {
+  font-size: 10pt;
+  line-height: 11pt;
+}
+
+.swiss-qr-bill-amount-area-receipt p {
+  line-height: 11pt;
+}
+
+.swiss-qr-bill-amount-area p {
+  line-height: 13pt;
+}
+
+.swiss-qr-bill-payment-further-information p {
+  font-size: 7pt;
+  line-height: 9pt;
+}
+
+/* Receipt */
+.swiss-qr-bill-receipt {
+  box-sizing: border-box;
+  width: 62mm;
+  border-right: 0.2mm solid black;
+  padding-left: 5mm;
+  padding-top: 5mm;
+  vertical-align: top;
+}
+
+.swiss-qr-bill-information-receipt {
+  height: 56mm;
+}
+
+.swiss-qr-bill-amount-area-receipt {
+  height: 14mm;
+}
+
+.swiss-qr-bill-currency-receipt {
+  float: left;
+  margin-right: 2mm;
+}
+
+.swiss-qr-bill-acceptance-point {
+  height: 18mm;
+  text-align: right;
+  margin-right: 5mm;
+}
+
+/* Main part */
+.swiss-qr-bill-payment-part {
+  box-sizing: border-box;
+  width: 148mm;
+  padding-left: 5mm;
+  padding-top: 5mm;
+  padding-right: 5mm;
+  vertical-align: top;
+}
+
+.swiss-qr-bill-payment-part-left {
+  float: left;
+  box-sizing: border-box;
+  width: 51mm;
+}
+
+.swiss-qr-bill-swiss-qr-image {
+  width: 46mm;
+  height: 46mm;
+  margin: 5mm;
+  margin-left: 0;
+}
+
+.swiss-qr-bill-amount-area {
+  height: 22mm;
+}
+
+.swiss-qr-bill-currency {
+  float: left;
+  margin-right: 2mm;
+}
+
+.swiss-qr-bill-payment-further-information {
+  clear: both;
+}
