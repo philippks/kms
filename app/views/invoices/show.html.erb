@@ -58,21 +58,17 @@
         <%= link_to t('shared.edit'), invoice_wizard_customer_path(@invoice), class: 'btn btn-default full-width' %>
       <% end %>
 
-      <% if Global.invoices.company_template_path.present? %>
-        <%= link_to t('.download'), invoice_pdf_path(@invoice, format: :pdf), class: 'btn btn-default full-width' %>
-      <% else %>
-        <div class="btn-group dropdown full-width">
-          <%= link_to t('.download'), invoice_pdf_path(@invoice, format: :pdf), class: 'btn btn-default grouped-download' %>
+      <div class="btn-group dropdown full-width">
+        <%= link_to t('.download'), invoice_pdf_path(@invoice, format: :pdf), class: 'btn btn-default grouped-download' %>
 
-          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-            <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu">
-            <li> <%= link_to t('.download_templated'), new_invoice_pdf_path(@invoice, format: :pdf, templated: true) %> </li>
-            <li> <%= link_to t('.download_qr_bill'), qr_bill_invoice_pdf_path(@invoice, format: :pdf) %> </li>
-          </ul>
-        </div>
-      <% end %>
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+          <li> <%= link_to t('.download_templated'), new_invoice_pdf_path(@invoice, format: :pdf, templated: true) %> </li>
+          <li> <%= link_to t('.download_qr_bill'), qr_bill_invoice_pdf_path(@invoice, format: :pdf) %> </li>
+        </ul>
+      </div>
 
       <% if can? :read, @invoice.payments.build %>
         <%= link_to t('.payments'),
