@@ -20,6 +20,17 @@ class Invoices::PdfsController < ApplicationController
     end
   end
 
+  def qr_bill
+    @invoice = InvoicePresenter.new(@invoice)
+    wicked_pdf_config = Global.invoices.qr_bill_wicked_pdf_options.hash.deep_symbolize_keys
+
+    respond_to do |format|
+      format.pdf do
+        render pdf: filename, layout: false, show_as_html: params[:html], **wicked_pdf_config
+      end
+    end
+  end
+
   private
 
   def pdf
