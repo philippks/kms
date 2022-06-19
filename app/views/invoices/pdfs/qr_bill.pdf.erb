@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <%= wicked_pdf_stylesheet_link_tag 'invoices/qr_bill' %>
+  </head>
+
+
+  <div class="main">
+    <table class="swiss-qr-bill">
+      <tr class="swiss-qr-bill-separate-info">
+        <td colspan="99">
+          <span class="swiss-qr-bill-separate-info-text"></span>
+        </td>
+      </tr>
+      <tr>
+        <td class="swiss-qr-bill-receipt">
+          <h1>Empfangsschein</h1>
+          <div class="swiss-qr-bill-information-receipt">
+            <h2>Konto / Zahlbar an</h2>
+            <p><%= Global.invoices.iban %></p>
+            <p><%= Global.invoices.receiver.name %></p>
+            <p><%= Global.invoices.receiver.street %></p>
+            <p><%= Global.invoices.receiver.postal_code %> <%= Global.invoices.receiver.city %></p>
+
+            <h2>Zahlbar durch</h2>
+            <%= simple_format @invoice.customer.address, {}, wrapper_tag: :p %>
+          </div>
+          <div class="swiss-qr-bill-amount-area-receipt">
+            <div class="swiss-qr-bill-currency-receipt">
+              <h2>Währung</h2>
+              <p><%= currency_symbol %></p>
+            </div>
+            <div class="swiss-qr-bill-amount-receipt">
+              <h2>Betrag</h2>
+              <p><%= humanized_money @invoice.total_amount %></p>
+            </div>
+          </div>
+          <div class="swiss-qr-bill-acceptance-point">
+            <h2>Annahmestelle</h2>
+          </div>
+        </td>
+        <td class="swiss-qr-bill-payment-part">
+          <div class="swiss-qr-bill-payment-part-left">
+            <h1>Zahlteil</h1>
+            <img class="swiss-qr-bill-swiss-qr-image" src="data:image/png;base64,<%= Invoices::SwissQrBillQrCode.generate_img_data_for(@invoice) %>">
+            <div class="swiss-qr-bill-amount-area">
+              <div class="swiss-qr-bill-currency">
+                <h2>Währung</h2>
+                <p><%= currency_symbol %></p>
+              </div>
+              <div class="swiss-qr-bill-amount">
+                <h2>Betrag</h2>
+                <p><%= humanized_money @invoice.total_amount %></p>
+              </div>
+            </div>
+          </div>
+          <div class="swiss-qr-bill-payment-part-right">
+            <div class="swiss-qr-bill-information">
+              <h2>Konto / Zahlbar an</h2>
+              <p><%= Global.invoices.iban %></p>
+              <p><%= Global.invoices.receiver.name %></p>
+              <p><%= Global.invoices.receiver.street %></p>
+              <p><%= Global.invoices.receiver.postal_code %> <%= Global.invoices.receiver.city %></p>
+
+              <h2>Zahlbar durch</h2>
+              <%= simple_format @invoice.customer.address, {}, wrapper_tag: :p %>
+            </div>
+          </div>
+          <div class="swiss-qr-bill-payment-further-information"></div>
+        </td>
+      </tr>
+    </table>
+  </div>
+</html>
