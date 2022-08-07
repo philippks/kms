@@ -17,15 +17,6 @@ Initially created for the [Koster Consulting AG](http://kosterconsulting.ch/) an
 * Manage invoice payments
 * and many more...
 
-## Demo
-
-Only available in German for now:
-
-* Username: demo@user.ch
-* Passwort: demopassword
-* URL: [here](https://kms-demo.kdev.ch)
-
-
 
 ## Getting Started
 
