@@ -71,7 +71,9 @@ Rails.application.routes.draw do
       resources :payments
       resource :delivery, only: [:new, :update]
       resource :mail, only: [:new, :create, :show]
-      resource :pdf, only: [:new, :show]
+      resource :pdf, only: [:new, :show] do
+        get :qr_bill
+      end
 
       controller '/invoices/wizard' do
         patch :wizard, action: :update

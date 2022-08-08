@@ -1,7 +1,14 @@
 default:
-  iban: "<%= ENV.fetch('INVOICE_IBAN') { 'CH11 1111 2222 3333 4444' } %>"
+  receiver:
+    name: "<%= ENV.fetch('INVOICE_RECEIVER_NAME') { 'Some Company' } %>"
+    street: "<%= ENV.fetch('INVOICE_RECEIVER_STREET') { 'Some Street 12' } %>"
+    postal_code: "<%= ENV.fetch('INVOICE_RECEIVER_POSTAL_CODE') { '1234' } %>"
+    city: "<%= ENV.fetch('INVOICE_RECEIVER_CITY') { 'Somewhere' } %>"
+    country_code: "<%= ENV.fetch('INVOICE_RECEIVER_COUNTRY_CODE') { 'CH' } %>"
+  iban: "<%= ENV.fetch('INVOICE_IBAN') { 'CH90 1111 2222 3333 4444' } %>"
   vat_number: "<%= ENV.fetch('INVOICE_VAT_NUMBER') { 'CHE-111.999.333' } %>"
   swift: "<%= ENV.fetch('INVOICE_SWIFT') { 'ZZZZZZZZZZZZZZ' } %>"
+  currency_symbol: "CHF"
   default_vat_rate: 0.077
   persisted_pdfs_directory: "<%= Rails.root %>/storage/invoices/"
   company_template_path: <%= ENV['INVOICE_COMPANY_TEMPLATE_PATH'] %>
@@ -16,6 +23,14 @@ default:
     dpi: 96
     footer:
       right:
+  qr_bill_wicked_pdf_options:
+    page_size: 'A4'
+    margin:
+      top: 0
+      bottom: 0
+      left: 0
+      right: 0
+
 
 test:
   iban: CH90 1337 1337 1337 1337 8
