@@ -32,6 +32,7 @@ gem 'simple-navigation'
 gem 'simple_form'
 gem 'uglifier'
 gem 'wicked_pdf'
+gem 'rqrcode'
 
 # to be removed
 gem 'will_paginate-bootstrap'
