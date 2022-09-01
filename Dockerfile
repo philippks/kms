@@ -1,4 +1,4 @@
-FROM ruby:2.7.1 AS base
+FROM ruby:3.1.2 AS base
 RUN apt-get update \
     && curl -sL https://deb.nodesource.com/setup_14.x | bash \
     && apt-get install --no-install-recommends -y \
