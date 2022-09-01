@@ -25,7 +25,7 @@
           <th></th>
           <th></th>
           <th></th>
-          <th class="amount"><%= humanized_money @invoice.expenses.sum(&:amount) %></th>
+          <th class="amount"><%= humanized_money @invoice.expenses.map(&:amount).sum(0) %></th>
           <th></th>
         </tfoot>
       </table>
@@ -36,7 +36,7 @@
     <table class="expenses_amounts">
       <tr>
         <td><%= t '.actual_expenses_amount' %></td>
-        <td><%= humanized_money @expenses.to_a.sum(&:actual_amount) %></td>
+        <td><%= humanized_money @expenses.to_a.map(&:actual_amount).sum(0) %></td>
       </tr>
       <tr>
         <td><%= t '.remaining_open_amount' %></td>

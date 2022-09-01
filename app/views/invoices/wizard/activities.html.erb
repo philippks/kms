@@ -44,9 +44,9 @@
           <th></th>
           <th></th>
           <th></th>
-          <th class="hours"><%= number_with_precision @activities.to_a.sum(&:hours) %></th>
+          <th class="hours"><%= number_with_precision @activities.to_a.map(&:hours).sum(0) %></th>
           <th></th>
-          <th class="amount"><%= humanized_money @activities.to_a.sum(&:amount) %></th>
+          <th class="amount"><%= humanized_money @activities.to_a.map(&:amount).sum(0) %></th>
           <th></th>
         </tfoot>
       </table>
@@ -59,7 +59,7 @@
     <table class="activities_amounts">
       <tr>
         <td><%= t '.actual_activities_amount' %></td>
-        <td><%= humanized_money @activities.to_a.sum(&:actual_amount) %></td>
+        <td><%= humanized_money @activities.to_a.map(&:actual_amount).sum(0) %></td>
       </tr>
       <tr>
         <td><%= t '.remaining_open_amount' %></td>

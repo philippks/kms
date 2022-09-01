@@ -49,7 +49,7 @@ class TargetHours < ActiveRecord::Base
   end
 
   def self.hours_between(from:, to:)
-    hours_per_date(from: from, to: to).values.sum
+    hours_per_date(from: from, to: to).values.sum(0)
   end
 
   def self.hours_between_for_employee(from:, to:, employee:)

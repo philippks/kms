@@ -20,7 +20,7 @@
       </tbody>
       <tfoot>
         <th><%= Invoices::Payment.human_attribute_name(:total) %></th>
-        <th><%= humanized_money @payments.sum(&:amount) %></th>
+        <th><%= humanized_money @payments.map(&:amount).sum(0) %></th>
         <th></th>
       </tfoot>
     </table>
