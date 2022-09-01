@@ -46,7 +46,7 @@ module Invoices
 
       begin
         ::InvoiceMailer.invoice_mail(@invoice, @mail.body).deliver_now
-      rescue Exception => e
+      rescue StandardError => e
         @invoice.reopen!
         raise e
       end

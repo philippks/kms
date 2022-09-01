@@ -92,7 +92,7 @@ Freundliche Grüsse
 
     context 'mailer raises an exception' do
       before do
-        expect(InvoiceMailer).to receive(:invoice_mail).and_raise Net::SMTPAuthenticationError
+        expect(InvoiceMailer).to receive(:invoice_mail).and_raise Net::SMTPAuthenticationError.new("error", message: "error")
       end
 
       it 'does not change state of invoice to sent' do

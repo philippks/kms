@@ -9,7 +9,7 @@ services:
         - philippks/kms:test-latest
         - philippks/kms:latest
     image: "philippks/kms:${TAG-latest}"
-    env_file: .env
+    env_file: .env.production
     ports:
       - 3000:3000
     depends_on:
@@ -19,7 +19,7 @@ services:
     build:
       context: .
       target: development
-    env_file: .env
+    env_file: .env.dev
     ports:
       - 3000:3000
     depends_on:
@@ -38,12 +38,12 @@ services:
     env_file: .env.test
     depends_on:
       - postgres-test
-    # volumes:
-    #   - .:/app
+    volumes:
+      - .:/app
 
   postgres:
     image: postgres:12
-    env_file: .env
+    env_file: .env.dev
     volumes:
       - postgres:/var/lib/postgresql/data/
 
