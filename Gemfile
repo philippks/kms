@@ -33,6 +33,13 @@ gem 'simple_form'
 gem 'uglifier'
 gem 'wicked_pdf'
 gem 'rqrcode'
+gem 'matrix', '~> 0.4.2'
+
+# can be removed after upgrade to rails 7
+gem 'psych', '~> 3.3.2'
+gem 'net-smtp', require: false
+gem 'net-imap', require: false
+gem 'net-pop', require: false
 
 # to be removed
 gem 'will_paginate-bootstrap'

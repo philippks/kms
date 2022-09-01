@@ -1,0 +1,26 @@
+version: "3.7"
+
+services:
+  kms:
+    build:
+      context: .
+      target: production
+      cache_from:
+        - philippks/kms:test-latest
+        - philippks/kms:latest
+    image: "philippks/kms:${TAG-latest}"
+    env_file: .env.production
+    ports:
+      - 3000:3000
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:12
+    env_file: .env.dev
+    volumes:
+      - postgres:/var/lib/postgresql/data/
+
+volumes:
+  postgres:
+    name: kms-postgres
