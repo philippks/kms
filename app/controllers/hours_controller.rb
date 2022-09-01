@@ -6,11 +6,11 @@ class HoursController < ApplicationController
 
     @target_hours = TargetHours.hours_between_for_employee from: range[:from], to: range[:to], employee: current_employee
     @total_activities = Activity.for_employee(current_employee)
-                                .between(range)
+                                .between(**range)
                                 .sum(:hours)
     @total_absences = Absence.for_employee(current_employee)
-                             .between(range)
-                             .sum { |absence| absence.absent_target_hours(range) }
+                             .between(**range)
+                             .sum { |absence| absence.absent_target_hours(**range) }
   end
 
   private
