@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_11_140540) do
-
+ActiveRecord::Schema[7.0].define(version: 2021_12_11_140540) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -22,29 +21,29 @@ ActiveRecord::Schema.define(version: 2021_12_11_140540) do
     t.decimal "hours"
     t.integer "reason"
     t.string "text"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["employee_id"], name: "index_absences_on_employee_id"
   end
 
   create_table "activity_categories", id: :serial, force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "customer_groups", id: :serial, force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.boolean "not_chargeable", default: false
   end
 
   create_table "customers", id: :serial, force: :cascade do |t|
     t.string "name"
     t.text "address"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.integer "customer_group_id"
     t.string "confidential_title"
     t.string "email_address"
@@ -67,8 +66,8 @@ ActiveRecord::Schema.define(version: 2021_12_11_140540) do
     t.integer "activity_category_id"
     t.integer "amount_cents"
     t.integer "invoice_effort_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.index ["activity_category_id"], name: "index_efforts_on_activity_category_id"
     t.index ["customer_id"], name: "index_efforts_on_customer_id"
     t.index ["employee_id"], name: "index_efforts_on_employee_id"
@@ -79,12 +78,12 @@ ActiveRecord::Schema.define(version: 2021_12_11_140540) do
     t.string "name"
     t.string "initials"
     t.integer "hourly_rate_cents"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.integer "worktime_model"
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
-    t.datetime "remember_created_at"
+    t.datetime "remember_created_at", precision: nil
     t.boolean "deactivated", default: false
     t.integer "workload", default: 100, null: false
     t.index ["email"], name: "index_employees_on_email", unique: true
@@ -106,8 +105,8 @@ ActiveRecord::Schema.define(version: 2021_12_11_140540) do
     t.integer "hourly_rate_manually_cents"
     t.integer "efforts_count", default: 0
     t.integer "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.boolean "confidential", default: false
     t.boolean "visible", default: true
     t.boolean "pagebreak", default: false
@@ -121,8 +120,8 @@ ActiveRecord::Schema.define(version: 2021_12_11_140540) do
     t.string "body"
     t.bigint "invoice_id"
     t.bigint "employee_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.index ["employee_id"], name: "index_invoice_mails_on_employee_id"
     t.index ["invoice_id"], name: "index_invoice_mails_on_invoice_id"
   end
@@ -131,8 +130,8 @@ ActiveRecord::Schema.define(version: 2021_12_11_140540) do
     t.date "date", null: false
     t.integer "amount_cents", null: false
     t.integer "invoice_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["invoice_id"], name: "index_invoice_payments_on_invoice_id"
   end
 
@@ -141,8 +140,8 @@ ActiveRecord::Schema.define(version: 2021_12_11_140540) do
     t.decimal "vat_rate", null: false
     t.integer "employee_id"
     t.integer "customer_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.boolean "confidential", default: false
     t.boolean "display_swift", default: false
     t.integer "activities_amount_manually_cents"
@@ -153,7 +152,7 @@ ActiveRecord::Schema.define(version: 2021_12_11_140540) do
     t.integer "persisted_total_amount_cents"
     t.integer "delivery_method"
     t.string "created_by_initials"
-    t.datetime "sent_at"
+    t.datetime "sent_at", precision: nil
     t.index ["customer_id"], name: "index_invoices_on_customer_id"
     t.index ["employee_id"], name: "index_invoices_on_employee_id"
   end
@@ -161,15 +160,15 @@ ActiveRecord::Schema.define(version: 2021_12_11_140540) do
   create_table "target_hours", id: :serial, force: :cascade do |t|
     t.date "date"
     t.integer "hours", default: 0
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "text_templates", id: :serial, force: :cascade do |t|
     t.string "text"
     t.integer "activity_category_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["activity_category_id"], name: "index_text_templates_on_activity_category_id"
   end
 
@@ -179,7 +178,7 @@ ActiveRecord::Schema.define(version: 2021_12_11_140540) do
     t.string "event", null: false
     t.string "whodunnit"
     t.text "object"
-    t.datetime "created_at"
+    t.datetime "created_at", precision: nil
     t.text "object_changes"
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
   end
