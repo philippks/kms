@@ -46,19 +46,19 @@
     <tfoot>
       <th><%= t Invoice.human_attribute_name :total %></th>
       <th></th>
-      <th class="amount"><%= humanized_money @debtors.sum(&:open_amount) %></th>
+      <th class="amount"><%= humanized_money @debtors.map(&:open_amount).sum(0) %></th>
       <th></th>
       <th class="amount">
-        <%= humanized_money @debtors.sum { |debtor| @overdues[debtor].between?(31, 60) ? debtor.open_amount : 0 }  %>
+        <%= humanized_money @debtors.map { |debtor| @overdues[debtor].between?(31, 60) ? debtor.open_amount : 0 }.sum(0)  %>
       </th>
       <th class="amount">
-        <%= humanized_money @debtors.sum { |debtor| @overdues[debtor].between?(61, 90) ? debtor.open_amount : 0 }  %>
+        <%= humanized_money @debtors.map { |debtor| @overdues[debtor].between?(61, 90) ? debtor.open_amount : 0 }.sum(0)  %>
       </th>
       <th class="amount">
-        <%= humanized_money @debtors.sum { |debtor| @overdues[debtor].between?(91, 120) ? debtor.open_amount : 0 }  %>
+        <%= humanized_money @debtors.map { |debtor| @overdues[debtor].between?(91, 120) ? debtor.open_amount : 0 }.sum(0)  %>
       </th>
       <th class="amount">
-        <%= humanized_money @debtors.sum { |debtor| @overdues[debtor] > 120 ? debtor.open_amount : 0 }  %>
+        <%= humanized_money @debtors.map { |debtor| @overdues[debtor] > 120 ? debtor.open_amount : 0 }.sum(0)  %>
       </th>
       <% if request.format.html? %>
         <th></th>
