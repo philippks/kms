@@ -1,0 +1,19 @@
+version: "3.7"
+
+services:
+  tests:
+    build:
+      context: .
+      target: test
+      cache_from:
+        - philippks/kms:test-latest
+    image: philippks/kms:test-latest
+    env_file: .env.test
+    depends_on:
+      - postgres
+    volumes:
+      - .:/app
+
+  postgres:
+    image: postgres:12
+    env_file: .env.test
