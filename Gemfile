@@ -15,14 +15,11 @@ gem 'font-awesome-rails'
 gem 'global'
 gem 'jbuilder'
 gem 'jquery-rails'
-gem 'json'
-gem 'jwt'
-gem 'libreconv'
 gem 'money-rails'
 gem 'paper_trail'
 gem 'pg'
 gem 'puma'
-gem 'rails', '~> 6.0'
+gem 'rails', '~> 7.0'
 gem 'rails-i18n'
 gem 'responders'
 gem 'sassc-rails'
@@ -30,16 +27,8 @@ gem 'select2-rails'
 gem 'sentry-raven'
 gem 'simple-navigation'
 gem 'simple_form'
-gem 'uglifier'
 gem 'wicked_pdf'
 gem 'rqrcode'
-gem 'matrix', '~> 0.4.2'
-
-# can be removed after upgrade to rails 7
-gem 'psych', '~> 3.3.2'
-gem 'net-smtp', require: false
-gem 'net-imap', require: false
-gem 'net-pop', require: false
 
 # to be removed
 gem 'will_paginate-bootstrap'
@@ -50,8 +39,6 @@ gem 'x-editable-rails'
 gem 'sprockets', '~> 3'
 
 group :development do
-  gem 'better_errors'
-  gem 'binding_of_caller'
   gem 'letter_opener'
   gem 'listen'
   gem 'spring'
@@ -60,8 +47,6 @@ end
 
 group :development, :test do
   gem 'awesome_print'
-  gem 'bullet'
-  gem 'byebug'
   gem 'factory_bot_rails'
   gem 'i18n-tasks'
   gem 'rspec-rails'
@@ -71,12 +56,12 @@ end
 
 group :test do
   gem 'capybara'
+  gem 'selenium-webdriver'
+  gem 'webdrivers'
   gem 'capybara-select2', git: 'https://github.com/philippks/capybara-select2.git'
-  gem 'capybara-selenium'
   gem 'database_cleaner'
   gem 'launchy', require: false
   gem 'rails-controller-testing'
   gem 'shoulda-matchers'
   gem 'timecop'
-  gem 'webdrivers'
 end
