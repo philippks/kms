@@ -71,7 +71,7 @@ describe Absence do
       end
 
       subject do
-        absence.absent_target_hours range
+        absence.absent_target_hours **range
       end
 
       it 'only returns value between limited date range' do
@@ -89,7 +89,7 @@ describe Absence do
   end
 
   describe 'between' do
-    subject { described_class.between(range) }
+    subject { described_class.between(**range) }
 
     let!(:absence) do
       create :absence, hours: nil, from_date: '2016-11-30', to_date: '2016-12-06'
