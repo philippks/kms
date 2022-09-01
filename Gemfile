@@ -34,6 +34,12 @@ gem 'uglifier'
 gem 'wicked_pdf'
 gem 'rqrcode'
 
+# can be removed after upgrade to rails 7
+gem 'psych', '~> 3.3.2'
+gem 'net-smtp', require: false
+gem 'net-imap', require: false
+gem 'net-pop', require: false
+
 # to be removed
 gem 'will_paginate-bootstrap'
 gem 'x-editable-rails'
@@ -73,3 +79,5 @@ group :test do
   gem 'timecop'
   gem 'webdrivers'
 end
+
+gem "matrix", "~> 0.4.2"
