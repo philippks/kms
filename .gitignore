@@ -80,6 +80,7 @@ vendor/assets/bower_components/
 # Environment files that may contain sensitive data
 .env
 .powenv
+.env.production
 
 examples.txt
 
