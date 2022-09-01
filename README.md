@@ -55,7 +55,7 @@ Access web application: http://localhost:3000
 Run tests inside docker container with:
 
 ```
-docker-compose -f docker-compose.test.yml run --rm test
+docker-compose -f docker-compose.test.yml run --rm tests
 ```
 
 ### Configuration
