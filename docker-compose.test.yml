@@ -10,10 +10,10 @@ services:
     image: philippks/kms:test-latest
     env_file: .env.test
     depends_on:
-      - postgres
+      - postgres-tests
     volumes:
       - .:/app
 
-  postgres:
+  postgres-tests:
     image: postgres:12
     env_file: .env.test

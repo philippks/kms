@@ -46,13 +46,13 @@ class Hours
     end
 
     def activities_hours
-      activities.sum(&:hours).to_f
+      activities.map(&:hours).sum(0).to_f
     end
 
     def absences_hours
-      absences.sum do |absence|
+      absences.map do |absence|
         absence.absent_target_hours(from: date, to: date).to_f
-      end
+      end.sum(0)
     end
 
     def total_hours
