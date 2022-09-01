@@ -22,7 +22,7 @@ gem 'money-rails'
 gem 'paper_trail'
 gem 'pg'
 gem 'puma'
-gem 'rails', '~> 6.0'
+gem 'rails', '~> 7.0'
 gem 'rails-i18n'
 gem 'responders'
 gem 'sassc-rails'
@@ -60,7 +60,6 @@ end
 
 group :development, :test do
   gem 'awesome_print'
-  gem 'bullet'
   gem 'byebug'
   gem 'factory_bot_rails'
   gem 'i18n-tasks'
