@@ -41,7 +41,7 @@ class OpListItem
   end
 
   def amount
-    Money.new @activities.sum(&:amount_cents)
+    Money.new @activities.map(&:amount_cents).sum(0)
   end
 
   private

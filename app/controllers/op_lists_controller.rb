@@ -4,7 +4,7 @@ class OpListsController < ApplicationController
     @highlighted_employee_id = filter.employee || current_employee.id
     @op_list_items = OpListItem.build_for(employee_id: filter.employee, until_date: filter.until_date)
     @op_list_items.sort_by! { |item| item.customer.name.downcase }
-    @total_open_amount = @op_list_items.sum(&:amount)
+    @total_open_amount = @op_list_items.map(&:amount).sum(0)
 
     respond_to do |format|
       format.html { }
