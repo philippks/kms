@@ -12,11 +12,11 @@ blocks:
           - checkout
           - echo $DOCKER_PASSWORD | docker login --username "$DOCKER_USERNAME" --password-stdin
           - cp .env.example .env
-          - docker-compose pull test || true
+          - docker-compose -f docker-compose.test.yml pull tests || true
       jobs:
         - name: "Build an push staging image to Docker Hub"
           commands:
-            - TAG=staging-latest docker-compose build production
+            - TAG=staging-latest docker-compose -f docker-compose.prod.yml build production
             - docker push philippks/kms:staging-latest
       secrets:
         - name: docker
