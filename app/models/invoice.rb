@@ -79,7 +79,7 @@ class Invoice < ActiveRecord::Base
   end
 
   def open_amount(ignore: nil)
-    total_amount - payments.select(&:persisted?).without(ignore).sum(&:amount)
+    total_amount - payments.select(&:persisted?).without(ignore).map(&:amount).sum(0)
   end
 
   def payed_amount
