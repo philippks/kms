@@ -9,7 +9,6 @@ default:
   vat_number: "<%= ENV.fetch('INVOICE_VAT_NUMBER') { 'CHE-111.999.333' } %>"
   swift: "<%= ENV.fetch('INVOICE_SWIFT') { 'ZZZZZZZZZZZZZZ' } %>"
   currency_symbol: "CHF"
-  default_vat_rate: 0.077
   persisted_pdfs_directory: "<%= Rails.root %>/storage/invoices/"
   company_template_path: <%= ENV['INVOICE_COMPANY_TEMPLATE_PATH'] %>
   mail_footer: "<%= ENV.fetch('INVOICE_MAIL_FOOTER') { 'Freundliche Grüsse' } %>"
