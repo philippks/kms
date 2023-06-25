@@ -17,7 +17,7 @@ de:
       payments: Zahlungen
       download: Herunterladen
       download_templated: Auf Briefpapier herunterladen
-      download_qr_bill: QR Rechnung (experimentell)
+      download_qr_bill: QR Rechnung
       deliver: Rechnungsversand
     notices:
       open_efforts_before_invoice_date_exists: |
