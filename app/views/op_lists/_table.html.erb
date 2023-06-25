@@ -36,7 +36,7 @@
           <%= f.hidden_field :employee_id, value: current_employee.id %>
           <%= f.hidden_field :customer_id, value: op_list_item.customer.id %>
           <%= f.hidden_field :date, value: Date.current %>
-          <%= f.hidden_field :vat_rate, value: Global.invoices.default_vat_rate %>
+          <%= f.hidden_field :vat_rate, value: Settings.default_vat_rate %>
 
           <%= f.submit t('.create_invoice'), class: 'btn btn-default' %>
         <% end %>

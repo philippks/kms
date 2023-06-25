@@ -9,6 +9,7 @@ SimpleNavigation::Configuration.run do |navigation|
       sub_nav.item :activity_categories, ActivityCategory.model_name.human(count: 2), activity_categories_path, highlights_on:  %r{\A/activity_categories(/.*)?\z}
       sub_nav.item :employees, Employee.model_name.human(count: 2), employees_path, highlights_on:  %r{\A\/employees((\?.*)|(\/\d*\/(edit|new)))?\z}
       sub_nav.item :target_hours, TargetHours.model_name.human(count: 2), target_hours_path, highlights_on:  %r{\A/target_hours(/.*)?\z}
+      sub_nav.item :settings, t('application.navigation.other_preferences'), settings_path, highlights_on:  %r{\A/settings(/.*)?\z}
     end
   end
 end

@@ -1,0 +1,11 @@
+---
+de:
+  activerecord:
+    attributes:
+      settings:
+        vat_rates: Mehrwertsteuersätze für Rechnungen
+    models:
+      settings:
+        one: Sonstige Einstellungen
+        other: Sonstige Einstellungen
+
