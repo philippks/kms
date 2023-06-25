@@ -6,8 +6,8 @@ Capybara.register_driver :chrome do |app|
 end
 
 Capybara.register_driver :headless_chrome do |app|
-  options = Selenium::WebDriver::Chrome::Options.new(args: %w[no-sandbox headless disable-gpu])
-  capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(loggingPrefs: {browser: "ALL"})
+  options = Selenium::WebDriver::Options.chrome(args: %w[no-sandbox headless disable-gpu])
+  options.add_option("goog:loggingPrefs", {browser: 'ALL'})
 
   Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
 end
