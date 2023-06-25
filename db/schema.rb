@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_01_113022) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_24_060025) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -155,6 +155,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_01_113022) do
     t.datetime "sent_at", precision: nil
     t.index ["customer_id"], name: "index_invoices_on_customer_id"
     t.index ["employee_id"], name: "index_invoices_on_employee_id"
+  end
+
+  create_table "settings", force: :cascade do |t|
+    t.string "vat_rates"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "target_hours", id: :serial, force: :cascade do |t|

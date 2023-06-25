@@ -1,0 +1,13 @@
+<%= page_title_for resource: Settings, action: :edit %>
+
+<%= simple_form_for @settings do |f| %>
+  <fieldset>
+    <%= f.input :vat_rates %>
+
+    <p>Die Mehrwertsteuersätze für Rechnungen sind als kommaseparierte Liste angegeben, wobei der Standardwert an erster Stelle steht.</p>
+  </fieldset>
+
+  <div class="actions">
+    <%= f.button :submit, class: 'btn-primary' %>
+  </div>
+<% end %>
