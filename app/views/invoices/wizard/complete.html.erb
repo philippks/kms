@@ -10,31 +10,20 @@
                     data: { model: :invoice, name: :activities_amount_manually, url: invoice_path(@invoice)  } } %>
     <%= form.input :expenses_amount, as: :currency, readonly: true, disabled: true %>
 
-    <!-- remove vat_rate switch as soon as all invoices of 2017 are written -->
     <!-- <%= form.input :vat_rate, as: :percent, readonly: true, disabled: true %> -->
-
     <div class="form-group optional">
       <label class="control-label currency optional disabled" for="invoice_expenses_amount"><%= t '.vat_rate' %> </label>
 
       <div class="input-group">
         <div class="btn-group" role="group">
-          <%= link_to '8.0 %',
-            invoice_wizard_path(@invoice, invoice: { vat_rate: 0.08 }, referrer: invoice_wizard_complete_path),
-            method: :patch,
-            class: "btn btn-default #{'btn-primary disabled' if @invoice.vat_rate == 0.08}"
-          %>
-
-          <%= link_to '7.7 %',
-            invoice_wizard_path(@invoice, invoice: { vat_rate: 0.077 }, referrer: invoice_wizard_complete_path),
-            method: :patch,
-            class: "btn btn-default #{'btn-primary disabled' if @invoice.vat_rate == 0.077}"
-          %>
-
-          <%= link_to '0 %',
-            invoice_wizard_path(@invoice, invoice: { vat_rate: 0 }, referrer: invoice_wizard_complete_path),
-            method: :patch,
-            class: "btn btn-default #{'btn-primary disabled' if @invoice.vat_rate == 0}"
-          %>
+          <!-- one option for every poissible vat rate -->
+          <% @vat_rates.each do |vat_rate| %>
+            <%= link_to "#{vat_rate * 100} %",
+              invoice_wizard_path(@invoice, invoice: { vat_rate: vat_rate }, referrer: invoice_wizard_complete_path),
+              method: :patch,
+              class: "btn btn-default #{'btn-primary disabled' if @invoice.vat_rate == vat_rate}"
+            %>
+          <% end %>
         </div>
       </div>
     </div>

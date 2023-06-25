@@ -31,7 +31,7 @@ RSpec.describe InvoicesController do
         customer_id: customer.id,
         employee_id: employee.id,
         date: Date.current,
-        vat_rate: Global.invoices.default_vat_rate,
+        vat_rate: Settings.default_vat_rate,
       }
     end
 

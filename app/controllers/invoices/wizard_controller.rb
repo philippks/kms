@@ -16,6 +16,9 @@ module Invoices
     end
 
     def complete
+      # combine vat rates from settings with vat rate of the invoice
+      # uniq did not work on floats, why I map them to strings and back (yes, it's hacky).
+      @vat_rates = (Settings.vat_rates + [@invoice.vat_rate]).map(&:to_s).uniq.map(&:to_f).sort.reverse
     end
 
     def summary
