@@ -6,8 +6,8 @@ services:
       context: .
       target: test
       cache_from:
-        - philippks/kms:test-latest
-    image: philippks/kms:test-latest
+        - docker.io/philippks/kms:test-latest
+    image: localhost/philippks/kms:test-latest
     env_file: .env.example
     depends_on:
       - postgres-tests
