@@ -1,6 +1,6 @@
 FROM ruby:3.1.2 AS base
 RUN apt-get update \
-    && curl -sL https://deb.nodesource.com/setup_14.x | bash \
+    && curl -sL https://deb.nodesource.com/setup_20.x | bash \
     && apt-get install --no-install-recommends -y \
     libpq-dev \
     cmake \
@@ -41,7 +41,7 @@ RUN wget --no-verbose https://dl.google.com/linux/direct/google-chrome-stable_cu
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 ADD Gemfile* $APP_HOME/
-RUN bundle install --jobs 3 --with test development
+RUN bundle config set --local with 'test development' && bundle install --jobs 3
 
 ADD . $APP_HOME
 CMD ["bundle", "exec", "rspec"]

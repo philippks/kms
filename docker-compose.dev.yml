@@ -13,6 +13,7 @@ services:
     volumes:
       - .:/app
       - bundle:/bundle
+      - /app/node_modules/
 
   postgres:
     image: postgres:12
