@@ -24,7 +24,8 @@ gem 'rails-i18n'
 gem 'responders'
 gem 'sassc-rails'
 gem 'select2-rails'
-gem 'sentry-raven'
+gem 'sentry-ruby'
+gem 'sentry-rails'
 gem 'simple-navigation'
 gem 'simple_form'
 gem 'wicked_pdf'
@@ -57,7 +58,6 @@ end
 group :test do
   gem 'capybara'
   gem 'selenium-webdriver'
-  gem 'webdrivers'
   gem 'capybara-select2', git: 'https://github.com/philippks/capybara-select2.git'
   gem 'database_cleaner'
   gem 'launchy', require: false
