@@ -94,4 +94,6 @@ Rails.application.routes.draw do
   resources :debtors_reports, only: [:new, :create]
   resources :versions, only: [:index]
   resources :settings, only: [:index, :update]
+
+  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 end

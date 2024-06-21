@@ -79,6 +79,11 @@ To use a company template for the invoices, set the path to the corresponding PD
 INVOICE_COMPANY_TEMPLATE_PATH='/home/kms/invoice_template.pdf'
 ```
 
+### Mails in development
+
+In development no emails will be sent. One can access all emails here: http://localhost:3000/letter_opener
+For more details, see https://github.com/fgrehm/letter_opener_web
+
 ## Questions?
 
 For any questions drop me a mail: <kms-opensource@use.startmail.com>
