@@ -37,10 +37,17 @@ module Invoices
     def render_pdf
       invoice_presenter = InvoicePresenter.new(@invoice)
 
-      WickedPdf.new.pdf_from_string(
+      invoice_pdf =  WickedPdf.new.pdf_from_string(
         PdfsController.render(:new, assigns: { invoice: invoice_presenter }),
         **Global.invoices.wicked_pdf_options.hash.deep_symbolize_keys
       )
+
+      qr_bill_pdf = WickedPdf.new.pdf_from_string(
+        PdfsController.render(:qr_bill, assigns: { invoice: invoice_presenter }),
+        **Global.invoices.qr_bill_wicked_pdf_options.hash.deep_symbolize_keys
+      )
+
+    (CombinePDF.parse(invoice_pdf) << CombinePDF.parse(qr_bill_pdf)).to_pdf
     end
 
     def file_name
