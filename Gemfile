@@ -30,6 +30,7 @@ gem 'simple-navigation'
 gem 'simple_form'
 gem 'wicked_pdf'
 gem 'rqrcode'
+gem 'csv'
 
 # to be removed
 gem 'will_paginate-bootstrap'
@@ -41,6 +42,7 @@ gem 'sprockets', '~> 3'
 
 group :development do
   gem 'letter_opener'
+  gem 'letter_opener_web', '~> 3.0'
   gem 'listen'
   gem 'spring'
   gem 'spring-commands-rspec'
