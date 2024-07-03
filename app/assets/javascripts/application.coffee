@@ -1,6 +1,6 @@
 #= require jquery
 #= require jquery_ujs
-#= require html5sortable/dist/html5sortable.min
+#= require sortablejs/Sortable
 
 #= require select2
 #= require select2_locale_de

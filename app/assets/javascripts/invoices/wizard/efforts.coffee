@@ -8,29 +8,25 @@ $ ->
     initEditables()
 
 initSortables = () ->
-  sortables = sortable('.sortable', {
-    items: 'tr',
-    handle: '.sort',
-    placeholder: '<tr><td colspan="10">&nbsp;</td></tr>',
-    forcePlaceholderSize: true,
-  })
+  $('.sortable').each ->
+    new Sortable(this, {
+      draggable: 'tr',
+      handle: '.sort',
+      onEnd: (event) ->
+        path = $(event.item).data('reorder_path')
+        id = path.match(/(\d+)\/reorder/)[1]
 
-  $(sortables).on('sortupdate', (event) ->
-    path = $(event.detail.item).data('reorder_path')
-    id = path.match(/(\d+)\/reorder/)[1]
-
-    $.ajax({
-      url: path,
-      data: {
-        id: id,
-        activity: {
-          position: event.detail.destination.index + 1
-        }
-      },
-      type: "PATCH"
+        $.ajax({
+          url: path,
+          data: {
+            id: id,
+            activity: {
+              position: event.newIndex + 1
+            }
+          },
+          type: "PATCH"
+        })
     })
-  )
-
 
 initEditables = ->
   $('td.hourly_rate .editable, td.hours .editable, td.amount .editable').editable({
