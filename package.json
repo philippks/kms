@@ -8,7 +8,7 @@
     "easy-autocomplete": "https://github.com/philippks/EasyAutocomplete.git#upgrade",
     "fullcalendar": "^3.9.0",
     "moment": "^2.30.1",
-    "pdfjs-dist": "^3.11.174",
+    "pdfjs-dist": "^4.2.67",
     "sortablejs": "^1.15.2"
   }
 }
