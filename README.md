@@ -22,6 +22,12 @@ Use docker for development, testing and production.
 
 ### Start Locally
 
+Install dependencies with mise:
+
+```
+mise install
+```
+
 Start postgres database:
 
 ```
