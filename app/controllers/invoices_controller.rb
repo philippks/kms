@@ -21,9 +21,8 @@ class InvoicesController < ApplicationController
         render pdf: export_file_name, orientation: :landscape, disposition: :attachment, zoom: 0.65
       end
 
-      format.xls do
-        response.headers['Content-Disposition'] =
-          "attachment; filename=#{export_file_name}.xls"
+      format.csv do
+        send_data InvoicesCsv.new(@invoices).to_csv, filename: "#{export_file_name}.csv"
       end
     end
   end

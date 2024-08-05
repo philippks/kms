@@ -1,6 +1,7 @@
 ---
 de:
   attributes:
+    id: ID
     address: Adresse
     customer: Kunde
     customer_group: Kundengruppe
