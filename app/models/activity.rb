@@ -5,7 +5,7 @@ class Activity < Effort
   validates :hours, numericality: { greater_than_or_equal: 0 }
 
   scope :for_activity_category, lambda { |activity_category_id|
-    where(activity_category_id: activity_category_id)
+    where(activity_category_id:)
   }
 
   monetize :hourly_rate_cents, :amount_cents

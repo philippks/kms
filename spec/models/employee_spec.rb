@@ -18,7 +18,7 @@ describe Employee do
 
     context 'with open activities' do
       before do
-        create :activity, employee: employee, customer: customer, state: :open
+        create :activity, employee:, customer:, state: :open
       end
 
       it 'is not possible to deactivate' do
@@ -29,7 +29,7 @@ describe Employee do
 
     context 'with open invoice' do
       before do
-        create :invoice, employee: employee, customer: customer, state: :open
+        create :invoice, employee:, customer:, state: :open
       end
 
       it 'is not possible to deactivate' do
@@ -40,7 +40,7 @@ describe Employee do
 
     context 'with sent invoice' do
       before do
-        create :invoice, employee: employee, customer: customer, state: :sent
+        create :invoice, employee:, customer:, state: :sent
       end
 
       it 'is not possible to deactivate' do
@@ -52,10 +52,10 @@ describe Employee do
 
   describe 'activity methods' do
     before do
-      create :activity, employee: employee, customer: customer, date: Date.current, hours: 2
-      create :activity, employee: employee, customer: customer, date: Date.current, hours: 3
-      create :activity, employee: employee, customer: customer, date: 1.day.ago, hours: 3
-      create :activity, employee: (create :employee), customer: customer, hours: 3
+      create :activity, employee:, customer:, date: Date.current, hours: 2
+      create :activity, employee:, customer:, date: Date.current, hours: 3
+      create :activity, employee:, customer:, date: 1.day.ago, hours: 3
+      create :activity, employee: (create :employee), customer:, hours: 3
     end
 
     around do |example|
@@ -78,10 +78,10 @@ describe Employee do
   end
 
   describe 'valid_password?' do
+    subject { employee.valid_password? password }
+
     let(:employee) { create :employee, password: 'password', password_confirmation: 'password' }
     let(:password) { 'password' }
-
-    subject { employee.valid_password? password }
 
     it { is_expected.to eq true }
 

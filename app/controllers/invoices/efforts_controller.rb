@@ -1,9 +1,9 @@
 module Invoices
   class EffortsController < ApplicationController
     def reorder
-      unless effort_params[:position].blank?
-        effort.insert_at effort_params[:position].to_i
-      end
+      return if effort_params[:position].blank?
+
+      effort.insert_at effort_params[:position].to_i
     end
 
     def ungroup
@@ -17,15 +17,15 @@ module Invoices
     end
 
     def effort
-      fail 'override method'
+      raise 'override method'
     end
 
     def effort_params
-      fail 'override method'
+      raise 'override method'
     end
 
     def invoice_wizard_path
-      fail 'override method'
+      raise 'override method'
     end
 
     private

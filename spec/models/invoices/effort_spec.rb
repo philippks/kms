@@ -14,14 +14,14 @@ describe Invoices::Effort do
     end
 
     let(:invoice_activity) do
-      create :invoice_activity, efforts: efforts
+      create :invoice_activity, efforts:
     end
 
     it { eq 300 }
 
     context 'when amount_is set manually' do
       let(:invoice_activity) do
-        create :invoice_activity, efforts: efforts,
+        create :invoice_activity, efforts:,
                                   amount_manually: 720
       end
 
@@ -61,13 +61,13 @@ describe Invoices::Effort do
 
     let(:customer) { create :customer }
     let(:employee) { create :employee }
-    let(:invoice) { create :invoice, customer: customer, employee: employee }
-    let(:invoice_activity) { create :invoice_activity, invoice: invoice }
-    let(:activity) { create(:activity, customer: customer, employee: employee) }
+    let(:invoice) { create :invoice, customer:, employee: }
+    let(:invoice_activity) { create :invoice_activity, invoice: }
+    let(:activity) { create(:activity, customer:, employee:) }
 
     it 'returns activities by customer' do
       other_customer = create :customer, name: 'Mr Wrong'
-      create :activity, customer: other_customer, employee: employee
+      create(:activity, customer: other_customer, employee:)
 
       expect(selection).to eq [activity]
     end
@@ -79,17 +79,16 @@ describe Invoices::Effort do
     end
 
     it 'does not return activities assigned to an other invoice activity' do
-      other_activity = create :activity, customer: customer, employee: employee
-      create :invoice_activity, invoice: invoice, efforts: [other_activity]
+      other_activity = create(:activity, customer:, employee:)
+      create :invoice_activity, invoice:, efforts: [other_activity]
 
       expect(selection).to eq [activity]
     end
 
     it 'does not return efforts with other types' do
-      create(:expense, customer: customer, employee: employee)
+      create(:expense, customer:, employee:)
 
       expect(selection).to eq [activity]
     end
   end
-
 end

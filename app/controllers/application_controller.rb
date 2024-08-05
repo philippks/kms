@@ -22,8 +22,8 @@ class ApplicationController < ActionController::Base
   private
 
   def set_sentry_context
-    if current_user.present?
-      Sentry.set_user(id: current_user.id, username: current_user.name, email: current_user.email)
-    end
+    return unless current_user.present?
+
+    Sentry.set_user(id: current_user.id, username: current_user.name, email: current_user.email)
   end
 end

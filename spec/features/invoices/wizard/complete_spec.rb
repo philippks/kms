@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Complete Wizard Page' do
+describe 'Complete Wizard Page' do
   let(:employee) { create :employee }
   let(:invoice) { create :invoice, :default_associations }
 
@@ -10,7 +10,7 @@ feature 'Complete Wizard Page' do
     invoice.touch
   end
 
-  scenario 'Complete the invoice' do
+  it 'Complete the invoice' do
     visit invoice_wizard_complete_path(invoice)
 
     fill_in 'WIR Zahlung möglich', with: 100
@@ -29,7 +29,7 @@ feature 'Complete Wizard Page' do
     end
   end
 
-  scenario 'Overwrite Activities Amount', js: true do
+  it 'Overwrite Activities Amount', js: true do
     visit invoice_wizard_complete_path(invoice)
 
     within('.invoice_activities_amount_manually') do

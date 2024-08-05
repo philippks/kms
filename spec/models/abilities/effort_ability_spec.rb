@@ -6,8 +6,8 @@ describe Abilities::EffortAbility do
   let(:employee) { create :employee }
   let(:customer) { create :customer }
   let(:effort) do
-    create :activity, employee: employee,
-                      customer: customer
+    create :activity, employee:,
+                      customer:
   end
 
   it { is_expected.to be_able_to :manage, effort }
@@ -22,11 +22,11 @@ describe Abilities::EffortAbility do
 
   context 'if charged' do
     let(:invoice) do
-      create :invoice, customer: customer, employee: employee
+      create :invoice, customer:, employee:
     end
 
     before do
-      create :invoice_activity, invoice: invoice, efforts: [effort]
+      create :invoice_activity, invoice:, efforts: [effort]
     end
 
     it { is_expected.to be_able_to :show, effort }

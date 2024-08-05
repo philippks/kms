@@ -1,14 +1,14 @@
 require 'rails_helper'
 
 describe Invoices::Validations do
-  let(:invoice) { build :invoice, :with_associations, invoice_params }
-
   subject { invoice }
+
+  let(:invoice) { build :invoice, :with_associations, invoice_params }
 
   context 'detailed invoice format' do
     let(:invoice_params) do
       {
-        format: :detailed
+        format: :detailed,
       }
     end
 

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe Activities::Report do
-  let(:report) { described_class.new from_date: from_date, to_date: to_date }
+  let(:report) { described_class.new from_date:, to_date: }
   let(:from_date) { Date.parse '2015-02-01' }
   let(:to_date) { Date.parse '2015-02-28' }
 
@@ -11,8 +11,8 @@ describe Activities::Report do
   let(:other_customer) { create :customer }
 
   before do
-    create :activity, employee: employee, customer: customer, date: from_date + 1.day, hours: 1, hourly_rate: 500
-    create :activity, employee: employee, customer: other_customer, date: from_date + 1.day, hours: 1
+    create :activity, employee:, customer:, date: from_date + 1.day, hours: 1, hourly_rate: 500
+    create :activity, employee:, customer: other_customer, date: from_date + 1.day, hours: 1
 
     create :absence, employee: other_employee
   end
@@ -24,20 +24,20 @@ describe Activities::Report do
   end
 
   describe '#customers_by_customer_group' do
-    let!(:customer_group) { create :customer_group }
-    let!(:customer_with_group) { create :customer, customer_group: customer_group }
-
     subject { report.customers_by_customer_group }
 
+    let!(:customer_group) { create :customer_group }
+    let!(:customer_with_group) { create :customer, customer_group: }
+
     before do
-      create :activity, employee: employee, customer: customer_with_group, date: from_date + 1.day
+      create :activity, employee:, customer: customer_with_group, date: from_date + 1.day
     end
 
     it 'groups customers correctly' do
       expect(subject).to eq({
-        nil => [customer, other_customer].sort_by(&:name),
-        customer_group => [customer_with_group]
-      })
+                              nil => [customer, other_customer].sort_by(&:name),
+                              customer_group => [customer_with_group],
+                            })
     end
   end
 
@@ -53,11 +53,11 @@ describe Activities::Report do
 
   describe '#invoice_value_for' do
     before do
-      [:open, :sent, :charged].each do |state|
-        create :invoice, customer: customer,
-                         employee: employee,
+      %i[open sent charged].each do |state|
+        create :invoice, customer:,
+                         employee:,
                          date: from_date,
-                         state: state,
+                         state:,
                          activities_amount_manually: 500
       end
     end
@@ -69,7 +69,7 @@ describe Activities::Report do
 
   describe '#total_hours_for' do
     before do
-      create :absence, employee: employee, hours: 4, from_date: from_date, to_date: from_date
+      create :absence, employee:, hours: 4, from_date:, to_date: from_date
     end
 
     it 'sums effort and absence hours' do

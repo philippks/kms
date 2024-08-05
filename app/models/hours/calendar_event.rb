@@ -26,9 +26,9 @@ class Hours
         end: date.iso8601,
         allDay: true,
         recurring: false,
-        color: color,
-        url: url,
-        icon: icon,
+        color:,
+        url:,
+        icon:,
         className: type,
       }
     end

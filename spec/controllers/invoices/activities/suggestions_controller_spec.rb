@@ -6,9 +6,6 @@ RSpec.describe Invoices::Activities::SuggestionsController do
 
     before do
       sign_in create :employee
-    end
-
-    before do
       expect(Invoices::Activities::SuggestionsBuilder).to receive(:new).with(
         query: 'asdf',
         invoice_activity_id: '2'
@@ -21,7 +18,7 @@ RSpec.describe Invoices::Activities::SuggestionsController do
       get :index, params: {
         query: 'asdf',
         invoice_activity_id: 2,
-        format: :json
+        format: :json,
       }
 
       expect(response.body).to eq 'some json'

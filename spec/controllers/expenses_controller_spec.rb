@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe ExpensesController do
   let(:employee) { create :employee, name: 'Der Dude' }
-  let(:expense) { create :expense, employee: employee }
+  let(:expense) { create :expense, employee: }
 
   before do
     sign_in employee
@@ -32,7 +32,7 @@ RSpec.describe ExpensesController do
         customer_id: (create :customer).id,
         date: '2015-02-20',
         amount: 250,
-        text: 'Spesen'
+        text: 'Spesen',
       }
     end
 

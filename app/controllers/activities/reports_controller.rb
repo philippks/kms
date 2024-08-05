@@ -1,11 +1,11 @@
 module Activities
   class ReportsController < ApplicationController
     def new
-      @report = Report.new from_date: from_date,
-                           to_date: to_date
+      @report = Report.new(from_date:,
+                           to_date:)
 
       respond_to do |format|
-        format.html { }
+        format.html {}
         format.pdf do
           render pdf: filename, orientation: :landscape, zoom: 0.65, disposition: :attachment
         end
@@ -16,7 +16,7 @@ module Activities
 
     def filename
       I18n.t 'activities.reports.report.filename', from: I18n.l(from_date, format: :short),
-                                                    to: I18n.l(to_date, format: :short)
+                                                   to: I18n.l(to_date, format: :short)
     end
 
     def from_date

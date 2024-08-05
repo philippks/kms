@@ -1,13 +1,13 @@
 require 'rails_helper'
 
-feature 'Edit Settings' do
+describe 'Edit Settings' do
   let(:employee) { create :employee }
 
   before do
     sign_in employee
   end
 
-  scenario 'Update settings' do
+  it 'Update settings' do
     visit settings_path
 
     expect(page).to have_field('Mehrwertsteuersätze für Rechnungen', with: '7.7,8.0,0.0')

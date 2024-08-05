@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe ActivitiesController do
   let(:employee) { create :employee }
   let(:customer) { create :customer, name: 'Max Hässig' }
-  let(:activity) { create :activity, date: Date.current, employee: employee, customer: customer }
+  let(:activity) { create :activity, date: Date.current, employee:, customer: }
 
   before do
     sign_in employee
@@ -13,12 +13,12 @@ RSpec.describe ActivitiesController do
 
   describe 'GET #index' do
     let(:other_employee) { create :employee, name: 'Der Andere' }
-    let!(:other_activity) { create :activity, employee: other_employee, customer: customer, date: Date.current }
+    let!(:other_activity) { create :activity, employee: other_employee, customer:, date: Date.current }
 
     it 'assigns activities in descending order' do
-      old_activity = create :activity, employee: employee, customer: customer, date: 99.days.ago
+      old_activity = create :activity, employee:, customer:, date: 99.days.ago
 
-      get :index, params: { filter: { from: 100.days.ago, employee: employee } }
+      get :index, params: { filter: { from: 100.days.ago, employee: } }
       expect(assigns(:activities)).to eq [activity, old_activity]
     end
 
@@ -29,7 +29,7 @@ RSpec.describe ActivitiesController do
       end
 
       it 'lists only todays activities' do
-        create :activity, date: 1.day.ago, employee: employee, customer: customer
+        create(:activity, date: 1.day.ago, employee:, customer:)
 
         get :index
 
@@ -64,7 +64,7 @@ RSpec.describe ActivitiesController do
 
     context 'hourly rate for customer exists' do
       before do
-        create :hourly_rate, customer: customer, employee: employee, hourly_rate: 999
+        create :hourly_rate, customer:, employee:, hourly_rate: 999
       end
 
       it 'assigns existing hourly rate as hourly rate' do
@@ -95,7 +95,7 @@ RSpec.describe ActivitiesController do
         customer_id: customer.id,
         hours: '2.5',
         hourly_rate: 150,
-        date: '2015-02-18'
+        date: '2015-02-18',
       }
     end
 
@@ -123,7 +123,7 @@ RSpec.describe ActivitiesController do
 
   describe 'DELETE #destroy' do
     it 'destroys a activity' do
-      activity = create :activity, employee: employee, customer: customer
+      activity = create(:activity, employee:, customer:)
       expect do
         delete :destroy, params: { id: activity.to_param }
       end.to change(Activity, :count).by(-1)

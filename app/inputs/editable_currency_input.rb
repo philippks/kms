@@ -1,6 +1,6 @@
 class EditableCurrencyInput < SimpleForm::Inputs::Base
   include MoneyRails::ActionViewExtension
-  def input(wrapper_options = nil)
+  def input(_wrapper_options = nil)
     template.content_tag :div,
                          "#{currency_addon} #{editable_label}".html_safe,
                          class: 'input-group currency'

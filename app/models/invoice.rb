@@ -26,12 +26,12 @@ class Invoice < ActiveRecord::Base
 
   scope :before, ->(date) { where('invoices.date <= ?', date.to_date) }
   scope :after, ->(date) { where('invoices.date >= ?', date.to_date) }
-  scope :for_customer, ->(customer_id) { where(customer_id: customer_id) }
-  scope :for_employee, ->(employee_id) { where(employee_id: employee_id) }
-  scope :for_state, ->(state) { where(state: state) }
-  scope :for_customer_group, ->(customer_group_id) do
-    includes(:customer).where(customers: { customer_group_id: customer_group_id })
-  end
+  scope :for_customer, ->(customer_id) { where(customer_id:) }
+  scope :for_employee, ->(employee_id) { where(employee_id:) }
+  scope :for_state, ->(state) { where(state:) }
+  scope :for_customer_group, lambda { |customer_group_id|
+    includes(:customer).where(customers: { customer_group_id: })
+  }
 
   monetize :activities_amount_manually_cents,
            :possible_wir_amount_cents,
@@ -48,7 +48,7 @@ class Invoice < ActiveRecord::Base
     end
 
     event :deliver do
-      transitions from: :open, to: :sent, after: [:persist_total_amount, :persist_pdf, :update_sent_at]
+      transitions from: :open, to: :sent, after: %i[persist_total_amount persist_pdf update_sent_at]
     end
 
     event :charge do
@@ -56,9 +56,9 @@ class Invoice < ActiveRecord::Base
     end
 
     event :reopen do
-      transitions from: [:sent, :charged],
+      transitions from: %i[sent charged],
                   to: :open,
-                  after: [:clear_persisted_total_amount, :remove_persisted_pdf]
+                  after: %i[clear_persisted_total_amount remove_persisted_pdf]
     end
   end
 

@@ -62,16 +62,15 @@ describe Absence do
       end
     end
 
-
     describe 'limiting date range' do
+      subject do
+        absence.absent_target_hours(**range)
+      end
+
       let(:range) { { from: Date.parse('2016-12-01'), to: Date.parse('2016-12-05') } }
 
       let(:absence) do
         build :absence, from_date: '2016-11-30', to_date: '2016-12-06'
-      end
-
-      subject do
-        absence.absent_target_hours **range
       end
 
       it 'only returns value between limited date range' do

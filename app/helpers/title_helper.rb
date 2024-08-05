@@ -1,6 +1,6 @@
 module TitleHelper
   def page_title_for(resource:, action:)
-    define_page_title(title_for(resource, action: action))
+    define_page_title(title_for(resource, action:))
   end
 
   def define_page_title(title)

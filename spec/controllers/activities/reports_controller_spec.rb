@@ -18,7 +18,7 @@ RSpec.describe Activities::ReportsController do
       let(:to_date) { 1.year.ago.end_of_month.to_date }
 
       it 'assigns report with given dates' do
-        get :new, format: :pdf, params: { activities_report: { from_date: from_date, to_date: to_date } }
+        get :new, format: :pdf, params: { activities_report: { from_date:, to_date: } }
 
         expect(assigns(:report).from_date).to eq from_date
         expect(assigns(:report).to_date).to eq to_date

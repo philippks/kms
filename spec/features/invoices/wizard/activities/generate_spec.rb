@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Manage Invoice Activities' do
+describe 'Manage Invoice Activities' do
   let(:invoice) { create :invoice, :default_associations }
   let!(:activity) do
     create :activity, :default_associations, text: 'Something done',
@@ -11,7 +11,7 @@ feature 'Manage Invoice Activities' do
     sign_in invoice.employee
   end
 
-  scenario 'Generate Invoice Activities' do
+  it 'Generate Invoice Activities' do
     visit invoice_wizard_activities_path(invoice)
 
     click_link 'Leistungen generieren'
@@ -20,7 +20,7 @@ feature 'Manage Invoice Activities' do
       expect(Invoices::Activity.count).to eq 1
       expect(Invoices::Activity.last.text).to eq 'Something done'
       expect(Invoices::Activity.last.efforts).to eq [activity]
-      expect(current_path).to eq invoice_wizard_activities_path(invoice)
+      expect(page).to have_current_path invoice_wizard_activities_path(invoice), ignore_query: true
     end
   end
 end

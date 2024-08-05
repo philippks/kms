@@ -1,16 +1,16 @@
 require 'rails_helper'
 
-feature 'Group Invoice Activities' do
+describe 'Group Invoice Activities' do
   let(:invoice) { create :invoice, :default_associations }
 
   let!(:invoice_activity) do
-    create :invoice_activity, invoice: invoice,
+    create :invoice_activity, invoice:,
                               text: 'Something done',
                               position: 1
   end
 
   let!(:another_invoice_activity) do
-    create :invoice_activity, invoice: invoice,
+    create :invoice_activity, invoice:,
                               text: 'Something else done',
                               position: 2
   end
@@ -32,12 +32,12 @@ feature 'Group Invoice Activities' do
   end
 
   before do
-    create :invoice_activity, invoice: invoice, position: 3
+    create :invoice_activity, invoice:, position: 3
 
     sign_in invoice.employee
   end
 
-  scenario 'Group Invoice Activities', js: true do
+  it 'Group Invoice Activities', js: true do
     visit invoice_wizard_activities_path(invoice)
 
     find(:css, "#effort_ids_[value='#{invoice_activity.id}']").set(true)

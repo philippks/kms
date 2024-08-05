@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Create a Debtors Report' do
+describe 'Create a Debtors Report' do
   let!(:debtor) do
     create :invoice, :default_associations, state: :sent,
                                             date: 100.days.ago,
@@ -22,7 +22,7 @@ feature 'Create a Debtors Report' do
     create :payment, invoice: debtor, date: 10.days.ago, amount: 100
   end
 
-  scenario 'Renders all infos' do
+  it 'Renders all infos' do
     visit new_debtors_report_path
 
     expect(page).to have_css 'td', text: debtor.customer.name
@@ -35,7 +35,7 @@ feature 'Create a Debtors Report' do
     expect(page).to have_link 'Zur Rechnung', href: invoice_path(debtor)
   end
 
-  scenario 'Redirects when changing the date', js: true do
+  it 'Redirects when changing the date', js: true do
     visit new_debtors_report_path
 
     # chose new date
@@ -51,12 +51,12 @@ feature 'Create a Debtors Report' do
     expect(page).to have_link 'Herunterladen', href: expected_link
   end
 
-  scenario 'Download Report' do
+  it 'Download Report' do
     visit new_debtors_report_path
 
     click_link 'Herunterladen'
 
-    expect(current_path).to eq new_debtors_report_path(format: :pdf)
+    expect(page).to have_current_path new_debtors_report_path(format: :pdf), ignore_query: true
     expect(page.status_code).to eq 200
   end
 end

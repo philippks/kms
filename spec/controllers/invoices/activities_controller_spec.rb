@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Invoices::ActivitiesController do
   let(:invoice) { create :invoice, :default_associations }
-  let!(:first_invoice_activity) { create :invoice_activity, invoice: invoice }
-  let!(:second_invoice_activity) { create :invoice_activity, invoice: invoice }
+  let!(:first_invoice_activity) { create :invoice_activity, invoice: }
+  let!(:second_invoice_activity) { create :invoice_activity, invoice: }
 
   before do
     sign_in invoice.employee
@@ -12,10 +12,10 @@ RSpec.describe Invoices::ActivitiesController do
   describe 'PATCH #update' do
     subject do
       patch :update, params: {
-        format: format,
+        format:,
         invoice_id: invoice.to_param,
         id: first_invoice_activity.to_param,
-        activity: { text: 'Eifach öpis' }
+        activity: { text: 'Eifach öpis' },
       }
     end
 
@@ -53,7 +53,7 @@ RSpec.describe Invoices::ActivitiesController do
       patch :toggle_pagebreak, params: {
         invoice_id: invoice,
         id: first_invoice_activity,
-        activity_id: first_invoice_activity
+        activity_id: first_invoice_activity,
       }
 
       expect(first_invoice_activity.reload.pagebreak).to eq true
@@ -69,7 +69,7 @@ RSpec.describe Invoices::ActivitiesController do
 
         activity: {
           position: 2,
-        }
+        },
       }
 
       expect(first_invoice_activity.reload.position).to eq 2
@@ -78,15 +78,15 @@ RSpec.describe Invoices::ActivitiesController do
   end
 
   describe 'POST #group' do
-    let(:activity_ids) { [first_invoice_activity.id, second_invoice_activity.id] }
-    let(:service) { instance_double Invoices::Efforts::Group }
-
     subject do
       patch :group, params: {
         invoice_id: invoice.to_param,
         effort_ids: activity_ids,
       }
     end
+
+    let(:activity_ids) { [first_invoice_activity.id, second_invoice_activity.id] }
+    let(:service) { instance_double Invoices::Efforts::Group }
 
     it 'calls service to group activities' do
       expect(Invoices::Efforts::Group).to receive(:new).with(invoice, activity_ids).and_return service

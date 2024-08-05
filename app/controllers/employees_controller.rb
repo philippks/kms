@@ -26,20 +26,18 @@ class EmployeesController < ApplicationController
   private
 
   def employee_params
-   employee_params = params.require(:employee).permit :name,
-                                                      :email,
-                                                      :initials,
-                                                      :hourly_rate,
-                                                      :worktime_model,
-                                                      :workload,
-                                                      :password,
-                                                      :password_confirmation,
-                                                      :deactivated
+    employee_params = params.require(:employee).permit :name,
+                                                       :email,
+                                                       :initials,
+                                                       :hourly_rate,
+                                                       :worktime_model,
+                                                       :workload,
+                                                       :password,
+                                                       :password_confirmation,
+                                                       :deactivated
 
-   if employee_params[:password].blank?
-     employee_params.delete :password
-   end
+    employee_params.delete :password if employee_params[:password].blank?
 
-   employee_params
+    employee_params
   end
 end

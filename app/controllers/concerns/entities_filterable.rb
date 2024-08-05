@@ -5,8 +5,7 @@ module EntitiesFilterable
     before_action :initialize_filter, only: :index
   end
 
-  def default_filter
-  end
+  def default_filter; end
 
   def initialize_filter
     @filter = EntitiesFilter.new filter_params
@@ -37,6 +36,7 @@ module EntitiesFilterable
 
   def stored_filter
     return nil if session[:stored_date] != Date.current.iso8601
+
     session["#{controller_name}_stored_filter"]&.symbolize_keys
   end
 

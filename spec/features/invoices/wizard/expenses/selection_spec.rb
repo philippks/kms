@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-feature 'Select expenses' do
+describe 'Select expenses' do
   let(:invoice) { create :invoice, :default_associations }
-  let(:invoice_expense) { create :invoice_expense, invoice: invoice }
+  let(:invoice_expense) { create :invoice_expense, invoice: }
   let(:expense) { create(:expense, :default_associations) }
 
   before do
@@ -12,7 +12,7 @@ feature 'Select expenses' do
     sign_in invoice.employee
   end
 
-  scenario 'Select expenses for Invoice expense' do
+  it 'Select expenses for Invoice expense' do
     visit edit_invoice_expense_path(invoice, invoice_expense)
 
     page.check('expense[effort_ids][]')
@@ -21,7 +21,7 @@ feature 'Select expenses' do
     expect(invoice_expense.reload.efforts).to eq [expense]
   end
 
-  scenario 'De-Select expense for Invoice expense' do
+  it 'De-Select expense for Invoice expense' do
     invoice_expense.update efforts: [expense]
     visit edit_invoice_expense_path(invoice, invoice_expense)
 

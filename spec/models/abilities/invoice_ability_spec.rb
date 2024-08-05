@@ -4,7 +4,7 @@ describe Abilities::InvoiceAbility do
   subject { Ability.new(employee) }
 
   let(:employee) { invoice.employee }
-  let(:invoice) { create :invoice, :default_associations, state: state }
+  let(:invoice) { create :invoice, :default_associations, state: }
 
   context 'open invoice' do
     let(:state) { 'open' }

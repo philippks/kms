@@ -1,14 +1,14 @@
 require 'rails_helper'
 
-feature 'Inline-Edit Activity Text' do
+describe 'Inline-Edit Activity Text' do
   let(:invoice) { create :invoice, :default_associations }
-  let!(:invoice_activity) { create :invoice_activity, text: 'Lala', invoice: invoice }
+  let!(:invoice_activity) { create :invoice_activity, text: 'Lala', invoice: }
 
   before do
     sign_in invoice.employee
   end
 
-  scenario 'Edit Text with Inline-Edit', js: true do
+  it 'Edit Text with Inline-Edit', js: true do
     visit invoice_wizard_activities_path(invoice)
 
     page.find('span', text: 'Lala').click

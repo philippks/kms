@@ -1,6 +1,6 @@
 module Invoices
   class Activity < ::Invoices::Effort
-    acts_as_list scope: [:invoice_id, :type, :confidential]
+    acts_as_list scope: %i[invoice_id type confidential]
 
     validates :hourly_rate_manually_cents, numericality: true, allow_nil: true
 
@@ -13,6 +13,7 @@ module Invoices
     def amount
       return amount_manually if amount_manually.present?
       return hours * hourly_rate if hours && hourly_rate
+
       actual_amount
     end
 
@@ -20,6 +21,7 @@ module Invoices
       return hourly_rate_manually if hourly_rate_manually.present?
       return 0 if efforts.empty?
       return nil if uniq_efforts_hourly_rates.count != 1
+
       uniq_efforts_hourly_rates.first || 0
     end
 

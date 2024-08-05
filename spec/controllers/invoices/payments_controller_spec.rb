@@ -4,7 +4,7 @@ RSpec.describe Invoices::PaymentsController do
   let(:invoice) do
     create :invoice, :default_associations, state: :sent, activities_amount_manually: 500
   end
-  let(:payment) { create :payment, invoice: invoice, amount: 200 }
+  let(:payment) { create :payment, invoice:, amount: 200 }
 
   before do
     sign_in invoice.employee
@@ -12,7 +12,7 @@ RSpec.describe Invoices::PaymentsController do
 
   describe 'GET #index' do
     it 'lists all payments' do
-      payment = create :payment, amount: 200, invoice: invoice
+      payment = create(:payment, amount: 200, invoice:)
       get :index, params: { invoice_id: invoice }
       expect(assigns(:payments)).to eq [payment]
     end
@@ -58,7 +58,7 @@ RSpec.describe Invoices::PaymentsController do
       it 'has validation error' do
         post :create, params: { invoice_id: invoice, payment: payment_params }
 
-        expect(assigns(:payment).errors).to_not be_empty
+        expect(assigns(:payment).errors).not_to be_empty
       end
     end
   end

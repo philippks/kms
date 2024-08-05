@@ -7,7 +7,7 @@ class OpListItem
   end
 
   def self.build_for(employee_id:, until_date: Date.current)
-    @op_list_items = build_for_date(until_date: until_date)
+    @op_list_items = build_for_date(until_date:)
 
     unless employee_id.nil?
       @op_list_items.reject! do |op_list_item|

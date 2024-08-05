@@ -4,10 +4,10 @@ describe Invoices::Activity do
   let(:employee) { create :employee }
   let(:customer) { create :customer, name: 'Mr Right' }
 
-  let(:invoice) { create :invoice, customer: customer, employee: employee }
-  let(:invoice_activity) { create :invoice_activity, invoice: invoice }
+  let(:invoice) { create :invoice, customer:, employee: }
+  let(:invoice_activity) { create :invoice_activity, invoice: }
 
-  let(:activity) { create(:activity, customer: customer, employee: employee) }
+  let(:activity) { create(:activity, customer:, employee:) }
 
   describe '#destroy' do
     it 'nullify assigned activities foreign keys' do
@@ -29,11 +29,11 @@ describe Invoices::Activity do
 
     context 'with assigned activities' do
       let(:some_activity) do
-        create :activity, hourly_rate: first_hourly_rate, customer: customer, employee: employee
+        create :activity, hourly_rate: first_hourly_rate, customer:, employee:
       end
 
       let(:another_activity) do
-        create :activity, hourly_rate: second_hourly_rate, customer: customer, employee: employee
+        create :activity, hourly_rate: second_hourly_rate, customer:, employee:
       end
 
       before do
@@ -94,11 +94,11 @@ describe Invoices::Activity do
 
     context 'with assigned activities' do
       let(:some_activity) do
-        create :activity, hours: 3, customer: customer, employee: employee
+        create :activity, hours: 3, customer:, employee:
       end
 
       let(:another_activity) do
-        create :activity, hours: 1.4, customer: customer, employee: employee
+        create :activity, hours: 1.4, customer:, employee:
       end
 
       before do
@@ -126,7 +126,7 @@ describe Invoices::Activity do
       before do
         invoice_activity.efforts << [
           create(:activity, :default_associations, hours: 2, hourly_rate: 150),
-          create(:activity, :default_associations, hours: 1.5, hourly_rate: 150)
+          create(:activity, :default_associations, hours: 1.5, hourly_rate: 150),
         ]
       end
 
@@ -149,7 +149,7 @@ describe Invoices::Activity do
       before do
         invoice_activity.efforts << [
           create(:activity, :default_associations, hours: 2, hourly_rate: 150),
-          create(:activity, :default_associations, hours: 1.5, hourly_rate: 150)
+          create(:activity, :default_associations, hours: 1.5, hourly_rate: 150),
         ]
       end
 
@@ -179,7 +179,7 @@ describe Invoices::Activity do
         context 'and confliciting hourly_rates' do
           before do
             invoice_activity.efforts << [
-              create(:activity, :default_associations, hours: 2, hourly_rate: 200)
+              create(:activity, :default_associations, hours: 2, hourly_rate: 200),
             ]
           end
 

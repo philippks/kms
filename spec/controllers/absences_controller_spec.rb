@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe AbsencesController do
   let(:employee) { create :employee }
-  let(:absence) { create :absence, employee: employee }
+  let(:absence) { create :absence, employee: }
 
   before do
     sign_in employee
@@ -32,7 +32,7 @@ RSpec.describe AbsencesController do
         to_date: '2015-02-20',
         hours: 1.5,
         reason: :doctor,
-        text: 'Bein gebrochen'
+        text: 'Bein gebrochen',
       }
     end
 

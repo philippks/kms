@@ -11,7 +11,7 @@ class EntitiesFilter
     activity_category: :for_activity_category,
     reason: :for_reason,
     from: :after,
-    to: :before
+    to: :before,
   }.freeze
 
   def initialize(parameters)

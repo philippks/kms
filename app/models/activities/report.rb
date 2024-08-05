@@ -32,7 +32,7 @@ module Activities
     end
 
     def target_hours_for(employee)
-      TargetHours.hours_between_for_employee(from: @from_date, to: @to_date, employee: employee)
+      TargetHours.hours_between_for_employee(from: @from_date, to: @to_date, employee:)
     end
 
     def saldo_for(employee)
@@ -63,8 +63,8 @@ module Activities
 
       customers.map do |customer|
         activities_amount = Money.new(activities_amount_by_customer[customer])
-        default_amount = Invoices::Expense.default_amount_for(activities_amount: activities_amount)
-        Expense.new(customer: customer, amount: default_amount)
+        default_amount = Invoices::Expense.default_amount_for(activities_amount:)
+        Expense.new(customer:, amount: default_amount)
       end
     end
 

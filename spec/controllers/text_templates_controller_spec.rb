@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe TextTemplatesController do
-  let(:text_template) { create :text_template, activity_category: activity_category }
+  let(:text_template) { create :text_template, activity_category: }
   let(:activity_category) { create :activity_category }
 
   before do
@@ -27,7 +27,7 @@ RSpec.describe TextTemplatesController do
       expect do
         post :create, params: {
           activity_category_id: activity_category.id,
-          text_template: { text: 'Ein Text der oft vorkommt' }
+          text_template: { text: 'Ein Text der oft vorkommt' },
         }
       end.to change(TextTemplate, :count).by(1)
     end
@@ -47,7 +47,7 @@ RSpec.describe TextTemplatesController do
       expect do
         patch :update, params: {
           activity_category_id: text_template.activity_category.id,
-          id: text_template.to_param, text_template: { text: text }
+          id: text_template.to_param, text_template: { text: }
         }
       end.to change { text_template.reload.text }.to(text)
     end

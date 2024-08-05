@@ -1,7 +1,7 @@
 class CurrencyInput < SimpleForm::Inputs::Base
   include MoneyRails::ActionViewExtension
 
-  def input(wrapper_options = nil)
+  def input(_wrapper_options = nil)
     template.content_tag :div,
                          "#{currency_addon} #{text_field}".html_safe,
                          class: 'input-group currency'

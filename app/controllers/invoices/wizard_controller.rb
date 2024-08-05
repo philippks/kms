@@ -2,8 +2,7 @@ module Invoices
   class WizardController < ApplicationController
     load_and_authorize_resource :invoice
 
-    def customer
-    end
+    def customer; end
 
     def activities
       @activities = @invoice.activities.eager_load(:efforts)
@@ -21,8 +20,7 @@ module Invoices
       @vat_rates = (Settings.vat_rates + [@invoice.vat_rate]).map(&:to_s).uniq.map(&:to_f).sort.reverse
     end
 
-    def summary
-    end
+    def summary; end
 
     def update
       if params[:invoice].blank? || @invoice.update(invoice_params)
@@ -36,6 +34,7 @@ module Invoices
 
     def current_wizard_action
       raise 'invalid action' if wizard_actions.keys.exclude? params[:current_wizard_action]&.to_sym
+
       params[:current_wizard_action].to_sym
     end
 
@@ -58,21 +57,21 @@ module Invoices
 
     def wizard_actions
       @wizard_actions ||= {
-          customer: {
-            path: invoice_wizard_customer_path(@invoice),
-          },
-          activities: {
-            path: invoice_wizard_activities_path(@invoice),
-          },
-          expenses: {
-            path: invoice_wizard_expenses_path(@invoice),
-          },
-          complete: {
-            path: invoice_wizard_complete_path(@invoice),
-          },
-          summary: {
-            path: invoice_wizard_summary_path(@invoice),
-          },
+        customer: {
+          path: invoice_wizard_customer_path(@invoice),
+        },
+        activities: {
+          path: invoice_wizard_activities_path(@invoice),
+        },
+        expenses: {
+          path: invoice_wizard_expenses_path(@invoice),
+        },
+        complete: {
+          path: invoice_wizard_complete_path(@invoice),
+        },
+        summary: {
+          path: invoice_wizard_summary_path(@invoice),
+        },
       }
     end
 
@@ -90,7 +89,7 @@ module Invoices
                                       :vat_amount,
                                       :total_amount,
                                       :created_by_initials,
-                                      customer_attributes: [:id, :address, :confidential_title, :invoice_hint]
+                                      customer_attributes: %i[id address confidential_title invoice_hint]
     end
 
     def xeditable?(*)

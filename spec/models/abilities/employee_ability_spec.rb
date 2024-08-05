@@ -9,7 +9,7 @@ describe Abilities::EmployeeAbility do
 
   context 'with absences' do
     before do
-      create :absence, employee: employee
+      create :absence, employee:
     end
 
     it { is_expected.not_to be_able_to :destroy, employee }
@@ -17,7 +17,7 @@ describe Abilities::EmployeeAbility do
 
   context 'with efforts' do
     before do
-      create :activity, employee: employee, customer: create(:customer)
+      create :activity, employee:, customer: create(:customer)
     end
 
     it { is_expected.not_to be_able_to :destroy, employee }
@@ -25,7 +25,7 @@ describe Abilities::EmployeeAbility do
 
   context 'with invoices' do
     before do
-      create :invoice, employee: employee, customer: create(:customer)
+      create :invoice, employee:, customer: create(:customer)
     end
 
     it { is_expected.not_to be_able_to :destroy, employee }

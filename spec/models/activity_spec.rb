@@ -3,7 +3,7 @@ require 'rails_helper'
 describe Activity do
   describe 'amount' do
     let(:activity) do
-      create :activity, :with_associations, hourly_rate: 150, hours: hours
+      create :activity, :with_associations, hourly_rate: 150, hours:
     end
 
     context 'integer hours' do
@@ -33,7 +33,7 @@ describe Activity do
 
       invoice_effort = create :invoice_activity, :default_associations
       create :activity, :default_associations, hourly_rate: 150, hours: 1,
-                                               invoice_effort: invoice_effort
+                                               invoice_effort:
     end
 
     it 'returns amount of activities for a customer,
@@ -48,7 +48,7 @@ describe Activity do
       let(:employee) { create :employee }
 
       let(:activity) do
-        create :activity, customer: customer, employee: employee, hourly_rate: 150, hours: 2
+        create :activity, customer:, employee:, hourly_rate: 150, hours: 2
       end
 
       it 'updates amount to 0' do

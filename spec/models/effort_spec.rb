@@ -7,14 +7,14 @@ describe Effort do
 
   let!(:activity) do
     create :activity, date: Date.today,
-                      employee: employee,
-                      customer: customer,
+                      employee:,
+                      customer:,
                       state: :open
   end
 
   let!(:old_activity) do
     create :activity, date: 10.days.ago,
-                      employee: employee,
+                      employee:,
                       customer: not_chargeable_customer
   end
 
@@ -72,9 +72,9 @@ describe Effort do
 
   describe 'for_customer_group' do
     let(:customer_group) { create :customer_group, name: 'Irgendeine Kundengruppe' }
-    let(:customer_with_customer_group) { create :customer, customer_group: customer_group }
+    let(:customer_with_customer_group) { create :customer, customer_group: }
     let!(:other_activity) do
-      create :activity, employee: employee, customer: customer_with_customer_group
+      create :activity, employee:, customer: customer_with_customer_group
     end
 
     it 'returns efforts for a customer_group' do
@@ -84,8 +84,8 @@ describe Effort do
 
   describe 'between' do
     let(:event_older_activity) do
-      create :activity, employee: employee,
-                        customer: customer,
+      create :activity, employee:,
+                        customer:,
                         date: 20.days.ago
     end
 
@@ -95,7 +95,7 @@ describe Effort do
   end
 
   describe 'before_save' do
-    let(:invoice) { create :invoice, customer: customer, employee: employee }
+    let(:invoice) { create :invoice, customer:, employee: }
 
     it 'sets default state to open' do
       expect(activity.state.to_sym).to eq :open
@@ -117,13 +117,13 @@ describe Effort do
     context 'when assigned to invoice_effort' do
       it 'sets state to charged' do
         expect do
-          create :invoice_activity, invoice: invoice, efforts: [activity]
+          create :invoice_activity, invoice:, efforts: [activity]
         end.to change { activity.state.to_sym }.from(:open).to :charged
       end
     end
 
     context 'if invoice effort was destroyed' do
-      let!(:invoice_activity) { create :invoice_activity, invoice: invoice, efforts: [activity] }
+      let!(:invoice_activity) { create :invoice_activity, invoice:, efforts: [activity] }
 
       it 'sets state to open' do
         expect do

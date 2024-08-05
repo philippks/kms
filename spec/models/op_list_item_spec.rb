@@ -7,11 +7,11 @@ describe OpListItem do
   let(:customer_2) { create :customer }
 
   let!(:activity_1) { create :activity, customer: customer_1, employee: employee_1 }
-  let!(:activity_2) { create :activity, customer: customer_1, employee: employee_2, date: 2.weeks.ago}
+  let!(:activity_2) { create :activity, customer: customer_1, employee: employee_2, date: 2.weeks.ago }
   let!(:activity_3) { create :activity, customer: customer_2, employee: employee_2 }
 
   describe '.build_for' do
-    subject(:op_list_items) { described_class.build_for(employee_id: employee_id, until_date: until_date) }
+    subject(:op_list_items) { described_class.build_for(employee_id:, until_date:) }
 
     let(:employee_id) { nil }
     let(:until_date) { Date.current }

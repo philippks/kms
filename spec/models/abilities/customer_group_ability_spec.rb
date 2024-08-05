@@ -10,7 +10,7 @@ describe Abilities::CustomerGroupAbility do
 
   context 'with customer' do
     before do
-      create :customer, customer_group: customer_group
+      create :customer, customer_group:
     end
 
     it { is_expected.not_to be_able_to :destroy, customer_group }

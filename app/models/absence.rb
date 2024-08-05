@@ -10,13 +10,14 @@ class Absence < ActiveRecord::Base
   enumerize :reason, in: { holidays: 0, doctor: 1, funeral: 2, disease: 3,
                            personal: 4, death_family: 5, military: 6 }
 
-  scope :before, -> (date) { where('from_date <= ?', date.to_date) }
-  scope :after, -> (date) { where('from_date >= ?', date.to_date) }
-  scope :for_employee, -> (employee_id) { where(employee_id: employee_id) }
-  scope :for_reason, -> (reason) { where(reason: Absence.reason.find_value(reason).value) }
+  scope :before, ->(date) { where('from_date <= ?', date.to_date) }
+  scope :after, ->(date) { where('from_date >= ?', date.to_date) }
+  scope :for_employee, ->(employee_id) { where(employee_id:) }
+  scope :for_reason, ->(reason) { where(reason: Absence.reason.find_value(reason).value) }
 
   def absent_target_hours(from: from_date, to: to_date)
     return hours if one_day_absence?
+
     TargetHours.hours_between(from: [from_date, from].max, to: [to, to_date].min)
   end
 
@@ -29,7 +30,7 @@ class Absence < ActiveRecord::Base
   end
 
   def self.between(from:, to:)
-    where('(from_date >= :from AND from_date <= :to) OR (to_date >= :from AND to_date <= :to)', from: from, to: to)
+    where('(from_date >= :from AND from_date <= :to) OR (to_date >= :from AND to_date <= :to)', from:, to:)
   end
 
   def per_date_hash

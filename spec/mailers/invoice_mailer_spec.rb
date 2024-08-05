@@ -6,7 +6,7 @@ describe InvoiceMailer do
 
     let(:customer) { create :customer, email_address: 'hans@muster.ch' }
     let(:employee) { create :employee }
-    let(:invoice) { create :invoice, customer: customer, employee: employee, date: '2017-09-04' }
+    let(:invoice) { create :invoice, customer:, employee:, date: '2017-09-04' }
     let(:body) { 'Gruezi' }
 
     before do

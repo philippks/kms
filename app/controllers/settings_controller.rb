@@ -14,10 +14,7 @@ class SettingsController < ApplicationController
 
   private
 
-
   def settings_params
-   settings_params = params.require(:settings).permit :vat_rates
+    settings_params = params.require(:settings).permit :vat_rates
   end
 end
-
-

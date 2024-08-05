@@ -4,13 +4,13 @@ describe Abilities::Invoices::PaymentAbility do
   subject { Ability.new(employee) }
 
   let(:employee) { invoice.employee }
-  let(:invoice) { create :invoice, :default_associations, state: state }
-  let(:payment) { build :payment, invoice: invoice }
+  let(:invoice) { create :invoice, :default_associations, state: }
+  let(:payment) { build :payment, invoice: }
 
   context 'open invoice' do
     let(:state) { 'open' }
 
-    it { is_expected.to_not be_able_to :manage, payment }
+    it { is_expected.not_to be_able_to :manage, payment }
   end
 
   context 'sent invoice' do
@@ -22,7 +22,7 @@ describe Abilities::Invoices::PaymentAbility do
   context 'charged invoice' do
     let(:state) { 'charged' }
 
-    it { is_expected.to_not be_able_to :manage, payment }
+    it { is_expected.not_to be_able_to :manage, payment }
     it { is_expected.to     be_able_to :read, payment }
   end
 end

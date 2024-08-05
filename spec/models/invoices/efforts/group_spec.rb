@@ -7,14 +7,14 @@ describe Invoices::Efforts::Group do
 
   describe '#group_efforts!' do
     describe 'for invoice activities' do
-      let!(:first_activity) { create :invoice_activity, invoice: invoice, text: 'First' }
-      let!(:second_activity) { create :invoice_activity, invoice: invoice, text: 'Second' }
-
-      let(:activity_ids) { [first_activity.id, second_activity.id] }
-
       subject do
         described_class.new(invoice, activity_ids).group_efforts!
       end
+
+      let!(:first_activity) { create :invoice_activity, invoice:, text: 'First' }
+      let!(:second_activity) { create :invoice_activity, invoice:, text: 'Second' }
+
+      let(:activity_ids) { [first_activity.id, second_activity.id] }
 
       it 'groups given invoice activities' do
         expect { subject }.to change { Invoices::Activity.count }.from(2).to 1
@@ -46,13 +46,13 @@ describe Invoices::Efforts::Group do
         end
 
         it 'does nothing' do
-          expect { subject }.not_to change { Invoices::Activity.count }
+          expect { subject }.not_to(change { Invoices::Activity.count })
         end
       end
 
       context 'with confidential activities' do
-        let!(:first_activity) { create :invoice_activity, invoice: invoice, confidential: true }
-        let!(:second_activity) { create :invoice_activity, invoice: invoice, confidential: true }
+        let!(:first_activity) { create :invoice_activity, invoice:, confidential: true }
+        let!(:second_activity) { create :invoice_activity, invoice:, confidential: true }
 
         it 'sets created activity to confidential' do
           subject
@@ -63,14 +63,14 @@ describe Invoices::Efforts::Group do
     end
 
     describe 'for invoice expenses' do
-      let!(:first_expense) { create :invoice_expense, invoice: invoice, text: 'First' }
-      let!(:second_expense) { create :invoice_expense, invoice: invoice, text: 'Second' }
-
-      let(:expenses_ids) { [first_expense.id, second_expense.id] }
-
       subject do
         described_class.new(invoice, expenses_ids).group_efforts!
       end
+
+      let!(:first_expense) { create :invoice_expense, invoice:, text: 'First' }
+      let!(:second_expense) { create :invoice_expense, invoice:, text: 'Second' }
+
+      let(:expenses_ids) { [first_expense.id, second_expense.id] }
 
       it 'groups given invoice expenses' do
         expect { subject }.to change { Invoices::Expense.count }.from(2).to 1

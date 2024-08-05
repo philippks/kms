@@ -19,6 +19,7 @@ module Activities
 
     def suggestions_for_activity_category
       return [] unless @activity_category_id.present?
+
       activity_category.text_templates
                        .where('lower(text) LIKE lower(?)', "%#{@query}%")
                        .first(SUGGESTIONS_SIZE_LIMIT)
@@ -27,6 +28,7 @@ module Activities
 
     def activities_suggestions_for_customer
       return [] unless @customer_id.present?
+
       Activity.for_customer(@customer_id).reorder(date: :desc)
               .where('lower(text) LIKE lower(?)', "%#{@query}%")
               .limit(SUGGESTIONS_SIZE_LIMIT)

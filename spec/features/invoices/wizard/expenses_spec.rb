@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-feature 'Managing Invoice Expenses' do
+describe 'Managing Invoice Expenses' do
   let(:employee) { create :employee }
   let(:customer) { create :customer }
-  let(:invoice) { create :invoice, employee: employee, customer: customer, date: Date.today }
+  let(:invoice) { create :invoice, employee:, customer:, date: Date.today }
   let(:text) { 'Some work done' }
 
   before do
@@ -13,11 +13,11 @@ feature 'Managing Invoice Expenses' do
     sign_in employee
   end
 
-  scenario 'List Invoice Expenses' do
+  it 'List Invoice Expenses' do
     2.times do
       expense = create(:expense, :default_associations, amount: 600)
-      create :invoice_expense, invoice: invoice,
-                               text: text,
+      create :invoice_expense, invoice:,
+                               text:,
                                amount_manually: 400,
                                efforts: [expense]
     end
@@ -33,7 +33,7 @@ feature 'Managing Invoice Expenses' do
     expect(page).to have_text('150.00') # open expenses amount
   end
 
-  scenario 'Add Invoice Expense' do
+  it 'Add Invoice Expense' do
     visit invoice_wizard_expenses_path(invoice)
 
     expect do
@@ -43,8 +43,8 @@ feature 'Managing Invoice Expenses' do
     end.to change { Invoices::Expense.count }.from(0).to(1)
   end
 
-  scenario 'Delete Invoice Expense' do
-    invoice_expense = create :invoice_expense, invoice: invoice
+  it 'Delete Invoice Expense' do
+    invoice_expense = create(:invoice_expense, invoice:)
 
     visit invoice_wizard_expenses_path(invoice)
 

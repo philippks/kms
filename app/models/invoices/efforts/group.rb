@@ -17,9 +17,9 @@ module Invoices
 
       def new_invoice_effort
         efforts_class.new invoice: @invoice,
-                          text: text,
-                          position: position,
-                          confidential: confidential,
+                          text:,
+                          position:,
+                          confidential:,
                           efforts: assigned_efforts
       end
 

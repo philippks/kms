@@ -8,11 +8,11 @@ describe Invoices::Expenses::Generate do
   let(:default_expense_text) { I18n.t('invoice.default_expense_text') }
 
   describe '#generate!' do
-    let(:generate_default_expense) { false }
-
     subject(:generate!) do
-      described_class.new(invoice, generate_default_expense: generate_default_expense).generate!
+      described_class.new(invoice, generate_default_expense:).generate!
     end
+
+    let(:generate_default_expense) { false }
 
     context 'with generate_default_expense set to true' do
       let(:generate_default_expense) { true }

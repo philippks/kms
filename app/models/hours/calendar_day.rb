@@ -20,11 +20,11 @@ class Hours
     private
 
     def activity_event
-      CalendarEvent.new date: date,
+      CalendarEvent.new date:,
                         hours: activities_hours,
                         type: :activity,
                         target_reached: total_hours >= target_hours,
-                        employee: employee
+                        employee:
     end
 
     def show_activity_event?
@@ -34,11 +34,11 @@ class Hours
     end
 
     def absence_event
-      CalendarEvent.new date: date,
+      CalendarEvent.new date:,
                         hours: absences_hours,
                         type: :absence,
                         target_reached: total_hours >= target_hours,
-                        employee: employee
+                        employee:
     end
 
     def show_absence_event?
