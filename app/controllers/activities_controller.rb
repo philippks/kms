@@ -20,9 +20,8 @@ class ActivitiesController < ApplicationController
         render pdf: export_file_name, orientation: :landscape, disposition: :attachment, zoom: 0.65
       end
 
-      format.xls do
-        response.headers['Content-Disposition'] =
-          "attachment; filename=#{export_file_name}.xls"
+      format.csv do
+        send_data ActivitiesCsv.new(@activities).to_csv, filename: "#{export_file_name}.csv"
       end
     end
   end
@@ -76,7 +75,7 @@ class ActivitiesController < ApplicationController
       end
     end
 
-    return current_employee.hourly_rate
+    current_employee.hourly_rate
   end
 
   def export_file_name

@@ -34,7 +34,7 @@ de:
     today: Heute
     export: Exportieren
     as_pdf: Als PDF
-    as_xls: Als XLS
+    as_csv: Als CSV
   enumerize:
     defaults:
       state:
