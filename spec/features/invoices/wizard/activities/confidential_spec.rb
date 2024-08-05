@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-feature 'Change Invoice Activity Confidentiality' do
+describe 'Change Invoice Activity Confidentiality' do
   let(:invoice) { create :invoice, :default_associations, confidential: true }
   let(:activity) do
-    create :invoice_activity, invoice: invoice, confidential: false
+    create :invoice_activity, invoice:, confidential: false
   end
 
   before do
@@ -12,7 +12,7 @@ feature 'Change Invoice Activity Confidentiality' do
     sign_in invoice.employee
   end
 
-  scenario 'Change confidentiality to true' do
+  it 'Change confidentiality to true' do
     visit invoice_wizard_activities_path(invoice)
 
     find('.fa-unlock').find(:xpath, './/..').click
@@ -22,7 +22,7 @@ feature 'Change Invoice Activity Confidentiality' do
     expect(page).to have_css('td', text: 'Vertrauliche Leistungen')
   end
 
-  scenario 'Change confidentiality to false' do
+  it 'Change confidentiality to false' do
     activity.update confidential: true
     visit invoice_wizard_activities_path(invoice)
 

@@ -6,7 +6,7 @@ class Customer < ActiveRecord::Base
 
   scope :for_customer, ->(customer_id) { where(id: customer_id) }
   scope :for_customer_group, lambda { |customer_group_id|
-    where(customer_group_id: customer_group_id)
+    where(customer_group_id:)
   }
   scope :for_query, lambda { |query|
     where('lower(name) LIKE lower(?)', "%#{query}%")

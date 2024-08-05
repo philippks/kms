@@ -10,7 +10,7 @@ describe Abilities::CustomerAbility do
 
   context 'with efforts' do
     before do
-      create :activity, employee: employee, customer: customer
+      create :activity, employee:, customer:
     end
 
     it { is_expected.not_to be_able_to :destroy, customer }
@@ -18,7 +18,7 @@ describe Abilities::CustomerAbility do
 
   context 'with invoices' do
     before do
-      create :invoice, employee: employee, customer: customer
+      create :invoice, employee:, customer:
     end
 
     it { is_expected.not_to be_able_to :destroy, customer }

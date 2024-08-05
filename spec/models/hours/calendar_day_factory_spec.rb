@@ -5,7 +5,7 @@ describe Hours::CalendarDayFactory do
   let(:customer) { create :customer }
 
   let(:factory) do
-    described_class.new employee: employee,
+    described_class.new employee:,
                         from: Date.parse('2016-12-01'),
                         to: Date.parse('2016-12-03')
   end
@@ -19,7 +19,7 @@ describe Hours::CalendarDayFactory do
 
     context 'with activities' do
       let!(:activity) do
-        create :activity, employee: employee, customer: customer, date: '2016-12-01'
+        create :activity, employee:, customer:, date: '2016-12-01'
       end
 
       it 'assigns activities' do
@@ -34,8 +34,8 @@ describe Hours::CalendarDayFactory do
     context 'with multiple absences' do
       let!(:absences) do
         [
-          create(:absence, employee: employee, from_date: '2016-12-01', to_date: '2016-12-01'),
-          create(:absence, employee: employee, from_date: '2016-12-01', to_date: '2016-12-01')
+          create(:absence, employee:, from_date: '2016-12-01', to_date: '2016-12-01'),
+          create(:absence, employee:, from_date: '2016-12-01', to_date: '2016-12-01'),
         ]
       end
 
@@ -46,7 +46,7 @@ describe Hours::CalendarDayFactory do
 
     context 'with spanning absence' do
       let!(:absence) do
-        create :absence, employee: employee, from_date: '2016-12-01', to_date: '2016-12-02', hours: nil
+        create :absence, employee:, from_date: '2016-12-01', to_date: '2016-12-02', hours: nil
       end
 
       it 'assigns absence to relevant days' do

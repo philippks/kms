@@ -17,7 +17,7 @@ if @customers.any?
     json.children do
       json.array!(@customers) do |customer|
         json.call(customer, :id, :name)
-        json.url new_activity_path(customer: customer)
+        json.url new_activity_path(customer:)
       end
     end
   end
@@ -29,7 +29,7 @@ if @last_customers.any?
     json.children do
       json.array!(@last_customers) do |customer|
         json.call(customer, :id, :name)
-        json.url new_activity_path(customer: customer)
+        json.url new_activity_path(customer:)
       end
     end
   end

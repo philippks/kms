@@ -15,10 +15,10 @@ class Effort < ActiveRecord::Base
 
   scope :before, ->(date) { where('date <= ?', date.to_date) }
   scope :after, ->(date) { where('date >= ?', date.to_date) }
-  scope :for_customer, ->(customer_id) { where(customer_id: customer_id) }
-  scope :for_employee, ->(employee_id) { where(employee_id: employee_id) }
+  scope :for_customer, ->(customer_id) { where(customer_id:) }
+  scope :for_employee, ->(employee_id) { where(employee_id:) }
   scope :for_customer_group, lambda { |customer_group_id|
-    includes(:customer).where(customers: { customer_group_id: customer_group_id })
+    includes(:customer).where(customers: { customer_group_id: })
   }
   scope :for_state, ->(state) { with_state(state) }
   scope :without_invoice, -> { where(invoice_effort_id: nil) }

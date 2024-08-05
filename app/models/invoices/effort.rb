@@ -17,7 +17,7 @@ module Invoices
     default_scope { order(:position) }
     scope :visible, -> { where(visible: true) }
     scope :for_customer, lambda { |customer_id|
-      includes(:invoice).where(invoices: { customer_id: customer_id })
+      includes(:invoice).where(invoices: { customer_id: })
     }
 
     monetize :amount_manually_cents, allow_nil: true

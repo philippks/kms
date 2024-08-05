@@ -10,9 +10,9 @@ RSpec.describe Invoices::WizardController do
   end
 
   describe 'GET #activities' do
-    let(:confidential_activity) { create :invoice_activity, confidential: true, invoice: invoice, position: 1 }
-    let(:activity) { create :invoice_activity, invoice: invoice, position: 1 }
-    let(:second_activity) { create :invoice_activity, invoice: invoice, position: 2 }
+    let(:confidential_activity) { create :invoice_activity, confidential: true, invoice:, position: 1 }
+    let(:activity) { create :invoice_activity, invoice:, position: 1 }
+    let(:second_activity) { create :invoice_activity, invoice:, position: 2 }
 
     it 'assigns invoice activities in correct order' do
       get :activities, params: { invoice_id: invoice.to_param }
@@ -22,16 +22,16 @@ RSpec.describe Invoices::WizardController do
   end
 
   describe 'PATCH #update' do
+    subject do
+      patch :update, params: parameters
+    end
+
     let(:parameters) do
       {
         invoice_id: invoice.to_param,
         invoice: { title: 'Huhu' },
-        current_wizard_action: :complete
+        current_wizard_action: :complete,
       }
-    end
-
-    subject do
-      patch :update, params: parameters
     end
 
     it 'updates the invoice' do
@@ -47,7 +47,7 @@ RSpec.describe Invoices::WizardController do
         {
           activities: 'Leistungen gruppieren',
           invoice_id: invoice.to_param,
-          invoice: { title: 'Huhu' }
+          invoice: { title: 'Huhu' },
         }
       end
 
@@ -62,7 +62,7 @@ RSpec.describe Invoices::WizardController do
       patch :update, params: {
         invoice_id: invoice.to_param,
         invoice: { customer_attributes: { address: 'Huhu' } },
-        current_wizard_action: :complete
+        current_wizard_action: :complete,
       }
     end
 

@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-feature 'Inline-Edit Expense Text' do
+describe 'Inline-Edit Expense Text' do
   let(:invoice) { create :invoice, :default_associations }
-  let(:invoice_expense) { create :invoice_expense, text: 'Lala', invoice: invoice }
+  let(:invoice_expense) { create :invoice_expense, text: 'Lala', invoice: }
 
   before do
     invoice_expense.touch
@@ -10,7 +10,7 @@ feature 'Inline-Edit Expense Text' do
     sign_in invoice.employee
   end
 
-  scenario 'Edit Text with Inline-Edit', js: true do
+  it 'Edit Text with Inline-Edit', js: true do
     visit invoice_wizard_expenses_path(invoice)
 
     page.find('span', text: 'Lala').click

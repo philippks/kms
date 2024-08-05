@@ -5,7 +5,7 @@ class InvoiceMailer < ApplicationMailer
 
     set_attachment
 
-    mail(to: to_address, subject: subject, body: body)
+    mail(to: to_address, subject:, body:)
   end
 
   private
@@ -25,7 +25,7 @@ class InvoiceMailer < ApplicationMailer
       I18n.t('activerecord.attributes.invoices/mail.attachment_filename'),
       '_',
       @invoice.date,
-      '.pdf'
+      '.pdf',
     ].join
   end
 

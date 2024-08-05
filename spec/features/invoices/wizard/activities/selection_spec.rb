@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-feature 'Select Activities' do
+describe 'Select Activities' do
   let(:invoice) { create :invoice, :default_associations }
-  let(:invoice_activity) { create :invoice_activity, invoice: invoice }
+  let(:invoice_activity) { create :invoice_activity, invoice: }
   let(:activity) { create(:activity, :default_associations) }
 
   before do
@@ -12,7 +12,7 @@ feature 'Select Activities' do
     sign_in invoice.employee
   end
 
-  scenario 'Select Activities for Invoice Activity' do
+  it 'Select Activities for Invoice Activity' do
     visit edit_invoice_activity_path(invoice, invoice_activity)
 
     page.check('activity[effort_ids][]')
@@ -21,7 +21,7 @@ feature 'Select Activities' do
     expect(invoice_activity.reload.efforts).to eq [activity]
   end
 
-  scenario 'De-Select Activity for Invoice Activity' do
+  it 'De-Select Activity for Invoice Activity' do
     invoice_activity.update efforts: [activity]
     visit edit_invoice_activity_path(invoice, invoice_activity)
 

@@ -40,7 +40,8 @@ RSpec.describe CustomerGroupsController do
   describe 'PATCH #update' do
     it 'updates the customer_group' do
       expect do
-        patch :update, params: { id: customer_group.to_param, customer_group: { name: 'Administration', not_chargeable: true } }
+        patch :update,
+              params: { id: customer_group.to_param, customer_group: { name: 'Administration', not_chargeable: true } }
       end.to change { customer_group.reload.name }.to('Administration')
     end
   end

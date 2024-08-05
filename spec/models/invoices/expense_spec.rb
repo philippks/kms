@@ -2,11 +2,11 @@ require 'rails_helper'
 
 describe Invoices::Expense do
   describe '.default_amount_for' do
-    let(:activities_amount) { 800 }
-
     subject(:default_amount) do
       described_class.default_amount_for(activities_amount: Money.from_amount(activities_amount))
     end
+
+    let(:activities_amount) { 800 }
 
     context 'with floating amount' do
       let(:activities_amount) { 802.5 }

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Managing Invoices' do
+describe 'Managing Invoices' do
   let(:employee) { create :employee }
   let(:customer) { create :customer }
 
@@ -8,7 +8,7 @@ feature 'Managing Invoices' do
     sign_in employee
   end
 
-  scenario 'Create Invoice', js: true do
+  it 'Create Invoice', js: true do
     visit new_invoice_path
 
     select2(customer.name, from: 'Kunde', search: true)
@@ -19,7 +19,7 @@ feature 'Managing Invoices' do
     expect(page).to have_xpath("//canvas[@id='pdf-canvas' and @height>-1]", wait: 10) # waits for rendered invoice pdf
   end
 
-  scenario 'Charge nevertheless' do
+  it 'Charge nevertheless' do
     invoice = create :invoice, :default_associations, state: :sent
 
     visit invoice_path(invoice)

@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-feature 'Wizard, Invoice Activities' do
+describe 'Wizard, Invoice Activities' do
   let(:invoice_activity) do
     create :invoice_activity, :default_associations, efforts: [
       create(:activity, :default_associations, text: 'Huhu'),
-      create(:activity, :default_associations, text: 'Hehe')
+      create(:activity, :default_associations, text: 'Hehe'),
     ]
   end
 
@@ -14,7 +14,7 @@ feature 'Wizard, Invoice Activities' do
     sign_in invoice_activity.invoice.employee
   end
 
-  scenario 'User ungroups grouped invoice activity' do
+  it 'User ungroups grouped invoice activity' do
     visit invoice_wizard_activities_path(invoice_activity.invoice)
 
     expect do

@@ -3,27 +3,27 @@ require 'rails_helper'
 describe Activities::Report::EffortsCube do
   let(:employee) { create :employee }
   let(:other_employee) { create :employee }
-  let(:customer) { create :customer, customer_group: customer_group }
+  let(:customer) { create :customer, customer_group: }
   let(:other_customer) { create :customer }
   let(:customer_group) { create :customer_group }
 
   let(:constellations) do
     [
       {
-        customer: customer,
-        employee: employee,
+        customer:,
+        employee:,
       },
       {
-        customer: customer,
-        employee: employee,
+        customer:,
+        employee:,
       },
       {
-        customer: customer,
+        customer:,
         employee: other_employee,
       },
       {
         customer: other_customer,
-        employee: employee,
+        employee:,
       },
       {
         customer: other_customer,
@@ -36,7 +36,7 @@ describe Activities::Report::EffortsCube do
     constellations.map do |constellation|
       [
         build(:activity, constellation.merge(hours: 1, hourly_rate: 100)),
-        build(:expense, constellation.merge(amount: 50))
+        build(:expense, constellation.merge(amount: 50)),
       ]
     end.flatten
   end
@@ -44,7 +44,7 @@ describe Activities::Report::EffortsCube do
   describe '#value_for' do
     let(:cube) { described_class.new(efforts) }
 
-    def check_amounts_for(*keys, activities:, expenses:, turnover: activities + expenses, hours:)
+    def check_amounts_for(*keys, activities:, expenses:, hours:, turnover: activities + expenses)
       expect(cube.value_for(*(keys + [:activities]))).to eq Money.from_amount activities
       expect(cube.value_for(*(keys + [:expenses]))).to eq Money.from_amount expenses
       expect(cube.value_for(*(keys + [:turnover]))).to eq Money.from_amount turnover

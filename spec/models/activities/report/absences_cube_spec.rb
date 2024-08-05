@@ -7,22 +7,22 @@ describe Activities::Report::AbsencesCube do
 
   let(:absences) do
     [
-      build(:absence, employee: employee,
+      build(:absence, employee:,
                       from_date: date,
                       to_date: date,
                       hours: 4,
                       reason: :doctor),
 
-      build(:absence, employee: employee,
+      build(:absence, employee:,
                       from_date: (date - 1.day),
                       to_date: date,
                       reason: :holidays),
 
       build(:absence, employee: other_employee,
-                       from_date: date,
-                       to_date: date,
-                       hours: 4,
-                       reason: :holidays),
+                      from_date: date,
+                      to_date: date,
+                      hours: 4,
+                      reason: :holidays),
     ]
   end
 
@@ -43,7 +43,7 @@ describe Activities::Report::AbsencesCube do
     context 'with absence out of range' do
       let(:absences) do
         [
-          build(:absence, employee: employee,
+          build(:absence, employee:,
                           from_date: (date.beginning_of_month - 2.day),
                           to_date: (date.beginning_of_month + 2.day),
                           reason: :doctor),

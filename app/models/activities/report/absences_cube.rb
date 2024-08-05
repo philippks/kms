@@ -47,11 +47,11 @@ module Activities
         {
           absence.employee => {
             absence.reason => {
-              hours: hours
+              hours:,
             },
 
-            hours: hours
-          }
+            hours:,
+          },
         }
       end
     end

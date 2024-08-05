@@ -8,7 +8,7 @@ describe Customer do
     it { is_expected.to validate_presence_of :address }
 
     context 'not chargeable customer' do
-      subject { described_class.new customer_group: customer_group }
+      subject { described_class.new customer_group: }
 
       let(:customer_group) { build :customer_group, not_chargeable: true }
 

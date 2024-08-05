@@ -2,14 +2,14 @@ require 'rails_helper'
 
 describe Invoices::Activities::SuggestionsBuilder do
   let(:suggestion_builder) do
-    described_class.new query: query, invoice_activity_id: invoice_activity.id
+    described_class.new query:, invoice_activity_id: invoice_activity.id
   end
   let!(:invoice_activity) { create :invoice_activity, :default_associations, text: 'just something' }
 
   describe '.build' do
-    let(:query) { '' }
-
     subject(:suggestions) { suggestion_builder.build }
+
+    let(:query) { '' }
 
     context 'with invoice activity' do
       context 'which has assigned activities' do

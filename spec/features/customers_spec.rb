@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Managing Customers' do
+describe 'Managing Customers' do
   let!(:customer) { create :customer, name: 'Hans Meier', address: 'Hansstrasse 10\n4312 Meiershausen' }
   let(:customer_group) {}
 
@@ -8,12 +8,12 @@ feature 'Managing Customers' do
     sign_in create :employee
   end
 
-  scenario 'List Customers' do
+  it 'List Customers' do
     visit customers_path
     expect(page).to have_text('Hans Meier')
   end
 
-  scenario 'Export Customers' do
+  it 'Export Customers' do
     visit customers_path
 
     click_link 'Exportieren'
@@ -25,7 +25,7 @@ feature 'Managing Customers' do
     expect(page.text).to eq expected
   end
 
-  scenario 'Create new Customer' do
+  it 'Create new Customer' do
     visit new_customer_path
 
     fill_in 'Name', with: 'Friedrich Schiller'
@@ -36,7 +36,7 @@ feature 'Managing Customers' do
     expect(page).to have_text('Kunde wurde erfasst')
   end
 
-  scenario 'Update a Customer' do
+  it 'Update a Customer' do
     visit edit_customer_path(customer)
 
     fill_in 'Name', with: 'Friedrich Schiller'
@@ -46,7 +46,7 @@ feature 'Managing Customers' do
     expect(page).to have_text('Kunde wurde gespeichert')
   end
 
-  scenario 'Destroy a Customer' do
+  it 'Destroy a Customer' do
     visit edit_customer_path(customer)
 
     click_link 'Löschen'

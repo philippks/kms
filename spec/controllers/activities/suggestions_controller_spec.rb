@@ -21,7 +21,7 @@ RSpec.describe Activities::SuggestionsController do
         query: 'asdf',
         customer_id: 2,
         activity_category_id: 3,
-        format: :json
+        format: :json,
       }
       expect(response.body).to eq 'some json'
     end

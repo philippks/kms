@@ -5,7 +5,7 @@ describe Invoices::Title do
     create :invoice, :with_associations, date: invoice_date
   end
   let(:invoice_date) { '2015-06-01' }
-  let(:invoice_activity) { create :invoice_activity, invoice: invoice }
+  let(:invoice_activity) { create :invoice_activity, invoice: }
 
   describe '#to_s' do
     subject { described_class.new(invoice).to_s }

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe Invoice do
-  let(:invoice_params) { { } }
+  let(:invoice_params) { {} }
   let(:invoice) { build :invoice, :with_associations, invoice_params }
 
   it { is_expected.to validate_presence_of :employee }
@@ -9,7 +9,7 @@ describe Invoice do
 
   describe '#activities_amount_manually' do
     before do
-      create_list :invoice_activity, 2, hours_manually: 1, hourly_rate_manually: 150, invoice: invoice
+      create_list :invoice_activity, 2, hours_manually: 1, hourly_rate_manually: 150, invoice:
     end
 
     it 'returns calculated activities amount' do
@@ -31,8 +31,8 @@ describe Invoice do
     let(:invoice) { create :invoice, :with_associations }
 
     before do
-      create_list :invoice_activity, 2, hours_manually: 1, hourly_rate_manually: 150, invoice: invoice
-      create :invoice_expense, amount_manually: 150, invoice: invoice
+      create_list(:invoice_activity, 2, hours_manually: 1, hourly_rate_manually: 150, invoice:)
+      create :invoice_expense, amount_manually: 150, invoice:
     end
 
     it 'returns calculated efforts_amount' do
@@ -62,11 +62,11 @@ describe Invoice do
   end
 
   describe '#total_amount' do
+    subject { invoice.total_amount }
+
     let(:invoice) do
       create :invoice, :with_associations, activities_amount_manually: 200
     end
-
-    subject { invoice.total_amount }
 
     it { is_expected.to eq Money.from_amount 203 }
   end
@@ -77,7 +77,7 @@ describe Invoice do
     end
 
     context 'with payments' do
-      let!(:payment) { create :payment, invoice: invoice, amount: 100 }
+      let!(:payment) { create :payment, invoice:, amount: 100 }
 
       it 'returns remaining amount' do
         expect(invoice.reload.open_amount).to eq(invoice.total_amount - Money.from_amount(100))
@@ -90,13 +90,13 @@ describe Invoice do
   end
 
   describe '#expenses_amount' do
-    let(:invoice) { create :invoice, :with_associations }
-
     subject(:expenses_amount) { invoice.expenses_amount }
+
+    let(:invoice) { create :invoice, :with_associations }
 
     context 'with expenses' do
       before do
-        create :invoice_expense, invoice: invoice, amount_manually: 300
+        create :invoice_expense, invoice:, amount_manually: 300
       end
 
       it 'returns expenses amount' do

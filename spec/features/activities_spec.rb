@@ -1,16 +1,16 @@
 require 'rails_helper'
 
-feature 'Managing Activities' do
+describe 'Managing Activities' do
   let(:text) { 'Einfach etwas' }
   let(:employee) { create :employee }
   let!(:customer) { create :customer, name: 'Max' }
-  let!(:activity) { create :activity, customer: customer, employee: employee, text: text }
+  let!(:activity) { create :activity, customer:, employee:, text: }
 
   before do
     sign_in employee
   end
 
-  scenario 'Create new Activity' do
+  it 'Create new Activity' do
     visit new_activity_path(customer: customer.to_param)
 
     fill_in 'Stundensatz', with: 150
@@ -21,8 +21,8 @@ feature 'Managing Activities' do
     expect(page).to have_text('Leistung wurde erfasst')
   end
 
-  scenario 'Suggestions', js: true do
-    create :activity, customer: customer, employee: employee, text: 'Gugus'
+  it 'Suggestions', js: true do
+    create :activity, customer:, employee:, text: 'Gugus'
     visit new_activity_path(customer: customer.to_param)
 
     page.execute_script("$('#activity_text_input').focus()")
@@ -31,7 +31,7 @@ feature 'Managing Activities' do
     sleep(1) # 💩
   end
 
-  scenario 'Update a Activity' do
+  it 'Update a Activity' do
     visit edit_activity_path(activity)
 
     fill_in 'Rechnungstext', with: 'Aktualisierte Leistung'
@@ -40,7 +40,7 @@ feature 'Managing Activities' do
     expect(page).to have_text('Leistung wurde gespeichert')
   end
 
-  scenario 'Destroy a Activity' do
+  it 'Destroy a Activity' do
     visit edit_activity_path(activity)
 
     click_link 'Löschen'

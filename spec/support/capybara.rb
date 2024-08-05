@@ -6,9 +6,9 @@ end
 
 Capybara.register_driver :headless_chrome do |app|
   options = Selenium::WebDriver::Options.chrome(args: %w[no-sandbox headless disable-gpu])
-  options.add_option("goog:loggingPrefs", {browser: 'ALL'})
+  options.add_option('goog:loggingPrefs', { browser: 'ALL' })
 
-  Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
+  Capybara::Selenium::Driver.new(app, browser: :chrome, options:)
 end
 
 Capybara.javascript_driver = :headless_chrome
@@ -34,7 +34,7 @@ IGNORED_WARNINGS = [
   'Warning: Load test font never loaded.',
   'XMLHttpRequest.responseType "moz-chunked-arraybuffer" is not supported.',
   "Consider using 'dppx' units instead of 'dpi', as in CSS 'dpi' means dots-per-CSS-inch, not dots-per-physical-inch, so does not correspond to the actual 'dpi' of a screen. In media query expression: only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 144dpi), only screen and (min-resolution: 1.5dppx)",
-  "TypeError: fontRes.getRaw is not a function",
+  'TypeError: fontRes.getRaw is not a function',
 ]
 
 RSpec.configure do |config|

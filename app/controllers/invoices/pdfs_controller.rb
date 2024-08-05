@@ -15,7 +15,7 @@ class Invoices::PdfsController < ApplicationController
   def show
     respond_to do |format|
       format.pdf do
-        send_data pdf, filename: filename
+        send_data pdf, filename:
       end
     end
   end
@@ -50,6 +50,6 @@ class Invoices::PdfsController < ApplicationController
   end
 
   def filename
-    "Rechnung #{@invoice.customer.name} #{@invoice.date.to_s}.pdf"
+    "Rechnung #{@invoice.customer.name} #{@invoice.date}.pdf"
   end
 end

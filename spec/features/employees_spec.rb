@@ -1,20 +1,20 @@
 require 'rails_helper'
 
-feature 'Managing Employees' do
+describe 'Managing Employees' do
   let(:employee) { create :employee, name: 'Hans Meier' }
 
   before do
     sign_in create :employee
   end
 
-  scenario 'List Employees' do
+  it 'List Employees' do
     employee.touch
 
     visit employees_path
     expect(page).to have_text('Hans Meier')
   end
 
-  scenario 'Create new Employee' do
+  it 'Create new Employee' do
     visit new_employee_path
 
     fill_in 'Name', with: 'Friedrich Schiller'
@@ -29,7 +29,7 @@ feature 'Managing Employees' do
     expect(page).to have_text('Mitarbeiter wurde erfasst')
   end
 
-  scenario 'Update a Employee' do
+  it 'Update a Employee' do
     visit edit_employee_path(employee)
 
     fill_in 'Name', with: 'Friedrich Schiller'
@@ -39,7 +39,7 @@ feature 'Managing Employees' do
     expect(page).to have_text('Mitarbeiter wurde gespeichert')
   end
 
-  scenario 'Destroy a Employee' do
+  it 'Destroy a Employee' do
     visit edit_employee_path(employee)
 
     click_link 'Löschen'

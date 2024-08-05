@@ -2,11 +2,11 @@ require 'rails_helper'
 
 describe Hours::CalendarEvent do
   let(:calendar_event) do
-    described_class.new date: date,
-                        hours: hours,
-                        target_reached: target_reached,
-                        type: type,
-                        employee: employee
+    described_class.new date:,
+                        hours:,
+                        target_reached:,
+                        type:,
+                        employee:
   end
 
   describe '#as_json' do
@@ -51,7 +51,7 @@ describe Hours::CalendarEvent do
         let(:type) { :activity }
         let(:expected_url) do
           Rails.application.routes.url_helpers.activities_path(
-            { filter: { from: date, to: date, employee: employee } }
+            { filter: { from: date, to: date, employee: } }
           )
         end
 
@@ -62,7 +62,7 @@ describe Hours::CalendarEvent do
         let(:type) { :absence }
         let(:expected_url) do
           Rails.application.routes.url_helpers.absences_path(
-            { filter: { from: date, to: date, employee: employee } }
+            { filter: { from: date, to: date, employee: } }
           )
         end
 

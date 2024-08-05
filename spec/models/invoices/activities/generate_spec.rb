@@ -6,6 +6,10 @@ describe Invoices::Activities::Generate do
   end
 
   describe '#call' do
+    subject do
+      described_class.new(invoice).generate!
+    end
+
     let!(:some_activity) do
       create :activity, :default_associations, date: (1.month.ago.beginning_of_month + 3.days),
                                                text: first_text
@@ -19,14 +23,10 @@ describe Invoices::Activities::Generate do
     let(:first_text) { 'something' }
     let(:second_text) { 'something else' }
 
-    subject do
-      described_class.new(invoice).generate!
-    end
-
     context 'without any activities' do
       let(:customer_without_activities) { create :customer }
       let(:employee) { create :employee }
-      let(:invoice) { create :invoice, customer: customer_without_activities, employee: employee }
+      let(:invoice) { create :invoice, customer: customer_without_activities, employee: }
 
       it 'works' do
         subject

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Login / Logout' do
+describe 'Login / Logout' do
   let!(:employee) do
     create :employee, name: 'Max',
                       email: 'someone@kms.ch',
@@ -8,7 +8,7 @@ feature 'Login / Logout' do
                       password_confirmation: 'password'
   end
 
-  scenario 'login' do
+  it 'login' do
     visit new_employee_session_path
 
     fill_in 'E-Mail-Adresse', with: 'someone@kms.ch'
@@ -16,10 +16,10 @@ feature 'Login / Logout' do
 
     click_button 'Anmelden'
 
-    expect(current_path).to eq activities_path
+    expect(page).to have_current_path activities_path, ignore_query: true
   end
 
-  scenario 'invalid login' do
+  it 'invalid login' do
     visit new_employee_session_path
 
     fill_in 'E-Mail-Adresse', with: 'someone@kms.ch'
@@ -28,18 +28,18 @@ feature 'Login / Logout' do
     click_button 'Anmelden'
 
     expect(page).to have_text 'Ungültige Anmeldedaten'
-    expect(current_path).to eq new_employee_session_path
+    expect(page).to have_current_path new_employee_session_path, ignore_query: true
   end
 
-  scenario 'logout' do
+  it 'logout' do
     sign_in employee
 
     visit root_path
 
-    expect(current_path).to eq activities_path
+    expect(page).to have_current_path activities_path, ignore_query: true
 
     click_link 'Max abmelden'
 
-    expect(current_path).to eq new_employee_session_path
+    expect(page).to have_current_path new_employee_session_path, ignore_query: true
   end
 end

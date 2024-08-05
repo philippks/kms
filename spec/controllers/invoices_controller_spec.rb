@@ -49,7 +49,7 @@ RSpec.describe InvoicesController do
 
     context 'with activities' do
       let!(:activity) do
-        create :activity, employee: employee, customer: customer, hours: 1
+        create :activity, employee:, customer:, hours: 1
       end
 
       it 'generates activities' do
@@ -64,9 +64,9 @@ RSpec.describe InvoicesController do
   describe 'PATCH #update' do
     subject do
       patch :update, params: {
-        format: format,
+        format:,
         id: invoice.to_param,
-        invoice: { title: 'Spezialrechnung' }
+        invoice: { title: 'Spezialrechnung' },
       }
     end
 

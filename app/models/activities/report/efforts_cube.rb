@@ -1,7 +1,7 @@
 module Activities
   class Report
     class EffortsCube
-      AMOUNT_KEYS = [:activities, :expenses, :turnover].freeze
+      AMOUNT_KEYS = %i[activities expenses turnover].freeze
       KEYS = (AMOUNT_KEYS + [:hours]).freeze
 
       def initialize(efforts)
@@ -72,8 +72,8 @@ module Activities
 
         values = {
           hours: effort.hours,
-          activities: activities,
-          expenses: expenses,
+          activities:,
+          expenses:,
           turnover: activities + expenses,
         }
 

@@ -1,5 +1,5 @@
 class TargetHours < ActiveRecord::Base
-  DEFAULT_TARGET_HOURS = 8.freeze
+  DEFAULT_TARGET_HOURS = 8
 
   validates :date, :hours, presence: true
   validates_inclusion_of :hours, in: [0, 4, 6, 8]
@@ -7,12 +7,14 @@ class TargetHours < ActiveRecord::Base
   # increments hours from 0 to 4 or by 2
   def increment_hours
     return self.hours = 4 if hours.zero?
+
     self.hours += 2
   end
 
   # deletes the instance if hours >= 8
   def save_or_delete!
     return delete if hours >= DEFAULT_TARGET_HOURS
+
     save!
   end
 
@@ -20,13 +22,13 @@ class TargetHours < ActiveRecord::Base
   # http://arshaw.com/fullcalendar/docs/event_data/Event_Object/
   def as_json(_options = {})
     {
-      id: id,
+      id:,
       title: "#{hours} Stunden",
       start: date.iso8601,
       end: date.iso8601,
       allDay: true,
       recurring: false,
-      color: hours < DEFAULT_TARGET_HOURS ? 'blue' : 'green'
+      color: hours < DEFAULT_TARGET_HOURS ? 'blue' : 'green',
     }
   end
 
@@ -35,28 +37,26 @@ class TargetHours < ActiveRecord::Base
   end
 
   def self.hours_per_date(from:, to:)
-    target_hours_per_date = between(from: from, to: to).group_by(&:date)
+    target_hours_per_date = between(from:, to:).group_by(&:date)
 
     (from..to).each do |date|
-      if target_hours_per_date[date].blank?
-        target_hours_per_date[date] = default_target_hours_for(date)
-      else
-        target_hours_per_date[date] = target_hours_per_date[date].first.hours
-      end
+      target_hours_per_date[date] = if target_hours_per_date[date].blank?
+                                      default_target_hours_for(date)
+                                    else
+                                      target_hours_per_date[date].first.hours
+                                    end
     end
 
     target_hours_per_date
   end
 
   def self.hours_between(from:, to:)
-    hours_per_date(from: from, to: to).values.sum(0)
+    hours_per_date(from:, to:).values.sum(0)
   end
 
   def self.hours_between_for_employee(from:, to:, employee:)
-    hours_between(from: from, to: to) * (employee.workload_in_percent)
+    hours_between(from:, to:) * employee.workload_in_percent
   end
-
-  private
 
   def self.default_target_hours_for(date)
     if date.saturday? || date.sunday?
