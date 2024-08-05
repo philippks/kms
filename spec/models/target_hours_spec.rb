@@ -32,15 +32,15 @@ describe TargetHours do
   end
 
   describe '.between' do
+    subject do
+      described_class.between from: Date.parse('2016-12-19'), to: Date.parse('2016-12-20')
+    end
+
     let!(:target_hours) { create :target_hours, date: '2016-12-19', hours: 4 }
 
     before do
       create :target_hours, date: '2016-12-18'
       create :target_hours, date: '2016-12-21'
-    end
-
-    subject do
-      described_class.between from: Date.parse('2016-12-19'), to: Date.parse('2016-12-20')
     end
 
     it { is_expected.to eq [target_hours] }
@@ -66,12 +66,11 @@ describe TargetHours do
   end
 
   describe '.hours_between' do
+    subject do
+      described_class.hours_between(from:, to:)
+    end
     let(:from) { Date.parse('2016-12-19') } # monday
     let(:to) { Date.parse('2016-12-20') } # tuesday
-
-    subject do
-      described_class.hours_between(from: from, to: to)
-    end
 
     before do
       create :target_hours, date: '2016-12-19', hours: 4

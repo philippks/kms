@@ -1,12 +1,12 @@
 require 'rails_helper'
 
-feature 'New Invoice PDF' do
+describe 'New Invoice PDF' do
   let(:employee) { create :employee }
   let(:customer) { create :customer, confidential_title: 'Lölimann' }
   let(:invoice_attributes) do
     {
-      customer: customer,
-      employee: employee,
+      customer:,
+      employee:,
       vat_rate: 0.08,
       date: '2017-10-01',
     }
@@ -18,7 +18,7 @@ feature 'New Invoice PDF' do
   end
 
   it 'shows visible activity texts' do
-    create :invoice_activity, invoice: invoice, text: 'Däumchen drehen'
+    create :invoice_activity, invoice:, text: 'Däumchen drehen'
 
     visit new_invoice_pdf_path(invoice, format: :pdf, html: true)
 
@@ -26,7 +26,7 @@ feature 'New Invoice PDF' do
   end
 
   it 'does not show hidden activity texts' do
-    create :invoice_activity, invoice: invoice, visible: false, text: 'Däumchen drehen'
+    create :invoice_activity, invoice:, visible: false, text: 'Däumchen drehen'
 
     visit new_invoice_pdf_path(invoice, format: :pdf, html: true)
 
@@ -40,9 +40,9 @@ feature 'New Invoice PDF' do
   end
 
   it 'shows correct amounts' do
-    create :invoice_activity, invoice: invoice, amount_manually: 500
-    create :invoice_activity, invoice: invoice, amount_manually: 200
-    create :invoice_expense, invoice: invoice, amount_manually: 100
+    create :invoice_activity, invoice:, amount_manually: 500
+    create :invoice_activity, invoice:, amount_manually: 200
+    create :invoice_expense, invoice:, amount_manually: 100
 
     visit new_invoice_pdf_path(invoice, format: :pdf, html: true)
 
@@ -79,11 +79,11 @@ feature 'New Invoice PDF' do
 
     context 'when invoice has confidential invoices' do
       let(:activity) do
-        create :activity, customer: customer, employee: employee, date: '2017-01-19'
+        create :activity, customer:, employee:, date: '2017-01-19'
       end
 
       before do
-        create :invoice_activity, invoice: invoice,
+        create :invoice_activity, invoice:,
                                   confidential: true,
                                   text: 'Gugus',
                                   efforts: [activity]
@@ -101,7 +101,7 @@ feature 'New Invoice PDF' do
 
   context 'when activities should break the page' do
     it 'adds pagebreak class to table row' do
-      create :invoice_activity, invoice: invoice, pagebreak: true
+      create :invoice_activity, invoice:, pagebreak: true
 
       visit new_invoice_pdf_path(invoice, format: :pdf, html: true)
 

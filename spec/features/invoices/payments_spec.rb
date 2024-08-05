@@ -1,17 +1,17 @@
 require 'rails_helper'
 
-feature 'Managing Payments' do
+describe 'Managing Payments' do
   let!(:invoice) do
     create :invoice, :with_associations, activities_amount_manually: 400, state: :sent
   end
-  let!(:payment) { create :payment, invoice: invoice, amount: 200 }
+  let!(:payment) { create :payment, invoice:, amount: 200 }
 
   before do
     sign_in invoice.employee
   end
 
-  scenario 'List payments' do
-    create :payment, invoice: invoice, amount: 50
+  it 'List payments' do
+    create :payment, invoice:, amount: 50
 
     visit invoice_payments_path(invoice)
 
@@ -19,7 +19,7 @@ feature 'Managing Payments' do
     expect(page).to have_text('250.00')
   end
 
-  scenario 'Create new payment' do
+  it 'Create new payment' do
     visit new_invoice_payment_path(invoice)
 
     fill_in 'Betrag', with: '50'
@@ -28,7 +28,7 @@ feature 'Managing Payments' do
     expect(page).to have_text('Zahlung wurde erfasst.')
   end
 
-  scenario 'Create new payment with total amount' do
+  it 'Create new payment with total amount' do
     visit new_invoice_payment_path(invoice)
 
     fill_in 'Betrag', with: invoice.reload.open_amount
@@ -37,7 +37,7 @@ feature 'Managing Payments' do
     expect(page).to have_text('Die Rechnung wurde als bezahlt markiert.')
   end
 
-  scenario 'Create new payment and mark invoice as charged anyway' do
+  it 'Create new payment and mark invoice as charged anyway' do
     visit new_invoice_payment_path(invoice)
 
     fill_in 'Betrag', with: '50'
@@ -47,7 +47,7 @@ feature 'Managing Payments' do
     expect(page).to have_text('Die Rechnung wurde als bezahlt markiert.')
   end
 
-  scenario 'Update a payment' do
+  it 'Update a payment' do
     visit edit_invoice_payment_path(invoice, payment)
 
     fill_in 'Betrag', with: '100'
@@ -58,7 +58,7 @@ feature 'Managing Payments' do
     expect(page).to have_text('100.00')
   end
 
-  scenario 'Destroy a payment' do
+  it 'Destroy a payment' do
     visit edit_invoice_payment_path(invoice, payment)
 
     click_link 'Löschen'

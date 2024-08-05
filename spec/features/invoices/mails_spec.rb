@@ -1,12 +1,12 @@
 require 'rails_helper'
 
-feature 'Manage Mails' do
+describe 'Manage Mails' do
   let(:employee) { create :employee }
   let(:customer) { create :customer }
-  let(:invoice) { create :invoice, employee: employee, customer: customer, state: :sent, sent_at: '2017-01-01 12:00' }
+  let(:invoice) { create :invoice, employee:, customer:, state: :sent, sent_at: '2017-01-01 12:00' }
   let!(:mail) do
-    create :invoice_mail, invoice: invoice,
-                          employee: employee,
+    create :invoice_mail, invoice:,
+                          employee:,
                           body: 'Some text',
                           from: Global.mailer.from,
                           to: 'customers@mail.ch'
@@ -16,7 +16,7 @@ feature 'Manage Mails' do
     sign_in employee
   end
 
-  scenario 'Show Mail' do
+  it 'Show Mail' do
     visit invoice_mail_path(invoice)
 
     expect(page).to have_text '01.01.2017 12:00'

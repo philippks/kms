@@ -2,11 +2,10 @@ module Invoices
   class DeliveriesController < ApplicationController
     load_and_authorize_resource :invoice
 
-    def new
-    end
+    def new; end
 
     def update
-      if @invoice.update delivery_params.merge(delivery_method: delivery_method)
+      if @invoice.update delivery_params.merge(delivery_method:)
         case delivery_method
         when :post
           @invoice.deliver!
@@ -27,10 +26,10 @@ module Invoices
     end
 
     def delivery_params
-      params.require(:delivery).permit customer_attributes: [:id,
-                                                             :invoice_delivery,
-                                                             :confidential_title,
-                                                             :email_address]
+      params.require(:delivery).permit customer_attributes: %i[id
+                                                               invoice_delivery
+                                                               confidential_title
+                                                               email_address]
     end
   end
 end

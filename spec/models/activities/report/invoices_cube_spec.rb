@@ -3,20 +3,20 @@ require 'rails_helper'
 describe Activities::Report::InvoicesCube do
   let(:employee) { create :employee }
   let(:customer_group) { create :customer_group }
-  let(:customer) { create :customer, customer_group: customer_group }
-  let(:other_customer) { create :customer, customer_group: customer_group }
+  let(:customer) { create :customer, customer_group: }
+  let(:other_customer) { create :customer, customer_group: }
   let(:date) { Date.parse '2016-12-20' }
   let(:cube) { described_class.new invoices }
 
   let(:invoices) do
     [
-      build(:invoice, employee: employee,
-                      customer: customer,
-                      date: date,
+      build(:invoice, employee:,
+                      customer:,
+                      date:,
                       activities_amount_manually: 500),
-      build(:invoice, employee: employee,
+      build(:invoice, employee:,
                       customer: other_customer,
-                      date: date,
+                      date:,
                       activities_amount_manually: 500),
     ]
   end

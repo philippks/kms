@@ -12,29 +12,25 @@ module Invoices
     private
 
     def customer_attributes_validation
-      if customer
-        customer.valid?
+      return unless customer
 
-        if confidential? && customer.confidential_title.blank?
-          errors.add(:confidential, :confidential_title_necessary)
-        end
-      end
+      customer.valid?
+
+      return unless confidential? && customer.confidential_title.blank?
+
+      errors.add(:confidential, :confidential_title_necessary)
     end
 
     def validate_format
-      if format == :detailed
-        if activities_amount_manually.present?
-          errors.add(:format, :activities_amount_set_manually)
-        end
+      return unless format == :detailed
 
-        if activities.select { |activity| !activity.visible? }.any?
-          errors.add(:format, :hidden_activities)
-        end
+      errors.add(:format, :activities_amount_set_manually) if activities_amount_manually.present?
 
-        if (activities.map(&:hourly_rate).count(nil) > 0)
-          errors.add(:format, :conflicting_activities)
-        end
-      end
+      errors.add(:format, :hidden_activities) if activities.select { |activity| !activity.visible? }.any?
+
+      return unless activities.map(&:hourly_rate).count(nil) > 0
+
+      errors.add(:format, :conflicting_activities)
     end
   end
 end

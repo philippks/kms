@@ -1,5 +1,5 @@
 class PercentInput < SimpleForm::Inputs::Base
-  def input(wrapper_options = nil)
+  def input(_wrapper_options = nil)
     template.content_tag :div,
                          "#{text_field} #{percent_addon}".html_safe,
                          class: 'input-group percent'

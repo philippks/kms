@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-feature 'Managing Expenses' do
+describe 'Managing Expenses' do
   let(:text) { 'Eine grössere Ausgabe' }
   let(:employee) { create :employee }
   let(:customer) { create :customer, name: 'Max' }
-  let(:expense) { create :expense, employee: employee, text: text }
+  let(:expense) { create :expense, employee:, text: }
 
   before do
     customer.touch
@@ -13,7 +13,7 @@ feature 'Managing Expenses' do
     sign_in employee
   end
 
-  scenario 'Create new Expense', js: true do
+  it 'Create new Expense', js: true do
     visit new_expense_path
 
     fill_in 'Betrag', with: 300
@@ -25,7 +25,7 @@ feature 'Managing Expenses' do
     expect(page).to have_text('Nebenkosten wurde erfasst')
   end
 
-  scenario 'Update a Expense' do
+  it 'Update a Expense' do
     visit edit_expense_path(expense)
 
     fill_in 'Text', with: 'Aktualisierte Nebenkosten'
@@ -34,7 +34,7 @@ feature 'Managing Expenses' do
     expect(page).to have_text('Nebenkosten wurde gespeichert')
   end
 
-  scenario 'Destroy a Expense' do
+  it 'Destroy a Expense' do
     visit edit_expense_path(expense)
 
     click_link 'Löschen'

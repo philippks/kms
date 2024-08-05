@@ -52,7 +52,7 @@ RSpec.describe EmployeesController do
         initials: 'HM',
         hourly_rate: 150,
         password: 'my secure password',
-        password_confirmation: 'my secure password'
+        password_confirmation: 'my secure password',
       }
     end
 

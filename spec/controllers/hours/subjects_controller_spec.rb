@@ -4,12 +4,11 @@ RSpec.describe Hours::SubjectsController do
   render_views
 
   let(:employee) { create :employee }
+  let(:parsed_response) { JSON.parse response.body }
 
   before do
     sign_in employee
   end
-
-  let(:parsed_response) { JSON.parse response.body }
 
   describe 'GET #index' do
     let!(:customer) { create :customer, id: 777, name: 'Fritzli' }
@@ -23,7 +22,7 @@ RSpec.describe Hours::SubjectsController do
 
     context 'with empty query' do
       before do
-        create :activity, employee: employee, customer: customer
+        create :activity, employee:, customer:
       end
 
       it 'returns only last customers' do

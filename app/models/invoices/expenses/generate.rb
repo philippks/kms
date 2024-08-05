@@ -10,9 +10,9 @@ module Invoices
       def generate!
         super
 
-        if @generate_default_expense
-          Invoices::Expense.create_default_expense_for @invoice
-        end
+        return unless @generate_default_expense
+
+        Invoices::Expense.create_default_expense_for @invoice
       end
 
       def efforts_class

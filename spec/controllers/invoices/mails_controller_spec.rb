@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Invoices::MailsController do
   let(:customer) { create :customer, name: 'Hans Muster', confidential_title: 'Hansi', email_address: 'hans@muster.ch' }
   let(:employee) { create :employee }
-  let(:invoice) { create :invoice, customer: customer, employee: employee, state: :open }
+  let(:invoice) { create :invoice, customer:, employee:, state: :open }
 
   before do
     sign_in employee
@@ -13,14 +13,14 @@ RSpec.describe Invoices::MailsController do
     it 'assigns invoice mail with default body' do
       get :new, params: { invoice_id: invoice.to_param }
 
-    expect(assigns(:mail).body).to eq("""Guten Tag Hansi
+      expect(assigns(:mail).body).to eq(''"Guten Tag Hansi
 
 In der Beilage erhalten Sie unsere Rechnung vom 22. März 2015 mit der Bitte um fristgerechte Begleichung.
 
 Wir bedanken uns für das entgegengebrachte Vertrauen.
 
 Freundliche Grüsse
-""")
+"'')
     end
 
     context 'without confidential title' do
@@ -33,7 +33,7 @@ Freundliche Grüsse
       it 'uses the customers name' do
         get :new, params: { invoice_id: invoice.to_param }
 
-        expect(assigns(:mail).body).to include("Guten Tag Hans Muster")
+        expect(assigns(:mail).body).to include('Guten Tag Hans Muster')
       end
     end
   end
@@ -46,11 +46,10 @@ Freundliche Grüsse
           employee_id: employee.id,
           from: Global.mailer.from,
           to: customer.email_address,
-          body: 'Some body'
-        }
+          body: 'Some body',
+        },
       }
     end
-
 
     before do
       allow_any_instance_of(Invoice).to receive(:persist_pdf) # ignore persist
@@ -81,18 +80,19 @@ Freundliche Grüsse
     end
 
     context 'if invoice state change not possible' do
-      let(:invoice) { create :invoice, customer: customer, employee: employee, state: :sent }
+      let(:invoice) { create :invoice, customer:, employee:, state: :sent }
 
       it 'does not send a mail' do
         expect do
           post :create, params: parameters
-        end.to_not change { ActionMailer::Base.deliveries.size }
+        end.not_to(change { ActionMailer::Base.deliveries.size })
       end
     end
 
     context 'mailer raises an exception' do
       before do
-        expect(InvoiceMailer).to receive(:invoice_mail).and_raise Net::SMTPAuthenticationError.new("error", message: "error")
+        expect(InvoiceMailer).to receive(:invoice_mail).and_raise Net::SMTPAuthenticationError.new('error',
+                                                                                                   message: 'error')
       end
 
       it 'does not change state of invoice to sent' do

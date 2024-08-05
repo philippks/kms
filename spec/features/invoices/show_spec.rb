@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'View Invoice' do
+describe 'View Invoice' do
   let(:employee) { create :employee }
   let(:customer) { create :customer }
 
@@ -10,13 +10,13 @@ feature 'View Invoice' do
 
   context 'when invoice state is open' do
     let!(:invoice) do
-      create :invoice, customer: customer, employee: employee, state: :open
+      create :invoice, customer:, employee:, state: :open
     end
 
     context 'when a invoice hint is present' do
       let(:customer) { create :customer, invoice_hint: 'Unbedingt vertikal falten' }
 
-      scenario 'the hint is shown' do
+      it 'the hint is shown' do
         visit invoice_path(invoice)
 
         expect(page).to have_text 'Unbedingt vertikal falten'
@@ -25,7 +25,7 @@ feature 'View Invoice' do
 
     context 'when open efforts before the invoice date exists' do
       before do
-        create :activity, state: :open, employee: employee, customer: customer, date: (invoice.date - 1.week)
+        create :activity, state: :open, employee:, customer:, date: (invoice.date - 1.week)
       end
 
       it 'shows a warning' do

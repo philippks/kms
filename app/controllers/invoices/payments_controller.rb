@@ -38,10 +38,10 @@ module Invoices
     end
 
     def may_mark_invoice_charged!
-      if @invoice.valid? && (@invoice.open_amount.zero? || mark_invoice_charged_anyway?)
-        @invoice.charge!
-        redirect_to @invoice, flash: { notice: t('invoices.payments.create.charged') }
-      end
+      return unless @invoice.valid? && (@invoice.open_amount.zero? || mark_invoice_charged_anyway?)
+
+      @invoice.charge!
+      redirect_to @invoice, flash: { notice: t('invoices.payments.create.charged') }
     end
   end
 end

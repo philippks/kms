@@ -1,6 +1,6 @@
 class TargetHoursController < ApplicationController
   respond_to :html, only: :index
-  respond_to :json, only: [:index, :update]
+  respond_to :json, only: %i[index update]
 
   def index
     respond_with target_hours if request.format == :json
@@ -8,7 +8,7 @@ class TargetHoursController < ApplicationController
 
   def update
     date = Date.parse params[:date]
-    target_hours = TargetHours.where(date: date).first_or_initialize
+    target_hours = TargetHours.where(date:).first_or_initialize
     target_hours.increment_hours if target_hours.persisted?
     target_hours.save_or_delete!
 
@@ -16,7 +16,7 @@ class TargetHoursController < ApplicationController
   end
 
   def target_hours
-    target_hours = TargetHours.between(from: from, to: to).to_a
+    target_hours = TargetHours.between(from:, to:).to_a
     complete_target_hours target_hours
   end
 
@@ -24,9 +24,8 @@ class TargetHoursController < ApplicationController
   def complete_target_hours(target_hours)
     (from..to).each do |date|
       next if date.saturday? || date.sunday?
-      if target_hours.none? { |tg| tg.date == date }
-        target_hours.push TargetHours.new(date: date, hours: 8)
-      end
+
+      target_hours.push TargetHours.new(date:, hours: 8) if target_hours.none? { |tg| tg.date == date }
     end
 
     target_hours

@@ -7,7 +7,7 @@ class OpListsController < ApplicationController
     @total_open_amount = @op_list_items.map(&:amount).sum(0)
 
     respond_to do |format|
-      format.html { }
+      format.html {}
       format.pdf do
         render pdf: file_name, disposition: :attachment, zoom: 0.65
       end

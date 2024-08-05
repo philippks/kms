@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Filter Activities' do
+describe 'Filter Activities' do
   let!(:open_activity) do
     create :activity, :default_associations, date: Date.current,
                                              text: 'Offene Leistung',
@@ -17,7 +17,7 @@ feature 'Filter Activities' do
     sign_in open_activity.employee
   end
 
-  scenario 'by state', js: true do
+  it 'by state', js: true do
     visit activities_path
 
     # select state 'Offen'

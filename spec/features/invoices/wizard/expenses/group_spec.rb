@@ -1,16 +1,16 @@
 require 'rails_helper'
 
-feature 'Group Invoice Expenses' do
+describe 'Group Invoice Expenses' do
   let(:invoice) { create :invoice, :default_associations }
 
   let!(:invoice_expense) do
-    create :invoice_expense, invoice: invoice,
+    create :invoice_expense, invoice:,
                              text: 'Autofahrt',
                              position: 1
   end
 
   let!(:another_invoice_expense) do
-    create :invoice_expense, invoice: invoice,
+    create :invoice_expense, invoice:,
                              text: 'Eine andere Autofahrt',
                              position: 2
   end
@@ -28,12 +28,12 @@ feature 'Group Invoice Expenses' do
   end
 
   before do
-    create :invoice_expense, invoice: invoice, position: 3
+    create :invoice_expense, invoice:, position: 3
 
     sign_in invoice.employee
   end
 
-  scenario 'Group Invoice Expenses', js: true do
+  it 'Group Invoice Expenses', js: true do
     visit invoice_wizard_expenses_path(invoice)
 
     find(:css, "#effort_ids_[value='#{invoice_expense.id}']").set(true)

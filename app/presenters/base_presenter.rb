@@ -1,5 +1,5 @@
 class BasePresenter < SimpleDelegator
-  def initialize(model, view=nil)
+  def initialize(model, view = nil)
     @view = view
     super(model)
   end

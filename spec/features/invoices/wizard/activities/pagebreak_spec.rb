@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-feature 'Manage Invoice Activities' do
+describe 'Manage Invoice Activities' do
   let(:invoice) { create :invoice, :default_associations }
 
   let(:invoice_activity) do
-    create :invoice_activity, invoice: invoice, pagebreak: false
+    create :invoice_activity, invoice:, pagebreak: false
   end
 
   before do
@@ -13,7 +13,7 @@ feature 'Manage Invoice Activities' do
     sign_in invoice.employee
   end
 
-  scenario 'Toggle Pagebreak' do
+  it 'Toggle Pagebreak' do
     visit invoice_wizard_activities_path(invoice)
 
     find('.fa-cut').find(:xpath, './/..').click

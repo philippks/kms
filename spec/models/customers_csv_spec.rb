@@ -9,7 +9,7 @@ describe CustomersCsv do
     let(:customers) do
       [
         build(:customer, name: 'Kunde 1', invoice_hint: 'Per Mail'),
-        build(:customer, name: 'Kunde 2', customer_group: customer_group),
+        build(:customer, name: 'Kunde 2', customer_group:),
       ]
     end
 

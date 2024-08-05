@@ -6,7 +6,7 @@ describe InvoicePresenter do
 
   describe 'with confidential activities' do
     before do
-      create_list :invoice_activity, 2, invoice: invoice,
+      create_list :invoice_activity, 2, invoice:,
                                         confidential: true,
                                         hours_manually: 2,
                                         hourly_rate_manually: 150
@@ -25,7 +25,7 @@ describe InvoicePresenter do
 
       describe 'with various hourly rates' do
         before do
-          create :invoice_activity, invoice: invoice,
+          create :invoice_activity, invoice:,
                                     confidential: true,
                                     hourly_rate_manually: 250
         end

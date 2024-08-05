@@ -7,8 +7,7 @@ class HourlyRatesController < ApplicationController
     @hourly_rates = @hourly_rates.order('customers.name')
   end
 
-  def new
-  end
+  def new; end
 
   def create
     @hourly_rate.save

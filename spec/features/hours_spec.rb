@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'View Hours' do
+describe 'View Hours' do
   let(:employee) { create :employee }
 
   before do
@@ -13,7 +13,7 @@ feature 'View Hours' do
     end
   end
 
-  scenario 'View Total Hours' do
+  it 'View Total Hours' do
     create :activity, :default_associations, date: Date.current, hours: 1.3
     create :activity, :default_associations, date: 1.day.ago, hours: 2.3
 

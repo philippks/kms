@@ -7,10 +7,11 @@ class Employee < ActiveRecord::Base
 
   has_many :hourly_rates, dependent: :destroy
 
-  scope :for_query, -> (query) do
+  scope :for_query, lambda { |query|
     return if query.blank?
+
     where('lower(name) LIKE lower(?)', "%#{query}%")
-  end
+  }
 
   scope :active, -> { where(deactivated: false) }
 
@@ -20,7 +21,9 @@ class Employee < ActiveRecord::Base
   validates :password, length: { minimum: 8 }, unless: -> { persisted? && password.nil? }, confirmation: true
   validates :password_confirmation, presence: true, unless: -> { persisted? && password.nil? }
   validate :check_deactivate
-  validates :workload, presence: true, numericality: { greater_than: 0, less_than_or_equal_to: 100 }, unless: -> { worktime_model.debit_is_actual? }
+  validates :workload, presence: true, numericality: { greater_than: 0, less_than_or_equal_to: 100 }, unless: lambda {
+                                                                                                                worktime_model.debit_is_actual?
+                                                                                                              }
 
   enumerize :worktime_model, in: { target_hours: 0, debit_is_actual: 1 }, default: :target_hours
 
@@ -47,7 +50,7 @@ class Employee < ActiveRecord::Base
     end
   end
 
-  #this method is called by devise to check for "active" state of the model
+  # this method is called by devise to check for "active" state of the model
   def active_for_authentication?
     !deactivated?
   end

@@ -2,11 +2,11 @@ require 'rails_helper'
 
 describe Hours::CalendarDay do
   let(:calendar_day) do
-    described_class.new date: date,
-                        activities: activities,
-                        absences: absences,
-                        target_hours: target_hours,
-                        employee: employee
+    described_class.new date:,
+                        activities:,
+                        absences:,
+                        target_hours:,
+                        employee:
   end
 
   let(:date) { Date.parse('2016-12-21') }
@@ -29,7 +29,7 @@ describe Hours::CalendarDay do
       let(:activities) do
         [
           create(:activity, :default_associations, hours: 2),
-          create(:activity, :default_associations, hours: 2)
+          create(:activity, :default_associations, hours: 2),
         ]
       end
 
@@ -126,7 +126,7 @@ describe Hours::CalendarDay do
 
       context 'and target hours' do
         before do
-          create :target_hours, date: date, hours: 6
+          create :target_hours, date:, hours: 6
         end
 
         it 'considers target hours' do
@@ -137,7 +137,7 @@ describe Hours::CalendarDay do
 
       context 'if target hours are zero' do
         before do
-          create :target_hours, date: date, hours: 0
+          create :target_hours, date:, hours: 0
         end
 
         it 'does not create an event' do
@@ -168,8 +168,8 @@ describe Hours::CalendarDay do
       end
 
       it 'creates both' do
-        expect(activity_event).to_not eq nil
-        expect(absence_event).to_not eq nil
+        expect(activity_event).not_to eq nil
+        expect(absence_event).not_to eq nil
       end
 
       it 'considers both for the target_reached attribute' do

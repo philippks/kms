@@ -1,18 +1,18 @@
 require 'rails_helper'
 
 describe Invoices::Activity do
+  subject { invoice.reload.activities.map(&:id) }
+
   let(:invoice) do
     create :invoice, :default_associations
   end
 
   before do
-    create :invoice_activity, invoice: invoice, id: 10
-    create :invoice_activity, invoice: invoice, id: 11
-    create :invoice_activity, invoice: invoice, confidential: true, id: 101
-    create :invoice_activity, invoice: invoice, confidential: true, id: 102
+    create :invoice_activity, invoice:, id: 10
+    create :invoice_activity, invoice:, id: 11
+    create :invoice_activity, invoice:, confidential: true, id: 101
+    create :invoice_activity, invoice:, confidential: true, id: 102
   end
-
-  subject { invoice.reload.activities.map(&:id) }
 
   describe 'default order' do
     it { is_expected.to eq [10, 11, 101, 102] }

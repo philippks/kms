@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Invoices::ExpensesController do
   let(:invoice) { create :invoice, :default_associations }
-  let!(:first_invoice_expense) { create :invoice_expense, invoice: invoice }
-  let!(:second_invoice_expense) { create :invoice_expense, invoice: invoice }
+  let!(:first_invoice_expense) { create :invoice_expense, invoice: }
+  let!(:second_invoice_expense) { create :invoice_expense, invoice: }
 
   before do
     sign_in invoice.employee
@@ -12,10 +12,10 @@ RSpec.describe Invoices::ExpensesController do
   describe 'PATCH #update' do
     subject do
       patch :update, params: {
-        format: format,
+        format:,
         invoice_id: invoice,
         id: first_invoice_expense.to_param,
-        expense: { text: 'Eifach öpis' }
+        expense: { text: 'Eifach öpis' },
       }
     end
 
@@ -53,7 +53,7 @@ RSpec.describe Invoices::ExpensesController do
 
         expense: {
           position: 2,
-        }
+        },
       }
 
       expect(first_invoice_expense.reload.position).to eq 2
@@ -62,15 +62,15 @@ RSpec.describe Invoices::ExpensesController do
   end
 
   describe 'POST #group' do
-    let(:expense_ids) { [first_invoice_expense.id, second_invoice_expense.id] }
-    let(:service) { instance_double Invoices::Efforts::Group }
-
     subject do
       patch :group, params: {
         invoice_id: invoice.to_param,
         effort_ids: expense_ids,
       }
     end
+
+    let(:expense_ids) { [first_invoice_expense.id, second_invoice_expense.id] }
+    let(:service) { instance_double Invoices::Efforts::Group }
 
     it 'calls service to group expenses' do
       expect(Invoices::Efforts::Group).to receive(:new).with(invoice, expense_ids).and_return service

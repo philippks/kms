@@ -1,6 +1,5 @@
 class DebtorsReportsController < ApplicationController
-  def index
-  end
+  def index; end
 
   def new
     @until_date = until_date
@@ -8,7 +7,7 @@ class DebtorsReportsController < ApplicationController
     @overdues = overdues
 
     respond_to do |format|
-      format.html { }
+      format.html {}
       format.pdf do
         render pdf: file_name, orientation: :landscape, disposition: :attachment
       end
@@ -16,7 +15,7 @@ class DebtorsReportsController < ApplicationController
   end
 
   def create
-    redirect_to new_debtors_report_path(debtors_report: { until_date: until_date })
+    redirect_to new_debtors_report_path(debtors_report: { until_date: })
   end
 
   private
@@ -38,9 +37,9 @@ class DebtorsReportsController < ApplicationController
 
   def overdues
     @overdues ||= debtors.each_with_object({}) do |debtor, hash|
-                    hash[debtor] = (@until_date - debtor.date).to_i
-                    hash
-                  end
+      hash[debtor] = (@until_date - debtor.date).to_i
+      hash
+    end
   end
 
   def file_name
