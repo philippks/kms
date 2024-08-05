@@ -8,15 +8,15 @@
 #
 # https://github.com/mileszs/wicked_pdf/blob/master/README.md
 
-WickedPdf.config = {
+WickedPdf.configure do |c|
   # Path to the wkhtmltopdf executable:
-  exe_path: '/usr/bin/wkhtmltopdf',
+  c.exe_path = '/usr/bin/wkhtmltopdf'
 
   # Layout file to be used for all PDFs
   # (but can be overridden in `render :pdf` calls)
-  layout: 'pdf',
+  c.layout = 'pdf'
 
-  encoding: 'utf-8',
-  size: 'A4',
-  footer: { right: '[page] / [topage]' }
-}
+  c.encoding = 'utf-8'
+  c.size = 'A4'
+  c.footer = { right: '[page] / [topage]' }
+end
