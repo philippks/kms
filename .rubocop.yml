@@ -32,8 +32,8 @@ Style/TrailingCommaInArrayLiteral:
 Style/TrailingCommaInHashLiteral:
   EnforcedStyleForMultiline: comma
 
-Capybara/FeatureMethods:
-  Enabled: false
-
 RSpec/MultipleExpectations:
   Enabled: false
+
+RSpec/ExampleLength:
+  Max: 20

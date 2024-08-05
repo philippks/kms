@@ -22,21 +22,44 @@ Use docker for development, testing and production.
 
 ### Start Locally
 
-Build containers:
+Install dependencies with mise:
 
 ```
-docker-compose -f docker-compose.dev.yml build
+mise install
 ```
 
-Edit configuration file `.env.dev` if necessary.
-
-Start app for development:
+Start postgres database:
 
 ```
-docker-compose -f docker-compose.dev.yml up kms_development
+docker compose -f docker-compose.dev.yml up postgres
+```
+
+Edit configuration file `.env.development` if necessary.
+
+Start rails server:
+
+```
+bundle exec rails s
 ```
 
 Access web application: http://localhost:3000
+
+### Run Tests Locally
+
+To run the tests locally, ensure that postgres is running.
+
+```
+docker compose -f docker-compose.dev.yml up postgres
+bundle exec rspec
+```
+
+### Run Tests in CI
+
+Run tests inside docker container with:
+
+```
+docker compose -f docker-compose.test.yml run --rm tests
+```
 
 ### Run Production
 
@@ -45,18 +68,11 @@ Change values in `.env.production` accordingly.
 Start server with:
 
 ```
-docker-compose -f docker-compose.prod.yml up kms
+docker compose -f docker-compose.prod.yml up kms
 ```
 
 Access web application: http://localhost:3000
 
-### Run Tests
-
-Run tests inside docker container with:
-
-```
-docker-compose -f docker-compose.test.yml run --rm tests
-```
 
 ### Configuration
 

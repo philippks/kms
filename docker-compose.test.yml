@@ -1,5 +1,3 @@
-version: "3.7"
-
 services:
   tests:
     build:
@@ -8,7 +6,7 @@ services:
       cache_from:
         - philippks/kms:test-latest
     image: philippks/kms:test-latest
-    env_file: .env.example
+    env_file: .env.test.ci
     depends_on:
       - postgres-tests
     volumes:
@@ -17,4 +15,4 @@ services:
 
   postgres-tests:
     image: postgres:12
-    env_file: .env.example
+    env_file: .env.test.ci

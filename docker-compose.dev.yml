@@ -1,28 +1,12 @@
-version: "3.7"
-
 services:
-  kms_development:
-    build:
-      context: .
-      target: development
-    env_file: .env.dev
-    ports:
-      - 3000:3000
-    depends_on:
-      - postgres
-    volumes:
-      - .:/app
-      - bundle:/bundle
-      - /app/node_modules/
-
   postgres:
     image: postgres:12
-    env_file: .env.dev
+    env_file: .env.development
+    ports:
+      - 5432:5432
     volumes:
       - postgres:/var/lib/postgresql/data/
 
 volumes:
   postgres:
     name: kms-postgres
-  bundle:
-    name: kms-bundle
