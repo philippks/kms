@@ -16,14 +16,10 @@ class ActivitiesCsv
 
   }.freeze
 
-  def initialize(activitys)
-    @activitys = activitys
-  end
-
-  def to_csv
+  def to_csv(activities)
     CSV.generate do |csv|
       csv << COLUMNS.keys.map(&Activity.method(:human_attribute_name))
-      @activitys.each do |activity|
+      activities.each do |activity|
         csv << COLUMNS.values.map { |column| column.call(activity) }
       end
     end

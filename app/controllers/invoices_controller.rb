@@ -22,7 +22,7 @@ class InvoicesController < ApplicationController
       end
 
       format.csv do
-        send_data InvoicesCsv.new(@invoices).to_csv, filename: "#{export_file_name}.csv"
+        send_data InvoicesCsv.new.to_csv(@invoices), filename: "#{export_file_name}.csv"
       end
     end
   end
