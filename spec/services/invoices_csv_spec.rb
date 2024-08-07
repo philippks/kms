@@ -12,7 +12,7 @@ describe InvoicesCsv do
     end
 
     it 'returns CSV with invoices data' do
-      expect(described_class.new([invoice]).to_csv).to eq <<~CSV
+      expect(described_class.new.to_csv([invoice])).to eq <<~CSV
         ID,Mitarbeiter,Kunde,Rechnungsdatum,Betrag,Status
         #{invoice.id},Irgendein Mitarbeiter,Irgendein Kunde,#{I18n.l(invoice.date)},1'015.00,Offen
       CSV

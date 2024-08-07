@@ -7,7 +7,7 @@ describe ActivitiesCsv do
 
   describe '#to_csv' do
     it 'returns CSV with activities data' do
-      expect(described_class.new([activity]).to_csv).to eq <<~CSV
+      expect(described_class.new.to_csv([activity])).to eq <<~CSV
         ID,Mitarbeiter,Kunde,Datum,Anzahl Stunden,Stundensatz,Betrag,Rechnungstext,Notiz,Status,Leistungskategorie
         #{activity.id},Irgendein Mitarbeiter,Irgendein Kunde,18.02.2015,10.0,150.00,1'500.00,Steuererklärung ausgefüllt,"",Offen,Buchhaltung
       CSV
