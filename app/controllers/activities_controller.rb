@@ -21,7 +21,7 @@ class ActivitiesController < ApplicationController
       end
 
       format.csv do
-        send_data ActivitiesCsv.new(@activities).to_csv, filename: "#{export_file_name}.csv"
+        send_data ActivitiesCsv.new.to_csv(@activities), filename: "#{export_file_name}.csv"
       end
     end
   end

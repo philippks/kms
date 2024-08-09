@@ -11,14 +11,10 @@ class InvoicesCsv
 
   }.freeze
 
-  def initialize(invoices)
-    @invoices = invoices
-  end
-
-  def to_csv
+  def to_csv(invoices)
     CSV.generate do |csv|
       csv << COLUMNS.keys.map(&Invoice.method(:human_attribute_name))
-      @invoices.each do |invoice|
+      invoices.each do |invoice|
         csv << COLUMNS.values.map { |column| column.call(invoice) }
       end
     end
