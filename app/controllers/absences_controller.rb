@@ -19,6 +19,10 @@ class AbsencesController < ApplicationController
   end
 
   def create
+    if @absence.hours.nil? 
+      @absence.hours = AbsencesService.new.calculate_default_hours(@absence)
+    end
+
     @absence.save
     respond_with @absence, location: absences_path
   end

@@ -46,7 +46,7 @@ describe Hours::CalendarDayFactory do
 
     context 'with spanning absence' do
       let!(:absence) do
-        create :absence, employee:, from_date: '2016-12-01', to_date: '2016-12-02', hours: nil
+        create :absence, employee:, from_date: '2016-12-01', to_date: '2016-12-02', hours: 16
       end
 
       it 'assigns absence to relevant days' do
