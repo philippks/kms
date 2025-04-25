@@ -20,7 +20,7 @@ describe 'View Hours' do
     create :target_hours, date: '2017-04-17', hours: 4
     create :absence, :default_associations, from_date: '2017-04-17',
                                             to_date: '2017-04-21',
-                                            hours: nil
+                                            hours: 36
     create :absence, :default_associations, from_date: '2017-04-6',
                                             to_date: '2017-04-6',
                                             hours: 4
@@ -30,7 +30,7 @@ describe 'View Hours' do
     create :activity, :default_associations, date: 1.month.ago, hours: 10
     create :absence, :default_associations, from_date: '2017-03-27',
                                             to_date: '2017-03-28',
-                                            hours: nil
+                                            hours: 16
     create :absence, :default_associations, from_date: '2017-03-29',
                                             to_date: '2017-03-29',
                                             hours: 8
