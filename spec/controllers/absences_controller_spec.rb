@@ -41,51 +41,6 @@ RSpec.describe AbsencesController do
         post :create, params: { absence: attributes }
       end.to change(Absence, :count).by(1)
     end
-
-    # these tests should be in the serivce specs, but I've no time left now...
-    context 'for part time employee' do
-      before do
-        employee.update! workload: 50
-      end
-
-      context 'for a full week' do
-        let(:attributes) do
-          {
-            employee_id: employee.id,
-            from_date: '2024-12-02',
-            to_date: '2024-12-06',
-            reason: :holidays
-          }
-        end
-
-        it 'creates a new absence which takes workload into account' do
-          expect do
-            post :create, params: { absence: attributes }
-          end.to change(Absence, :count).by(1)
-
-          expect(Absence.last.hours).to eq(20)
-        end
-      end
-
-      context 'for a part of the week' do
-        let(:attributes) do
-          {
-            employee_id: employee.id,
-            from_date: '2024-12-02',
-            to_date: '2024-12-03',
-            reason: :holidays
-          }
-        end
-
-        it 'creates a new absence which does not take workload into account' do
-          expect do
-            post :create, params: { absence: attributes }
-          end.to change(Absence, :count).by(1)
-
-          expect(Absence.last.hours).to eq(16)
-        end
-      end
-    end
   end
 
   describe 'GET #edit' do
