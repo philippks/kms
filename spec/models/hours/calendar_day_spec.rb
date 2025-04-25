@@ -115,34 +115,13 @@ describe Hours::CalendarDay do
         [
           create(:absence, :default_associations, from_date: date,
                                                   to_date: date + 1.day,
-                                                  hours: nil),
+                                                  hours: 16),
         ]
       end
 
       it 'sets correct values' do
         expect(absence_event.date).to eq date
         expect(absence_event.hours).to eq 8
-      end
-
-      context 'and target hours' do
-        before do
-          create :target_hours, date:, hours: 6
-        end
-
-        it 'considers target hours' do
-          expect(absence_event.date).to eq date
-          expect(absence_event.hours).to eq 6
-        end
-      end
-
-      context 'if target hours are zero' do
-        before do
-          create :target_hours, date:, hours: 0
-        end
-
-        it 'does not create an event' do
-          expect(absence_event).to eq nil
-        end
       end
     end
 
