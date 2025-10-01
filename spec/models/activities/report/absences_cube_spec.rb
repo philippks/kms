@@ -16,6 +16,7 @@ describe Activities::Report::AbsencesCube do
       build(:absence, employee:,
                       from_date: (date - 1.day),
                       to_date: date,
+                      hours: 16,
                       reason: :holidays),
 
       build(:absence, employee: other_employee,
@@ -46,6 +47,7 @@ describe Activities::Report::AbsencesCube do
           build(:absence, employee:,
                           from_date: (date.beginning_of_month - 2.day),
                           to_date: (date.beginning_of_month + 2.day),
+                          hours: 32,
                           reason: :doctor),
         ]
       end

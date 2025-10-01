@@ -32,6 +32,7 @@
 #= require hours_subject_select
 #= require target_hours
 #= require activities
+#= require absences
 #= require invoices
 #= require invoices/deliveries
 #= require invoices/wizard/customer
