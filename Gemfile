@@ -49,6 +49,7 @@ group :development do
 end
 
 group :development, :test do
+  gem 'pry'
   gem 'awesome_print'
   gem 'factory_bot_rails'
   gem 'i18n-tasks'

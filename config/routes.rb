@@ -21,7 +21,9 @@ Rails.application.routes.draw do
   resources :op_lists, only: [:new, :create]
 
   resources :expenses
-  resources :absences
+  resources :absences do
+    get :default_hours, on: :collection
+  end
   resources :employees do
     resources :hourly_rates
   end
