@@ -1,6 +1,6 @@
 require 'bcrypt'
 
-class Employee < ActiveRecord::Base
+class Employee < ApplicationRecord
   devise :database_authenticatable, :rememberable
 
   extend Enumerize
@@ -21,9 +21,11 @@ class Employee < ActiveRecord::Base
   validates :password, length: { minimum: 8 }, unless: -> { persisted? && password.nil? }, confirmation: true
   validates :password_confirmation, presence: true, unless: -> { persisted? && password.nil? }
   validate :check_deactivate
-  validates :workload, presence: true, numericality: { greater_than: 0, less_than_or_equal_to: 100 }, unless: lambda {
-                                                                                                                worktime_model.debit_is_actual?
-                                                                                                              }
+  validates :workload, presence: true,
+                       numericality: { greater_than: 0, less_than_or_equal_to: 100 },
+                       unless: lambda {
+                         worktime_model.debit_is_actual?
+                       }
 
   enumerize :worktime_model, in: { target_hours: 0, debit_is_actual: 1 }, default: :target_hours
 
@@ -43,9 +45,9 @@ class Employee < ActiveRecord::Base
   def check_deactivate
     return unless deactivated
 
-    if Effort.for_employee(self).for_state(:open).count > 0
+    if Effort.for_employee(self).for_state(:open).count.positive?
       errors.add :deactivated, :open_efforts_error
-    elsif Invoice.for_employee(self).where.not(state: :charged).count > 0
+    elsif Invoice.for_employee(self).where.not(state: :charged).count.positive?
       errors.add :deactivated, :open_invoices_error
     end
   end

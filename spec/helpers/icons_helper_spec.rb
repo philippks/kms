@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe IconsHelper, type: :helper do
+RSpec.describe IconsHelper do
   describe '#fa_icon' do
     subject { helper.fa_icon 'eye' }
 

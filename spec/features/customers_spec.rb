@@ -2,7 +2,6 @@ require 'rails_helper'
 
 describe 'Managing Customers' do
   let!(:customer) { create :customer, name: 'Hans Meier', address: 'Hansstrasse 10\n4312 Meiershausen' }
-  let(:customer_group) {}
 
   before do
     sign_in create :employee

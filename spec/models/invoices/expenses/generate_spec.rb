@@ -20,7 +20,7 @@ describe Invoices::Expenses::Generate do
       it 'creates a default expense' do
         generate!
 
-        expect(Invoices::Expense.pluck(:text)).to match_array [default_expense_text]
+        expect(Invoices::Expense.pluck(:text)).to contain_exactly(default_expense_text)
       end
     end
 
@@ -40,24 +40,19 @@ describe Invoices::Expenses::Generate do
         let(:second_text) { 'Some other work' }
 
         it 'generates an invoice expense for each expense' do
-          expect { generate! }.to change { Invoices::Expense.count }.from(0).to(2)
+          expect { generate! }.to change(Invoices::Expense, :count).from(0).to(2)
         end
 
         it 'assigns expenses to generated expenses' do
           generate!
 
-          expect(Invoices::Expense.all.map(&:efforts)).to match_array(
-            [
-              [some_expense],
-              [another_expense],
-            ]
-          )
+          expect(Invoices::Expense.all.map(&:efforts)).to contain_exactly([some_expense], [another_expense])
         end
 
         it 'sets correct text' do
           generate!
 
-          expect(Invoices::Expense.pluck(:text)).to match_array [first_text, second_text]
+          expect(Invoices::Expense.pluck(:text)).to contain_exactly(first_text, second_text)
         end
 
         context 'with default expense' do
@@ -73,20 +68,20 @@ describe Invoices::Expenses::Generate do
 
       context 'with overlapping expense texts' do
         overlapping_texts = [['Some work', 'Some work'],
-                             ['Some work', 'somework']]
+                             ['Some work', 'somework'],]
 
         overlapping_texts.each do |first_text, second_text|
           let(:first_text) { first_text }
           let(:second_text) { second_text }
 
           it 'generates only one invoice expense' do
-            expect { generate! }.to change { Invoices::Expense.count }.from(0).to(1)
+            expect { generate! }.to change(Invoices::Expense, :count).from(0).to(1)
           end
 
           it 'assigns both expenses to generated expense' do
             generate!
 
-            expect(Invoices::Expense.first.efforts).to match_array [some_expense, another_expense]
+            expect(Invoices::Expense.first.efforts).to contain_exactly(some_expense, another_expense)
           end
         end
       end

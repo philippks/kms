@@ -39,7 +39,7 @@ class Hours
       if target_reached
         date.on_weekend? ? BLUE : GREEN
       else
-        hours == 0 ? RED : ORANGE
+        hours.zero? ? RED : ORANGE
       end
     end
 

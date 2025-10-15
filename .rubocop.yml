@@ -1,6 +1,10 @@
-require: rubocop-rspec
+require:
+  - rubocop-rails
+  - standard
 
 AllCops:
+  NewCops: enable
+
   Exclude:
     - 'db/**/*'
     - 'config/**/*'
@@ -14,8 +18,11 @@ AllCops:
 Style/Documentation:
    Enabled: false
 
-Metrics/LineLength:
+Layout/LineLength:
    Max: 120
+
+Metrics/MethodLength:
+  Enabled: false
 
 Metrics/BlockLength:
   Exclude:
@@ -23,17 +30,45 @@ Metrics/BlockLength:
     - '**/*.rake'
     - 'spec/**/*.rb'
 
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: consistent_comma
+
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: consistent_comma
+
+########################
+# to be removed
+########################
+
 Style/FrozenStringLiteralComment:
   Enabled: false
 
-Style/TrailingCommaInArrayLiteral:
-  EnforcedStyleForMultiline: comma
-
-Style/TrailingCommaInHashLiteral:
-  EnforcedStyleForMultiline: comma
-
-RSpec/MultipleExpectations:
+Naming/VariableNumber:
   Enabled: false
 
-RSpec/ExampleLength:
-  Max: 20
+Rails/SkipsModelValidations:
+  Enabled: false
+
+Rails/InverseOf:
+  Enabled: false
+
+Rails/HasManyOrHasOneDependent:
+  Enabled: false
+
+Rails/I18nLocaleTexts:
+  Enabled: false
+
+Metrics/AbcSize:
+  Enabled: false
+
+Lint/EmptyBlock:
+  Enabled: false
+
+Style/OpenStructUse:
+  Enabled: false
+
+Rails/UniqueValidationWithoutIndex:
+  Enabled: false
+
+Rails/LexicallyScopedActionFilter:
+  Enabled: false

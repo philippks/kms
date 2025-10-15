@@ -33,10 +33,7 @@ describe Hours::CalendarDayFactory do
 
     context 'with multiple absences' do
       let!(:absences) do
-        [
-          create(:absence, employee:, from_date: '2016-12-01', to_date: '2016-12-01'),
-          create(:absence, employee:, from_date: '2016-12-01', to_date: '2016-12-01'),
-        ]
+        2.times.map { create(:absence, employee:, from_date: '2016-12-01', to_date: '2016-12-01') }
       end
 
       it 'assigns absence' do

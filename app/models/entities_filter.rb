@@ -23,14 +23,14 @@ class EntitiesFilter
 
     parameters.each do |key, value|
       next if value.blank?
-      next if value.class == Array && (value - [nil, '']).empty?
+      next if value.instance_of?(Array) && (value - [nil, '']).empty?
 
       entities = entities.send(FILTER_METHODS[key.to_sym], value)
     end
     entities
   end
 
-  FILTER_METHODS.keys.each do |filter_method|
+  FILTER_METHODS.each_key do |filter_method|
     define_method filter_method do
       parameters[filter_method.to_sym]
     end

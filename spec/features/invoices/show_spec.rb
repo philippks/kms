@@ -31,7 +31,7 @@ describe 'View Invoice' do
       it 'shows a warning' do
         visit invoice_path(invoice)
 
-        expect(page).to have_text 'Achtung, diese Rechnung umfasst nicht alle offenen Leistungen bis zum Rechnungsdatum.'
+        expect(page).to have_text 'Achtung, diese Rechnung umfasst nicht alle offenen Leistungen bis zum Rechnungsdatum'
       end
     end
   end

@@ -1,4 +1,4 @@
-class Invoice < ActiveRecord::Base
+class Invoice < ApplicationRecord
   extend Enumerize
   include AASM
   include Invoices::Validations
@@ -24,8 +24,8 @@ class Invoice < ActiveRecord::Base
   enumerize :format, in: { compact: 0, detailed: 1 }, default: :compact
   enumerize :delivery_method, in: { post: 0, email: 1 }, default: :post
 
-  scope :before, ->(date) { where('invoices.date <= ?', date.to_date) }
-  scope :after, ->(date) { where('invoices.date >= ?', date.to_date) }
+  scope :before, ->(date) { where(invoices: { date: ..date.to_date }) }
+  scope :after, ->(date) { where(invoices: { date: date.to_date.. }) }
   scope :for_customer, ->(customer_id) { where(customer_id:) }
   scope :for_employee, ->(employee_id) { where(employee_id:) }
   scope :for_state, ->(state) { where(state:) }
@@ -63,7 +63,7 @@ class Invoice < ActiveRecord::Base
   end
 
   def self.between(from:, to:)
-    where('date >= ? AND date <= ?', from, to)
+    where(date: from..to)
   end
 
   def efforts_amount
@@ -75,11 +75,11 @@ class Invoice < ActiveRecord::Base
   end
 
   def total_amount
-    persisted_total_amount || efforts_amount + vat_amount
+    persisted_total_amount || (efforts_amount + vat_amount)
   end
 
   def open_amount(ignore: nil)
-    total_amount - payments.select(&:persisted?).without(ignore).map(&:amount).sum(0)
+    total_amount - payments.select(&:persisted?).without(ignore).map(&:amount).sum
   end
 
   def payed_amount

@@ -2,9 +2,7 @@ module Abilities
   class InvoiceAbility < ClassyCancan::BaseAbility
     def setup
       cannot :edit, Invoice
-      can :edit, Invoice do |invoice|
-        invoice.open?
-      end
+      can :edit, Invoice, &:open?
 
       cannot :mail, Invoice
       can :mail, Invoice, &:may_mail?
@@ -24,9 +22,7 @@ module Abilities
       end
 
       cannot :destroy, Invoice
-      can :destroy, Invoice do |invoice|
-        invoice.open?
-      end
+      can :destroy, Invoice, &:open?
     end
   end
 end

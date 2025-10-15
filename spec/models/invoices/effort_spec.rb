@@ -7,10 +7,7 @@ describe Invoices::Effort do
     subject { invoice_activity.amount }
 
     let(:efforts) do
-      [
-        create(:activity, hours: 1, hourly_rate: 150),
-        create(:activity, hours: 1, hourly_rate: 150),
-      ]
+      create_list(:activity, 2, hours: 1, hourly_rate: 150)
     end
 
     let(:invoice_activity) do

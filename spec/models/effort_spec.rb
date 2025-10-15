@@ -6,7 +6,7 @@ describe Effort do
   let(:not_chargeable_customer) { create :customer, :not_chargeable }
 
   let!(:activity) do
-    create :activity, date: Date.today,
+    create :activity, date: Time.zone.today,
                       employee:,
                       customer:,
                       state: :open
@@ -30,7 +30,7 @@ describe Effort do
     end
 
     it 'includes given date' do
-      expect(described_class.before(Date.today)).to match_array [old_activity, activity]
+      expect(described_class.before(Time.zone.today)).to contain_exactly(old_activity, activity)
     end
   end
 
@@ -40,7 +40,7 @@ describe Effort do
     end
 
     it 'includes given date' do
-      expect(described_class.after(10.days.ago)).to match_array [old_activity, activity]
+      expect(described_class.after(10.days.ago)).to contain_exactly(old_activity, activity)
     end
   end
 
@@ -61,7 +61,7 @@ describe Effort do
       create :activity, :with_associations
     end
 
-    it { is_expected.to match_array [old_activity, activity] }
+    it { is_expected.to contain_exactly(old_activity, activity) }
   end
 
   describe 'for_state' do

@@ -30,13 +30,13 @@ describe 'New Invoice PDF' do
 
     visit new_invoice_pdf_path(invoice, format: :pdf, html: true)
 
-    expect(page).not_to have_text 'Däumchen drehen'
+    expect(page).to have_no_text 'Däumchen drehen'
   end
 
   it 'shows invoice title' do
     visit new_invoice_pdf_path(invoice, format: :pdf, html: true)
 
-    expect(page).not_to have_text 'Weitere Leistungen vom 19. Januar'
+    expect(page).to have_no_text 'Weitere Leistungen vom 19. Januar'
   end
 
   it 'shows correct amounts' do
