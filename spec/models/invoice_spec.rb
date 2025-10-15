@@ -119,7 +119,7 @@ describe Invoice do
     it 'persists amount' do
       expect do
         invoice.deliver
-      end.to change { invoice.persisted_total_amount }.from(nil).to Money.from_amount 101
+      end.to change(invoice, :persisted_total_amount).from(nil).to Money.from_amount 101
     end
 
     it 'persists pdf' do
@@ -148,7 +148,7 @@ describe Invoice do
     it 'clears persisted amount' do
       expect do
         invoice.reopen
-      end.to change { invoice.persisted_total_amount }.from(Money.from_amount(200)).to nil
+      end.to change(invoice, :persisted_total_amount).from(Money.from_amount(200)).to nil
     end
 
     it 'removes persisted pdf' do

@@ -9,7 +9,7 @@ module Invoices
     end
 
     def actual_amount
-      efforts.to_a.map(&:amount).sum(0)
+      efforts.to_a.map(&:amount).sum
     end
 
     def self.create_default_expense_for(invoice)

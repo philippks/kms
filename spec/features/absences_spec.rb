@@ -4,7 +4,7 @@ describe 'Managing Absences' do
   let(:text) { 'Musste weg' }
   let(:employee) { create :employee }
   let(:absence) do
-    attributes = (FactoryBot.build :absence, employee:).attributes.symbolize_keys
+    attributes = (build :absence, employee:).attributes.symbolize_keys
     create :absence, attributes.merge(text:)
   end
 

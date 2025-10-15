@@ -17,7 +17,7 @@ describe Invoices::Efforts::Group do
       let(:activity_ids) { [first_activity.id, second_activity.id] }
 
       it 'groups given invoice activities' do
-        expect { subject }.to change { Invoices::Activity.count }.from(2).to 1
+        expect { subject }.to change(Invoices::Activity, :count).from(2).to 1
       end
 
       it 'sets first text to new invoice activity' do
@@ -46,7 +46,7 @@ describe Invoices::Efforts::Group do
         end
 
         it 'does nothing' do
-          expect { subject }.not_to(change { Invoices::Activity.count })
+          expect { subject }.not_to(change(Invoices::Activity, :count))
         end
       end
 
@@ -73,7 +73,7 @@ describe Invoices::Efforts::Group do
       let(:expenses_ids) { [first_expense.id, second_expense.id] }
 
       it 'groups given invoice expenses' do
-        expect { subject }.to change { Invoices::Expense.count }.from(2).to 1
+        expect { subject }.to change(Invoices::Expense, :count).from(2).to 1
       end
 
       it 'sets first text to new invoice expense' do

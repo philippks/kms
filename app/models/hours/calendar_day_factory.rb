@@ -29,15 +29,15 @@ class Hours
     end
 
     def activities_by_date
-      @activities ||= Activity.for_employee(employee)
-                              .between(from:, to:)
-                              .group_by(&:date)
+      @activities_by_date ||= Activity.for_employee(employee)
+                                      .between(from:, to:)
+                                      .group_by(&:date)
     end
 
     def absences_by_date
-      @absences ||= Absence.for_employee(employee)
-                           .between(from:, to:)
-                           .inject({}) do |hash, absence|
+      @absences_by_date ||= Absence.for_employee(employee)
+                                   .between(from:, to:)
+                                   .inject({}) do |hash, absence|
         hash.merge(absence.per_date_hash) do |_key, lhs, rhs|
           lhs.concat rhs
         end

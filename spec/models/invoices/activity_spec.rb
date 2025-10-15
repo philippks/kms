@@ -14,7 +14,7 @@ describe Invoices::Activity do
       invoice_activity.update effort_ids: [activity.id]
       invoice_activity.destroy
 
-      expect(activity.reload.invoice_effort_id).to eq nil
+      expect(activity.reload.invoice_effort_id).to be_nil
     end
   end
 
@@ -54,7 +54,7 @@ describe Invoices::Activity do
         let(:second_hourly_rate) { 170 }
 
         it 'returns nil' do
-          expect(hourly_rate).to eq nil
+          expect(hourly_rate).to be_nil
         end
 
         context 'and manually set hourly rate' do

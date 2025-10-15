@@ -20,7 +20,7 @@ class OpListItem
 
   def self.build_for_date(until_date:)
     Activity.for_state(:open)
-            .where('date <= ?', until_date)
+            .where(date: ..until_date)
             .where('amount_cents > 0')
             .includes(:customer, :employee)
             .group_by(&:customer)
@@ -41,7 +41,7 @@ class OpListItem
   end
 
   def amount
-    Money.new @activities.map(&:amount_cents).sum(0)
+    Money.new @activities.map(&:amount_cents).sum
   end
 
   private

@@ -27,12 +27,12 @@ module Invoices
 
     def hours
       hours_manually ||
-        efforts.map(&:hours).sum(0).round(4) ||
+        efforts.map(&:hours).sum.round(4) ||
         0
     end
 
     def actual_amount
-      efforts.to_a.map(&:amount).sum(0)
+      efforts.to_a.map(&:amount).sum
     end
 
     private
