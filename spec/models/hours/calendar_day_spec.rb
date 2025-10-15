@@ -27,10 +27,7 @@ describe Hours::CalendarDay do
 
     context 'with activities' do
       let(:activities) do
-        [
-          create(:activity, :default_associations, hours: 2),
-          create(:activity, :default_associations, hours: 2),
-        ]
+        create_list(:activity, 2, :default_associations, hours: 2)
       end
 
       describe 'activity_event' do
@@ -38,7 +35,7 @@ describe Hours::CalendarDay do
           expect(activity_event.hours).to eq 4
           expect(activity_event.type).to eq :activity
           expect(activity_event.date).to eq date
-          expect(activity_event.target_reached).to eq false
+          expect(activity_event.target_reached).to be false
           expect(activity_event.employee).to eq employee
         end
 
@@ -46,7 +43,7 @@ describe Hours::CalendarDay do
           let(:target_hours) { 4 }
 
           it 'sets target reached' do
-            expect(activity_event.target_reached).to eq true
+            expect(activity_event.target_reached).to be true
           end
         end
       end
@@ -63,7 +60,7 @@ describe Hours::CalendarDay do
         let(:date) { Date.parse('2016-12-26') }
 
         it 'does not create a activity event' do
-          expect(activity_event).to eq nil
+          expect(activity_event).to be_nil
         end
       end
 
@@ -71,7 +68,7 @@ describe Hours::CalendarDay do
         let(:date) { Date.parse('2016-12-17') }
 
         it 'does not create a activity event' do
-          expect(activity_event).to eq nil
+          expect(activity_event).to be_nil
         end
       end
 
@@ -79,7 +76,7 @@ describe Hours::CalendarDay do
         let(:employee) { build :employee, worktime_model: :debit_is_actual }
 
         it 'does not create a activity event' do
-          expect(activity_event).to eq nil
+          expect(activity_event).to be_nil
         end
       end
     end
@@ -96,7 +93,7 @@ describe Hours::CalendarDay do
           expect(absence_event.date).to eq date
           expect(absence_event.hours).to eq 2
           expect(absence_event.type).to eq :absence
-          expect(absence_event.target_reached).to eq false
+          expect(absence_event.target_reached).to be false
           expect(absence_event.employee).to eq employee
         end
 
@@ -104,7 +101,7 @@ describe Hours::CalendarDay do
           let(:target_hours) { 2 }
 
           it 'sets target reached' do
-            expect(absence_event.target_reached).to eq true
+            expect(absence_event.target_reached).to be true
           end
         end
       end
@@ -127,7 +124,7 @@ describe Hours::CalendarDay do
 
     context 'without absences' do
       it 'does not create an absence event' do
-        expect(absence_event).to eq nil
+        expect(absence_event).to be_nil
       end
     end
 
@@ -147,13 +144,13 @@ describe Hours::CalendarDay do
       end
 
       it 'creates both' do
-        expect(activity_event).not_to eq nil
-        expect(absence_event).not_to eq nil
+        expect(activity_event).not_to be_nil
+        expect(absence_event).not_to be_nil
       end
 
       it 'considers both for the target_reached attribute' do
-        expect(activity_event.target_reached).to eq true
-        expect(absence_event.target_reached).to eq true
+        expect(activity_event.target_reached).to be true
+        expect(absence_event.target_reached).to be true
       end
     end
 
@@ -166,7 +163,7 @@ describe Hours::CalendarDay do
       end
 
       it 'creates no activity event' do
-        expect(activity_event).to eq nil
+        expect(activity_event).to be_nil
       end
     end
   end

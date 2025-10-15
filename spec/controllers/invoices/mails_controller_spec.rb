@@ -13,14 +13,14 @@ RSpec.describe Invoices::MailsController do
     it 'assigns invoice mail with default body' do
       get :new, params: { invoice_id: invoice.to_param }
 
-      expect(assigns(:mail).body).to eq(''"Guten Tag Hansi
+      expect(assigns(:mail).body).to eq("Guten Tag Hansi
 
 In der Beilage erhalten Sie unsere Rechnung vom 22. März 2015 mit der Bitte um fristgerechte Begleichung.
 
 Wir bedanken uns für das entgegengebrachte Vertrauen.
 
 Freundliche Grüsse
-"'')
+")
     end
 
     context 'without confidential title' do

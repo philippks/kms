@@ -18,7 +18,7 @@ module Activities
     private
 
     def suggestions_for_activity_category
-      return [] unless @activity_category_id.present?
+      return [] if @activity_category_id.blank?
 
       activity_category.text_templates
                        .where('lower(text) LIKE lower(?)', "%#{@query}%")
@@ -27,7 +27,7 @@ module Activities
     end
 
     def activities_suggestions_for_customer
-      return [] unless @customer_id.present?
+      return [] if @customer_id.blank?
 
       Activity.for_customer(@customer_id).reorder(date: :desc)
               .where('lower(text) LIKE lower(?)', "%#{@query}%")

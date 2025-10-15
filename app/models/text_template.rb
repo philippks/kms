@@ -1,4 +1,4 @@
-class TextTemplate < ActiveRecord::Base
+class TextTemplate < ApplicationRecord
   belongs_to :activity_category
 
   validates :text, presence: true

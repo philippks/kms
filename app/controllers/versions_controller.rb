@@ -5,7 +5,7 @@ class VersionsController < ApplicationController
                                    .includes(:item)
 
     @employees = Employee.find(@versions.map(&:whodunnit).uniq)
-    @employee_names = Hash[@employees.collect { |employee| [employee.id.to_s, employee.name] }]
+    @employee_names = @employees.to_h { |employee| [employee.id.to_s, employee.name] }
 
     render :index, format: :html
   end
