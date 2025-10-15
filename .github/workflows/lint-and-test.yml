@@ -31,7 +31,7 @@ jobs:
       - name: Install wkhtmltopdf
         uses: awalsh128/cache-apt-pkgs-action@latest
         with:
-          packages: xvfb libfontconfig wkhtmltopdf
+          packages: wkhtmltopdf
           version: 1.0
 
       - name: Checkout code
