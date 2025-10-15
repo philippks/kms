@@ -1,0 +1,76 @@
+name: "Lint and Test"
+
+on:
+  push:
+    branches: ["master"]
+  pull_request:
+
+concurrency: 
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:12-alpine
+        ports:
+          - "5432:5432"
+        env:
+          POSTGRES_DB: rails_test
+          POSTGRES_USER: rails
+          POSTGRES_PASSWORD: password
+
+    env:
+      RAILS_ENV: test
+      DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
+
+    steps:
+      - name: Install wkhtmltopdf
+        uses: awalsh128/cache-apt-pkgs-action@latest
+        with:
+          packages: wkhtmltopdf
+          version: 1.0
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Ruby and gems
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install JavaScript dependencies
+        run: npm install
+
+      - name: Precompile assets
+        run: bin/rails assets:precompile
+
+      - name: Set up database schema
+        run: bin/rails db:schema:load
+
+      - name: Run tests
+        run: bin/rspec
+
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Ruby and gems
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Lint Ruby files
+        run: bundle exec rubocop --parallel
