@@ -14,7 +14,7 @@ class ExpensesController < ApplicationController
 
   def new
     @expense.employee = current_employee
-    @expense.date = Date.today
+    @expense.date = Time.zone.today
   end
 
   def create

@@ -18,7 +18,7 @@ describe 'Change Invoice Activity Visibility' do
     find('.fa-eye').find(:xpath, './/..').click
 
     expect(page).to have_css '.fa-eye-slash'
-    expect(activity.reload.visible?).to eq false
+    expect(activity.reload.visible?).to be false
   end
 
   it 'Change visibility to true' do
@@ -28,6 +28,6 @@ describe 'Change Invoice Activity Visibility' do
     find('.fa-eye-slash').find(:xpath, './/..').click
 
     expect(page).to have_css '.fa-eye'
-    expect(activity.reload.visible?).to eq true
+    expect(activity.reload.visible?).to be true
   end
 end

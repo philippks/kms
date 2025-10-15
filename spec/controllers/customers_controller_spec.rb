@@ -18,7 +18,7 @@ RSpec.describe CustomersController do
     it 'returns all customers' do
       get :index
 
-      expect(assigns(:customers)).to match_array [customer, deactivated_customer]
+      expect(assigns(:customers)).to contain_exactly(customer, deactivated_customer)
     end
 
     context 'format json and param active' do

@@ -38,7 +38,7 @@ RSpec.describe InvoicesController do
     it 'creates invoice' do
       expect do
         post :create, params: { invoice: invoice_params }
-      end.to change { Invoice.count }.by 1
+      end.to change(Invoice, :count).by 1
     end
 
     it 'sets created_by_initials to employee initials' do
@@ -90,7 +90,7 @@ RSpec.describe InvoicesController do
       it 'returns 204' do
         subject
 
-        expect(response.status).to eq 204
+        expect(response).to have_http_status :no_content
       end
     end
   end

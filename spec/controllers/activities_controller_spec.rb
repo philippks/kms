@@ -57,7 +57,7 @@ RSpec.describe ActivitiesController do
       aggregate_failures do
         expect(assigns(:activity).employee).to eq employee
         expect(assigns(:activity).customer).to eq customer
-        expect(assigns(:activity).date).to eq Date.today
+        expect(assigns(:activity).date).to eq Time.zone.today
         expect(assigns(:activity).hourly_rate).to eq employee.hourly_rate
       end
     end

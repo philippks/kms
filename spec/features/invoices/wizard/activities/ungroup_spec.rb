@@ -19,10 +19,10 @@ describe 'Wizard, Invoice Activities' do
 
     expect do
       click_link 'Gruppierung aufheben'
-    end.to change { Invoices::Activity.count }.from(1).to(2)
+    end.to change(Invoices::Activity, :count).from(1).to(2)
 
     expect(page).to have_text 'Huhu'
     expect(page).to have_text 'Hehe'
-    expect(page).not_to have_css('option.fa-unlink')
+    expect(page).to have_no_css('option.fa-unlink')
   end
 end
