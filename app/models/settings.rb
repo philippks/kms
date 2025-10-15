@@ -1,7 +1,10 @@
-class Settings < ActiveRecord::Base
+class Settings < ApplicationRecord
   # comma separated list of vat_rates, e.g. 8.1,7.7,0.0
   validates :vat_rates, presence: true,
-                        format: { with: /\A\d+(\.\d+)?(,\s*\d+(\.\d+)?)*\z/, message: 'Muss eine kommaseparierte Liste sein' }
+                        format: {
+                          with: /\A\d+(\.\d+)?(,\s*\d+(\.\d+)?)*\z/,
+                          message: 'Muss eine kommaseparierte Liste sein',
+                        }
 
   def self.default_vat_rate
     get.vat_rates.split(',').first.to_f / 100

@@ -45,8 +45,8 @@ describe Activities::Report::AbsencesCube do
       let(:absences) do
         [
           build(:absence, employee:,
-                          from_date: (date.beginning_of_month - 2.day),
-                          to_date: (date.beginning_of_month + 2.day),
+                          from_date: (date.beginning_of_month - 2.days),
+                          to_date: (date.beginning_of_month + 2.days),
                           hours: 32,
                           reason: :doctor),
         ]

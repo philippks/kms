@@ -13,16 +13,16 @@ describe Invoices::Efforts::Ungroup do
     before do
       create :activity, :default_associations, invoice_effort: activity,
                                                text: 'Huhu',
-                                               date: 2.day.ago
+                                               date: 2.days.ago
       create :activity, :default_associations, invoice_effort: activity,
                                                text: 'Hello',
-                                               date: 1.days.ago
+                                               date: 1.day.ago
     end
 
     it 'creates an invoice activity for each assigned activity' do
       expect do
         subject
-      end.to change { Invoices::Activity.count }.from(1).to 2
+      end.to change(Invoices::Activity, :count).from(1).to 2
     end
 
     it 'destroy existing activity' do

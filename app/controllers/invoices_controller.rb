@@ -35,7 +35,7 @@ class InvoicesController < ApplicationController
   end
 
   def new
-    @invoice.date = Date.today
+    @invoice.date = Time.zone.today
     @invoice.vat_rate = Settings.default_vat_rate
     @invoice.employee = current_employee
   end

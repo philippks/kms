@@ -23,7 +23,7 @@ class Hours
     end
 
     def last_customers
-      return [] unless params['query'].blank?
+      return [] if params['query'].present?
 
       Subjects.last_customers_for(current_employee)
     end

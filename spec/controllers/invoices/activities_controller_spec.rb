@@ -39,7 +39,7 @@ RSpec.describe Invoices::ActivitiesController do
       it 'returns 204' do
         subject
 
-        expect(response.status).to eq 204
+        expect(response).to have_http_status :no_content
       end
     end
   end
@@ -56,7 +56,7 @@ RSpec.describe Invoices::ActivitiesController do
         activity_id: first_invoice_activity,
       }
 
-      expect(first_invoice_activity.reload.pagebreak).to eq true
+      expect(first_invoice_activity.reload.pagebreak).to be true
     end
   end
 

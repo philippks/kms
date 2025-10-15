@@ -27,7 +27,7 @@ describe 'Group Invoice Activities' do
     create :activity, :default_associations,
            hours: 1,
            hourly_rate: 100,
-           date: 10.day.ago,
+           date: 10.days.ago,
            invoice_effort_id: another_invoice_activity.id
   end
 
@@ -51,7 +51,7 @@ describe 'Group Invoice Activities' do
       end
       expect(Invoices::Activity.count).to eq 2
       expect(Invoices::Activity.first.text).to eq 'Something done'
-      expect(Invoices::Activity.first.efforts).to match_array [another_activity, activity]
+      expect(Invoices::Activity.first.efforts).to contain_exactly(another_activity, activity)
       expect(Invoices::Activity.first.position).to eq 1
     end
   end
