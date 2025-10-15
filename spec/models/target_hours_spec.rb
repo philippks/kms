@@ -12,7 +12,7 @@ describe TargetHours do
   it 'deletes the instance if hours equals 8' do
     tg = create :target_hours, hours: 8
 
-    expect { tg.save_or_delete! }.to change { described_class.count }.to 0
+    expect { tg.save_or_delete! }.to change(described_class, :count).to 0
   end
 
   it 'renders the instance correctly as json for the calendar' do
@@ -48,8 +48,8 @@ describe TargetHours do
 
   describe 'hours_per_date' do
     subject do
-      TargetHours.hours_per_date from: Date.parse('2016-12-01'),
-                                 to: Date.parse('2016-12-31')
+      described_class.hours_per_date from: Date.parse('2016-12-01'),
+                                     to: Date.parse('2016-12-31')
     end
 
     before do

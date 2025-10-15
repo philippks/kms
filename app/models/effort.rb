@@ -1,4 +1,4 @@
-class Effort < ActiveRecord::Base
+class Effort < ApplicationRecord
   extend Enumerize
 
   has_paper_trail
@@ -7,14 +7,14 @@ class Effort < ActiveRecord::Base
   belongs_to :customer
   belongs_to :invoice_effort, class_name: '::Invoices::Effort', optional: true
 
-  validates :employee, :customer_id, :text, :date, presence: true
+  validates :text, :date, presence: true
 
   enumerize :state, in: { open: 0, charged: 1, not_chargeable: 2 }, scope: true
 
   before_validation :set_state
 
-  scope :before, ->(date) { where('date <= ?', date.to_date) }
-  scope :after, ->(date) { where('date >= ?', date.to_date) }
+  scope :before, ->(date) { where(date: ..date.to_date) }
+  scope :after, ->(date) { where(date: date.to_date..) }
   scope :for_customer, ->(customer_id) { where(customer_id:) }
   scope :for_employee, ->(employee_id) { where(employee_id:) }
   scope :for_customer_group, lambda { |customer_group_id|
@@ -26,7 +26,7 @@ class Effort < ActiveRecord::Base
   delegate :invoice, :invoice_id, to: :invoice_effort, allow_nil: true
 
   def self.between(from:, to:)
-    where('date >= ? AND date <= ?', from, to)
+    where(date: from..to)
   end
 
   def self.open_amount_for(customer)

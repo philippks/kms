@@ -4,7 +4,7 @@ describe 'Manage Invoice Expenses' do
   let(:invoice) { create :invoice, :default_associations }
   let!(:expense) do
     create :expense, :default_associations, text: 'Something payed',
-                                            date: 10.day.ago
+                                            date: 10.days.ago
   end
 
   before do
@@ -18,7 +18,7 @@ describe 'Manage Invoice Expenses' do
 
     aggregate_failures 'generated invoice expense' do
       expect(Invoices::Expense.count).to eq 1
-      expect(Invoices::Expense.pluck(:text)).to match_array ['Something payed']
+      expect(Invoices::Expense.pluck(:text)).to contain_exactly('Something payed')
       expect(Invoices::Expense.first.efforts).to eq [expense]
       expect(page).to have_current_path invoice_wizard_expenses_path(invoice), ignore_query: true
     end

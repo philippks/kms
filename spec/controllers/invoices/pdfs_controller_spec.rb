@@ -15,9 +15,7 @@ describe Invoices::PdfsController do
 
     before do
       allow(Invoices::PDF).to receive(:new).and_return pdf_double
-      allow(pdf_double).to receive(:read).and_return pdf_data
-      allow(pdf_double).to receive(:persisted?).and_return true
-      allow(pdf_double).to receive(:persisted_pdf_path).and_return 'persisted.pdf'
+      allow(pdf_double).to receive_messages(read: pdf_data, persisted?: true, persisted_pdf_path: 'persisted.pdf')
     end
 
     it 'returns pdf path' do

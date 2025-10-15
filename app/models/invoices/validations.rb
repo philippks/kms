@@ -26,9 +26,9 @@ module Invoices
 
       errors.add(:format, :activities_amount_set_manually) if activities_amount_manually.present?
 
-      errors.add(:format, :hidden_activities) if activities.select { |activity| !activity.visible? }.any?
+      errors.add(:format, :hidden_activities) if activities.reject(&:visible?).any?
 
-      return unless activities.map(&:hourly_rate).count(nil) > 0
+      return unless activities.map(&:hourly_rate).count(nil).positive?
 
       errors.add(:format, :conflicting_activities)
     end

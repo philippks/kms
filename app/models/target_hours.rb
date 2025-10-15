@@ -1,8 +1,8 @@
-class TargetHours < ActiveRecord::Base
+class TargetHours < ApplicationRecord
   DEFAULT_TARGET_HOURS = 8
 
   validates :date, :hours, presence: true
-  validates_inclusion_of :hours, in: [0, 4, 6, 8]
+  validates :hours, inclusion: { in: [0, 4, 6, 8] }
 
   # increments hours from 0 to 4 or by 2
   def increment_hours
@@ -33,7 +33,7 @@ class TargetHours < ActiveRecord::Base
   end
 
   def self.between(from:, to:)
-    TargetHours.where('date >= ? AND date <= ?', from, to)
+    TargetHours.where(date: from..to)
   end
 
   def self.hours_per_date(from:, to:)
@@ -51,7 +51,7 @@ class TargetHours < ActiveRecord::Base
   end
 
   def self.hours_between(from:, to:)
-    hours_per_date(from:, to:).values.sum(0)
+    hours_per_date(from:, to:).values.sum
   end
 
   def self.hours_between_for_employee(from:, to:, employee:)

@@ -28,7 +28,7 @@ describe 'Deliver Invoice' do
 
     expect do
       click_button 'Weiter'
-    end.to change { page.current_path }.to new_invoice_mail_path(invoice)
+    end.to change(page, :current_path).to new_invoice_mail_path(invoice)
   end
 
   it 'Send Mail' do

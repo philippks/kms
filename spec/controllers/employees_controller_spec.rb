@@ -80,8 +80,12 @@ RSpec.describe EmployeesController do
     describe 'change password' do
       it 'works' do
         expect do
-          patch :update, params: { id: employee.to_param, employee: { password: 'another secure password',
-                                                                      password_confirmation: 'another secure password' } }
+          patch :update, params: {
+            id: employee.to_param, employee: {
+              password: 'another secure password',
+              password_confirmation: 'another secure password',
+            },
+          }
         end.to change { employee.reload.valid_password? 'another secure password' }.from(false).to(true)
       end
     end

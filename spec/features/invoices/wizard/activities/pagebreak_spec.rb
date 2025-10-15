@@ -18,6 +18,6 @@ describe 'Manage Invoice Activities' do
 
     find('.fa-cut').find(:xpath, './/..').click
 
-    expect(invoice_activity.reload.pagebreak).to eq true
+    expect(invoice_activity.reload.pagebreak).to be true
   end
 end
