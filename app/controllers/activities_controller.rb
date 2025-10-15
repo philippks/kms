@@ -29,7 +29,7 @@ class ActivitiesController < ApplicationController
   def new
     @activity.employee = current_employee
     @activity.customer = Customer.find(params[:customer])
-    @activity.date = Date.today
+    @activity.date = Time.zone.today
     @activity.hourly_rate = hourly_rate_for_new_activity
   end
 
@@ -67,8 +67,8 @@ class ActivitiesController < ApplicationController
 
   def hourly_rate_for_new_activity
     if params[:customer]
-      if hourly_rate = HourlyRate.find_by(customer_id: params[:customer],
-                                          employee: current_employee)
+      if (hourly_rate = HourlyRate.find_by(customer_id: params[:customer],
+                                           employee: current_employee))
         return hourly_rate.hourly_rate
       elsif Customer.find(params[:customer]).customer_group&.not_chargeable?
         return 0

@@ -8,7 +8,7 @@ module Invoices
 
     def read
       if persisted?
-        File.open(persisted_pdf_path).read
+        File.read(persisted_pdf_path)
       else
         render_pdf
       end
@@ -55,7 +55,7 @@ module Invoices
     end
 
     def tmp_dir
-      "#{Rails.root}/tmp/"
+      Rails.root.join('tmp/').to_s
     end
   end
 end

@@ -3,6 +3,8 @@ module Invoices
     load_and_authorize_resource :invoice
     load_and_authorize_resource through: :invoice, class: ::Invoices::Mail, singleton: true
 
+    def show; end
+
     def new
       @mail.body = new_body
       @mail.employee = current_employee
@@ -22,8 +24,6 @@ module Invoices
       end
     end
 
-    def show; end
-
     private
 
     def new_body
@@ -31,7 +31,7 @@ module Invoices
     end
 
     def body_template_path
-      Rails.root.join('app', 'views', 'invoices', 'mails', 'body.text.erb')
+      Rails.root.join('app/views/invoices/mails/body.text.erb')
     end
 
     def mail_params

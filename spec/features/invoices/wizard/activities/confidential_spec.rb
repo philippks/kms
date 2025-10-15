@@ -18,7 +18,7 @@ describe 'Change Invoice Activity Confidentiality' do
     find('.fa-unlock').find(:xpath, './/..').click
 
     expect(page).to have_css '.fa-lock'
-    expect(activity.reload.confidential?).to eq true
+    expect(activity.reload.confidential?).to be true
     expect(page).to have_css('td', text: 'Vertrauliche Leistungen')
   end
 
@@ -29,7 +29,7 @@ describe 'Change Invoice Activity Confidentiality' do
     find('.fa-lock').find(:xpath, './/..').click
 
     expect(page).to have_css '.fa-unlock'
-    expect(activity.reload.confidential?).to eq false
-    expect(page).not_to have_css('td', text: 'Vertrauliche Leistungen')
+    expect(activity.reload.confidential?).to be false
+    expect(page).to have_no_css('td', text: 'Vertrauliche Leistungen')
   end
 end

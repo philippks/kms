@@ -1,4 +1,4 @@
-class Customer < ActiveRecord::Base
+class Customer < ApplicationRecord
   extend Enumerize
 
   belongs_to :customer_group, optional: true

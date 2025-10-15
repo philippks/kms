@@ -26,14 +26,14 @@ describe EntitiesFilter do
       end
 
       it 'does not define getters for unknown keys' do
-        expect(filter.respond_to?(:huhu)).to be_falsy
+        expect(filter).not_to respond_to(:huhu)
       end
     end
 
     context 'with string keys' do
       let(:parameters) do
         {
-          'customer': 'Fritzli',
+          customer: 'Fritzli',
         }
       end
 
@@ -59,8 +59,7 @@ describe EntitiesFilter do
     let(:entities) { double 'entities' }
 
     before do
-      allow(entities).to receive(:for_customer).and_return entities
-      allow(entities).to receive(:for_employee).and_return entities
+      allow(entities).to receive_messages(for_customer: entities, for_employee: entities)
     end
 
     it 'calls each filter method on entities' do

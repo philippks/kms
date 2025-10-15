@@ -29,7 +29,7 @@ describe Activities::SuggestionsBuilder do
                           text: 'Some Activity from me', date: 5.days.ago
         create :activity, employee: other_employee, customer:,
                           text: 'Some Activity from someone else',
-                          date: 1.days.ago
+                          date: 1.day.ago
 
         create :activity, employee:, customer: other_customer,
                           text: 'Activity for other Customer', date: 9.days.ago
@@ -81,7 +81,7 @@ describe Activities::SuggestionsBuilder do
       end
 
       it 'returns suggestions for activity category' do
-        expect(suggestions[:for_activity_category]).to match_array ['Some template']
+        expect(suggestions[:for_activity_category]).to contain_exactly('Some template')
       end
 
       it 'returns suggestion keys in the correct order' do
