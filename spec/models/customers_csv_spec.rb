@@ -25,7 +25,7 @@ describe CustomersCsv do
         "Kunde 2","Hansi","Meiersstrasse 10\\n3791 Hanshausen","hans@hausen.ch","Kundengruppe",""
       EXPECTED
 
-      expect(csv.lines[1..-1].join).to eq expected
+      expect(csv.lines[1..].join).to eq expected
     end
   end
 end

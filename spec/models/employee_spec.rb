@@ -9,7 +9,7 @@ describe Employee do
     let!(:deactivated_employee) { create :employee, deactivated: true }
 
     it 'only returns active employees' do
-      expect(Employee.active).to eq [active_employee]
+      expect(described_class.active).to eq [active_employee]
     end
   end
 
@@ -22,7 +22,7 @@ describe Employee do
       end
 
       it 'is not possible to deactivate' do
-        expect(employee).to be_invalid
+        expect(employee).not_to be_valid
         expect(employee.errors).to have_key :deactivated
       end
     end
@@ -33,7 +33,7 @@ describe Employee do
       end
 
       it 'is not possible to deactivate' do
-        expect(employee).to be_invalid
+        expect(employee).not_to be_valid
         expect(employee.errors).to have_key :deactivated
       end
     end
@@ -44,7 +44,7 @@ describe Employee do
       end
 
       it 'is not possible to deactivate' do
-        expect(employee).to be_invalid
+        expect(employee).not_to be_valid
         expect(employee.errors).to have_key :deactivated
       end
     end
@@ -83,12 +83,12 @@ describe Employee do
     let(:employee) { create :employee, password: 'password', password_confirmation: 'password' }
     let(:password) { 'password' }
 
-    it { is_expected.to eq true }
+    it { is_expected.to be true }
 
     context 'with invalid password' do
       let(:password) { 'invalid password' }
 
-      it { is_expected.to eq false }
+      it { is_expected.to be false }
     end
   end
 end

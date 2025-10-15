@@ -47,7 +47,7 @@ RSpec.describe TextTemplatesController do
       expect do
         patch :update, params: {
           activity_category_id: text_template.activity_category.id,
-          id: text_template.to_param, text_template: { text: }
+          id: text_template.to_param, text_template: { text: },
         }
       end.to change { text_template.reload.text }.to(text)
     end

@@ -4,7 +4,7 @@ describe 'Manage Invoice Activities' do
   let(:invoice) { create :invoice, :default_associations }
   let!(:activity) do
     create :activity, :default_associations, text: 'Something done',
-                                             date: 10.day.ago
+                                             date: 10.days.ago
   end
 
   before do

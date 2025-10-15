@@ -1,8 +1,8 @@
-class HourlyRate < ActiveRecord::Base
+class HourlyRate < ApplicationRecord
   belongs_to :employee
   belongs_to :customer
 
-  validates :hourly_rate, :employee, :customer, presence: true
+  validates :hourly_rate, presence: true
 
   monetize :hourly_rate_cents
 end

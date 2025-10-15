@@ -23,7 +23,7 @@ describe 'Complete Wizard Page' do
     invoice.reload
     aggregate_failures do
       expect(invoice.possible_wir_amount).to eq Money.from_amount 100
-      expect(invoice.display_swift).to eq true
+      expect(invoice.display_swift).to be true
       expect(invoice.title).to eq 'Einfallsreicher Titel'
       expect(invoice.format.to_sym).to eq :detailed
     end
