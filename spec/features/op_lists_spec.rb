@@ -42,9 +42,9 @@ describe 'OP List' do
 
     expect do
       click_on 'Rechnung erstellen'
-    end.to change { Invoice.count }.by 1
+    end.to change(Invoice, :count).by 1
 
-    expect(Invoice.last.activities.first.efforts).to match_array [new_open_activity, old_open_activity]
+    expect(Invoice.last.activities.first.efforts).to contain_exactly(new_open_activity, old_open_activity)
   end
 
   it 'Download OP List' do

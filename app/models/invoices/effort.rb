@@ -1,5 +1,5 @@
 module Invoices
-  class Effort < ActiveRecord::Base
+  class Effort < ApplicationRecord
     def self.table_name_prefix
       'invoice_'
     end
@@ -11,8 +11,6 @@ module Invoices
                        class_name: '::Effort'
 
     before_destroy :nullify_efforts, prepend: true
-
-    validates :invoice, presence: true
 
     default_scope { order(:position) }
     scope :visible, -> { where(visible: true) }

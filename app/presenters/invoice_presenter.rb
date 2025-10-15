@@ -17,7 +17,7 @@ class InvoicePresenter < BasePresenter
   end
 
   def confidential_hours
-    activities.confidentials.map(&:hours).sum(0)
+    activities.confidentials.map(&:hours).sum
   end
 
   def confidential_hourly_rate
@@ -29,7 +29,7 @@ class InvoicePresenter < BasePresenter
   end
 
   def confidential_amount
-    humanized_money(activities.confidentials.map(&:amount).sum(0))
+    humanized_money(activities.confidentials.map(&:amount).sum)
   end
 
   def confidential_supplement?

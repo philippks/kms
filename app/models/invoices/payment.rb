@@ -1,5 +1,5 @@
 module Invoices
-  class Payment < ActiveRecord::Base
+  class Payment < ApplicationRecord
     def self.table_name_prefix
       'invoice_'
     end
@@ -8,7 +8,7 @@ module Invoices
 
     belongs_to :invoice
 
-    validates :date, :amount, :invoice, presence: true
+    validates :date, :amount, presence: true
     validates :amount, numericality: { greater_than: 0 }
     validate :amount_not_greater_than_open_invoice_amount
 

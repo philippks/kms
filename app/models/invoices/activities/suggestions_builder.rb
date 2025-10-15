@@ -29,7 +29,7 @@ module Invoices
                           .where.not(invoice_id: invoice_activity.invoice_id)
                           .where.not(text: '')
                           .where('lower(text) LIKE lower(?)', "%#{search_query}%")
-                          .where('invoices.customer_id = ?', invoice_activity.invoice.customer_id)
+                          .where(invoices: { customer_id: invoice_activity.invoice.customer_id })
                           .joins(:invoice)
                           .select('text, max(invoice_efforts.id), max(invoices.date) AS date')
                           .order('date DESC')

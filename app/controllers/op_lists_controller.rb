@@ -4,7 +4,7 @@ class OpListsController < ApplicationController
     @highlighted_employee_id = filter.employee || current_employee.id
     @op_list_items = OpListItem.build_for(employee_id: filter.employee, until_date: filter.until_date)
     @op_list_items.sort_by! { |item| item.customer.name.downcase }
-    @total_open_amount = @op_list_items.map(&:amount).sum(0)
+    @total_open_amount = @op_list_items.sum(&:amount)
 
     respond_to do |format|
       format.html {}
@@ -21,8 +21,10 @@ class OpListsController < ApplicationController
   end
 
   def filter
-    OpenStruct.new employee: filter_params[:employee].present? ? filter_params[:employee].to_i : nil,
-                   until_date: filter_params[:until_date].present? ? Date.parse(filter_params[:until_date]) : Date.current
+    OpenStruct.new(
+      employee: filter_params[:employee].present? ? filter_params[:employee].to_i : nil,
+      until_date: filter_params[:until_date].present? ? Date.parse(filter_params[:until_date]) : Date.current
+    )
   end
 
   def filter_params

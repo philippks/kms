@@ -22,7 +22,7 @@ describe Invoices::Activities::SuggestionsBuilder do
         end
 
         it 'returns suggestions for assigned activities' do
-          expect(suggestions[:assigned_to_invoice_activity]).to match_array ['gugusäli', 'da simmer']
+          expect(suggestions[:assigned_to_invoice_activity]).to contain_exactly('gugusäli', 'da simmer')
         end
       end
     end

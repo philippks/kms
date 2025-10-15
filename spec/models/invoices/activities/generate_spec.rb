@@ -40,7 +40,7 @@ describe Invoices::Activities::Generate do
       let(:second_text) { 'Some other work' }
 
       it 'generates an invoice activity for each activity' do
-        expect { subject }.to change { Invoices::Activity.count }.from(0).to(2)
+        expect { subject }.to change(Invoices::Activity, :count).from(0).to(2)
       end
 
       it 'assigns activities to generated activities' do
@@ -52,26 +52,26 @@ describe Invoices::Activities::Generate do
       it 'sets correct text' do
         subject
 
-        expect(Invoices::Activity.pluck(:text)).to match_array [first_text, second_text]
+        expect(Invoices::Activity.pluck(:text)).to contain_exactly(first_text, second_text)
       end
     end
 
     context 'with overlapping activity texts' do
       overlapping_texts = [['Some work', 'Some work'],
-                           ['Some work', 'somework']]
+                           ['Some work', 'somework'],]
 
       overlapping_texts.each do |first_text, second_text|
         let(:first_text) { first_text }
         let(:second_text) { second_text }
 
         it 'generates only one invoice activity' do
-          expect { subject }.to change { Invoices::Activity.count }.from(0).to(1)
+          expect { subject }.to change(Invoices::Activity, :count).from(0).to(1)
         end
 
         it 'assigns both activities to generatea activity' do
           subject
 
-          expect(Invoices::Activity.first.efforts).to match_array [some_activity, another_activity]
+          expect(Invoices::Activity.first.efforts).to contain_exactly(some_activity, another_activity)
         end
       end
     end

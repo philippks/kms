@@ -13,7 +13,7 @@ describe Invoices::Payment do
     context 'amount is greater than open invoice amount' do
       let(:amount) { 200 }
 
-      it { is_expected.to be_invalid }
+      it { is_expected.not_to be_valid }
     end
   end
 end

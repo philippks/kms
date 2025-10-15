@@ -4,7 +4,7 @@ RSpec.describe Hours::SubjectsController do
   render_views
 
   let(:employee) { create :employee }
-  let(:parsed_response) { JSON.parse response.body }
+  let(:parsed_response) { response.parsed_body }
 
   before do
     sign_in employee

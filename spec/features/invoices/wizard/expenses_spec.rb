@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'Managing Invoice Expenses' do
   let(:employee) { create :employee }
   let(:customer) { create :customer }
-  let(:invoice) { create :invoice, employee:, customer:, date: Date.today }
+  let(:invoice) { create :invoice, employee:, customer:, date: Time.zone.today }
   let(:text) { 'Some work done' }
 
   before do
@@ -40,7 +40,7 @@ describe 'Managing Invoice Expenses' do
       within 'div.actions' do
         click_link 'Nebenkosten erfassen'
       end
-    end.to change { Invoices::Expense.count }.from(0).to(1)
+    end.to change(Invoices::Expense, :count).from(0).to(1)
   end
 
   it 'Delete Invoice Expense' do
@@ -50,6 +50,6 @@ describe 'Managing Invoice Expenses' do
 
     expect do
       click_link "delete-invoice-expense-#{invoice_expense.id}-link"
-    end.to change { Invoices::Expense.count }.from(1).to(0)
+    end.to change(Invoices::Expense, :count).from(1).to(0)
   end
 end
