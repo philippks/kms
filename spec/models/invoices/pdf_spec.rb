@@ -12,7 +12,7 @@ describe Invoices::PDF do
       end
 
       it 'returns persisted pdf' do
-        expect(pdf.read).to eq File.open(persisted_pdf_path).read
+        expect(pdf.read).to eq File.read(persisted_pdf_path)
       end
     end
 

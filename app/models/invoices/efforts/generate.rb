@@ -8,7 +8,7 @@ module Invoices
       end
 
       def generate!
-        efforts_grouped_by_text.each do |_, efforts|
+        efforts_grouped_by_text.each_value do |efforts|
           invoice_efforts_class.create! invoice: @invoice,
                                         text: efforts.first.text,
                                         effort_ids: efforts.map(&:id)

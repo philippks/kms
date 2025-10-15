@@ -23,7 +23,7 @@ describe 'Group Invoice Expenses' do
 
   let!(:another_expense) do
     create :expense, :default_associations, amount: 300,
-                                            date: 10.day.ago,
+                                            date: 10.days.ago,
                                             invoice_effort_id: another_invoice_expense.id
   end
 
@@ -47,7 +47,7 @@ describe 'Group Invoice Expenses' do
       end
       expect(Invoices::Expense.count).to eq 2
       expect(Invoices::Expense.first.text).to eq 'Autofahrt'
-      expect(Invoices::Expense.first.efforts).to match_array [another_expense, expense]
+      expect(Invoices::Expense.first.efforts).to contain_exactly(another_expense, expense)
       expect(Invoices::Expense.first.position).to eq 1
     end
   end

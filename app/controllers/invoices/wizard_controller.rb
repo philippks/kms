@@ -42,7 +42,8 @@ module Invoices
       provided_redirect_from_navigation || provided_redirect_from_params || invoice_path(@invoice)
     end
 
-    # a redirection is provided with the name of the submit button # e.g. <input name="activites" value="Leistungen gruppieren"/>
+    # a redirection is provided with the name of the submit button
+    # e.g. <input name="activites" value="Leistungen gruppieren"/>
     # with which the params-hash contains { activities: 'Leistungen gruppieren' }
     def provided_redirect_from_navigation
       action = wizard_actions.keys.find do |state|

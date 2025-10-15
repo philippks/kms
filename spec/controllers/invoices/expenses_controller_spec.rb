@@ -39,7 +39,7 @@ RSpec.describe Invoices::ExpensesController do
       it 'returns 204' do
         subject
 
-        expect(response.status).to eq 204
+        expect(response).to have_http_status :no_content
       end
     end
   end
