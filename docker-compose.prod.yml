@@ -2,17 +2,13 @@ version: "3.7"
 
 services:
   kms:
-    build:
-      context: .
-      target: production
-      cache_from:
-        - philippks/kms:test-latest
-        - philippks/kms:latest
-    image: "philippks/kms:${TAG-latest}"
+    image: ghcr.io/philippks/kms:latest
+    build: .
     ports:
       - 3000:3000
     depends_on:
       - postgres
+    env_file: .env
 
   postgres:
     image: postgres:12
