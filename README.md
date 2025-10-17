@@ -53,17 +53,15 @@ docker compose -f docker-compose.dev.yml up postgres
 bundle exec rspec
 ```
 
-### Run Tests in CI
-
-Run tests inside docker container with:
+### Build
 
 ```
-docker compose -f docker-compose.test.yml run --rm tests
+docker compose -f docker-compose.prod.yml build kms
 ```
 
 ### Run Production
 
-Change values in `.env.production` accordingly.
+Change values in `.env` accordingly.
 
 Start server with:
 
