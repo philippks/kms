@@ -16,8 +16,9 @@ WORKDIR /rails
 
 # Install base packages
 # Replace libpq-dev with sqlite3 if using SQLite, or libmysqlclient-dev if using MySQL
+# KMS addition: install wkhtmltopdf and nodejs as javascript runtime (since we do not use importmaps yet)
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y curl libjemalloc2 libvips libpq-dev wkhtmltopdf && \
+    apt-get install --no-install-recommends -y curl libjemalloc2 libvips libpq-dev wkhtmltopdf nodejs && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # Set production environment
