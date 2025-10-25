@@ -1,0 +1,12 @@
+services:
+  postgres:
+    image: postgres:18
+    env_file: .env.development
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres:/var/lib/postgresql/
+
+volumes:
+  postgres:
+    name: kms-postgres
