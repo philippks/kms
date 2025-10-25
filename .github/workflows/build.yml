@@ -3,7 +3,6 @@ name: Build and publish Docker image
 on:
   release:
     types: [published]
-  pull_request: # for testing
 
 env:
   REGISTRY: ghcr.io
@@ -21,16 +20,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v5
 
-      # commented for testing
-      #- name: Extract version from release
-      #  id: meta
-      #  run: |
-      #    # Get tag name from release (e.g., v1.0.0)
-      #    TAG_NAME="${{ github.event.release.tag_name }}"
-      #    # Remove 'v' prefix if present
-      #    VERSION=${TAG_NAME#v}
-      #    echo "version=$VERSION" >> $GITHUB_OUTPUT
-      #    echo "tag=$TAG_NAME" >> $GITHUB_OUTPUT
+      - name: Extract version from release
+        id: meta
+        run: |
+          # Get tag name from release (e.g., v1.0.0)
+          TAG_NAME="${{ github.event.release.tag_name }}"
+          # Remove 'v' prefix if present
+          VERSION=${TAG_NAME#v}
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "tag=$TAG_NAME" >> $GITHUB_OUTPUT
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -48,8 +46,8 @@ jobs:
         with:
           context: .
           push: true
-          # ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.meta.outputs.version }}
           tags: |
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.meta.outputs.version }}
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
