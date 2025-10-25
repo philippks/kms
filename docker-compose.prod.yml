@@ -1,5 +1,3 @@
-version: "3.7"
-
 services:
   kms:
     image: ghcr.io/philippks/kms:latest
@@ -11,9 +9,11 @@ services:
     env_file: .env
 
   postgres:
-    image: postgres:12
+    image: postgres:18
+    shm_size: 128mb
     volumes:
-      - postgres:/var/lib/postgresql/data/
+      - postgres:/var/lib/postgresql/
+    env_file: .env
 
 volumes:
   postgres:

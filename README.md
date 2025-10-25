@@ -28,10 +28,12 @@ Install dependencies with mise:
 mise install
 ```
 
+Make sure `direnv` is installed. 
+
 Start postgres database:
 
 ```
-docker compose -f docker-compose.dev.yml up postgres
+docker compose up postgres
 ```
 
 Edit configuration file `.env.development` if necessary.
@@ -49,7 +51,7 @@ Access web application: http://localhost:3000
 To run the tests locally, ensure that postgres is running.
 
 ```
-docker compose -f docker-compose.dev.yml up postgres
+docker compose up postgres
 bundle exec rspec
 ```
 
