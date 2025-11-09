@@ -27,12 +27,12 @@ module Invoices
         0200
         1
         #{Global.invoices.iban.delete(' ')}
-        K
+        S
         #{Global.invoices.receiver.name}
         #{Global.invoices.receiver.street}
-        #{Global.invoices.receiver.postal_code} #{Global.invoices.receiver.city}
-
-
+        #{Global.invoices.receiver.housenumber}
+        #{Global.invoices.receiver.postal_code}
+        #{Global.invoices.receiver.city}
         #{Global.invoices.receiver.country_code}
 
 

@@ -20,7 +20,7 @@
             <h2>Konto / Zahlbar an</h2>
             <p><%= Global.invoices.iban %></p>
             <p><%= Global.invoices.receiver.name %></p>
-            <p><%= Global.invoices.receiver.street %></p>
+            <p><%= "#{Global.invoices.receiver.street} #{Global.invoices.receiver.housenumber}" %></p>
             <p><%= Global.invoices.receiver.postal_code %> <%= Global.invoices.receiver.city %></p>
 
             <h2>Zahlbar durch</h2>

@@ -1,7 +1,8 @@
 default:
   receiver:
     name: "<%= ENV.fetch('INVOICE_RECEIVER_NAME') { 'Some Company' } %>"
-    street: "<%= ENV.fetch('INVOICE_RECEIVER_STREET') { 'Some Street 12' } %>"
+    street: "<%= ENV.fetch('INVOICE_RECEIVER_STREET') { 'Some Street' } %>"
+    housenumber: "<%= ENV.fetch('INVOICE_RECEIVER_HOUSENUMBER') { '12' } %>"
     postal_code: "<%= ENV.fetch('INVOICE_RECEIVER_POSTAL_CODE') { '1234' } %>"
     city: "<%= ENV.fetch('INVOICE_RECEIVER_CITY') { 'Somewhere' } %>"
     country_code: "<%= ENV.fetch('INVOICE_RECEIVER_COUNTRY_CODE') { 'CH' } %>"
