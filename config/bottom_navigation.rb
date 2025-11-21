@@ -1,5 +1,7 @@
 SimpleNavigation::Configuration.run do |navigation|
   navigation.items do |bottom|
+    bottom.item :tools, t('application.navigation.tools'), tools_path, highlights_on: %r{\A/tools(/.*)?\z} 
+
     bottom.item :preferences, t('application.navigation.preferences'),
                               employee_hourly_rates_path(current_employee),
                               html: { class: 'sub_nav preferences' } do |sub_nav|
