@@ -12,7 +12,8 @@ module Invoices
         module_px_size: 10,
         resize_exactly_to: false,
         resize_gte_to: false,
-        size: 1024
+        size: 1024,
+        level: :m
       )
 
       swiss_cross = ChunkyPNG::Image.from_file('app/assets/images/swiss_cross.png')

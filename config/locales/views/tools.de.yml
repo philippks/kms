@@ -1,0 +1,8 @@
+de:
+  tools:
+    index:
+      title: Werkzeuge
+      apply_pdf_template:
+        title: "PDF mit Briefpapier kombinieren"
+        select_pdf_file: "PDF-Datei auswählen:"
+        submit: "PDF kombinieren und herunterladen"

@@ -15,5 +15,7 @@ SimpleNavigation::Configuration.run do |navigation|
                  t('application.navigation.activities_report'),
                  new_activities_report_path,
                  highlights_on:  %r{\A/activities/reports(/.*)?\z}
+
+    primary.item :tools, t('application.navigation.tools'), tools_path, highlights_on: %r{\A/tools(/.*)?\z} 
   end
 end
