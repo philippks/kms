@@ -1,0 +1,12 @@
+<%= define_page_title(t('.title')) %>
+
+<h4><%= t('.apply_pdf_template.title') %></h4>
+
+<%= form_with url: combine_pdf_tools_path, method: :post, multipart: true, local: true do |form| %>
+  <div class="form-group">
+    <%= form.label :pdf_file, t('.apply_pdf_template.select_pdf_file') %>
+    <%= form.file_field :pdf_file, accept: 'application/pdf', required: true, class: 'form-control' %>
+  </div>
+
+  <%= form.submit t('.apply_pdf_template.submit'), class: 'btn btn-primary', data: { disable_with: false } %>
+<% end %>
