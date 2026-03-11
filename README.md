@@ -28,7 +28,14 @@ Install dependencies with mise:
 mise install
 ```
 
-Make sure `direnv` is installed. 
+Make sure `direnv` is installed.
+
+Enable corepack and install JS dependencies:
+
+```
+corepack enable
+yarn install
+```
 
 Start postgres database:
 
