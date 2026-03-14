@@ -122,6 +122,21 @@ describe Hours::CalendarDay do
       end
     end
 
+    context 'with spanning absences for part-time employee' do
+      let(:absences) do
+        [
+          create(:absence, :default_associations, from_date: date,
+                                                  to_date: date + 1.day,
+                                                  hours: 8),
+        ]
+      end
+
+      it 'sets correct proportional hours' do
+        expect(absence_event.date).to eq date
+        expect(absence_event.hours).to eq 4
+      end
+    end
+
     context 'without absences' do
       it 'does not create an absence event' do
         expect(absence_event).to be_nil

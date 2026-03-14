@@ -31,7 +31,7 @@ class Absence < ApplicationRecord
     absent_target_hours_within_requested_range = TargetHours.hours_between(from: start_date, to: end_date)
 
     # calculate a hours per target hours ratio
-    absent_hours_per_target_hours = absent_target_hours_of_full_absence / hours
+    absent_hours_per_target_hours = hours / absent_target_hours_of_full_absence
 
     # and multiply this by the absent target hours with in the range
     absent_hours_per_target_hours * absent_target_hours_within_requested_range
