@@ -61,6 +61,18 @@ describe Absence do
         expect(subject).to eq 24
       end
 
+      context 'with part-time employee (hours < target hours)' do
+        let(:absence) do
+          build :absence, hours: 8, from_date: '2016-12-12', to_date: '2016-12-13'
+        end
+
+        let(:range) { { from: Date.parse('2016-12-12'), to: Date.parse('2016-12-12') } }
+
+        it 'returns proportional hours for a single day' do
+          expect(subject).to eq 4
+        end
+      end
+
       context 'it range is bigger than actual date' do
         let(:range) { { from: Date.parse('2016-11-01'), to: Date.parse('2016-12-31') } }
 

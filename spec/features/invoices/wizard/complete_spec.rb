@@ -46,6 +46,7 @@ describe 'Complete Wizard Page' do
       find('.editable-submit').click
     end
 
+    expect(page).to have_no_css('.editable-input', wait: 5)
     expect(page).to have_css 'span', text: "1'337.00", wait: 5
     expect(invoice.reload.activities_amount_manually).to eq Money.from_amount 1337
   end
